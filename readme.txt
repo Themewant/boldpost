@@ -82,7 +82,7 @@ Yes! Bold Post is designed to work with any properly coded WordPress theme. The 
 
 = Can I use Bold Post with page builders? =
 
-Bold Post is primarily designed for the WordPress block editor (Gutenberg). Support for Elementor and Bricks Builder is mentioned in the plugin description and may be available in future updates.
+Bold Post is primarily designed for the WordPress block editor (Gutenberg). You can use it with gutenberg.
 
 = How do I mark posts as featured? =
 
