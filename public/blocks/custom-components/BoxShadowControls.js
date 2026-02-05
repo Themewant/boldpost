@@ -70,7 +70,7 @@ const BoxShadowControls = ({ attributes, setAttributes, state = 'normal' }) => {
                         border: '1px solid #ccc',
                         backgroundColor: '#fff'
                     }} />
-                    {isHover ? __('Box Shadow (Hover)', 'bold-post') : __('Box Shadow Options', 'bold-post')}
+                    {isHover ? __('Box Shadow (Hover)', 'boldpost') : __('Box Shadow Options', 'boldpost')}
                 </div>
                 <Icon icon="plus" />
             </Button>
@@ -81,30 +81,30 @@ const BoxShadowControls = ({ attributes, setAttributes, state = 'normal' }) => {
                 >
                     <div style={{ padding: '20px', width: '260px' }}>
                         <RangeControl
-                            label={__('Horizontal Offset', 'bold-post')}
+                            label={__('Horizontal Offset', 'boldpost')}
                             value={boxShadowX}
                             onChange={(val) => updateShadow({ [xKey]: val })}
                             min={-50} max={50}
                         />
                         <RangeControl
-                            label={__('Vertical Offset', 'bold-post')}
+                            label={__('Vertical Offset', 'boldpost')}
                             value={boxShadowY}
                             onChange={(val) => updateShadow({ [yKey]: val })}
                             min={-50} max={50}
                         />
                         <RangeControl
-                            label={__('Blur', 'bold-post')}
+                            label={__('Blur', 'boldpost')}
                             value={boxShadowBlur}
                             onChange={(val) => updateShadow({ [bKey]: val })}
                             min={0} max={100}
                         />
                         <RangeControl
-                            label={__('Spread', 'bold-post')}
+                            label={__('Spread', 'boldpost')}
                             value={boxShadowSpread}
                             onChange={(val) => updateShadow({ [sKey]: val })}
                             min={-50} max={50}
                         />
-                        <BaseControl label={__('Shadow Color', 'bold-post')} __nextHasNoMarginBottom={true}>
+                        <BaseControl label={__('Shadow Color', 'boldpost')} __nextHasNoMarginBottom={true}>
                             <ColorPicker
                                 color={boxShadowColor}
                                 onChange={(color) => {
@@ -130,7 +130,7 @@ const BoxShadowControls = ({ attributes, setAttributes, state = 'normal' }) => {
                             }}
                             style={{ marginTop: '10px', width: '100%', justifyContent: 'center' }}
                         >
-                            {__('Reset Shadow', 'bold-post')}
+                            {__('Reset Shadow', 'boldpost')}
                         </Button>
                     </div>
                 </Popover>

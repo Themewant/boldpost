@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class Bold_Post_Helper {
+class BOLDPO_Helper {
 
 	public static function add_responsive_vars ($attributes, &$target_array, $attr_base, $prop_name, $properties = [], $is_object = false) {
    		$devices = ['' => 'desktop', 'Tablet' => 'tablet', 'Mobile' => 'mobile'];
@@ -60,7 +60,7 @@ class Bold_Post_Helper {
 			if (!empty($responsive_data[$device])) {
 				$decls = "";
 				foreach ($responsive_data[$device] as $prop => $val) {
-					$decls .= $prop . ":" . $val . ";";
+					$decls .= $prop . ":" . wp_strip_all_tags( $val ) . ";";
 				}
 				if ($media) {
 					$css .= $media . " { " . $selector . " { " . $decls . " } }\n";
@@ -83,7 +83,7 @@ class Bold_Post_Helper {
 
 		if ( ! empty( $css ) ) {
 			if ( is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS is sanitized during generation
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS values are sanitized via wp_strip_all_tags() during generation
 				echo '<style>' . $css . '</style>';
 			} else {
 				wp_add_inline_style( $handle, $css );

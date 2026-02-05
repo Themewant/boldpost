@@ -19,4 +19,4 @@ const catIcon = () => {
         createElement(Rect, { x: "139.393", y: "144.333", width: "38.3869", height: "7.67728", rx: "3.83864", fill: "#A216FF" })
     );
 }
-registerBlockCategory('bold-post', 'Bold Post', catIcon);
+registerBlockCategory('boldpost', 'BoldPost', catIcon);

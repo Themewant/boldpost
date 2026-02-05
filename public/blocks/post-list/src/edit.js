@@ -74,7 +74,7 @@ export default function Edit({ attributes, setAttributes }) {
 		value: category.slug,
 	}));
 
-	categoriesOptions.unshift({ label: __('All Categories', 'bold-post'), value: 'all' });
+	categoriesOptions.unshift({ label: __('All Categories', 'boldpost'), value: 'all' });
 
 	const imageSizeOptions = useSelect((select) => {
 		const blockEditorStore = select('core/block-editor');
@@ -94,9 +94,9 @@ export default function Edit({ attributes, setAttributes }) {
 			}));
 		} else {
 			options = [
-				{ label: __('Large', 'bold-post'), value: 'large' },
-				{ label: __('Medium', 'bold-post'), value: 'medium' },
-				{ label: __('Thumbnail', 'bold-post'), value: 'thumbnail' },
+				{ label: __('Large', 'boldpost'), value: 'large' },
+				{ label: __('Medium', 'boldpost'), value: 'medium' },
+				{ label: __('Thumbnail', 'boldpost'), value: 'thumbnail' },
 			];
 		}
 
@@ -124,84 +124,84 @@ export default function Edit({ attributes, setAttributes }) {
 	let includesOptions = [...postsOptions];
 
 	// add no excludes
-	excludesOptions.unshift({ label: __('No Excludes', 'bold-post'), value: 'no-excludes' });
+	excludesOptions.unshift({ label: __('No Excludes', 'boldpost'), value: 'no-excludes' });
 
 	// add all
-	includesOptions.unshift({ label: __('All', 'bold-post'), value: 'all' });
+	includesOptions.unshift({ label: __('All', 'boldpost'), value: 'all' });
 
 	return (
 		<div {...useBlockProps()}>
 			<InspectorControls>
 				{/* {query panel group} */}
-				<PanelBody title={__('Query', 'bold-post')} initialOpen={false}>
+				<PanelBody title={__('Query', 'boldpost')} initialOpen={false}>
 					<NumberControl
-						label={__('Per Page', 'bold-post')}
+						label={__('Per Page', 'boldpost')}
 						value={attributes.perPage}
 						onChange={(value) => setAttributes({ perPage: value })}
-						help={__('Number of items to display.', 'bold-post')}
+						help={__('Number of items to display.', 'boldpost')}
 						__next40pxDefaultSize={true}
 					/>
 					<SelectControl
-						label={__('Includes', 'bold-post')}
+						label={__('Includes', 'boldpost')}
 						value={attributes.posts}
 						onChange={(value) => setAttributes({ posts: value })}
 						multiple={true}
 						options={includesOptions}
 					/>
 					<SelectControl
-						label={__('Excludes', 'bold-post')}
+						label={__('Excludes', 'boldpost')}
 						value={attributes.excludes}
 						onChange={(value) => setAttributes({ excludes: value })}
 						multiple={true}
 						options={excludesOptions}
 					/>
 					<SelectControl
-						label={__('Categories', 'bold-post')}
+						label={__('Categories', 'boldpost')}
 						value={attributes.categories}
 						onChange={(value) => setAttributes({ categories: value })}
 						options={categoriesOptions}
 						multiple={true}
-						help={__('Select post categories from here. If you do not select any category, it will display posts from all categories.', 'bold-post')}
+						help={__('Select post categories from here. If you do not select any category, it will display posts from all categories.', 'boldpost')}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
 					<SelectControl
-						label={__('Order', 'bold-post')}
+						label={__('Order', 'boldpost')}
 						value={attributes.order}
 						onChange={(value) => setAttributes({ order: value })}
 						options={[
-							{ label: __('Ascending', 'bold-post'), value: 'ASC' },
-							{ label: __('Descending', 'bold-post'), value: 'DESC' },
+							{ label: __('Ascending', 'boldpost'), value: 'ASC' },
+							{ label: __('Descending', 'boldpost'), value: 'DESC' },
 						]}
-						help={__('Order of items to display.', 'bold-post')}
+						help={__('Order of items to display.', 'boldpost')}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
 					<SelectControl
-						label={__('Order By', 'bold-post')}
+						label={__('Order By', 'boldpost')}
 						value={attributes.orderby}
 						onChange={(value) => setAttributes({ orderby: value })}
 						options={[
-							{ label: __('Date', 'bold-post'), value: 'date' },
-							{ label: __('Title', 'bold-post'), value: 'title' },
-							{ label: __('Name', 'bold-post'), value: 'name' },
-							{ label: __('ID', 'bold-post'), value: 'id' },
-							{ label: __('Random', 'bold-post'), value: 'rand' },
+							{ label: __('Date', 'boldpost'), value: 'date' },
+							{ label: __('Title', 'boldpost'), value: 'title' },
+							{ label: __('Name', 'boldpost'), value: 'name' },
+							{ label: __('ID', 'boldpost'), value: 'id' },
+							{ label: __('Random', 'boldpost'), value: 'rand' },
 						]}
-						help={__('Order of items to display.', 'bold-post')}
+						help={__('Order of items to display.', 'boldpost')}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
 					<NumberControl
-						label={__('Offset', 'bold-post')}
+						label={__('Offset', 'boldpost')}
 						value={attributes.offset}
 						onChange={(value) => setAttributes({ offset: value })}
-						help={__('Number of items to skip.', 'bold-post')}
+						help={__('Number of items to skip.', 'boldpost')}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
 					<ToggleControl
-						label={__('Is Featured', 'bold-post')}
+						label={__('Is Featured', 'boldpost')}
 						checked={attributes.isFeatured}
 						onChange={(value) => setAttributes({ isFeatured: value })}
 						__nextHasNoMarginBottom={true}
@@ -209,31 +209,31 @@ export default function Edit({ attributes, setAttributes }) {
 				</PanelBody>
 
 
-				<PanelBody title={__('Layout', 'bold-post')} initialOpen={false}>
+				<PanelBody title={__('Layout', 'boldpost')} initialOpen={false}>
 					<ImageRadioControl
 						value={attributes.listStyle}
 						onChange={(value) => setAttributes({ listStyle: value })}
 						options={[
-							{ label: __('Default', 'bold-post'), value: 'default', src: list1 },
-							{ label: __('Style 1', 'bold-post'), value: '1', src: list2 },
+							{ label: __('Default', 'boldpost'), value: 'default', src: list1 },
+							{ label: __('Style 1', 'boldpost'), value: '1', src: list2 },
 						]}
 					/>
 				</PanelBody>
 
 				{ /* content panel group */}
-				<PanelBody title={__('Content', 'bold-post')} initialOpen={false}>
+				<PanelBody title={__('Content', 'boldpost')} initialOpen={false}>
 
-					<ResponsiveWrapper label={__('Columns', 'bold-post')}>
+					<ResponsiveWrapper label={__('Columns', 'boldpost')}>
 						{(device) => (
 							<SelectControl
 								value={attributes[getAttrKey('columns', device)]}
 								onChange={(value) => setAttributes({ [getAttrKey('columns', device)]: value })}
 								options={[
-									{ label: __('1 Column', 'bold-post'), value: '1' },
-									{ label: __('2 Column', 'bold-post'), value: '2' },
-									{ label: __('3 Column', 'bold-post'), value: '3' },
-									{ label: __('4 Column', 'bold-post'), value: '4' },
-									{ label: __('6 Column', 'bold-post'), value: '6' },
+									{ label: __('1 Column', 'boldpost'), value: '1' },
+									{ label: __('2 Column', 'boldpost'), value: '2' },
+									{ label: __('3 Column', 'boldpost'), value: '3' },
+									{ label: __('4 Column', 'boldpost'), value: '4' },
+									{ label: __('6 Column', 'boldpost'), value: '6' },
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
@@ -243,9 +243,9 @@ export default function Edit({ attributes, setAttributes }) {
 
 				</PanelBody>
 
-				<PanelBody title={__('Thumbnail', 'bold-post')} initialOpen={false}>
+				<PanelBody title={__('Thumbnail', 'boldpost')} initialOpen={false}>
 					<SelectControl
-						label={__('Size', 'bold-post')}
+						label={__('Size', 'boldpost')}
 						value={attributes.thumbnailSize}
 						onChange={(value) => setAttributes({ thumbnailSize: value })}
 						options={imageSizeOptions}
@@ -253,36 +253,36 @@ export default function Edit({ attributes, setAttributes }) {
 						__nextHasNoMarginBottom={true}
 					/>
 					<SelectControl
-						label={__('Animation', 'bold-post')}
+						label={__('Animation', 'boldpost')}
 						value={attributes.animStyle}
 						onChange={(value) => setAttributes({ animStyle: value })}
 						options={[
-							{ label: __('None', 'bold-post'), value: 'none' },
-							{ label: __('Left Right', 'bold-post'), value: 'left_right' },
-							{ label: __('Top Bottom', 'bold-post'), value: 'top_bottom' }
+							{ label: __('None', 'boldpost'), value: 'none' },
+							{ label: __('Left Right', 'boldpost'), value: 'left_right' },
+							{ label: __('Top Bottom', 'boldpost'), value: 'top_bottom' }
 						]}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
 				</PanelBody>
 
-				<PanelBody title={__('Title', 'bold-post')} initialOpen={false}>
+				<PanelBody title={__('Title', 'boldpost')} initialOpen={false}>
 					<SelectControl
-						label={__('Title Tag', 'bold-post')}
+						label={__('Title Tag', 'boldpost')}
 						value={attributes.titleTag}
 						onChange={(value) => setAttributes({ titleTag: value })}
 						options={[
-							{ label: __('H2', 'bold-post'), value: 'h2' },
-							{ label: __('H3', 'bold-post'), value: 'h3' },
-							{ label: __('H4', 'bold-post'), value: 'h4' },
-							{ label: __('H5', 'bold-post'), value: 'h5' },
-							{ label: __('H6', 'bold-post'), value: 'h6' },
+							{ label: __('H2', 'boldpost'), value: 'h2' },
+							{ label: __('H3', 'boldpost'), value: 'h3' },
+							{ label: __('H4', 'boldpost'), value: 'h4' },
+							{ label: __('H5', 'boldpost'), value: 'h5' },
+							{ label: __('H6', 'boldpost'), value: 'h6' },
 						]}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
 					<NumberControl
-						label={__('Title Trim', 'bold-post')}
+						label={__('Title Trim', 'boldpost')}
 						value={attributes.titleTrim}
 						onChange={(value) => setAttributes({ titleTrim: value })}
 						__next40pxDefaultSize={true}
@@ -290,16 +290,16 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 				</PanelBody>
 
-				<PanelBody title={__('Excerpt', 'bold-post')} initialOpen={false}>
+				<PanelBody title={__('Excerpt', 'boldpost')} initialOpen={false}>
 					<ToggleControl
-						label={__('Show / Hide', 'bold-post')}
+						label={__('Show / Hide', 'boldpost')}
 						checked={attributes.showExcerpt}
 						onChange={(value) => setAttributes({ showExcerpt: value })}
 						__nextHasNoMarginBottom={true}
 					/>
 					{attributes.showExcerpt && (
 						<NumberControl
-							label={__('Excerpt Trim', 'bold-post')}
+							label={__('Excerpt Trim', 'boldpost')}
 							value={attributes.excerptTrim}
 							onChange={(value) => setAttributes({ excerptTrim: value })}
 							__next40pxDefaultSize={true}
@@ -308,9 +308,9 @@ export default function Edit({ attributes, setAttributes }) {
 					)}
 				</PanelBody>
 
-				<PanelBody title={__('Meta', 'bold-post')} initialOpen={false}>
+				<PanelBody title={__('Meta', 'boldpost')} initialOpen={false}>
 					<ToggleControl
-						label={__('Show / Hide', 'bold-post')}
+						label={__('Show / Hide', 'boldpost')}
 						checked={attributes.showMeta}
 						onChange={(value) => setAttributes({ showMeta: value })}
 						__nextHasNoMarginBottom={true}
@@ -318,33 +318,33 @@ export default function Edit({ attributes, setAttributes }) {
 					{attributes.showMeta && (
 						<>
 							<SelectControl
-								label={__('Meta', 'bold-post')}
+								label={__('Meta', 'boldpost')}
 								value={attributes.allowedMetas}
 								onChange={(value) => setAttributes({ allowedMetas: value })}
 								multiple={true}
 								options={[
-									{ label: __('Author', 'bold-post'), value: 'author' },
-									{ label: __('Date', 'bold-post'), value: 'date' },
-									{ label: __('Category', 'bold-post'), value: 'category' },
-									{ label: __('Tag', 'bold-post'), value: 'tag' },
+									{ label: __('Author', 'boldpost'), value: 'author' },
+									{ label: __('Date', 'boldpost'), value: 'date' },
+									{ label: __('Category', 'boldpost'), value: 'category' },
+									{ label: __('Tag', 'boldpost'), value: 'tag' },
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
 							/>
 							<SelectControl
-								label={__('Position', 'bold-post')}
+								label={__('Position', 'boldpost')}
 								value={attributes.metaPosition}
 								onChange={(value) => setAttributes({ metaPosition: value })}
 								options={[
-									{ label: __('Up Title', 'bold-post'), value: 'up_title' },
-									{ label: __('Below Title', 'bold-post'), value: 'below_title' },
-									{ label: __('Below Content', 'bold-post'), value: 'below_content' },
+									{ label: __('Up Title', 'boldpost'), value: 'up_title' },
+									{ label: __('Below Title', 'boldpost'), value: 'below_title' },
+									{ label: __('Below Content', 'boldpost'), value: 'below_content' },
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
 							/>
 							<ToggleControl
-								label={__('Show Date Badge', 'bold-post')}
+								label={__('Show Date Badge', 'boldpost')}
 								checked={attributes.showDateOnTop}
 								onChange={(value) => { setAttributes({ showDateOnTop: value }); console.log(value); }}
 								__nextHasNoMarginBottom={true}
@@ -353,9 +353,9 @@ export default function Edit({ attributes, setAttributes }) {
 					)}
 				</PanelBody>
 
-				<PanelBody title={__('Button', 'bold-post')} initialOpen={false}>
+				<PanelBody title={__('Button', 'boldpost')} initialOpen={false}>
 					<ToggleControl
-						label={__('Show / Hide', 'bold-post')}
+						label={__('Show / Hide', 'boldpost')}
 						checked={attributes.showReadMore}
 						onChange={(value) => setAttributes({ showReadMore: value })}
 						__nextHasNoMarginBottom={true}
@@ -363,34 +363,34 @@ export default function Edit({ attributes, setAttributes }) {
 					{attributes.showReadMore && (
 						<>
 							<NumberControl
-								label={__('Text', 'bold-post')}
+								label={__('Text', 'boldpost')}
 								value={attributes.readMoreText}
 								onChange={(value) => setAttributes({ readMoreText: value })}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
 							/>
 							<SelectControl
-								label={__('Icon', 'bold-post')}
+								label={__('Icon', 'boldpost')}
 								value={attributes.readMoreIcon}
 								onChange={(value) => setAttributes({ readMoreIcon: value })}
 								options={[
-									{ label: __('None', 'bold-post'), value: 'none' },
-									{ label: __('Chevron Right', 'bold-post'), value: 'bldpst-icon-chevron-right' },
-									{ label: __('Chevron Left', 'bold-post'), value: 'bldpst-icon-chevron-left' },
-									{ label: __('Arrow Left', 'bold-post'), value: 'bldpst-icon-arrow-left' },
-									{ label: __('Arrow Right', 'bold-post'), value: 'bldpst-icon-arrow-right' },
-									{ label: __('Arrow Up Right', 'bold-post'), value: 'bldpst-icon-arrow-up-right' }
+									{ label: __('None', 'boldpost'), value: 'none' },
+									{ label: __('Chevron Right', 'boldpost'), value: 'boldpo-icon-chevron-right' },
+									{ label: __('Chevron Left', 'boldpost'), value: 'boldpo-icon-chevron-left' },
+									{ label: __('Arrow Left', 'boldpost'), value: 'boldpo-icon-arrow-left' },
+									{ label: __('Arrow Right', 'boldpost'), value: 'boldpo-icon-arrow-right' },
+									{ label: __('Arrow Up Right', 'boldpost'), value: 'boldpo-icon-arrow-up-right' }
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
 							/>
 							<SelectControl
-								label={__('Icon Position', 'bold-post')}
+								label={__('Icon Position', 'boldpost')}
 								value={attributes.readMoreIconPosition}
 								onChange={(value) => setAttributes({ readMoreIconPosition: value })}
 								options={[
-									{ label: __('Before', 'bold-post'), value: 'before' },
-									{ label: __('After', 'bold-post'), value: 'after' },
+									{ label: __('Before', 'boldpost'), value: 'before' },
+									{ label: __('After', 'boldpost'), value: 'after' },
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
@@ -399,9 +399,9 @@ export default function Edit({ attributes, setAttributes }) {
 					)}
 				</PanelBody>
 
-				<PanelBody title={__('Pagination', 'bold-post')} initialOpen={false}>
+				<PanelBody title={__('Pagination', 'boldpost')} initialOpen={false}>
 					<ToggleControl
-						label={__('Show Pagination', 'bold-post')}
+						label={__('Show Pagination', 'boldpost')}
 						checked={attributes.pagination}
 						onChange={(value) => setAttributes({ pagination: value })}
 						__nextHasNoMarginBottom={true}
@@ -410,13 +410,13 @@ export default function Edit({ attributes, setAttributes }) {
 
 			</InspectorControls>
 			<InspectorControls group='styles'>
-				<PanelBody title={__('Item', 'bold-post')} initialOpen={false}>
+				<PanelBody title={__('Item', 'boldpost')} initialOpen={false}>
 					<TabPanel
 						className="eshb-tab-panel"
 						activeClass="is-active"
 						tabs={[
-							{ name: 'normal', title: __('Normal', 'bold-post'), className: 'eshb-tab-normal' },
-							{ name: 'hover', title: __('Hover', 'bold-post'), className: 'eshb-tab-hover' },
+							{ name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
+							{ name: 'hover', title: __('Hover', 'boldpost'), className: 'eshb-tab-hover' },
 						]}
 					>
 						{(tab) => {
@@ -424,7 +424,7 @@ export default function Edit({ attributes, setAttributes }) {
 							return (
 								<div style={{ marginTop: '15px' }}>
 									<BackgroundControl
-										label={isHover ? __('Background', 'bold-post') : __('Background', 'bold-post')}
+										label={isHover ? __('Background', 'boldpost') : __('Background', 'boldpost')}
 										colorValue={isHover ? attributes.itemBackgroundColorHover : attributes.itemBackgroundColor}
 										gradientValue={isHover ? attributes.itemBackgroundGradientHover : attributes.itemBackgroundGradient}
 										onColorChange={(value) => {
@@ -435,7 +435,7 @@ export default function Edit({ attributes, setAttributes }) {
 									/>
 									{!isHover && (
 										<BackgroundControl
-											label={__('Overlay', 'bold-post')}
+											label={__('Overlay', 'boldpost')}
 											colorValue={attributes.itemOverlayBackgroundColor}
 											gradientValue={attributes.itemOverlayBackgroundGradient}
 											onColorChange={(value) => {
@@ -450,7 +450,7 @@ export default function Edit({ attributes, setAttributes }) {
 						}}
 					</TabPanel>
 					<Divider />
-					<ResponsiveWrapper label={__('Item Gap', 'bold-post')}>
+					<ResponsiveWrapper label={__('Item Gap', 'boldpost')}>
 						{(device) => (
 							<NumberControl
 								value={attributes[getAttrKey('itemGap', device)]}
@@ -461,7 +461,7 @@ export default function Edit({ attributes, setAttributes }) {
 						)}
 					</ResponsiveWrapper>
 					<Divider />
-					<ResponsiveWrapper label={__('Padding', 'bold-post')}>
+					<ResponsiveWrapper label={__('Padding', 'boldpost')}>
 						{(device) => (
 							<BoxControl
 								values={attributes[getAttrKey('itemPadding', device)]}
@@ -471,19 +471,19 @@ export default function Edit({ attributes, setAttributes }) {
 					</ResponsiveWrapper>
 					<Divider />
 					<BoxControl
-						label={__('Border Radious', 'bold-post')}
+						label={__('Border Radious', 'boldpost')}
 						values={attributes.itemBorderRadius}
 						onChange={(nextValues) => setAttributes({ itemBorderRadius: nextValues })}
 					/>
 				</PanelBody>
 
-				<PanelBody title={__('Title', 'bold-post')} initialOpen={false}>
+				<PanelBody title={__('Title', 'boldpost')} initialOpen={false}>
 					<TabPanel
 						className="eshb-tab-panel"
 						activeClass="is-active"
 						tabs={[
-							{ name: 'normal', title: __('Normal', 'bold-post'), className: 'eshb-tab-normal' },
-							{ name: 'hover', title: __('Hover', 'bold-post'), className: 'eshb-tab-hover' },
+							{ name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
+							{ name: 'hover', title: __('Hover', 'boldpost'), className: 'eshb-tab-hover' },
 						]}
 					>
 						{(tab) => {
@@ -491,7 +491,7 @@ export default function Edit({ attributes, setAttributes }) {
 							return (
 								<div style={{ marginTop: '15px' }}>
 									<ColorPopover
-										label={isHover ? __('Color', 'bold-post') : __('Color', 'bold-post')}
+										label={isHover ? __('Color', 'boldpost') : __('Color', 'boldpost')}
 										color={isHover ?
 											attributes.itemTitleColorHover
 											: attributes.itemTitleColor}
@@ -506,7 +506,7 @@ export default function Edit({ attributes, setAttributes }) {
 						}}
 					</TabPanel>
 					<Divider />
-					<ResponsiveWrapper label={__('Padding', 'bold-post')}>
+					<ResponsiveWrapper label={__('Padding', 'boldpost')}>
 						{(device) => (
 							<BoxControl
 								values={attributes[getAttrKey('itemTitlePadding', device)]}
@@ -515,7 +515,7 @@ export default function Edit({ attributes, setAttributes }) {
 						)}
 					</ResponsiveWrapper>
 					<Divider />
-					<ResponsiveWrapper label={__('Margin', 'bold-post')}>
+					<ResponsiveWrapper label={__('Margin', 'boldpost')}>
 						{(device) => (
 							<BoxControl
 								values={attributes[getAttrKey('itemTitleMargin', device)]}
@@ -524,10 +524,10 @@ export default function Edit({ attributes, setAttributes }) {
 						)}
 					</ResponsiveWrapper>
 					<Divider />
-					<ResponsiveWrapper label={__('Typography', 'bold-post')}>
+					<ResponsiveWrapper label={__('Typography', 'boldpost')}>
 						{(device) => (
 							<TypographyControls
-								label={__('Typography', 'bold-post')}
+								label={__('Typography', 'boldpost')}
 								attributes={attributes}
 								setAttributes={setAttributes}
 								attributeKey={getAttrKey('itemTitleTypography', device)}
@@ -536,9 +536,9 @@ export default function Edit({ attributes, setAttributes }) {
 					</ResponsiveWrapper>
 				</PanelBody>
 
-				<PanelBody title={__('Excerpt', 'bold-post')} initialOpen={false}>
+				<PanelBody title={__('Excerpt', 'boldpost')} initialOpen={false}>
 					<ColorPopover
-						label={__('Color', 'bold-post')}
+						label={__('Color', 'boldpost')}
 						color={attributes.itemExcerptColor}
 						defaultColor={''}
 						onChange={(value) => {
@@ -547,7 +547,7 @@ export default function Edit({ attributes, setAttributes }) {
 						}}
 					/>
 					<Divider />
-					<ResponsiveWrapper label={__('Padding', 'bold-post')}>
+					<ResponsiveWrapper label={__('Padding', 'boldpost')}>
 						{(device) => (
 							<BoxControl
 								values={attributes[getAttrKey('itemExcerptPadding', device)]}
@@ -556,7 +556,7 @@ export default function Edit({ attributes, setAttributes }) {
 						)}
 					</ResponsiveWrapper>
 					<Divider />
-					<ResponsiveWrapper label={__('Margin', 'bold-post')}>
+					<ResponsiveWrapper label={__('Margin', 'boldpost')}>
 						{(device) => (
 							<BoxControl
 								values={attributes[getAttrKey('itemExcerptMargin', device)]}
@@ -565,10 +565,10 @@ export default function Edit({ attributes, setAttributes }) {
 						)}
 					</ResponsiveWrapper>
 					<Divider />
-					<ResponsiveWrapper label={__('Typography', 'bold-post')}>
+					<ResponsiveWrapper label={__('Typography', 'boldpost')}>
 						{(device) => (
 							<TypographyControls
-								label={__('Typography', 'bold-post')}
+								label={__('Typography', 'boldpost')}
 								attributes={attributes}
 								setAttributes={setAttributes}
 								attributeKey={getAttrKey('itemExcerptTypography', device)}
@@ -577,41 +577,41 @@ export default function Edit({ attributes, setAttributes }) {
 					</ResponsiveWrapper>
 				</PanelBody>
 
-				<PanelBody title={__('Date Badge', 'bold-post')} initialOpen={false}>
+				<PanelBody title={__('Date Badge', 'boldpost')} initialOpen={false}>
 					<ColorPopover
-						label={__('Color', 'bold-post')}
+						label={__('Color', 'boldpost')}
 						color={attributes.topDateColor}
 						defaultColor={attributes.topDateColor}
 						onChange={(value) => setAttributes({ topDateColor: value })}
 					/>
 					<ColorPopover
-						label={__('Background Color', 'bold-post')}
+						label={__('Background Color', 'boldpost')}
 						color={attributes.topDateBackgroundColor}
 						defaultColor={attributes.topDateBackgroundColor}
 						onChange={(value) => setAttributes({ topDateBackgroundColor: value })}
 					/>
 				</PanelBody>
-				<PanelBody title={__('Meta', 'bold-post')} initialOpen={false}>
+				<PanelBody title={__('Meta', 'boldpost')} initialOpen={false}>
 					<ColorPopover
-						label={__('Color', 'bold-post')}
+						label={__('Color', 'boldpost')}
 						color={attributes.metaColor}
 						defaultColor={attributes.metaColor}
 						onChange={(value) => setAttributes({ metaColor: value })}
 					/>
 					<BoxControl
-						label={__('Margin', 'bold-post')}
+						label={__('Margin', 'boldpost')}
 						values={attributes.metaMargin}
 						onChange={(value) => setAttributes({ metaMargin: value })}
 					/>
 				</PanelBody>
 
-				<PanelBody title={__('Button', 'bold-post')} initialOpen={false}>
+				<PanelBody title={__('Button', 'boldpost')} initialOpen={false}>
 					<TabPanel
 						className="eshb-tab-panel"
 						activeClass="is-active"
 						tabs={[
-							{ name: 'normal', title: __('Normal', 'bold-post'), className: 'eshb-tab-normal' },
-							{ name: 'hover', title: __('Hover', 'bold-post'), className: 'eshb-tab-hover' },
+							{ name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
+							{ name: 'hover', title: __('Hover', 'boldpost'), className: 'eshb-tab-hover' },
 						]}
 					>
 						{(tab) => {
@@ -619,7 +619,7 @@ export default function Edit({ attributes, setAttributes }) {
 							return (
 								<div style={{ marginTop: '15px' }}>
 									<BackgroundControl
-										label={isHover ? __('Background', 'bold-post') : __('Background', 'bold-post')}
+										label={isHover ? __('Background', 'boldpost') : __('Background', 'boldpost')}
 										colorValue={isHover ? attributes.readMoreBackgroundColorHover : attributes.readMoreBackgroundColor}
 										gradientValue={isHover ? attributes.readMoreBackgroundGradientHover : attributes.readMoreBackgroundGradient}
 										onColorChange={(value) => {
@@ -629,7 +629,7 @@ export default function Edit({ attributes, setAttributes }) {
 										onGradientChange={(value) => setAttributes({ [isHover ? 'readMoreBackgroundGradientHover' : 'readMoreBackgroundGradient']: value })}
 									/>
 									<ColorPopover
-										label={isHover ? __('Color', 'bold-post') : __('Color', 'bold-post')}
+										label={isHover ? __('Color', 'boldpost') : __('Color', 'boldpost')}
 										color={isHover ?
 											attributes.readMoreColorHover
 											: attributes.readMoreColor}
@@ -645,32 +645,32 @@ export default function Edit({ attributes, setAttributes }) {
 					</TabPanel>
 					<Divider />
 					<BoxControl
-						label={__('Padding', 'bold-post')}
+						label={__('Padding', 'boldpost')}
 						values={attributes.readMorePadding}
 						onChange={(value) => setAttributes({ readMorePadding: value })}
 					/>
 					<Divider />
 					<BoxControl
-						label={__('Margin', 'bold-post')}
+						label={__('Margin', 'boldpost')}
 						values={attributes.readMoreMargin}
 						onChange={(value) => setAttributes({ readMoreMargin: value })}
 					/>
 					<Divider />
 					<TypographyControls
-						label={__('Typography', 'bold-post')}
+						label={__('Typography', 'boldpost')}
 						attributes={attributes}
 						setAttributes={setAttributes}
 						attributeKey="readMoreTypography"
 					/>
 				</PanelBody>
 
-				<PanelBody title={__('Pagination', 'bold-post')} initialOpen={false}>
+				<PanelBody title={__('Pagination', 'boldpost')} initialOpen={false}>
 					<TabPanel
 						className="eshb-tab-panel"
 						activeClass="is-active"
 						tabs={[
-							{ name: 'normal', title: __('Normal', 'bold-post'), className: 'eshb-tab-normal' },
-							{ name: 'hover', title: __('Hover / Active', 'bold-post'), className: 'eshb-tab-hover' },
+							{ name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
+							{ name: 'hover', title: __('Hover / Active', 'boldpost'), className: 'eshb-tab-hover' },
 						]}
 					>
 						{(tab) => {
@@ -678,15 +678,15 @@ export default function Edit({ attributes, setAttributes }) {
 							return (
 								<div style={{ marginTop: '15px' }}>
 									<ColorPopover
-										label={__('Color', 'bold-post')}
+										label={__('Color', 'boldpost')}
 										color={isHover ? attributes.paginationColorHover : attributes.paginationColor}
-										defaultColor={isHover ? 'var(--bldpst-preset-color-white)' : 'var(--bldpst-preset-color-contrast-2)'}
+										defaultColor={isHover ? 'var(--boldpo-preset-color-white)' : 'var(--boldpo-preset-color-contrast-2)'}
 										onChange={(value) => setAttributes({ [isHover ? 'paginationColorHover' : 'paginationColor']: value })}
 									/>
 									<ColorPopover
-										label={__('Background Color', 'bold-post')}
+										label={__('Background Color', 'boldpost')}
 										color={isHover ? attributes.paginationBackgroundColorHover : attributes.paginationBackgroundColor}
-										defaultColor={isHover ? 'var(--bldpst-preset-color-primary)' : 'var(--bldpst-preset-color-tertiary)'}
+										defaultColor={isHover ? 'var(--boldpo-preset-color-primary)' : 'var(--boldpo-preset-color-tertiary)'}
 										onChange={(value) => setAttributes({ [isHover ? 'paginationBackgroundColorHover' : 'paginationBackgroundColor']: value })}
 									/>
 								</div>
@@ -698,7 +698,7 @@ export default function Edit({ attributes, setAttributes }) {
 
 			</InspectorControls>
 
-			<ServerSideRender block="bold-post/post-list" attributes={attributes} httpMethod="POST" />
+			<ServerSideRender block="boldpost/post-list" attributes={attributes} httpMethod="POST" />
 		</div>
 	);
 }

@@ -1,4 +1,4 @@
-=== Bold Post ===
+=== BoldPost ===
 Contributors: themewant
 Tags: post grid, post list, post slider, gutenberg blocks, category list
 Requires at least: 6.0
@@ -12,7 +12,7 @@ Display posts beautifully with customizable grids, lists, sliders & category dis
 
 == Description ==
 
-**Bold Post** is a powerful and flexible WordPress plugin that helps you showcase your blog posts in stunning layouts. Whether you're running a blog, magazine, news site, or any content-rich website, Bold Post provides you with beautiful, customizable blocks to display your posts exactly how you want.
+**BoldPost** is a powerful and flexible WordPress plugin that helps you showcase your blog posts in stunning layouts. Whether you're running a blog, magazine, news site, or any content-rich website, BoldPost provides you with beautiful, customizable blocks to display your posts exactly how you want.
 
 = Key Features =
 
@@ -61,32 +61,32 @@ Display posts beautifully with customizable grids, lists, sliders & category dis
 
 = Gutenberg Block Editor =
 
-Bold Post integrates seamlessly with the WordPress block editor, providing you with native blocks that feel right at home in Gutenberg. Each block comes with an intuitive interface and live preview, making it easy to create beautiful post displays without any coding knowledge.
+BoldPost integrates seamlessly with the WordPress block editor, providing you with native blocks that feel right at home in Gutenberg. Each block comes with an intuitive interface and live preview, making it easy to create beautiful post displays without any coding knowledge.
 
 = Performance Optimized =
 
-Built with performance in mind, Bold Post uses efficient queries and minimal JavaScript to ensure your site stays fast. The plugin only loads assets when needed and follows WordPress best practices for optimal performance.
+Built with performance in mind, BoldPost uses efficient queries and minimal JavaScript to ensure your site stays fast. The plugin only loads assets when needed and follows WordPress best practices for optimal performance.
 
 == Installation ==
 
-1. Upload the `bold-post` folder to the `/wp-content/plugins/` directory
+1. Upload the `boldpost` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Go to any post or page and add a Bold Post block from the block inserter
+3. Go to any post or page and add a BoldPost block from the block inserter
 4. Customize your block settings and publish!
 
 == Frequently Asked Questions ==
 
-= Is Bold Post compatible with my theme? =
+= Is BoldPost compatible with my theme? =
 
-Yes! Bold Post is designed to work with any properly coded WordPress theme. The blocks inherit your theme's typography and can be fully customized to match your design.
+Yes! BoldPost is designed to work with any properly coded WordPress theme. The blocks inherit your theme's typography and can be fully customized to match your design.
 
-= Can I use Bold Post with page builders? =
+= Can I use BoldPost with page builders? =
 
-Bold Post is primarily designed for the WordPress block editor (Gutenberg). You can use it with gutenberg.
+BoldPost is primarily designed for the WordPress block editor (Gutenberg). You can use it with gutenberg.
 
 = How do I mark posts as featured? =
 
-When editing a post, you'll find a "Featured Post" meta box in the sidebar. Simply check the box to mark a post as featured, then use the "Show Featured Posts Only" option in any Bold Post block.
+When editing a post, you'll find a "Featured Post" meta box in the sidebar. Simply check the box to mark a post as featured, then use the "Show Featured Posts Only" option in any BoldPost block.
 
 = Can I customize the block styles? =
 
@@ -94,11 +94,11 @@ Absolutely! Each block comes with extensive styling options including colors, ty
 
 = Is the plugin translation ready? =
 
-Yes, Bold Post is fully translation ready and follows WordPress internationalization standards.
+Yes, BoldPost is fully translation ready and follows WordPress internationalization standards.
 
 = Does it work with custom post types? =
 
-Currently, Bold Post is designed to work with standard WordPress posts. Custom post type support may be added in future versions.
+Currently, BoldPost is designed to work with standard WordPress posts. Custom post type support may be added in future versions.
 
 == Screenshots ==
 
@@ -124,4 +124,4 @@ Currently, Bold Post is designed to work with standard WordPress posts. Custom p
 == Upgrade Notice ==
 
 = 1.0.0 =
-Initial release of Bold Post. Install and start creating beautiful post displays!
+Initial release of BoldPost. Install and start creating beautiful post displays!

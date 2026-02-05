@@ -4,10 +4,10 @@ return array(
 	'build' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'bold-post/post-slider',
+		'name' => 'boldpost/post-slider',
 		'version' => '0.1.0',
 		'title' => 'Post Slider',
-		'category' => 'bold-post',
+		'category' => 'boldpost',
 		'icon' => 'slider',
 		'description' => 'Post Slider Block',
 		'example' => array(
@@ -25,7 +25,7 @@ return array(
 				'gradients' => true
 			)
 		),
-		'textdomain' => 'bold-post',
+		'textdomain' => 'boldpost',
 		'editorScript' => 'file:./index.js',
 		'script' => 'file:./view.js',
 		'viewScript' => 'file:./view.js',

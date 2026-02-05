@@ -1,8 +1,8 @@
 @charset "UTF-8";
 @font-face {
-  font-family: "bldpst-icon";
-  src: url("../font/bldpst-icon.eot?38163978");
-  src: url("../font/bldpst-icon.eot?38163978#iefix") format("embedded-opentype"), url("../font/bldpst-icon.woff2?38163978") format("woff2"), url("../font/bldpst-icon.woff?38163978") format("woff"), url("../font/bldpst-icon.ttf?38163978") format("truetype"), url("../font/bldpst-icon.svg?38163978#bldpst-icon") format("svg");
+  font-family: "boldpo-icon";
+  src: url("../font/boldpo-icon.eot?38163978");
+  src: url("../font/boldpo-icon.eot?38163978#iefix") format("embedded-opentype"), url("../font/boldpo-icon.woff2?38163978") format("woff2"), url("../font/boldpo-icon.woff?38163978") format("woff"), url("../font/boldpo-icon.ttf?38163978") format("truetype"), url("../font/boldpo-icon.svg?38163978#boldpo-icon") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -11,13 +11,13 @@
 /*
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
-    font-family: 'bldpst-icon';
-    src: url('../font/bldpst-icon.svg?38163978#bldpst-icon') format('svg');
+    font-family: 'boldpo-icon';
+    src: url('../font/boldpo-icon.svg?38163978#boldpo-icon') format('svg');
   }
 }
 */
-[class^=bldpst-icon-]:before, [class*=" bldpst-icon-"]:before {
-  font-family: "bldpst-icon";
+[class^=boldpo-icon-]:before, [class*=" boldpo-icon-"]:before {
+  font-family: "boldpo-icon";
   font-style: normal;
   font-weight: normal;
   speak: never;
@@ -44,246 +44,246 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
-.bldpst-icon-tags:before {
+.boldpo-icon-tags:before {
   content: "\e800";
 } /* '' */
-.bldpst-icon-credit-card-alt:before {
+.boldpo-icon-credit-card-alt:before {
   content: "\e80a";
 } /* '' */
-.bldpst-icon-font:before {
+.boldpo-icon-font:before {
   content: "\e80f";
 } /* '' */
-.bldpst-icon-move:before {
+.boldpo-icon-move:before {
   content: "\e87e";
 } /* '' */
-.bldpst-icon-arrow-down:before {
+.boldpo-icon-arrow-down:before {
   content: "\e90b";
 } /* '' */
-.bldpst-icon-arrow-left:before {
+.boldpo-icon-arrow-left:before {
   content: "\e90c";
 } /* '' */
-.bldpst-icon-arrow-right:before {
+.boldpo-icon-arrow-right:before {
   content: "\e90d";
 } /* '' */
-.bldpst-icon-arrow-up-right:before {
+.boldpo-icon-arrow-up-right:before {
   content: "\e90e";
 } /* '' */
-.bldpst-icon-arrow-up:before {
+.boldpo-icon-arrow-up:before {
   content: "\e90f";
 } /* '' */
-.bldpst-icon-attachment:before {
+.boldpo-icon-attachment:before {
   content: "\e911";
 } /* '' */
-.bldpst-icon-caret-down:before {
+.boldpo-icon-caret-down:before {
   content: "\e925";
 } /* '' */
-.bldpst-icon-caret-left:before {
+.boldpo-icon-caret-left:before {
   content: "\e926";
 } /* '' */
-.bldpst-icon-caret-right:before {
+.boldpo-icon-caret-right:before {
   content: "\e927";
 } /* '' */
-.bldpst-icon-caret-up:before {
+.boldpo-icon-caret-up:before {
   content: "\e929";
 } /* '' */
-.bldpst-icon-carousel-horizontal:before {
+.boldpo-icon-carousel-horizontal:before {
   content: "\e92a";
 } /* '' */
-.bldpst-icon-carousel-vertical:before {
+.boldpo-icon-carousel-vertical:before {
   content: "\e92b";
 } /* '' */
-.bldpst-icon-categories:before {
+.boldpo-icon-categories:before {
   content: "\e92c";
 } /* '' */
-.bldpst-icon-chart-treemap:before {
+.boldpo-icon-chart-treemap:before {
   content: "\e936";
 } /* '' */
-.bldpst-icon-chat:before {
+.boldpo-icon-chat:before {
   content: "\e93a";
 } /* '' */
-.bldpst-icon-chevron-down:before {
+.boldpo-icon-chevron-down:before {
   content: "\e93f";
 } /* '' */
-.bldpst-icon-chevron-left:before {
+.boldpo-icon-chevron-left:before {
   content: "\e940";
 } /* '' */
-.bldpst-icon-chevron-right:before {
+.boldpo-icon-chevron-right:before {
   content: "\e942";
 } /* '' */
-.bldpst-icon-chevron-up:before {
+.boldpo-icon-chevron-up:before {
   content: "\e946";
 } /* '' */
-.bldpst-icon-data-base:before {
+.boldpo-icon-data-base:before {
   content: "\e972";
 } /* '' */
-.bldpst-icon-direction-straight-right:before {
+.boldpo-icon-direction-straight-right:before {
   content: "\e97e";
 } /* '' */
-.bldpst-icon-direction-straight:before {
+.boldpo-icon-direction-straight:before {
   content: "\e97f";
 } /* '' */
-.bldpst-icon-earth-americas:before {
+.boldpo-icon-earth-americas:before {
   content: "\e98f";
 } /* '' */
-.bldpst-icon-favorite-filled:before {
+.boldpo-icon-favorite-filled:before {
   content: "\e9a7";
 } /* '' */
-.bldpst-icon-favorite:before {
+.boldpo-icon-favorite:before {
   content: "\e9a8";
 } /* '' */
-.bldpst-icon-gui:before {
+.boldpo-icon-gui:before {
   content: "\e9c9";
 } /* '' */
-.bldpst-icon-image-copy:before {
+.boldpo-icon-image-copy:before {
   content: "\e9d5";
 } /* '' */
-.bldpst-icon-image:before {
+.boldpo-icon-image:before {
   content: "\e9d8";
 } /* '' */
-.bldpst-icon-logo-digg:before {
+.boldpo-icon-logo-digg:before {
   content: "\ea00";
 } /* '' */
-.bldpst-icon-logo-facebook:before {
+.boldpo-icon-logo-facebook:before {
   content: "\ea02";
 } /* '' */
-.bldpst-icon-logo-github:before {
+.boldpo-icon-logo-github:before {
   content: "\ea04";
 } /* '' */
-.bldpst-icon-logo-google:before {
+.boldpo-icon-logo-google:before {
   content: "\ea05";
 } /* '' */
-.bldpst-icon-logo-instagram:before {
+.boldpo-icon-logo-instagram:before {
   content: "\ea06";
 } /* '' */
-.bldpst-icon-logo-linkedin:before {
+.boldpo-icon-logo-linkedin:before {
   content: "\ea07";
 } /* '' */
-.bldpst-icon-logo-medium:before {
+.boldpo-icon-logo-medium:before {
   content: "\ea09";
 } /* '' */
-.bldpst-icon-logo-pinterest:before {
+.boldpo-icon-logo-pinterest:before {
   content: "\ea0a";
 } /* '' */
-.bldpst-icon-logo-skype:before {
+.boldpo-icon-logo-skype:before {
   content: "\ea0c";
 } /* '' */
-.bldpst-icon-logo-slack:before {
+.boldpo-icon-logo-slack:before {
   content: "\ea0d";
 } /* '' */
-.bldpst-icon-logo-snapchat:before {
+.boldpo-icon-logo-snapchat:before {
   content: "\ea0e";
 } /* '' */
-.bldpst-icon-logo-tumblr:before {
+.boldpo-icon-logo-tumblr:before {
   content: "\ea10";
 } /* '' */
-.bldpst-icon-logo-twitter:before {
+.boldpo-icon-logo-twitter:before {
   content: "\ea11";
 } /* '' */
-.bldpst-icon-logo-vmware:before {
+.boldpo-icon-logo-vmware:before {
   content: "\ea12";
 } /* '' */
-.bldpst-icon-logo-youtube:before {
+.boldpo-icon-logo-youtube:before {
   content: "\ea14";
 } /* '' */
-.bldpst-icon-map:before {
+.boldpo-icon-map:before {
   content: "\ea20";
 } /* '' */
-.bldpst-icon-notebook:before {
+.boldpo-icon-notebook:before {
   content: "\ea3e";
 } /* '' */
-.bldpst-icon-open-panel-left:before {
+.boldpo-icon-open-panel-left:before {
   content: "\ea43";
 } /* '' */
-.bldpst-icon-open-panel-top:before {
+.boldpo-icon-open-panel-top:before {
   content: "\ea44";
 } /* '' */
-.bldpst-icon-password:before {
+.boldpo-icon-password:before {
   content: "\ea51";
 } /* '' */
-.bldpst-icon-phone:before {
+.boldpo-icon-phone:before {
   content: "\ea5b";
 } /* '' */
-.bldpst-icon-calendar-two:before {
+.boldpo-icon-calendar-two:before {
   content: "\ea5c";
 } /* '' */
-.bldpst-icon-notification-status:before {
+.boldpo-icon-notification-status:before {
   content: "\ea5d";
 } /* '' */
-.bldpst-icon-play-filled-alt:before {
+.boldpo-icon-play-filled-alt:before {
   content: "\ea61";
 } /* '' */
-.bldpst-icon-play-filled:before {
+.boldpo-icon-play-filled:before {
   content: "\ea62";
 } /* '' */
-.bldpst-icon-play:before {
+.boldpo-icon-play:before {
   content: "\ea64";
 } /* '' */
-.bldpst-icon-thumbnail-1:before {
+.boldpo-icon-thumbnail-1:before {
   content: "\eade";
 } /* '' */
-.bldpst-icon-thumbnail-2:before {
+.boldpo-icon-thumbnail-2:before {
   content: "\eadf";
 } /* '' */
-.bldpst-icon-thumbs-down:before {
+.boldpo-icon-thumbs-down:before {
   content: "\eae0";
 } /* '' */
-.bldpst-icon-thumbs-up:before {
+.boldpo-icon-thumbs-up:before {
   content: "\eae1";
 } /* '' */
-.bldpst-icon-time:before {
+.boldpo-icon-time:before {
   content: "\eae3";
 } /* '' */
-.bldpst-icon-user-avatar-filled-alt:before {
+.boldpo-icon-user-avatar-filled-alt:before {
   content: "\eaf1";
 } /* '' */
-.bldpst-icon-user-avatar-filled:before {
+.boldpo-icon-user-avatar-filled:before {
   content: "\eaf2";
 } /* '' */
-.bldpst-icon-user-avatar:before {
+.boldpo-icon-user-avatar:before {
   content: "\eaf3";
 } /* '' */
-.bldpst-icon-wikis:before {
+.boldpo-icon-wikis:before {
   content: "\eb0c";
 } /* '' */
-.bldpst-icon-logo-dribbble:before {
+.boldpo-icon-logo-dribbble:before {
   content: "\eb15";
 } /* '' */
-.bldpst-icon-cart:before {
+.boldpo-icon-cart:before {
   content: "\eb16";
 } /* '' */
-.bldpst-icon-vcard:before {
+.boldpo-icon-vcard:before {
   content: "\ebb6";
 } /* '' */
-.bldpst-icon-share-2:before {
+.boldpo-icon-share-2:before {
   content: "\ecc0";
 } /* '' */
-.bldpst-icon-button:before {
+.boldpo-icon-button:before {
   content: "\ed08";
 } /* '' */
-.bldpst-icon-check-empty:before {
+.boldpo-icon-check-empty:before {
   content: "\f096";
 } /* '' */
-.bldpst-icon-doc-text:before {
+.boldpo-icon-doc-text:before {
   content: "\f0f6";
 } /* '' */
-.bldpst-icon-h-sigh:before {
+.boldpo-icon-h-sigh:before {
   content: "\f0fd";
 } /* '' */
-.bldpst-icon-left:before {
+.boldpo-icon-left:before {
   content: "\f177";
 } /* '' */
-.bldpst-icon-whatsapp:before {
+.boldpo-icon-whatsapp:before {
   content: "\f232";
 } /* '' */
-.bldpst-icon-map-o:before {
+.boldpo-icon-map-o:before {
   content: "\f278";
 } /* '' */
 :root {
-  --bldpst-preset-color-primary: #126bf0;
-  --bldpst-preset-color-secondary: #5096ff;
-  --bldpst-preset-color-tertiary: #f3f3f3;
-  --bldpst-preset-color-white: var(--wp--preset--color--white, #ffffff);
-  --bldpst-preset-color-contrast-1: var(--wp--preset--color--contrast, #1e1e1e);
-  --bldpst-preset-color-contrast-2: var(--wp--preset--color--contrast, #424242);
-  --bldpst-preset-hover-transition: 0.4s ease;
+  --boldpo-preset-color-primary: #126bf0;
+  --boldpo-preset-color-secondary: #5096ff;
+  --boldpo-preset-color-tertiary: #f3f3f3;
+  --boldpo-preset-color-white: var(--wp--preset--color--white, #ffffff);
+  --boldpo-preset-color-contrast-1: var(--wp--preset--color--contrast, #1e1e1e);
+  --boldpo-preset-color-contrast-2: var(--wp--preset--color--contrast, #424242);
+  --boldpo-preset-hover-transition: 0.4s ease;
 }/*# sourceMappingURL=public.css.map */

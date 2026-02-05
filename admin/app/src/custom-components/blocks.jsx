@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import BlockItem from './blockItem';
 import { Row, notification } from 'antd';
 
-
 export default function Blocks() {
-    const [blocks, setBlocks] = useState(bldpst.blocks);
+    const [blocks, setBlocks] = useState(boldpo.blocks);
 
     // update by ajax
     const updateBlockStatus = (blockId, currentStatus) => { // Accept currentStatus to calculate new one locally
@@ -16,19 +15,19 @@ export default function Blocks() {
         ));
 
         const data = {
-            action: 'bldpst_update_block_status',
+            action: 'boldpo_update_block_status',
             blockId: blockId,
             status: newStatus,
-            nonce: bldpst.nonce
+            nonce: boldpo.nonce
         };
 
         console.log('Sending data:', data);
 
-        fetch(bldpst.rest_url + 'update-block-status', {
+        fetch(boldpo.rest_url + 'update-block-status', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-WP-Nonce': bldpst.nonce
+                'X-WP-Nonce': boldpo.nonce
             },
             body: JSON.stringify(data)
         })
@@ -38,7 +37,7 @@ export default function Blocks() {
                 // API returns { status: 'success', saved_status: '...' }
                 if (data.status === 'success') {
                     // Update global variable to keep in sync if needed (optional but good for consistency if mixed usage)
-                    // bldpst.blocks reference doesn't automatically update, but we can update if we strongly need to.
+                    // boldpo.blocks reference doesn't automatically update, but we can update if we strongly need to.
                     // For now, rely on local state.
 
                     // Verify server state matches optimistic state (optional double check)
@@ -76,8 +75,8 @@ export default function Blocks() {
     }
 
     return (
-        <div className='bldpst-options-content'>
-            <h1 className='bldpst-options-title'>Blocks</h1>
+        <div className='boldpo-options-content'>
+            <h1 className='boldpo-options-title'>Blocks</h1>
             <Row gutter={[16, 16]} justify="space-between">
                 {blocks.map((block, index) => (
 

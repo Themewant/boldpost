@@ -2,7 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-class Bold_Post_API {
+class BOLDPO_API {
     public static function instance() {
         static $instance = null;
         if ( null === $instance ) {
@@ -16,7 +16,7 @@ class Bold_Post_API {
     }
 
     public function register_routes() {
-        register_rest_route( 'bldpst/v1', '/update-block-status', array(
+        register_rest_route( 'boldpo/v1', '/update-block-status', array(
             'methods' => 'POST',
             'callback' => array( $this, 'update_block_status' ),
             'permission_callback' => function () {
@@ -32,13 +32,13 @@ class Bold_Post_API {
 
         
         // Update the block status in the database
-        update_option( 'bldpst_block_' . $block_id, $status );
+        update_option( 'boldpo_block_' . $block_id, $status );
 
-        $saved_status = get_option( 'bldpst_block_' . $block_id );
+        $saved_status = get_option( 'boldpo_block_' . $block_id );
         
         return rest_ensure_response( array( 'status' => 'success', 'saved_status' => $saved_status ) );
     }
 
 }
 
-Bold_Post_API::instance();
+BOLDPO_API::instance();

@@ -4,10 +4,10 @@ return array(
 	'build' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'bold-post/post-list',
+		'name' => 'boldpost/post-list',
 		'version' => '0.1.0',
 		'title' => 'Post List',
-		'category' => 'bold-post',
+		'category' => 'boldpost',
 		'icon' => 'list',
 		'description' => 'Post List Block',
 		'example' => array(
@@ -25,7 +25,7 @@ return array(
 				'gradients' => true
 			)
 		),
-		'textdomain' => 'bold-post',
+		'textdomain' => 'boldpost',
 		'editorScript' => 'file:./index.js',
 		'viewScript' => 'file:./view.js',
 		'render' => 'file:./render.php',
@@ -381,19 +381,19 @@ return array(
 			),
 			'paginationColor' => array(
 				'type' => 'string',
-				'default' => 'var(--bldpst-preset-color-contrast-2)'
+				'default' => 'var(--boldpo-preset-color-contrast-2)'
 			),
 			'paginationColorHover' => array(
 				'type' => 'string',
-				'default' => 'var(--bldpst-preset-color-white)'
+				'default' => 'var(--boldpo-preset-color-white)'
 			),
 			'paginationBackgroundColor' => array(
 				'type' => 'string',
-				'default' => 'var(--bldpst-preset-color-tertiary)'
+				'default' => 'var(--boldpo-preset-color-tertiary)'
 			),
 			'paginationBackgroundColorHover' => array(
 				'type' => 'string',
-				'default' => 'var(--bldpst-preset-color-primary)'
+				'default' => 'var(--boldpo-preset-color-primary)'
 			),
 			'columnsTablet' => array(
 				'type' => 'string',

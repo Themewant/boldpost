@@ -2,7 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-class Bold_Post_Block_Editor {
+class BOLDPO_Block_Editor {
     public static function instance() {
         static $instance = null;
         if ( null === $instance ) {
@@ -21,14 +21,14 @@ class Bold_Post_Block_Editor {
            return;
         }
         wp_enqueue_script(
-            'bold-post-block-editor-js',
-            BLDPST_PL_URL . 'editor/app/build/index.js',
+            'boldpo-block-editor-js',
+            BOLDPO_PL_URL . 'editor/app/build/index.js',
             ['wp-element', 'wp-hooks', 'wp-blocks'],
-            BLDPST_VERSION,
+            BOLDPO_VERSION,
             true
         );
     }
 
 }
 
-Bold_Post_Block_Editor::instance();
+BOLDPO_Block_Editor::instance();

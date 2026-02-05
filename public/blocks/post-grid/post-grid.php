@@ -3,18 +3,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-function bldpst_create_block_post_grid_block_init() {
+function boldpo_create_block_post_grid_block_init() {
 	// Register block-specific styles manually to be sure
 	wp_register_style(
-		'bldpst-post-grid-style',
+		'boldpo-post-grid-style',
 		plugins_url( 'build/style-index.css', __FILE__ ),
-		array('bldpst-public-style'),
-		BLDPST_VERSION
+		array('boldpo-public-style'),
+		BOLDPO_VERSION
 	);
 
 	register_block_type( __DIR__ . '/build', array(
-		'style'         => 'bldpst-post-grid-style',
-		'editor_style'  => 'bldpst-post-grid-style',
+		'style'         => 'boldpo-post-grid-style',
+		'editor_style'  => 'boldpo-post-grid-style',
 	) );
 }
-add_action( 'init', 'bldpst_create_block_post_grid_block_init' );
+add_action( 'init', 'boldpo_create_block_post_grid_block_init' );

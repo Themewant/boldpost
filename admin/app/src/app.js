@@ -50,8 +50,8 @@ export default function BoldPostApp() {
             <App>
                 <Layout>
                     <Header style={{ display: 'flex', alignItems: 'center', background: '#fff' }}>
-                        <div className="bold-post-logo">
-                            <img src={bldpst.bldpstUrl + 'public/assets/img/icons/plugin-icon-200_200.svg'} alt="bold-post-logo" />
+                        <div className="boldpo-logo">
+                            <img src={boldpo.boldpoUrl + 'public/assets/img/icons/plugin-icon-200_200.svg'} alt="boldpo-logo" />
                         </div>
                         <Menu
                             theme="light"
@@ -76,7 +76,7 @@ export default function BoldPostApp() {
                         </div>
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>
-                        Bold Post ©{new Date().getFullYear()} Created by Themewant
+                        BoldPost ©{new Date().getFullYear()} Created by Themewant
                     </Footer>
                 </Layout>
             </App >

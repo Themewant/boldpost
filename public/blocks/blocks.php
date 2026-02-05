@@ -4,39 +4,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
-require_once BLDPST_PL_PATH . 'admin/blocks.php';
+require_once BOLDPO_PL_PATH . 'admin/blocks.php';
 
-add_action( 'enqueue_block_assets', 'bldpst_enqueue_block_styles' );
-function bldpst_enqueue_block_styles() {
+add_action( 'enqueue_block_assets', 'boldpo_enqueue_block_styles' );
+function boldpo_enqueue_block_styles() {
 	
 
     // if swier not existing
 	if (!wp_style_is('swiper-css', 'enqueued')) {
-		wp_enqueue_style( 'swiper-css', BLDPST_PL_URL . 'assets/lib/swiper/swiper-bundle.min.css', array(), BLDPST_VERSION, 'all' );
+		wp_enqueue_style( 'swiper-css', BOLDPO_PL_URL . 'assets/lib/swiper/swiper-bundle.min.css', array(), BOLDPO_VERSION, 'all' );
 	}
 	if (!wp_script_is('swiper-js', 'enqueued')) {
-		wp_enqueue_script( 'swiper-js', BLDPST_PL_URL . 'assets/lib/swiper/swiper-bundle.min.js', array(),'12.0.3',false );
+		wp_enqueue_script( 'swiper-js', BOLDPO_PL_URL . 'assets/lib/swiper/swiper-bundle.min.js', array(),'12.0.3',false );
 	}
 
     // register plugin style if not registered	
-	if (!wp_style_is('bldpst-public-style', 'registered')) {
+	if (!wp_style_is('boldpo-public-style', 'registered')) {
 		wp_register_style( 
-			'bldpst-public-style', 
-			BLDPST_PL_URL . 'public/assets/css/public.css', 
+			'boldpo-public-style', 
+			BOLDPO_PL_URL . 'public/assets/css/public.css', 
 			array(), 
-			BLDPST_VERSION 
+			BOLDPO_VERSION 
 		);
 	}
 
     
 }
 
-$bldpst_blocks_instance = Bold_Post_Blocks::instance();
-$bldpst_blocks = $bldpst_blocks_instance->get_blocks();
+$boldpo_blocks_instance = BOLDPO_Blocks::instance();
+$boldpo_blocks = $boldpo_blocks_instance->get_blocks();
 
-foreach ($bldpst_blocks as $bldpst_block) {
-	if ($bldpst_block['status'] == 'disable') {
+foreach ($boldpo_blocks as $boldpo_block) {
+	if ($boldpo_block['status'] == 'disable') {
 		continue;
 	}
-	require_once __DIR__ . '/' . $bldpst_block['id'] . '/' . $bldpst_block['id'] . '.php';
+	require_once __DIR__ . '/' . $boldpo_block['id'] . '/' . $boldpo_block['id'] . '.php';
 }

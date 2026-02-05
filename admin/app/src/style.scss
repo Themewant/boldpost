@@ -1,14 +1,14 @@
-body.toplevel_page_bold-post #wpcontent {
+body.toplevel_page_boldpost #wpcontent {
     padding-left: 0 !important;
 }
 
-.menu-top.toplevel_page_bold-post .wp-menu-image img {
+.menu-top.toplevel_page_boldpost .wp-menu-image img {
     height: 17px;
     opacity: 1 !important;
 }
 
-#bldpst-dashboard {
-    .bold-post-logo {
+#boldpo-dashboard {
+    .boldpo-logo {
         display: flex;
         align-items: center;
         gap: 10px;
@@ -23,14 +23,14 @@ body.toplevel_page_bold-post #wpcontent {
     top: 50px !important;
 }
 
-.bldpst-options-title {
+.boldpo-options-title {
     font-size: 24px;
     font-weight: 600;
     line-height: 1.2;
     margin-top: 0;
 }
 
-.bldpst-block-item {
+.boldpo-block-item {
     display: flex;
     align-items: center;
     justify-content: space-between;

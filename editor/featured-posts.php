@@ -3,9 +3,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( ! class_exists( 'Bold_Post_Featured_Post' ) ) {
+if ( ! class_exists( 'BOLDPO_Featured_Post' ) ) {
 
-	class Bold_Post_Featured_Post {
+	class BOLDPO_Featured_Post {
 
 		public function __construct() {
 
@@ -111,7 +111,7 @@ if ( ! class_exists( 'Bold_Post_Featured_Post' ) ) {
 			}
 
 			wp_add_inline_script(
-				'jquery-core',
+				'inline-edit-post',
 				$this->quick_edit_js()
 			);
 		}
@@ -146,4 +146,4 @@ if ( ! class_exists( 'Bold_Post_Featured_Post' ) ) {
 	}
 }
 
-new Bold_Post_Featured_Post();
+new BOLDPO_Featured_Post();

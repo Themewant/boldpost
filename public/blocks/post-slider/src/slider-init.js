@@ -1,21 +1,21 @@
 (function (window) {
 
-    window.initBldpstSlider = function (scope) {
+    window.initBoldpoSlider = function (scope) {
 
         const wraps = (scope || document).querySelectorAll(
-            '.bldpst-post-slider-block-wrap'
+            '.boldpo-post-slider-block-wrap'
         );
 
         wraps.forEach(function (wrap) {
 
             // Check if Swiper is available
             if (typeof Swiper === 'undefined') {
-                console.warn('Bold Post: Swiper is not defined. Retrying later or check enqueue.');
+                console.warn('BoldPost: Swiper is not defined. Retrying later or check enqueue.');
                 return;
             }
 
             const unique = wrap.dataset.unique;
-            const sliderElement = wrap.querySelector('.bldpst-post-slider-' + unique);
+            const sliderElement = wrap.querySelector('.boldpo-post-slider-' + unique);
 
             // already initialized or no slider element
             if (wrap.dataset.initialized === 'true' || !sliderElement) {
@@ -82,7 +82,7 @@
                     }
                 });
             } catch (e) {
-                console.error('Bold Post: Swiper init failed', e);
+                console.error('BoldPost: Swiper init failed', e);
             }
 
             // Mark as initialized immediately to avoid double calls before Swiper finishes
@@ -92,7 +92,7 @@
 
     // Frontend initial load
     document.addEventListener('DOMContentLoaded', function () {
-        window.initBldpstSlider(document);
+        window.initBoldpoSlider(document);
     });
 
 })(window);

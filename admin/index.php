@@ -2,7 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-class Bold_Post_Admin {
+class BOLDPO_Admin {
     public static function instance() {
         static $instance = null;
         if ( null === $instance ) {
@@ -20,7 +20,7 @@ class Bold_Post_Admin {
     public function enqueue_scripts($hook) {
        
 
-        $asset_file = include BLDPST_PL_PATH . 'admin/app/build/index.asset.php';
+        $asset_file = include BOLDPO_PL_PATH . 'admin/app/build/index.asset.php';
 
         $deps = array_map(function($dep) {
             return match($dep) {
@@ -31,37 +31,37 @@ class Bold_Post_Admin {
         }, $asset_file['dependencies']);
 
         wp_enqueue_style(
-            'bold-post-admin-css',
-            BLDPST_PL_URL . 'admin/app/build/style-index.css',
+            'boldpo-admin-css',
+            BOLDPO_PL_URL . 'admin/app/build/style-index.css',
             [],
             $asset_file['version']
         );
 
-        if ($hook !== 'toplevel_page_bold-post') {
+        if ($hook !== 'toplevel_page_boldpost') {
             return;
         }
 
         wp_enqueue_script(
-            'bold-post-admin-js',
-            BLDPST_PL_URL . 'admin/app/build/index.js',
+            'boldpo-admin-js',
+            BOLDPO_PL_URL . 'admin/app/build/index.js',
             $deps,
             $asset_file['version'],
             true
         );
 
         
-        $blocks = Bold_Post_Blocks::instance()->get_blocks();
-        wp_localize_script( 'bold-post-admin-js', 'bldpst', array(
+        $blocks = BOLDPO_Blocks::instance()->get_blocks();
+        wp_localize_script( 'boldpo-admin-js', 'boldpo', array(
             'ajaxurl' => admin_url( 'admin-ajax.php' ),
             'siteUrl' => site_url(),
-            'rest_url' => esc_url_raw(rest_url('bldpst/v1/')),
+            'rest_url' => esc_url_raw(rest_url('boldpo/v1/')),
             'nonce' => wp_create_nonce('wp_rest'),
             'blocks' => $blocks,
-            'bldpstUrl' => BLDPST_PL_URL,
-            'bldpstPath' => BLDPST_PL_PATH,
+            'boldpoUrl' => BOLDPO_PL_URL,
+            'boldpoPath' => BOLDPO_PL_PATH,
         ) );
     }
 
 }
 
-Bold_Post_Admin::instance();
+BOLDPO_Admin::instance();

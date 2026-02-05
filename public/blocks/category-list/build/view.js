@@ -1,1 +1,1 @@
-document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".bldpst-category-item").forEach(e=>{})});
+document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".boldpo-category-item").forEach(e=>{})});

@@ -2,7 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-class Bold_Post_Blocks {
+class BOLDPO_Blocks {
     public static function instance() {
         static $instance = null;
         if ( null === $instance ) {
@@ -49,7 +49,7 @@ class Bold_Post_Blocks {
 
         // Merge status from DB
         foreach ($blocks as &$block) {
-            $block['status'] = get_option('bldpst_block_' . $block['id'], 'disable');
+            $block['status'] = get_option('boldpo_block_' . $block['id'], 'disable');
         }
         unset($block);
         

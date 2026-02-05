@@ -13,10 +13,10 @@ export default function BlockItem(
 ) {
     return (
         <Col className="gutter-row" span={5}>
-            <div className="bldpst-block-item">
+            <div className="boldpo-block-item">
                 <div className="meta">
                     <div className='icon'>
-                        <img src={bldpst.bldpstUrl + 'public/assets/img/icons/' + icon} alt="" />
+                        <img src={boldpo.boldpoUrl + 'public/assets/img/icons/' + icon} alt="" />
                     </div>
                     <div className='content'>
                         <strong>{title}</strong>

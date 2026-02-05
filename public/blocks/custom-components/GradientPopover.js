@@ -87,7 +87,7 @@ const GradientPopover = ({ label, gradient = '', onChange, defaultGradient = '' 
                             }}
                             style={{ marginTop: '10px', width: '100%', justifyContent: 'center' }}
                         >
-                            {__('Reset', 'bold-post')}
+                            {__('Reset', 'boldpost')}
                         </Button>
                     </div>
                 </Popover>

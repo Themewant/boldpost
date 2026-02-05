@@ -72,8 +72,8 @@ const BackgroundControl = ({
                             className="eshb-background-tabs"
                             activeClass="is-active"
                             tabs={[
-                                { name: 'solid', title: __('Solid', 'bold-post'), className: 'eshb-bg-tab-solid' },
-                                { name: 'gradient', title: __('Gradient', 'bold-post'), className: 'eshb-bg-tab-gradient' },
+                                { name: 'solid', title: __('Solid', 'boldpost'), className: 'eshb-bg-tab-solid' },
+                                { name: 'gradient', title: __('Gradient', 'boldpost'), className: 'eshb-bg-tab-gradient' },
                             ]}
                         >
                             {(tab) => {
@@ -91,7 +91,7 @@ const BackgroundControl = ({
                                                 onClick={() => onColorChange(defaultColor)}
                                                 style={{ marginTop: '10px', width: '100%', justifyContent: 'center' }}
                                             >
-                                                {__('Reset Color', 'bold-post')}
+                                                {__('Reset Color', 'boldpost')}
                                             </Button>
                                         </div>
                                     );
@@ -135,7 +135,7 @@ const BackgroundControl = ({
                                                 onClick={() => onGradientChange(defaultGradient)}
                                                 style={{ marginTop: '10px', width: '100%', justifyContent: 'center' }}
                                             >
-                                                {__('Reset Gradient', 'bold-post')}
+                                                {__('Reset Gradient', 'boldpost')}
                                             </Button>
                                         </div>
                                     );
