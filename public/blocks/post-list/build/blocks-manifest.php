@@ -30,6 +30,10 @@ return array(
 		'viewScript' => 'file:./view.js',
 		'render' => 'file:./render.php',
 		'attributes' => array(
+			'ignoreStikcyPosts' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
 			'isFeatured' => array(
 				'type' => 'boolean',
 				'default' => false
@@ -45,6 +49,10 @@ return array(
 			'thumbnailSize' => array(
 				'type' => 'string',
 				'default' => 'eshb_thumbnail'
+			),
+			'thumbnailHeight' => array(
+				'type' => 'string',
+				'default' => ''
 			),
 			'perPage' => array(
 				'type' => 'string',
@@ -188,6 +196,15 @@ return array(
 					'letterSpacing' => ''
 				)
 			),
+			'readMoreBorderRadius' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '0px',
+					'right' => '0px',
+					'bottom' => '0px',
+					'left' => '0px'
+				)
+			),
 			'itemBackgroundColor' => array(
 				'type' => 'string',
 				'default' => ''
@@ -228,13 +245,9 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
-			'itemColGap' => array(
+			'itemGap' => array(
 				'type' => 'string',
 				'default' => '20px'
-			),
-			'itemRowGap' => array(
-				'type' => 'string',
-				'default' => '30px'
 			),
 			'itemTitleColor' => array(
 				'type' => 'string',
@@ -247,6 +260,15 @@ return array(
 			'itemExcerptColor' => array(
 				'type' => 'string',
 				'default' => ''
+			),
+			'contentPadding' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '30px',
+					'right' => '20px',
+					'bottom' => '30px',
+					'left' => '20px'
+				)
 			),
 			'readMoreBackgroundColor' => array(
 				'type' => 'string',
@@ -556,6 +578,54 @@ return array(
 					'bottom' => '0px',
 					'left' => '0px'
 				)
+			),
+			'contentTextAlign' => array(
+				'type' => 'string',
+				'default' => 'left'
+			),
+			'contentTextAlignTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'contentTextAlignMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'titleTextAlign' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'titleTextAlignTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'titleTextAlignMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'excerptTextAlign' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'excerptTextAlignTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'excerptTextAlignMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'buttonTextAlign' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'buttonTextAlignTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'buttonTextAlignMobile' => array(
+				'type' => 'string',
+				'default' => ''
 			)
 		)
 	)

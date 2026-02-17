@@ -20,3 +20,16 @@ const catIcon = () => {
     );
 }
 registerBlockCategory('boldpost', 'BoldPost', catIcon);
+
+
+// prevent all link click when editor mode
+document.addEventListener('click', (e) => {
+    // Check if the clicked element is a link or inside a link
+    const link = e.target.closest('a');
+
+    // If it's a link and it's inside our block wrapper
+    if (link && link.closest('.boldpo-block')) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+}, true);

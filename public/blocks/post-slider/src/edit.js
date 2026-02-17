@@ -31,6 +31,8 @@ import TypographyControls from '../../custom-components/TypographyControls';
 import ColorPopover from '../../custom-components/ColorPopover';
 import ImageRadioControl from '../../custom-components/ImageRadioControl';
 import ResponsiveWrapper from '../../custom-components/ResponsiveWrapper';
+import RangeControlWithUnit from '../../custom-components/RangeControlWithUnit';
+import TextAlignControl from '../../custom-components/TextAlignControl';
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -156,6 +158,11 @@ export default function Edit({ attributes, setAttributes }) {
 						multiple={true}
 						options={excludesOptions}
 					/>
+					<ToggleControl
+						label={__('Ignore Sticky Posts', 'boldpost')}
+						checked={attributes.ignoreStikcyPosts}
+						onChange={(value) => setAttributes({ ignoreStikcyPosts: value })}
+					/>
 					<SelectControl
 						label={__('Categories', 'boldpost')}
 						value={attributes.categories}
@@ -253,6 +260,19 @@ export default function Edit({ attributes, setAttributes }) {
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
+					<ResponsiveWrapper label={__('Thumbnail Height', 'boldpost')}>
+						{(device) => (
+							<RangeControlWithUnit
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('thumbnailHeight', device)}
+								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+								min={0}
+								max={500}
+								step={1}
+							/>
+						)}
+					</ResponsiveWrapper>
 					<SelectControl
 						label={__('Animation', 'boldpost')}
 						value={attributes.animStyle}
@@ -400,11 +420,20 @@ export default function Edit({ attributes, setAttributes }) {
 					)}
 				</PanelBody>
 
-				<PanelBody title={__('Pagination', 'boldpost')} initialOpen={false}>
+				<PanelBody title={__('Navigation', 'boldpost')} initialOpen={false}>
 					<ToggleControl
-						label={__('Show Pagination', 'boldpost')}
-						checked={attributes.pagination}
-						onChange={(value) => setAttributes({ pagination: value })}
+						label={__('Show Navigation', 'boldpost')}
+						checked={attributes.showNav}
+						onChange={(value) => setAttributes({ showNav: value })}
+						__nextHasNoMarginBottom={true}
+					/>
+				</PanelBody>
+
+				<PanelBody title={__('Dots', 'boldpost')} initialOpen={false}>
+					<ToggleControl
+						label={__('Show Dots', 'boldpost')}
+						checked={attributes.showDots}
+						onChange={(value) => setAttributes({ showDots: value })}
 						__nextHasNoMarginBottom={true}
 					/>
 				</PanelBody>
@@ -607,17 +636,6 @@ export default function Edit({ attributes, setAttributes }) {
 						}}
 					</TabPanel>
 					<Divider />
-					<ResponsiveWrapper label={__('Item Gap', 'boldpost')}>
-						{(device) => (
-							<NumberControl
-								value={attributes[getAttrKey('itemGap', device)]}
-								onChange={(value) => setAttributes({ [getAttrKey('itemGap', device)]: value })}
-								__next40pxDefaultSize={true}
-								__nextHasNoMarginBottom={true}
-							/>
-						)}
-					</ResponsiveWrapper>
-					<Divider />
 					<ResponsiveWrapper label={__('Padding', 'boldpost')}>
 						{(device) => (
 							<BoxControl
@@ -632,6 +650,27 @@ export default function Edit({ attributes, setAttributes }) {
 						values={attributes.itemBorderRadius}
 						onChange={(nextValues) => setAttributes({ itemBorderRadius: nextValues })}
 					/>
+				</PanelBody>
+
+				<PanelBody title={__('Content', 'boldpost')} initialOpen={false}>
+					<ResponsiveWrapper label={__('Text Align', 'boldpost')}>
+						{(device) => (
+							<TextAlignControl
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('contentTextAlign', device)}
+							/>
+						)}
+					</ResponsiveWrapper>
+					<Divider />
+					<ResponsiveWrapper label={__('Padding', 'boldpost')}>
+						{(device) => (
+							<BoxControl
+								values={attributes[getAttrKey('contentPadding', device)]}
+								onChange={(value) => setAttributes({ [getAttrKey('contentPadding', device)]: value })}
+							/>
+						)}
+					</ResponsiveWrapper>
 				</PanelBody>
 
 				<PanelBody title={__('Title', 'boldpost')} initialOpen={false}>
@@ -681,6 +720,16 @@ export default function Edit({ attributes, setAttributes }) {
 						)}
 					</ResponsiveWrapper>
 					<Divider />
+					<ResponsiveWrapper label={__('Text Align', 'boldpost')}>
+						{(device) => (
+							<TextAlignControl
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('titleTextAlign', device)}
+							/>
+						)}
+					</ResponsiveWrapper>
+					<Divider />
 					<ResponsiveWrapper label={__('Typography', 'boldpost')}>
 						{(device) => (
 							<TypographyControls
@@ -718,6 +767,16 @@ export default function Edit({ attributes, setAttributes }) {
 							<BoxControl
 								values={attributes[getAttrKey('itemExcerptMargin', device)]}
 								onChange={(value) => setAttributes({ [getAttrKey('itemExcerptMargin', device)]: value })}
+							/>
+						)}
+					</ResponsiveWrapper>
+					<Divider />
+					<ResponsiveWrapper label={__('Text Align', 'boldpost')}>
+						{(device) => (
+							<TextAlignControl
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('excerptTextAlign', device)}
 							/>
 						)}
 					</ResponsiveWrapper>
@@ -813,6 +872,22 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(value) => setAttributes({ readMoreMargin: value })}
 					/>
 					<Divider />
+					<BoxControl
+						label={__('Border Radius', 'boldpost')}
+						values={attributes.readMoreBorderRadius}
+						onChange={(value) => setAttributes({ readMoreBorderRadius: value })}
+					/>
+					<Divider />
+					<ResponsiveWrapper label={__('Text Align', 'boldpost')}>
+						{(device) => (
+							<TextAlignControl
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('buttonTextAlign', device)}
+							/>
+						)}
+					</ResponsiveWrapper>
+					<Divider />
 					<TypographyControls
 						label={__('Typography', 'boldpost')}
 						attributes={attributes}
@@ -821,39 +896,91 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 				</PanelBody>
 
-				<PanelBody title={__('Pagination', 'boldpost')} initialOpen={false}>
-					<TabPanel
-						className="eshb-tab-panel"
-						activeClass="is-active"
-						tabs={[
-							{ name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
-							{ name: 'hover', title: __('Hover / Active', 'boldpost'), className: 'eshb-tab-hover' },
-						]}
-					>
-						{(tab) => {
-							const isHover = tab.name === 'hover';
-							return (
-								<div style={{ marginTop: '15px' }}>
-									<ColorPopover
-										label={__('Color', 'boldpost')}
-										color={isHover ? attributes.paginationColorHover : attributes.paginationColor}
-										defaultColor={isHover ? 'var(--boldpo-preset-color-white)' : 'var(--boldpo-preset-color-contrast-2)'}
-										onChange={(value) => setAttributes({ [isHover ? 'paginationColorHover' : 'paginationColor']: value })}
-									/>
-									<ColorPopover
-										label={__('Background Color', 'boldpost')}
-										color={isHover ? attributes.paginationBackgroundColorHover : attributes.paginationBackgroundColor}
-										defaultColor={isHover ? 'var(--boldpo-preset-color-primary)' : 'var(--boldpo-preset-color-tertiary)'}
-										onChange={(value) => setAttributes({ [isHover ? 'paginationBackgroundColorHover' : 'paginationBackgroundColor']: value })}
-									/>
-								</div>
-							);
-						}}
-					</TabPanel>
+				{
+					attributes.showDots && (
+						<PanelBody title={__('Dots', 'boldpost')} initialOpen={false}>
+							<TabPanel
+								className="eshb-tab-panel"
+								activeClass="is-active"
+								tabs={[
+									{ name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
+									{ name: 'hover', title: __('Hover / Active', 'boldpost'), className: 'eshb-tab-hover' },
+								]}
+							>
+								{(tab) => {
+									const isHover = tab.name === 'hover';
+									return (
+										<div style={{ marginTop: '15px' }}>
+											<ColorPopover
+												label={__('Color', 'boldpost')}
+												color={isHover ? attributes.dotsColorHover : attributes.dotsColor}
+												defaultColor={isHover ? 'var(--boldpo-preset-color-white)' : 'var(--boldpo-preset-color-contrast-2)'}
+												onChange={(value) => setAttributes({ [isHover ? 'dotsColorHover' : 'dotsColor']: value })}
+											/>
+											<ColorPopover
+												label={__('Background Color', 'boldpost')}
+												color={isHover ? attributes.dotsBgColorHover : attributes.dotsBgColor}
+												defaultColor={isHover ? 'var(--boldpo-preset-color-primary)' : 'var(--boldpo-preset-color-tertiary)'}
+												onChange={(value) => setAttributes({ [isHover ? 'dotsBgColorHover' : 'dotsBgColor']: value })}
+											/>
+										</div>
+									);
+								}}
+							</TabPanel>
 
-				</PanelBody>
+							<Divider />
+							<BoxControl
+								label={__('Border Radius', 'boldpost')}
+								values={attributes.dotsBorderRadius}
+								onChange={(value) => setAttributes({ dotsBorderRadius: value })}
+							/>
+
+						</PanelBody>
+					)
+				}
+				{
+					attributes.showNav && (
+						<PanelBody title={__('Navigation', 'boldpost')} initialOpen={false}>
+							<TabPanel
+								className="eshb-tab-panel"
+								activeClass="is-active"
+								tabs={[
+									{ name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
+									{ name: 'hover', title: __('Hover / Active', 'boldpost'), className: 'eshb-tab-hover' },
+								]}
+							>
+								{(tab) => {
+									const isHover = tab.name === 'hover';
+									return (
+										<div style={{ marginTop: '15px' }}>
+											<ColorPopover
+												label={__('Color', 'boldpost')}
+												color={isHover ? attributes.navColorHover : attributes.navColor}
+												defaultColor={isHover ? 'var(--boldpo-preset-color-white)' : 'var(--boldpo-preset-color-contrast-2)'}
+												onChange={(value) => setAttributes({ [isHover ? 'navColorHover' : 'navColor']: value })}
+											/>
+											<ColorPopover
+												label={__('Background Color', 'boldpost')}
+												color={isHover ? attributes.navBgColorHover : attributes.navBgColor}
+												defaultColor={isHover ? 'var(--boldpo-preset-color-primary)' : 'var(--boldpo-preset-color-tertiary)'}
+												onChange={(value) => setAttributes({ [isHover ? 'navBgColorHover' : 'navBgColor']: value })}
+											/>
+										</div>
+									);
+								}}
+							</TabPanel>
+							<Divider />
+							<BoxControl
+								label={__('Border Radius', 'boldpost')}
+								values={attributes.navBorderRadius}
+								onChange={(value) => setAttributes({ navBorderRadius: value })}
+							/>
+						</PanelBody>
+					)
+				}
 
 			</InspectorControls>
+
 
 			<ServerSideRender block="boldpost/post-slider" attributes={attributes} httpMethod="POST" />
 		</div>

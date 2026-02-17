@@ -39,6 +39,14 @@
 .boldpo-post-slider-block-wrap .boldpo-post-slider .boldpo-grid-item .boldpo-blog-date-top {
   z-index: 1;
   background-color: var(--boldpo-preset-color-primary);
+}
+.boldpo-post-slider-block-wrap .boldpo-post-slider .boldpo-grid-item .boldpo-blog-date-top h4 {
+  margin: 0;
+  color: #fff;
+  font-size: 36px;
+  line-height: 1;
+}
+.boldpo-post-slider-block-wrap .boldpo-post-slider .boldpo-grid-item .boldpo-blog-date-top {
   position: absolute;
   top: 0;
   right: 0;
@@ -49,12 +57,6 @@
   border-radius: 4px;
   color: #fff;
   margin: 25px;
-}
-.boldpo-post-slider-block-wrap .boldpo-post-slider .boldpo-grid-item .boldpo-blog-date-top h4 {
-  margin: 0;
-  color: #fff;
-  font-size: 36px;
-  line-height: 1;
 }
 .boldpo-post-slider-block-wrap .boldpo-post-slider .boldpo-grid-item .boldpo-blog-date-top h4,
 .boldpo-post-slider-block-wrap .boldpo-post-slider .boldpo-grid-item .boldpo-blog-date-top span {
@@ -109,7 +111,6 @@
   gap: 10px;
 }
 .boldpo-post-slider-block-wrap .boldpo-post-slider .boldpo-grid-item .boldpo-blog-metas a {
-  color: currentColor;
   text-decoration: none;
 }
 .boldpo-post-slider-block-wrap .boldpo-post-slider .boldpo-grid-item .boldpo-blog-metas a:hover {
@@ -127,10 +128,9 @@
   margin-top: 10px;
   text-decoration: none;
 }
-.boldpo-post-slider-block-wrap .boldpo-post-slider .boldpo-grid-item .boldpo-read-more a {
+.boldpo-post-slider-block-wrap .boldpo-post-slider .boldpo-grid-item .boldpo-read-more .boldpo-read-more-link {
   display: inline-flex;
   align-items: center;
-  color: currentColor;
   text-decoration: none;
 }
 .boldpo-post-slider-block-wrap .boldpo-post-slider .boldpo-grid-item .boldpo-read-more .boldpo-read-more-icon.after {
@@ -181,7 +181,7 @@
 .boldpo-post-slider-block-wrap .boldpo-post-slider.style-1 .boldpo-grid-item .boldpo-blog-title,
 .boldpo-post-slider-block-wrap .boldpo-post-slider.style-1 .boldpo-grid-item .boldpo-blog-metas,
 .boldpo-post-slider-block-wrap .boldpo-post-slider.style-1 .boldpo-grid-item .boldpo-blog-excerpt,
-.boldpo-post-slider-block-wrap .boldpo-post-slider.style-1 .boldpo-grid-item .boldpo-read-more a {
+.boldpo-post-slider-block-wrap .boldpo-post-slider.style-1 .boldpo-grid-item .boldpo-read-more .boldpo-read-more-link {
   color: #fff;
 }
 .boldpo-post-slider-block-wrap .boldpo-post-slider.style-1 .boldpo-grid-item a:hover {
@@ -201,8 +201,8 @@
   width: 20px;
 }
 .boldpo-post-slider-block-wrap .boldpo-post-slider .nav-btn svg path {
-  fill: #000;
-  stroke: #000;
+  fill: currentColor;
+  stroke: currentColor;
 }
 .boldpo-post-slider-block-wrap .boldpo-post-slider .nav-btn:focus {
   outline: none;
@@ -211,6 +211,6 @@
   background-color: #000;
 }
 .boldpo-post-slider-block-wrap .boldpo-post-slider .nav-btn:hover svg path {
-  fill: #fff;
-  stroke: #fff;
+  fill: currentColor;
+  stroke: currentColor;
 }/*# sourceMappingURL=style.css.map */

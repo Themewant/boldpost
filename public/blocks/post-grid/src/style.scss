@@ -117,7 +117,6 @@
 				gap: 10px;
 
 				a {
-					color: currentColor;
 					text-decoration: none;
 
 					&:hover {
@@ -140,10 +139,9 @@
 				margin-top: 10px;
 				text-decoration: none;
 
-				a {
+				.boldpo-read-more-link {
 					display: inline-flex;
 					align-items: center;
-					color: currentColor;
 					text-decoration: none;
 				}
 

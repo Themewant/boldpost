@@ -26,6 +26,10 @@
   "viewScript": "file:./view.js",
   "render": "file:./render.php",
   "attributes": {
+    "ignoreStikcyPosts": {
+      "type": "boolean",
+      "default": false
+    },
     "isFeatured": {
       "type": "boolean",
       "default": false
@@ -37,6 +41,10 @@
     "thumbnailSize": {
       "type": "string",
       "default": "eshb_thumbnail"
+    },
+    "thumbnailHeight": {
+      "type": "string",
+      "default": ""
     },
     "perPage": {
       "type": "string",
@@ -326,6 +334,15 @@
         "letterSpacing": ""
       }
     },
+    "readMoreBorderRadius": {
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      }
+    },
     "itemBackgroundColor": {
       "type": "string",
       "default": ""
@@ -377,6 +394,15 @@
     "itemExcerptColor": {
       "type": "string",
       "default": ""
+    },
+    "contentPadding": {
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      }
     },
     "readMoreBackgroundColor": {
       "type": "string",
@@ -544,41 +570,109 @@
       "type": "boolean",
       "default": false
     },
-    "nextBtnBorderRadius": {
-      "type": "object",
-      "default": {
-        "top": "20px",
-        "right": "0px",
-        "bottom": "0px",
-        "left": "20px"
-      }
+    "showNav": {
+      "type": "boolean",
+      "default": true
     },
-    "prevBtnBorderRadius": {
+    "navBgColor": {
+      "type": "string",
+      "default": ""
+    },
+    "navBgColorHover": {
+      "type": "string",
+      "default": ""
+    },
+    "navColor": {
+      "type": "string",
+      "default": ""
+    },
+    "navColorHover": {
+      "type": "string",
+      "default": ""
+    },
+    "navBorderRadius": {
       "type": "object",
       "default": {
         "top": "0px",
-        "right": "20px",
-        "bottom": "20px",
+        "right": "0px",
+        "bottom": "0px",
         "left": "0px"
       }
     },
-    "navBtnBgColor": {
-      "type": "string",
-      "default": ""
-    },
-    "navBtnBgColorHover": {
-      "type": "string",
-      "default": ""
-    },
-    "navBtnColor": {
-      "type": "string",
-      "default": ""
-    },
-    "navBtnColorHover": {
-      "type": "string",
-      "default": ""
+    "showDots": {
+      "type": "boolean",
+      "default": false
     },
     "dotsBgColor": {
+      "type": "string",
+      "default": ""
+    },
+    "dotsBgColorHover": {
+      "type": "string",
+      "default": ""
+    },
+    "dotsColor": {
+      "type": "string",
+      "default": ""
+    },
+    "dotsColorHover": {
+      "type": "string",
+      "default": ""
+    },
+    "dotsBorderRadius": {
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      }
+    },
+    "contentTextAlign": {
+      "type": "string",
+      "default": "left"
+    },
+    "contentTextAlignTablet": {
+      "type": "string",
+      "default": ""
+    },
+    "contentTextAlignMobile": {
+      "type": "string",
+      "default": ""
+    },
+    "titleTextAlign": {
+      "type": "string",
+      "default": ""
+    },
+    "titleTextAlignTablet": {
+      "type": "string",
+      "default": ""
+    },
+    "titleTextAlignMobile": {
+      "type": "string",
+      "default": ""
+    },
+    "excerptTextAlign": {
+      "type": "string",
+      "default": ""
+    },
+    "excerptTextAlignTablet": {
+      "type": "string",
+      "default": ""
+    },
+    "excerptTextAlignMobile": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonTextAlign": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonTextAlignTablet": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonTextAlignMobile": {
       "type": "string",
       "default": ""
     }

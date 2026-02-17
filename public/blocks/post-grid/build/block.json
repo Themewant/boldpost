@@ -34,6 +34,10 @@
   "viewScript": "file:./view.js",
   "render": "file:./render.php",
   "attributes": {
+    "ignoreStikcyPosts": {
+      "type": "boolean",
+      "default": false
+    },
     "isFeatured": {
       "type": "boolean",
       "default": false
@@ -49,6 +53,10 @@
     "thumbnailSize": {
       "type": "string",
       "default": "eshb_thumbnail"
+    },
+    "thumbnailHeight": {
+      "type": "string",
+      "default": ""
     },
     "perPage": {
       "type": "string",
@@ -85,6 +93,15 @@
       ]
     },
     "itemPadding": {
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      }
+    },
+    "itemMargin": {
       "type": "object",
       "default": {
         "top": "0px",
@@ -162,6 +179,15 @@
         "letterSpacing": ""
       }
     },
+    "contentPadding": {
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      }
+    },
     "readMorePadding": {
       "type": "object",
       "default": {
@@ -190,6 +216,15 @@
         "textTransform": "",
         "lineHeight": "",
         "letterSpacing": ""
+      }
+    },
+    "readMoreBorderRadius": {
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
       }
     },
     "itemBackgroundColor": {
@@ -535,6 +570,54 @@
         "bottom": "0px",
         "left": "0px"
       }
+    },
+    "contentTextAlign": {
+      "type": "string",
+      "default": "left"
+    },
+    "contentTextAlignTablet": {
+      "type": "string",
+      "default": ""
+    },
+    "contentTextAlignMobile": {
+      "type": "string",
+      "default": ""
+    },
+    "titleTextAlign": {
+      "type": "string",
+      "default": ""
+    },
+    "titleTextAlignTablet": {
+      "type": "string",
+      "default": ""
+    },
+    "titleTextAlignMobile": {
+      "type": "string",
+      "default": ""
+    },
+    "excerptTextAlign": {
+      "type": "string",
+      "default": ""
+    },
+    "excerptTextAlignTablet": {
+      "type": "string",
+      "default": ""
+    },
+    "excerptTextAlignMobile": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonTextAlign": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonTextAlignTablet": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonTextAlignMobile": {
+      "type": "string",
+      "default": ""
     }
   }
 }

@@ -155,7 +155,7 @@ if ( ! empty( $attributes['excludes'] ) && ! in_array( 'no-excludes', $attribute
 }
 
 $categories = get_terms( $args );
-$block_wrap_attr = get_block_wrapper_attributes( array( 'class' => 'boldpo-category-list-block-wrap ' . $unique_id ) );
+$block_wrap_attr = get_block_wrapper_attributes( array( 'class' => 'boldpo-block boldpo-category-list-block-wrap ' . $unique_id ) );
 
 if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) :
 ?>

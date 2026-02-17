@@ -51,6 +51,14 @@
 .boldpo-post-list-block-wrap .boldpo-post-list .boldpo-list-item .boldpo-blog-date-top {
   z-index: 1;
   background-color: var(--boldpo-preset-color-primary);
+}
+.boldpo-post-list-block-wrap .boldpo-post-list .boldpo-list-item .boldpo-blog-date-top h4 {
+  margin: 0;
+  color: #fff;
+  font-size: 36px;
+  line-height: 1;
+}
+.boldpo-post-list-block-wrap .boldpo-post-list .boldpo-list-item .boldpo-blog-date-top {
   position: absolute;
   top: 0;
   right: 0;
@@ -61,12 +69,6 @@
   border-radius: 4px;
   color: #fff;
   margin: 25px;
-}
-.boldpo-post-list-block-wrap .boldpo-post-list .boldpo-list-item .boldpo-blog-date-top h4 {
-  margin: 0;
-  color: #fff;
-  font-size: 36px;
-  line-height: 1;
 }
 .boldpo-post-list-block-wrap .boldpo-post-list .boldpo-list-item .boldpo-blog-date-top h4,
 .boldpo-post-list-block-wrap .boldpo-post-list .boldpo-list-item .boldpo-blog-date-top span {
@@ -135,7 +137,6 @@
   gap: 10px;
 }
 .boldpo-post-list-block-wrap .boldpo-post-list .boldpo-list-item .boldpo-blog-metas a {
-  color: currentColor;
   text-decoration: none;
 }
 .boldpo-post-list-block-wrap .boldpo-post-list .boldpo-list-item .boldpo-blog-metas a:hover {
@@ -158,10 +159,9 @@
     display: none;
   }
 }
-.boldpo-post-list-block-wrap .boldpo-post-list .boldpo-list-item .boldpo-read-more a {
+.boldpo-post-list-block-wrap .boldpo-post-list .boldpo-list-item .boldpo-read-more .boldpo-read-more-link {
   display: inline-flex;
   align-items: center;
-  color: currentColor;
   text-decoration: none;
 }
 .boldpo-post-list-block-wrap .boldpo-post-list .boldpo-list-item .boldpo-read-more .boldpo-read-more-icon.after {

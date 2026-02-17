@@ -24,9 +24,16 @@
 
             // Initialize Swiper with element reference
             try {
+                let slidesPerView = Number(wrap.dataset.slidesPerView) || 1;
+                let spaceBetween = Number(wrap.dataset.spaceBetween) || 15;
+                let slidesPerViewMobileSmall = Number(wrap.dataset.slidesPerViewMobileSmall) || 1;
+                let slidesPerViewMobile = Number(wrap.dataset.slidesPerViewMobile) || 1;
+                let slidesPerViewTablet = Number(wrap.dataset.slidesPerViewTablet) || 2;
+                let slidesPerViewDesktop = Number(wrap.dataset.slidesPerViewDesktop) || 3;
+                let slidesPerViewDesktopLarge = Number(wrap.dataset.slidesPerViewDesktopLarge) || 3;
                 new Swiper(sliderElement, {
-                    slidesPerView: Number(wrap.dataset.slidesPerView) || 1,
-                    spaceBetween: Number(wrap.dataset.spaceBetween) || 15,
+                    slidesPerView: slidesPerView,
+                    spaceBetween: spaceBetween,
                     centeredSlides: wrap.dataset.centeredSlides === 'true',
                     loop: wrap.dataset.loop === 'true',
                     effect: wrap.dataset.effect || 'slide',
@@ -55,24 +62,24 @@
                         480: { slidesPerView: 1, spaceBetween: 10 },
                         520: { slidesPerView: 1, spaceBetween: 10 },
                         575: {
-                            slidesPerView: Number(wrap.dataset.slidesPerViewMobileSmall) || 1,
+                            slidesPerView: slidesPerViewMobileSmall,
                             spaceBetween: 10,
                         },
                         767: {
-                            slidesPerView: Number(wrap.dataset.slidesPerViewMobile) || 1,
+                            slidesPerView: slidesPerViewMobile,
                             spaceBetween: 10,
                         },
                         991: {
-                            slidesPerView: Number(wrap.dataset.slidesPerViewTablet) || 2,
-                            spaceBetween: 10,
+                            slidesPerView: slidesPerViewTablet,
+                            spaceBetween: spaceBetween,
                         },
                         1199: {
-                            slidesPerView: Number(wrap.dataset.slidesPerView) || 3,
-                            spaceBetween: 20,
+                            slidesPerView: slidesPerViewDesktop,
+                            spaceBetween: spaceBetween,
                         },
                         1600: {
-                            slidesPerView: Number(wrap.dataset.slidesPerView) || 3,
-                            spaceBetween: 30,
+                            slidesPerView: slidesPerViewDesktopLarge,
+                            spaceBetween: spaceBetween,
                         },
                     },
                     on: {

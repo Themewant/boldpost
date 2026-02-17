@@ -21,7 +21,7 @@
  */
 
 /* eslint-disable no-console */
-console.log('Hello World! (from create-block-postSlider block)');
+//console.log('Hello World! (from create-block-postSlider block)');
 /* eslint-enable no-console */
 import './slider-init.js';
 

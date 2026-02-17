@@ -30,6 +30,8 @@ import TypographyControls from '../../custom-components/TypographyControls';
 import ColorPopover from '../../custom-components/ColorPopover';
 import ImageRadioControl from '../../custom-components/ImageRadioControl';
 import ResponsiveWrapper from '../../custom-components/ResponsiveWrapper';
+import RangeControlWithUnit from '../../custom-components/RangeControlWithUnit';
+import TextAlignControl from '../../custom-components/TextAlignControl';
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -155,6 +157,11 @@ export default function Edit({ attributes, setAttributes }) {
 						multiple={true}
 						options={excludesOptions}
 					/>
+					<ToggleControl
+						label={__('Ignore Sticky Posts', 'boldpost')}
+						checked={attributes.ignoreStikcyPosts}
+						onChange={(value) => setAttributes({ ignoreStikcyPosts: value })}
+					/>
 					<SelectControl
 						label={__('Categories', 'boldpost')}
 						value={attributes.categories}
@@ -252,6 +259,19 @@ export default function Edit({ attributes, setAttributes }) {
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
+					<ResponsiveWrapper label={__('Thumbnail Height', 'boldpost')}>
+						{(device) => (
+							<RangeControlWithUnit
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('thumbnailHeight', device)}
+								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+								min={0}
+								max={500}
+								step={1}
+							/>
+						)}
+					</ResponsiveWrapper>
 					<SelectControl
 						label={__('Animation', 'boldpost')}
 						value={attributes.animStyle}
@@ -477,6 +497,27 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 				</PanelBody>
 
+				<PanelBody title={__('Content', 'boldpost')} initialOpen={false}>
+					<ResponsiveWrapper label={__('Text Align', 'boldpost')}>
+						{(device) => (
+							<TextAlignControl
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('contentTextAlign', device)}
+							/>
+						)}
+					</ResponsiveWrapper>
+					<Divider />
+					<ResponsiveWrapper label={__('Padding', 'boldpost')}>
+						{(device) => (
+							<BoxControl
+								values={attributes[getAttrKey('contentPadding', device)]}
+								onChange={(value) => setAttributes({ [getAttrKey('contentPadding', device)]: value })}
+							/>
+						)}
+					</ResponsiveWrapper>
+				</PanelBody>
+
 				<PanelBody title={__('Title', 'boldpost')} initialOpen={false}>
 					<TabPanel
 						className="eshb-tab-panel"
@@ -524,6 +565,16 @@ export default function Edit({ attributes, setAttributes }) {
 						)}
 					</ResponsiveWrapper>
 					<Divider />
+					<ResponsiveWrapper label={__('Text Align', 'boldpost')}>
+						{(device) => (
+							<TextAlignControl
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('titleTextAlign', device)}
+							/>
+						)}
+					</ResponsiveWrapper>
+					<Divider />
 					<ResponsiveWrapper label={__('Typography', 'boldpost')}>
 						{(device) => (
 							<TypographyControls
@@ -561,6 +612,16 @@ export default function Edit({ attributes, setAttributes }) {
 							<BoxControl
 								values={attributes[getAttrKey('itemExcerptMargin', device)]}
 								onChange={(value) => setAttributes({ [getAttrKey('itemExcerptMargin', device)]: value })}
+							/>
+						)}
+					</ResponsiveWrapper>
+					<Divider />
+					<ResponsiveWrapper label={__('Text Align', 'boldpost')}>
+						{(device) => (
+							<TextAlignControl
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('excerptTextAlign', device)}
 							/>
 						)}
 					</ResponsiveWrapper>
@@ -655,6 +716,22 @@ export default function Edit({ attributes, setAttributes }) {
 						values={attributes.readMoreMargin}
 						onChange={(value) => setAttributes({ readMoreMargin: value })}
 					/>
+					<Divider />
+					<BoxControl
+						label={__('Border Radius', 'boldpost')}
+						values={attributes.readMoreBorderRadius}
+						onChange={(value) => setAttributes({ readMoreBorderRadius: value })}
+					/>
+					<Divider />
+					<ResponsiveWrapper label={__('Text Align', 'boldpost')}>
+						{(device) => (
+							<TextAlignControl
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('buttonTextAlign', device)}
+							/>
+						)}
+					</ResponsiveWrapper>
 					<Divider />
 					<TypographyControls
 						label={__('Typography', 'boldpost')}

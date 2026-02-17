@@ -16,7 +16,7 @@ class BOLDPO_Helper {
 				foreach ($properties as $prop_key => $css_prop) {
 					if ( isset( $val[$prop_key] ) && $val[$prop_key] !== '' ) {
 						$v = $val[$prop_key];
-						if ( in_array( $prop_key, ['top', 'right', 'bottom', 'left', 'fontSize', 'letterSpacing'] ) ) {
+						if ( in_array( $prop_key, ['top', 'right', 'bottom', 'left', 'fontSize', 'letterSpacing', 'itemGap'] ) ) {
 							$v = self::ensure_unit($v);
 						}
 						$target_array[$device][$css_prop] = $v;
@@ -24,8 +24,9 @@ class BOLDPO_Helper {
 				}
 			} elseif ( ! $is_object && ! empty( $val ) ) {
 				$v = $val;
-				if ( in_array($attr_base, ['itemGap', 'itemColGap', 'itemRowGap', 'columns']) ) {
+				if ( in_array($attr_base, ['itemGap', 'itemColGap', 'itemRowGap']) ) {
                      // handled per block usually, but let's store it
+					 $v = self::ensure_unit($v);
                 }
 				$target_array[$device][$prop_name] = $v;
 			}
@@ -41,9 +42,9 @@ class BOLDPO_Helper {
 	public static function get_inline_styles ($style_map) {
 		$styles = [];
 		foreach ( $style_map as $prop => $value ) {
-			if ( $value !== '' && $value !== null && $value !== 'inherit' && $value !== '0px' ) {
+			//if ( $value !== '' && $value !== null && $value !== 'inherit' && $value !== '0px' ) {
 				$styles[] = $prop . ':' . $value;
-			}
+			//}
 		}
 		return implode( ';', $styles );
 	}
