@@ -44,9 +44,9 @@
             <?php if ( $show_read_more === 'yes' && ! empty( $read_more_text ) ) : ?>
             <div class="boldpo-read-more">
                 <a href="<?php the_permalink(); ?>" class="boldpo-read-more-link">
-                    <?php if ( $read_more_icon_pos === 'before' ) echo $read_more_icon ? '<i class="' . esc_attr( $read_more_icon ) . ' boldpo-read-more-icon before"></i>' : ''; ?>
+                    <?php if ( $read_more_icon_pos === 'before' && !empty($read_more_icon)) echo '<i class="' . esc_attr( $read_more_icon ) . ' boldpo-read-more-icon before"></i>'; ?>
                     <?php echo esc_html( $read_more_text ); ?>
-                    <?php if ( $read_more_icon_pos === 'after' ) echo $read_more_icon ? '<i class="' . esc_attr( $read_more_icon ) . ' boldpo-read-more-icon after"></i>' : ''; ?>
+                    <?php if ( $read_more_icon_pos === 'after' && !empty($read_more_icon)) echo '<i class="' . esc_attr( $read_more_icon ) . ' boldpo-read-more-icon after"></i>'; ?>
                 </a>
             </div>
             <?php endif; ?>

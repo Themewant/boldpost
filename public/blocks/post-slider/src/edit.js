@@ -35,6 +35,7 @@ import RangeControlWithUnit from '../../custom-components/RangeControlWithUnit';
 import TextAlignControl from '../../custom-components/TextAlignControl';
 import BoxShadowControl from '../../custom-components/BoxShadowControls';
 import BorderControl from '../../custom-components/BorderControl';
+import IconPicker from '../../custom-components/IconPicker';
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -53,11 +54,13 @@ import grid2 from './assets/img/grid-2.png';
  *
  * @return {Element} Element to render.
  */
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, useRef } from '@wordpress/element';
 import ServerSideRender from '@wordpress/server-side-render';
 import metadata from './block.json';
 
 export default function Edit({ attributes, setAttributes }) {
+
+	const blockRef = useRef(null);
 
 	const getAttrKey = (base, device) => {
 		if (device === 'desktop') return base;
@@ -134,8 +137,32 @@ export default function Edit({ attributes, setAttributes }) {
 	// add all
 	includesOptions.unshift({ label: __('All', 'boldpost'), value: 'all' });
 
+	useEffect(() => {
+		const init = () => {
+			if (typeof window.initBoldpoSlider === 'function') {
+				window.initBoldpoSlider(blockRef.current);
+			}
+		};
+
+		init();
+
+		const observer = new MutationObserver(init);
+		if (blockRef.current) {
+			observer.observe(blockRef.current, { childList: true, subtree: true });
+		}
+
+		// Also trigger on a small delay to handle ServerSideRender completion
+		const timer = setTimeout(init, 1000);
+
+		return () => {
+			observer.disconnect();
+			clearTimeout(timer);
+		};
+	}, [attributes]);
+
+
 	return (
-		<div {...useBlockProps()}>
+		<div {...useBlockProps({ ref: blockRef })}>
 			<InspectorControls>
 				{/* {query panel group} */}
 				<PanelBody title={__('Query', 'boldpost')} initialOpen={false}>
@@ -354,6 +381,16 @@ export default function Edit({ attributes, setAttributes }) {
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
 							/>
+							{
+								attributes.allowedMetas.includes('author') && (
+									<TextControl
+										label={__('Author Prefix', 'boldpost')}
+										value={attributes.authorPrefix}
+										onChange={(value) => setAttributes({ authorPrefix: value })}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
+									/>
+								)}
 							<SelectControl
 								label={__('Position', 'boldpost')}
 								value={attributes.metaPosition}
@@ -385,27 +422,17 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 					{attributes.showReadMore && (
 						<>
-							<NumberControl
+							<TextControl
 								label={__('Text', 'boldpost')}
 								value={attributes.readMoreText}
 								onChange={(value) => setAttributes({ readMoreText: value })}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
 							/>
-							<SelectControl
+							<IconPicker
 								label={__('Icon', 'boldpost')}
 								value={attributes.readMoreIcon}
 								onChange={(value) => setAttributes({ readMoreIcon: value })}
-								options={[
-									{ label: __('None', 'boldpost'), value: 'none' },
-									{ label: __('Chevron Right', 'boldpost'), value: 'boldpo-icon-chevron-right' },
-									{ label: __('Chevron Left', 'boldpost'), value: 'boldpo-icon-chevron-left' },
-									{ label: __('Arrow Left', 'boldpost'), value: 'boldpo-icon-arrow-left' },
-									{ label: __('Arrow Right', 'boldpost'), value: 'boldpo-icon-arrow-right' },
-									{ label: __('Arrow Up Right', 'boldpost'), value: 'boldpo-icon-arrow-up-right' }
-								]}
-								__next40pxDefaultSize={true}
-								__nextHasNoMarginBottom={true}
 							/>
 							<SelectControl
 								label={__('Icon Position', 'boldpost')}
@@ -822,12 +849,54 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 				</PanelBody>
 				<PanelBody title={__('Meta', 'boldpost')} initialOpen={false}>
-					<ColorPopover
-						label={__('Color', 'boldpost')}
-						color={attributes.metaColor}
-						defaultColor={attributes.metaColor}
-						onChange={(value) => setAttributes({ metaColor: value })}
-					/>
+					<Heading>{__('Text', 'boldpost')}</Heading>
+					<TabPanel
+						className="eshb-tab-panel"
+						activeClass="is-active"
+						tabs={[
+							{ name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
+							{ name: 'hover', title: __('Hover', 'boldpost'), className: 'eshb-tab-hover' },
+						]}
+					>
+						{(tab) => {
+							const isHover = tab.name === 'hover';
+							return (
+								<div style={{ marginTop: '15px' }}>
+									<ColorPopover
+										label={__('Color', 'boldpost')}
+										color={isHover ? attributes.metaColorHover : attributes.metaColor}
+										defaultColor={isHover ? attributes.metaColorHover : attributes.metaColor}
+										onChange={(value) => setAttributes({ [isHover ? 'metaColorHover' : 'metaColor']: value })}
+									/>
+								</div>
+							)
+						}
+						}
+					</TabPanel>
+					<Heading>{__('Icon', 'boldpost')}</Heading>
+					<TabPanel
+						className="eshb-tab-panel"
+						activeClass="is-active"
+						tabs={[
+							{ name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
+							{ name: 'hover', title: __('Hover', 'boldpost'), className: 'eshb-tab-hover' },
+						]}
+					>
+						{(tab) => {
+							const isHover = tab.name === 'hover';
+							return (
+								<div style={{ marginTop: '15px' }}>
+									<ColorPopover
+										label={__('Color', 'boldpost')}
+										color={isHover ? attributes.metaIconColorHover : attributes.metaIconColor}
+										defaultColor={isHover ? attributes.metaIconColorHover : attributes.metaIconColor}
+										onChange={(value) => setAttributes({ [isHover ? 'metaIconColorHover' : 'metaIconColor']: value })}
+									/>
+								</div>
+							)
+						}
+						}
+					</TabPanel>
 					<BoxControl
 						label={__('Margin', 'boldpost')}
 						values={attributes.metaMargin}

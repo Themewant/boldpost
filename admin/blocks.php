@@ -22,28 +22,28 @@ class BOLDPO_Blocks {
                 'id'        => 'post-grid',
                 'description' => 'Post Grid Block',
                 'iconName'        => 'grid.svg',
-                'status'      => 'disable',
+                'status'      => 'enable',
             ],
             [
                 'title'       => 'Post List',
                 'id'        => 'post-list',
                 'description' => 'Post List Block',
                 'iconName'    => 'list.svg',
-                'status'      => 'disable',
+                'status'      => 'enable',
             ],
             [
                 'title'       => 'Post Slider',
                 'id'        => 'post-slider',
                 'description' => 'Post Slider Block',
                 'iconName'        => 'slider.svg',
-                'status'      => 'disable',
+                'status'      => 'enable',
             ],
             [
                 'title'       => 'Category List',
                 'id'        => 'category-list',
                 'description' => 'Category List Block',
                 'iconName'        => 'category.svg',
-                'status'      => 'disable',
+                'status'      => 'enable',
             ]
         ];
 

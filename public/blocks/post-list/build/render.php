@@ -25,6 +25,7 @@ $ignore_stikcy_posts = !empty($attributes['ignoreStikcyPosts']) ? 1 : 0;
 $show_meta = !empty($attributes['showMeta']) ? true : false;
 $allowed_metas = isset($attributes['allowedMetas']) ? $attributes['allowedMetas'] : [];
 $meta_position = isset($attributes['metaPosition']) ? $attributes['metaPosition'] : 'below_title';
+$author_prefix = isset($attributes['authorPrefix']) ? $attributes['authorPrefix'] : 'by';
 $title_tag = isset($attributes['titleTag']) ? $attributes['titleTag'] : 'h3';
 $show_excerpt = !empty($attributes['showExcerpt']) ? 'yes' : 'no';
 $show_read_more = !empty($attributes['showReadMore']) ? 'yes' : 'no';
@@ -225,6 +226,15 @@ if(!empty($meta_margin['right'])) $meta_styles['margin-right'] = BOLDPO_Helper::
 if(!empty($meta_margin['bottom'])) $meta_styles['margin-bottom'] = BOLDPO_Helper::ensure_unit($meta_margin['bottom']);
 if(!empty($meta_margin['left'])) $meta_styles['margin-left'] = BOLDPO_Helper::ensure_unit($meta_margin['left']);
 
+$meta_hover = [];
+if(!empty($attributes['metaColorHover'])) $meta_hover['color'] = $attributes['metaColorHover'];
+
+$meta_icon_styles = [];
+if(!empty($attributes['metaIconColor'])) $meta_icon_styles['color'] = $attributes['metaIconColor'];
+
+$meta_icon_hover = [];
+if(!empty($attributes['metaIconColorHover'])) $meta_icon_hover['color'] = $attributes['metaIconColorHover'];
+
 $item_content_styles = [];
 if ( ! empty( $attributes['itemContentPadding'] ) ) {
     if(!empty($attributes['itemContentPadding']['top'])) $item_content_styles['padding-top'] = BOLDPO_Helper::ensure_unit( $attributes['itemContentPadding']['top'] );
@@ -251,7 +261,7 @@ $thumbnail_height_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []]
 BOLDPO_Helper::add_responsive_vars($attributes, $thumbnail_height_responsive, 'thumbnailHeight', 'height', [], false);
 
 $style_handle = 'boldpo-post-list-style';
-$unique_id    = 'boldpo-' . md5( json_encode( $attributes ) );
+$unique_id    = isset($attributes['blockId']) ? $attributes['blockId'] : 'boldpo-' . rand(10000, 99999);
 $selector     = '.boldpo-post-list-block-wrap.' . $unique_id;
 
 $full_responsive_css = BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list.style-' . $style, $responsive_data);
@@ -274,20 +284,23 @@ BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css,
     '.boldpo-post-list .boldpo-list-item .boldpo-read-more-link'     => BOLDPO_Helper::get_inline_styles($button_styles),
     '.boldpo-post-list .boldpo-list-item .boldpo-read-more-link:hover'=> BOLDPO_Helper::get_inline_styles($button_hover),
     '.boldpo-post-list .boldpo-list-item .boldpo-blog-date-top'      => BOLDPO_Helper::get_inline_styles($td_styles),
-    '.boldpo-post-list .boldpo-list-item .boldpo-blog-metas'         => BOLDPO_Helper::get_inline_styles($meta_styles),
+    '.boldpo-post-list .boldpo-list-item .boldpo-blog-metas a'         => BOLDPO_Helper::get_inline_styles($meta_styles),
+    '.boldpo-post-list .boldpo-list-item .boldpo-blog-metas a:hover'         => BOLDPO_Helper::get_inline_styles($meta_hover),
+    '.boldpo-post-list .boldpo-list-item .boldpo-blog-metas i'         => BOLDPO_Helper::get_inline_styles($meta_icon_styles),
+    '.boldpo-post-list .boldpo-list-item .boldpo-blog-metas i:hover'         => BOLDPO_Helper::get_inline_styles($meta_icon_hover),
     '.boldpo-post-list .boldpo-list-item .boldpo-blog-content'       => BOLDPO_Helper::get_inline_styles($item_content_styles),
     '.boldpo-pagination a, .boldpo-pagination span' => BOLDPO_Helper::get_inline_styles($pag_styles),
     '.boldpo-pagination a:hover, .boldpo-pagination span.current' => BOLDPO_Helper::get_inline_styles($pag_hover),
 ] );
 
-$page_key = 'paged_' . md5( $unique_id );
-$is_front = is_front_page();
+$page_key = 'paged_' . $unique_id;
 
-if ( $is_front ) {
-    $paged = isset( $_GET[ $page_key ] ) ? max( 1, (int) $_GET[ $page_key ] ) : 1;
-} else {
+if ( is_archive() ) {
     $paged = max( 1, get_query_var('paged') );
+} else {
+    $paged = isset( $_GET[ $page_key ] ) ? max( 1, (int) $_GET[ $page_key ] ) : 1;
 }
+
 $args = array(
     'post_type'      => 'post',
     'posts_per_page' => (int) $per_page,
@@ -368,8 +381,8 @@ if ( $query->have_posts() ) :
             <?php
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- paginate_links output is already escaped
             echo wp_kses_post( paginate_links( array(
-                'base'      => $is_front ? str_replace( '999999999', '%#%', add_query_arg( $page_key, '999999999' ) ) : str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
-                'format'    => $is_front ? '' : '?paged=%#%',
+                'base'      => is_archive() ? str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ) : str_replace( '999999999', '%#%', add_query_arg( $page_key, '999999999' ) ),
+                'format'    => is_archive() ? '?paged=%#%' : '',
                 'current'   => $paged,
                 'total'     => $query->max_num_pages,
                 'prev_text' => '<i class="boldpo-icon-chevron-left"></i>',

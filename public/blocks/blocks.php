@@ -6,18 +6,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once BOLDPO_PL_PATH . 'admin/blocks.php';
 
+add_action( 'enqueue_block_editor_assets', 'boldpo_enqueue_block_styles' );
 add_action( 'enqueue_block_assets', 'boldpo_enqueue_block_styles' );
 function boldpo_enqueue_block_styles() {
 	
 
     // if swier not existing
-	if (!wp_style_is('swiper-css', 'enqueued')) {
-		wp_enqueue_style( 'swiper-css', BOLDPO_PL_URL . 'assets/lib/swiper/swiper-bundle.min.css', array(), BOLDPO_VERSION, 'all' );
-	}
-	if (!wp_script_is('swiper-js', 'enqueued')) {
-		wp_enqueue_script( 'swiper-js', BOLDPO_PL_URL . 'assets/lib/swiper/swiper-bundle.min.js', array(),'12.0.3',false );
-	}
-
+	//if (!wp_style_is('swiper-css', 'enqueued')) { 
+		wp_enqueue_style( 'swiper-css', BOLDPO_PL_URL . 'assets/lib/swiper/swiper-bundle.min.css', array(), BOLDPO_VERSION, 'all' ); 
+	//}
+	//if (!wp_script_is('swiper-js', 'enqueued')) { 
+		wp_enqueue_script( 'swiper-js', BOLDPO_PL_URL . 'assets/lib/swiper/swiper-bundle.min.js', array(),'12.0.3',false ); 
+	//}
     // register plugin style if not registered	
 	if (!wp_style_is('boldpo-public-style', 'registered')) {
 		wp_register_style( 

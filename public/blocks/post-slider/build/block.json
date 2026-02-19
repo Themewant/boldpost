@@ -28,7 +28,7 @@
   "attributes": {
     "ignoreStikcyPosts": {
       "type": "boolean",
-      "default": false
+      "default": true
     },
     "isFeatured": {
       "type": "boolean",
@@ -48,7 +48,7 @@
     },
     "perPage": {
       "type": "string",
-      "default": "9"
+      "default": "6"
     },
     "order": {
       "type": "string",
@@ -60,7 +60,7 @@
     },
     "offset": {
       "type": "string",
-      "default": "0"
+      "default": ""
     },
     "categories": {
       "type": "array",
@@ -338,16 +338,30 @@
       "type": "array",
       "default": [
         "author",
-        "date",
-        "category",
-        "tag"
+        "date"
       ]
+    },
+    "authorPrefix": {
+      "type": "string",
+      "default": "by"
     },
     "metaPosition": {
       "type": "string",
-      "default": "below_title"
+      "default": "up_title"
     },
     "metaColor": {
+      "type": "string",
+      "default": ""
+    },
+    "metaColorHover": {
+      "type": "string",
+      "default": ""
+    },
+    "metaIconColor": {
+      "type": "string",
+      "default": ""
+    },
+    "metaIconColorHover": {
       "type": "string",
       "default": ""
     },
@@ -372,7 +386,7 @@
     },
     "readMoreIcon": {
       "type": "string",
-      "default": "none"
+      "default": ""
     },
     "readMoreIconPosition": {
       "type": "string",
@@ -384,7 +398,7 @@
     },
     "showDateOnTop": {
       "type": "boolean",
-      "default": true
+      "default": false
     },
     "topDateBackgroundColor": {
       "type": "string",
@@ -400,7 +414,7 @@
     },
     "excerptTrim": {
       "type": "string",
-      "default": "20"
+      "default": "12"
     },
     "animStyle": {
       "type": "string",

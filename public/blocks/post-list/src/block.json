@@ -25,9 +25,13 @@
 	"viewScript": "file:./view.js",
 	"render": "file:./render.php",
 	"attributes": {
+		"blockId": {
+			"type": "string",
+			"default": ""
+		},
 		"ignoreStikcyPosts": {
 			"type": "boolean",
-			"default": false
+			"default": true
 		},
 		"isFeatured": {
 			"type": "boolean",
@@ -51,7 +55,7 @@
 		},
 		"perPage": {
 			"type": "string",
-			"default": "9"
+			"default": "6"
 		},
 		"order": {
 			"type": "string",
@@ -63,7 +67,7 @@
 		},
 		"offset": {
 			"type": "string",
-			"default": "0"
+			"default": ""
 		},
 		"categories": {
 			"type": "array",
@@ -265,16 +269,30 @@
 			"type": "array",
 			"default": [
 				"author",
-				"date",
-				"category",
-				"tag"
+				"date"
 			]
+		},
+		"authorPrefix": {
+			"type": "string",
+			"default": "by"
 		},
 		"metaPosition": {
 			"type": "string",
 			"default": "below_title"
 		},
 		"metaColor": {
+			"type": "string",
+			"default": ""
+		},
+		"metaColorHover": {
+			"type": "string",
+			"default": ""
+		},
+		"metaIconColor": {
+			"type": "string",
+			"default": ""
+		},
+		"metaIconColorHover": {
 			"type": "string",
 			"default": ""
 		},
@@ -299,7 +317,7 @@
 		},
 		"readMoreIcon": {
 			"type": "string",
-			"default": "none"
+			"default": ""
 		},
 		"readMoreIconPosition": {
 			"type": "string",

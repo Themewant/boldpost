@@ -7,18 +7,23 @@ if ( in_array( 'date', $boldpo_allowed_metas ) && empty($attributes['showDateOnT
     $boldpo_meta_html .= '<span class="bldpost-meta"><i class="boldpo-meta-icon boldpo-icon-calendar-two"></i>' . esc_html( get_the_date() ) . '</span>';
 }
 if ( in_array( 'author', $boldpo_allowed_metas ) ) {
-    $boldpo_meta_html .= '<span class="bldpost-meta"><i class="boldpo-meta-icon boldpo-icon-user-avatar"></i><a href="' . esc_url(get_author_posts_url(get_the_author_meta('ID'))) . '">' . esc_html( get_the_author() ) . '</a></span>';
+    $boldpo_meta_html .= '<span class="bldpost-meta"><i class="boldpo-meta-icon boldpo-icon-user-avatar"></i><a href="' . esc_url(get_author_posts_url(get_the_author_meta('ID'))) . '">' . esc_html( $attributes['authorPrefix'] ) . ' ' . esc_html( get_the_author() ) . '</a></span>';
 }
 if ( in_array( 'category', $boldpo_allowed_metas ) ) {
     $boldpo_categories = get_the_category();
     if ( ! empty($boldpo_categories) ) {
-        $boldpo_meta_html .= '<span class="bldpost-meta"><i class="boldpo-meta-icon boldpo-icon-notification-status"></i>';
         $cat_links = [];
         foreach ($boldpo_categories as $boldpo_category) {
+            if ( $boldpo_category->slug === 'uncategorized' ) {
+                continue;
+            }
             $cat_links[] = '<a href="' . esc_url(get_category_link($boldpo_category->term_id)) . '">' . esc_html( $boldpo_category->name ) . '</a>';
         }
-        $boldpo_meta_html .= implode( ', ', $cat_links );
-        $boldpo_meta_html .= '</span>';
+        if ( ! empty( $cat_links ) ) {
+            $boldpo_meta_html .= '<span class="bldpost-meta"><i class="boldpo-meta-icon boldpo-icon-notification-status"></i>';
+            $boldpo_meta_html .= implode( ', ', $cat_links );
+            $boldpo_meta_html .= '</span>';
+        }
     }
 }
 if ( in_array( 'tag', $boldpo_allowed_metas ) ) {

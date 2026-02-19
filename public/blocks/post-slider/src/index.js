@@ -60,7 +60,7 @@ import './slider-init.js';
 
 domReady(() => {
 	const observer = new MutationObserver(() => {
-		jQuery(document).trigger('boldpoInitSliders');
+		document.dispatchEvent(new CustomEvent('boldpoInitSliders'));
 	});
 
 	observer.observe(document.body, {
@@ -68,10 +68,11 @@ domReady(() => {
 		subtree: true,
 	});
 
-	jQuery(document).on('boldpoInitSliders', () => {
+	document.addEventListener('boldpoInitSliders', () => {
 		if (typeof window.initBoldpoSlider === 'function') {
 			window.initBoldpoSlider(document);
 		}
 	});
 });
+
 

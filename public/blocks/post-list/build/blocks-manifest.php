@@ -30,9 +30,13 @@ return array(
 		'viewScript' => 'file:./view.js',
 		'render' => 'file:./render.php',
 		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'ignoreStikcyPosts' => array(
 				'type' => 'boolean',
-				'default' => false
+				'default' => true
 			),
 			'isFeatured' => array(
 				'type' => 'boolean',
@@ -56,7 +60,7 @@ return array(
 			),
 			'perPage' => array(
 				'type' => 'string',
-				'default' => '9'
+				'default' => '6'
 			),
 			'order' => array(
 				'type' => 'string',
@@ -68,7 +72,7 @@ return array(
 			),
 			'offset' => array(
 				'type' => 'string',
-				'default' => '0'
+				'default' => ''
 			),
 			'categories' => array(
 				'type' => 'array',
@@ -270,16 +274,30 @@ return array(
 				'type' => 'array',
 				'default' => array(
 					'author',
-					'date',
-					'category',
-					'tag'
+					'date'
 				)
+			),
+			'authorPrefix' => array(
+				'type' => 'string',
+				'default' => 'by'
 			),
 			'metaPosition' => array(
 				'type' => 'string',
 				'default' => 'below_title'
 			),
 			'metaColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'metaColorHover' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'metaIconColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'metaIconColorHover' => array(
 				'type' => 'string',
 				'default' => ''
 			),
@@ -304,7 +322,7 @@ return array(
 			),
 			'readMoreIcon' => array(
 				'type' => 'string',
-				'default' => 'none'
+				'default' => ''
 			),
 			'readMoreIconPosition' => array(
 				'type' => 'string',

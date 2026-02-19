@@ -23,13 +23,58 @@ registerBlockCategory('boldpost', 'BoldPost', catIcon);
 
 
 // prevent all link click when editor mode
-document.addEventListener('click', (e) => {
-    // Check if the clicked element is a link or inside a link
-    const link = e.target.closest('a');
+// document.addEventListener('click', (e) => {
+//     // Check if the clicked element is a link or inside a link
+//     const link = e.target.closest('a');
 
-    // If it's a link and it's inside our block wrapper
-    if (link && link.closest('.boldpo-block')) {
-        e.preventDefault();
-        e.stopPropagation();
-    }
-}, true);
+//     // remove href attr
+//     link.removeAttribute('href');
+
+// }, true);
+// Prevent all link clicks inside .boldpo-block when in editor mode
+// We handle both the main document and any iframes used by the Gutenberg editor.
+const disableBlockLinks = () => {
+    const selector = '.boldpo-block a';
+
+    const processDocument = (doc) => {
+        if (!doc) return;
+
+        // Block click events in the capture phase
+        if (!doc._boldpoLinkBlockerBound) {
+            doc.addEventListener('click', (e) => {
+                const link = e.target.closest(selector);
+                if (link) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            }, true);
+            doc._boldpoLinkBlockerBound = true;
+        }
+
+        // Remove href attributes to avoid navigation and hover effects
+        doc.querySelectorAll(selector).forEach(link => {
+            if (link.hasAttribute('href')) {
+                link.removeAttribute('href');
+            }
+        });
+    };
+
+    // Run on the main document
+    processDocument(document);
+
+    // Run on all found iframes (Canvas mode handles blocks in an iframe)
+    document.querySelectorAll('iframe').forEach(iframe => {
+        try {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            if (iframeDoc) {
+                processDocument(iframeDoc);
+            }
+        } catch (e) {
+            // Ignore potential cross-origin access errors from other plugins/iframes
+        }
+    });
+};
+
+// Run periodically to catch dynamically rendered content (ServerSideRender)
+setInterval(disableBlockLinks, 1000);
+

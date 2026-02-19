@@ -134,7 +134,11 @@
   font-size: 14px;
   line-height: 120%;
   align-items: center;
-  gap: 10px;
+  gap: 18px;
+}
+.boldpo-post-list-block-wrap .boldpo-post-list .boldpo-list-item .boldpo-blog-metas .bldpost-meta {
+  display: flex;
+  align-items: center;
 }
 .boldpo-post-list-block-wrap .boldpo-post-list .boldpo-list-item .boldpo-blog-metas a {
   text-decoration: none;
@@ -163,6 +167,15 @@
   display: inline-flex;
   align-items: center;
   text-decoration: none;
+  padding: 7px 16px;
+  background-color: var(--boldpo-preset-color-primary);
+  color: var(--boldpo-preset-color-white);
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.3s ease-in-out;
+}
+.boldpo-post-list-block-wrap .boldpo-post-list .boldpo-list-item .boldpo-read-more .boldpo-read-more-link:hover {
+  background-color: var(--boldpo-preset-color-secondary);
 }
 .boldpo-post-list-block-wrap .boldpo-post-list .boldpo-list-item .boldpo-read-more .boldpo-read-more-icon.after {
   margin-left: 6px;
@@ -174,6 +187,8 @@
 }
 .boldpo-post-list-block-wrap .boldpo-post-list .boldpo-list-item .boldpo-blog-excerpt {
   margin-bottom: 20px;
+  font-size: 18px;
+  color: var(--boldpo-preset-color-contrast-2);
 }
 .boldpo-post-list-block-wrap .boldpo-post-list .boldpo-list-item .boldpo-blog-excerpt a {
   color: currentColor;

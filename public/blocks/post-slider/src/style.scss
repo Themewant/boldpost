@@ -15,6 +15,7 @@
 	.boldpo-grid-item {
 		position: relative;
 		transition: all .5s ease;
+		overflow: hidden;
 
 		&:hover {
 			.boldpo-blog-img {
@@ -138,7 +139,12 @@
 			font-size: 14px;
 			line-height: 120%;
 			align-items: center;
-			gap: 10px;
+			gap: 18px;
+
+			.bldpost-meta {
+				display: flex;
+				align-items: center;
+			}
 
 			a {
 				text-decoration: none;
@@ -167,6 +173,16 @@
 				display: inline-flex;
 				align-items: center;
 				text-decoration: none;
+				padding: 7px 16px;
+				background-color: var(--boldpo-preset-color-primary);
+				color: var(--boldpo-preset-color-white);
+				font-size: 14px;
+				font-weight: 600;
+				transition: 0.3s ease-in-out;
+
+				&:hover {
+					background-color: var(--boldpo-preset-color-secondary);
+				}
 			}
 
 			.boldpo-read-more-icon.after {
@@ -181,7 +197,9 @@
 		}
 
 		.boldpo-blog-excerpt {
+			font-size: 18px;
 			margin-bottom: 20px;
+			margin-top: 20px;
 
 			a {
 				color: currentColor;

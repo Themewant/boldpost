@@ -12,6 +12,9 @@
             if (typeof Swiper === 'undefined') {
                 console.warn('BoldPost: Swiper is not defined. Retrying later or check enqueue.');
                 return;
+            } else {
+                console.log('Swiper found!');
+
             }
 
             const unique = wrap.dataset.unique;

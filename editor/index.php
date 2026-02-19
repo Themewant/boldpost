@@ -21,12 +21,23 @@ class BOLDPO_Block_Editor {
         if (!$screen || !$screen->is_block_editor()) {
            return;
         }
+
+
+        
         wp_enqueue_script(
             'boldpo-block-editor-js',
             BOLDPO_PL_URL . 'editor/app/build/index.js',
             ['wp-element', 'wp-hooks', 'wp-blocks'],
             BOLDPO_VERSION,
             true
+        );
+
+        wp_localize_script(
+            'boldpo-block-editor-js',
+            'boldpoEditor',
+            [
+                'plugin_url' => BOLDPO_PL_URL,
+            ]
         );
     }
 

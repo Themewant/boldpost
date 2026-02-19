@@ -40,8 +40,7 @@
   top: 0;
   right: 0;
   display: inline-block;
-  padding: 20px;
-  padding-bottom: 6px;
+  padding: 16px 26px 16px;
   text-align: center;
   border-radius: 4px;
   color: #fff;
@@ -95,7 +94,11 @@
   font-size: 14px;
   line-height: 120%;
   align-items: center;
-  gap: 10px;
+  gap: 18px;
+}
+.boldpo-post-grid-block-wrap .boldpo-post-grid .boldpo-grid-item .boldpo-blog-metas .bldpost-meta {
+  display: flex;
+  align-items: center;
 }
 .boldpo-post-grid-block-wrap .boldpo-post-grid .boldpo-grid-item .boldpo-blog-metas a {
   text-decoration: none;
@@ -119,6 +122,15 @@
   display: inline-flex;
   align-items: center;
   text-decoration: none;
+  padding: 7px 16px;
+  background-color: var(--boldpo-preset-color-primary);
+  color: var(--boldpo-preset-color-white);
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.3s ease-in-out;
+}
+.boldpo-post-grid-block-wrap .boldpo-post-grid .boldpo-grid-item .boldpo-read-more .boldpo-read-more-link:hover {
+  background-color: var(--boldpo-preset-color-secondary);
 }
 .boldpo-post-grid-block-wrap .boldpo-post-grid .boldpo-grid-item .boldpo-read-more .boldpo-read-more-icon.after {
   margin-left: 6px;
@@ -129,7 +141,10 @@
   top: 1px;
 }
 .boldpo-post-grid-block-wrap .boldpo-post-grid .boldpo-grid-item .boldpo-blog-excerpt {
+  margin-top: 20px;
   margin-bottom: 20px;
+  font-size: 18px;
+  color: var(--boldpo-preset-color-contrast-2);
 }
 .boldpo-post-grid-block-wrap .boldpo-post-grid .boldpo-grid-item .boldpo-blog-excerpt a {
   color: currentColor;

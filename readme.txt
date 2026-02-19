@@ -1,10 +1,10 @@
-=== BoldPost ===
+=== BoldPost – Gutenberg Post Grid & Layout Blocks ===
 Contributors: themewant
 Tags: post grid, post list, post slider, gutenberg blocks, category list
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,9 @@ Display posts beautifully with customizable grids, lists, sliders & category dis
 
 == Description ==
 
-**BoldPost** is a powerful and flexible WordPress plugin that helps you showcase your blog posts in stunning layouts. Whether you're running a blog, magazine, news site, or any content-rich website, BoldPost provides you with beautiful, customizable blocks to display your posts exactly how you want.
+[BoldPost](https://boldpost.themewant.com/) is a modern Gutenberg post grid and layout plugin that helps you display blog posts in beautiful grids, lists, sliders, and category showcases. Perfect for blogs, news, magazine, and content-rich WordPress websites.
+
+👉 [Plugin Demo](https://boldpost.themewant.com/)
 
 = Key Features =
 
@@ -82,7 +84,7 @@ Yes! BoldPost is designed to work with any properly coded WordPress theme. The b
 
 = Can I use BoldPost with page builders? =
 
-BoldPost is primarily designed for the WordPress block editor (Gutenberg). You can use it with gutenberg.
+BoldPost works natively inside the WordPress Block Editor (Gutenberg).
 
 = How do I mark posts as featured? =
 
@@ -109,10 +111,21 @@ Currently, BoldPost is designed to work with standard WordPress posts. Custom po
 5. Block settings panel showing customization options
 6. Featured post meta box in post editor
 
+== Roadmap ==
+
+• Custom Post Type support  
+• AJAX category filtering  
+• More layout templates  
+• Masonry grid layout  
+• Pagination & Load More  
+
 == Changelog ==
 
+= 1.0.2 =
+* Fixed pagination issues & Update CSS
+
 = 1.0.1 =
-* Bug fixes & Update css
+* Bug fixes & Update CSS
 
 = 1.0.0 =
 * Initial release
