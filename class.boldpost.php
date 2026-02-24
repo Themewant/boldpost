@@ -72,6 +72,15 @@ class BOLDPO_Main {
 
     public static function activate() {
         update_option( 'boldpo_version', BOLDPO_VERSION );
+
+        // enable all blocks 
+        $blocks = BOLDPO_Blocks::instance()->get_blocks();
+        foreach ( $blocks as $block ) {
+            // update option if option not exist
+            if (!get_option('boldpo_block_' . $block['id'])) {
+                update_option('boldpo_block_' . $block['id'], 'enable');
+            }
+        }
     }
 
     public static function deactivate() {
