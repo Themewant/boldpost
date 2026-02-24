@@ -214,11 +214,13 @@ if(!empty($attributes['topDateColor'])) $td_styles['color'] = $attributes['topDa
 
 $meta_styles = [];
 if(!empty($attributes['metaColor'])) $meta_styles['color'] = $attributes['metaColor'];
+
+$metas_styles = [];
 $meta_margin = $attributes['metaMargin'] ?? [];
-if(!empty($meta_margin['top'])) $meta_styles['margin-top'] = BOLDPO_Helper::ensure_unit($meta_margin['top']);
-if(!empty($meta_margin['right'])) $meta_styles['margin-right'] = BOLDPO_Helper::ensure_unit($meta_margin['right']);
-if(!empty($meta_margin['bottom'])) $meta_styles['margin-bottom'] = BOLDPO_Helper::ensure_unit($meta_margin['bottom']);
-if(!empty($meta_margin['left'])) $meta_styles['margin-left'] = BOLDPO_Helper::ensure_unit($meta_margin['left']);
+if(!empty($meta_margin['top'])) $metas_styles['margin-top'] = BOLDPO_Helper::ensure_unit($meta_margin['top']);
+if(!empty($meta_margin['right'])) $metas_styles['margin-right'] = BOLDPO_Helper::ensure_unit($meta_margin['right']);
+if(!empty($meta_margin['bottom'])) $metas_styles['margin-bottom'] = BOLDPO_Helper::ensure_unit($meta_margin['bottom']);
+if(!empty($meta_margin['left'])) $metas_styles['margin-left'] = BOLDPO_Helper::ensure_unit($meta_margin['left']);
 
 $meta_hover = [];
 if(!empty($attributes['metaColorHover'])) $meta_hover['color'] = $attributes['metaColorHover'];
@@ -267,6 +269,7 @@ BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css,
     '.boldpo-post-grid .boldpo-grid-item .boldpo-read-more-link'     => BOLDPO_Helper::get_inline_styles($button_styles),
     '.boldpo-post-grid .boldpo-grid-item .boldpo-read-more-link:hover'=> BOLDPO_Helper::get_inline_styles($button_hover),
     '.boldpo-post-grid .boldpo-grid-item .boldpo-blog-date-top'      => BOLDPO_Helper::get_inline_styles($td_styles),
+    '.boldpo-post-grid .boldpo-grid-item .boldpo-blog-metas'         => BOLDPO_Helper::get_inline_styles($metas_styles),
     '.boldpo-post-grid .boldpo-grid-item .boldpo-blog-metas a'         => BOLDPO_Helper::get_inline_styles($meta_styles),
     '.boldpo-post-grid .boldpo-grid-item .boldpo-blog-metas a:hover'   => BOLDPO_Helper::get_inline_styles($meta_hover),
     '.boldpo-post-grid .boldpo-grid-item .boldpo-blog-metas i'       => BOLDPO_Helper::get_inline_styles($meta_icon_styles),
