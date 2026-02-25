@@ -4,7 +4,7 @@ Tags: post grid, post list, post slider, gutenberg blocks, category list
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -120,6 +120,13 @@ Currently, BoldPost is designed to work with standard WordPress posts. Custom po
 • Pagination & Load More  
 
 == Changelog ==
+
+= 1.0.3 =
+* Fixed Navigation Enable Disable
+* Fixed Navigation Styling
+* Fixed List style responisve issues
+* Fixed Image height not working ohter devices
+* Fixed Slider per view not working with devices
 
 = 1.0.2 =
 * Fixed pagination issues & Update CSS
