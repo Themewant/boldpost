@@ -67,6 +67,14 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
+			'thumbnailHeightTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'thumbnailHeightMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'perPage' => array(
 				'type' => 'string',
 				'default' => '6'

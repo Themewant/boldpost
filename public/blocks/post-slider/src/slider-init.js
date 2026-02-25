@@ -12,9 +12,6 @@
             if (typeof Swiper === 'undefined') {
                 console.warn('BoldPost: Swiper is not defined. Retrying later or check enqueue.');
                 return;
-            } else {
-                console.log('Swiper found!');
-
             }
 
             const unique = wrap.dataset.unique;
@@ -32,8 +29,9 @@
                 let slidesPerViewMobileSmall = Number(wrap.dataset.slidesPerViewMobileSmall) || 1;
                 let slidesPerViewMobile = Number(wrap.dataset.slidesPerViewMobile) || 1;
                 let slidesPerViewTablet = Number(wrap.dataset.slidesPerViewTablet) || 2;
-                let slidesPerViewDesktop = Number(wrap.dataset.slidesPerViewDesktop) || 3;
-                let slidesPerViewDesktopLarge = Number(wrap.dataset.slidesPerViewDesktopLarge) || 3;
+                let slidesPerViewDesktop = Number(wrap.dataset.slidesPerViewDesktop) || slidesPerView;
+                let slidesPerViewDesktopLarge = Number(wrap.dataset.slidesPerViewDesktopLarge) || slidesPerViewDesktop;
+
                 new Swiper(sliderElement, {
                     slidesPerView: slidesPerView,
                     spaceBetween: spaceBetween,
@@ -58,25 +56,30 @@
                         clickable: true,
                     },
 
+                    // Better support for editor responsive preview
+                    observer: true,
+                    observeParents: true,
+                    resizeObserver: true,
+                    breakpointsBase: 'container',
+
                     breakpoints: {
-                        0: { slidesPerView: 1, spaceBetween: 10 },
-                        360: { slidesPerView: 1, spaceBetween: 10 },
-                        375: { slidesPerView: 1, spaceBetween: 10 },
-                        480: { slidesPerView: 1, spaceBetween: 10 },
-                        520: { slidesPerView: 1, spaceBetween: 10 },
-                        575: {
+                        0: {
                             slidesPerView: slidesPerViewMobileSmall,
-                            spaceBetween: 10,
+                            spaceBetween: 10
                         },
-                        767: {
+                        360: {
                             slidesPerView: slidesPerViewMobile,
                             spaceBetween: 10,
                         },
-                        991: {
+                        600: {
                             slidesPerView: slidesPerViewTablet,
                             spaceBetween: spaceBetween,
                         },
-                        1199: {
+                        960: {
+                            slidesPerView: slidesPerViewDesktop,
+                            spaceBetween: spaceBetween,
+                        },
+                        1200: {
                             slidesPerView: slidesPerViewDesktop,
                             spaceBetween: spaceBetween,
                         },

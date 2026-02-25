@@ -46,6 +46,14 @@
 			"type": "string",
 			"default": ""
 		},
+		"thumbnailHeightTablet": {
+			"type": "string",
+			"default": ""
+		},
+		"thumbnailHeightMobile": {
+			"type": "string",
+			"default": ""
+		},
 		"perPage": {
 			"type": "string",
 			"default": "6"
@@ -497,6 +505,13 @@
 			"default": ""
 		},
 		"navBorderRadius": {
+			"type": "object"
+		},
+		"navIconSize": {
+			"type": "string",
+			"default": ""
+		},
+		"navPadding": {
 			"type": "object"
 		},
 		"showDots": {

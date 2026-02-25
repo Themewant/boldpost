@@ -24,7 +24,8 @@ import {
 	__experimentalNumberControl as NumberControl,
 	SelectControl,
 	ToggleControl,
-	TextControl
+	TextControl,
+	RangeControl
 } from '@wordpress/components';
 import BackgroundControl from '../../custom-components/BackgroundControl';
 import TypographyControls from '../../custom-components/TypographyControls';
@@ -1053,11 +1054,27 @@ export default function Edit({ attributes, setAttributes }) {
 								}}
 							</TabPanel>
 							<Divider />
+							<RangeControlWithUnit
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('navIconSize', '')}
+								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+								min={0}
+								max={500}
+								step={1}
+							/>
 							<BoxControl
 								label={__('Border Radius', 'boldpost')}
 								values={attributes.navBorderRadius}
 								onChange={(value) => setAttributes({ navBorderRadius: value })}
 							/>
+							<Divider />
+							<BoxControl
+								label={__('Padding', 'boldpost')}
+								values={attributes.navPadding}
+								onChange={(value) => setAttributes({ navPadding: value })}
+							/>
+							<Divider />
 						</PanelBody>
 					)
 				}

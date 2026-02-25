@@ -58,6 +58,14 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
+			'thumbnailHeightTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'thumbnailHeightMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'perPage' => array(
 				'type' => 'string',
 				'default' => '6'
@@ -389,7 +397,7 @@ return array(
 			),
 			'columnsTablet' => array(
 				'type' => 'string',
-				'default' => '2'
+				'default' => '1'
 			),
 			'columnsMobile' => array(
 				'type' => 'string',

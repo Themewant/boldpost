@@ -245,6 +245,12 @@ $navButtonStyles = [];
 if(!empty($attributes['navBgColor'])) $navButtonStyles['background-color'] = $attributes['navBgColor'];
 if(!empty($attributes['navColor'])) $navButtonStyles['color'] = $attributes['navColor'];
 
+$navPadding = $attributes['navPadding'] ?? [];
+if(!empty($navPadding['top'])) $navButtonStyles['padding-top'] = BOLDPO_Helper::ensure_unit($navPadding['top']);
+if(!empty($navPadding['right'])) $navButtonStyles['padding-right'] = BOLDPO_Helper::ensure_unit($navPadding['right']);
+if(!empty($navPadding['bottom'])) $navButtonStyles['padding-bottom'] = BOLDPO_Helper::ensure_unit($navPadding['bottom']);
+if(!empty($navPadding['left'])) $navButtonStyles['padding-left'] = BOLDPO_Helper::ensure_unit($navPadding['left']);
+
 $navButtonBorderRadius = $attributes['navBorderRadius'] ?? [];
 if(!empty($navButtonBorderRadius['top'])) $navButtonStyles['border-top-left-radius'] = BOLDPO_Helper::ensure_unit($navButtonBorderRadius['top']);
 if(!empty($navButtonBorderRadius['right'])) $navButtonStyles['border-top-right-radius'] = BOLDPO_Helper::ensure_unit($navButtonBorderRadius['right']);
@@ -255,6 +261,11 @@ if(!empty($navButtonBorderRadius['left'])) $navButtonStyles['border-bottom-left-
 $navButtonHoverStyles = [];
 if(!empty($attributes['navBgColorHover'])) $navButtonHoverStyles['background-color'] = $attributes['navBgColorHover'];
 if(!empty($attributes['navColorHover'])) $navButtonHoverStyles['color'] = $attributes['navColorHover'];
+
+$navBtnIconStyles = [];
+if(!empty($attributes['navIconSize'])) $navBtnIconStyles['height'] = BOLDPO_Helper::ensure_unit($attributes['navIconSize']);
+if(!empty($attributes['navIconSize'])) $navBtnIconStyles['width'] = BOLDPO_Helper::ensure_unit($attributes['navIconSize']);
+
 
 $dotStyles = [];
 if(!empty($attributes['dotsColor'])) $dotStyles['color'] = $attributes['dotsColor'];
@@ -299,6 +310,7 @@ BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css,
     '.boldpo-post-slider .boldpo-grid-item .boldpo-blog-metas i:hover'         => BOLDPO_Helper::get_inline_styles($meta_icon_hover),
     '.boldpo-post-slider .nav-btn'         => BOLDPO_Helper::get_inline_styles($navButtonStyles),
     '.boldpo-post-slider .nav-btn:hover'   => BOLDPO_Helper::get_inline_styles($navButtonHoverStyles),
+    '.boldpo-post-slider .nav-btn .swiper-navigation-icon'   => BOLDPO_Helper::get_inline_styles($navBtnIconStyles),
     '.boldpo-post-slider .swiper-pagination-bullet'         => BOLDPO_Helper::get_inline_styles($dotStyles),
     '.boldpo-post-slider .swiper-pagination-bullet.swiper-pagination-bullet-active'   => BOLDPO_Helper::get_inline_styles($dotHoverStyles),
 ] );
@@ -363,6 +375,7 @@ if ( $query->have_posts() ) :
         'class' => 'boldpo-block boldpo-post-slider-block-wrap ' . $unique_id,
         'data-unique' => esc_attr($unique),  
         'data-slides-per-view' => esc_attr($slidesPerView),
+        'data-slides-per-view-desktop' => esc_attr($slidesPerView),
         'data-slides-per-view-tablet' => esc_attr($slidesPerViewTablet),
         'data-slides-per-view-mobile' => esc_attr($slidesPerViewMobile),
         'data-slides-per-view-mobile-small' => esc_attr($slidesPerViewMobileSmall),
@@ -397,7 +410,7 @@ if ( $query->have_posts() ) :
                     endwhile;
                 ?>
             </div>
-            <?php if( !empty($show_dots == 'true' || $show_nav  == 'true') ) : ?>
+            <?php if( !empty($show_dots == true || $show_nav  == true) ) : ?>
                 <div class="boldpo-post-slider-btn-wrapper boldpo-post-slider-btn-wrapper-<?php echo esc_attr($unique); ?>">
                     <?php 
                     if($show_dots) {
@@ -407,8 +420,10 @@ if ( $query->have_posts() ) :
                     }
                     ?>
                     <!-- If we need navigation buttons -->
-                    <div class="nav-btn swiper-button-prev"></div>
-                    <div class="nav-btn swiper-button-next"></div>
+                    <?php if($show_nav) { ?>
+                        <div class="nav-btn swiper-button-prev"></div>
+                        <div class="nav-btn swiper-button-next"></div>
+                    <?php } ?>
                     <!-- If we need scrollbar -->
                     <div class="swiper-scrollbar"></div>
                 </div>

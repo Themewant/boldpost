@@ -53,6 +53,14 @@
 			"type": "string",
 			"default": ""
 		},
+		"thumbnailHeightTablet": {
+			"type": "string",
+			"default": ""
+		},
+		"thumbnailHeightMobile": {
+			"type": "string",
+			"default": ""
+		},
 		"perPage": {
 			"type": "string",
 			"default": "6"
@@ -384,7 +392,7 @@
 		},
 		"columnsTablet": {
 			"type": "string",
-			"default": "2"
+			"default": "1"
 		},
 		"columnsMobile": {
 			"type": "string",
