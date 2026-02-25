@@ -102,6 +102,8 @@ Yes, BoldPost is fully translation ready and follows WordPress internationalizat
 
 Currently, BoldPost is designed to work with standard WordPress posts. Custom post type support may be added in future versions.
 
+
+
 == Screenshots ==
 
 1. Post Grid block with multiple column layouts
@@ -118,6 +120,16 @@ Currently, BoldPost is designed to work with standard WordPress posts. Custom po
 • More layout templates  
 • Masonry grid layout  
 • Pagination & Load More  
+
+## Privacy Policy 
+
+BoldPost &#8211; Gutenberg Post Grid & Layout Blocks [Appsero](https://appsero.com) SDK to collect some telemetry data upon user's confirmation. This helps us to troubleshoot problems faster & make product improvements.
+
+Appsero SDK **does not gather any data by default.** The SDK only starts gathering basic telemetry data **when a user allows it via the admin notice**. We collect the data to ensure a great user experience for all our users. 
+
+Integrating Appsero SDK **DOES NOT IMMEDIATELY** start gathering data, **without confirmation from users in any case.**
+
+Learn more about how [Appsero collects and uses this data](https://appsero.com/privacy-policy/).
 
 == Changelog ==
 
