@@ -35,6 +35,7 @@
 			position: relative;
 			transition: var(--boldpo-preset-hover-transition);
 			background-color: var(--boldpo-preset-color-tertiary);
+			overflow: hidden;
 
 			.boldpo-list-item-inner {
 				align-items: self-start;

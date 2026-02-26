@@ -4,7 +4,7 @@ Tags: post grid, post list, post slider, gutenberg blocks, category list
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,6 +15,7 @@ Display posts beautifully with customizable grids, lists, sliders & category dis
 [BoldPost](https://boldpost.themewant.com/) is a modern Gutenberg post grid and layout plugin that helps you display blog posts in beautiful grids, lists, sliders, and category showcases. Perfect for blogs, news, magazine, and content-rich WordPress websites.
 
 👉 [Plugin Demo](https://boldpost.themewant.com/)
+👉 [Documentation](https://documentation.themewant.com/docs/boldpost/)
 
 = Key Features =
 
@@ -132,6 +133,9 @@ Integrating Appsero SDK **DOES NOT IMMEDIATELY** start gathering data, **without
 Learn more about how [Appsero collects and uses this data](https://appsero.com/privacy-policy/).
 
 == Changelog ==
+
+= 1.0.4
+* Fixed Css
 
 = 1.0.3 =
 * Fixed Navigation Enable Disable

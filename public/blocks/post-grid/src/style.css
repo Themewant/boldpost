@@ -15,6 +15,7 @@
   position: relative;
   transition: var(--boldpo-preset-hover-transition);
   margin-bottom: 10px;
+  overflow: hidden;
 }
 .boldpo-post-grid-block-wrap .boldpo-post-grid .boldpo-grid-item img {
   max-width: 100%;
