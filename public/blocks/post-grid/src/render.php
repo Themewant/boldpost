@@ -274,7 +274,7 @@ BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css,
     '.boldpo-post-grid .boldpo-grid-item .boldpo-blog-metas a:hover'   => BOLDPO_Helper::get_inline_styles($meta_hover),
     '.boldpo-post-grid .boldpo-grid-item .boldpo-blog-metas i'       => BOLDPO_Helper::get_inline_styles($meta_icon_styles),
     '.boldpo-post-grid .boldpo-grid-item .boldpo-blog-metas i:hover' => BOLDPO_Helper::get_inline_styles($meta_icon_hover),
-    '.boldpo-post-grid .boldpo-pagination a, .boldpo-pagination span' => BOLDPO_Helper::get_inline_styles($pag_styles),
+    '.boldpo-pagination a, .boldpo-pagination span' => BOLDPO_Helper::get_inline_styles($pag_styles),
     '.boldpo-pagination a:hover, .boldpo-pagination span.current' => BOLDPO_Helper::get_inline_styles($pag_hover),
 ] );
 
