@@ -18,6 +18,10 @@ function boldpo_enqueue_block_styles() {
 	//if (!wp_script_is('swiper-js', 'enqueued')) { 
 		wp_enqueue_script( 'swiper-js', BOLDPO_PL_URL . 'assets/lib/swiper/swiper-bundle.min.js', array(),'12.0.3',false ); 
 	//}
+
+	// enqueue bootstrap grid
+	wp_enqueue_style( 'boldpo-bootstrap-grid', BOLDPO_PL_URL . 'assets/lib/bootstrap/bootstrap-grid.min.css', array(), BOLDPO_VERSION, 'all' );
+
     // register plugin style if not registered	
 	if (!wp_style_is('boldpo-public-style', 'registered')) {
 		wp_register_style( 

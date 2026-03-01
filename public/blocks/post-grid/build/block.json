@@ -233,7 +233,7 @@
     },
     "itemGap": {
       "type": "string",
-      "default": "20px"
+      "default": "4"
     },
     "itemTitleColor": {
       "type": "string",
@@ -399,11 +399,23 @@
     },
     "itemGapTablet": {
       "type": "string",
-      "default": "20px"
+      "default": "3"
     },
     "itemGapMobile": {
       "type": "string",
-      "default": "20px"
+      "default": "0"
+    },
+    "itemRowGap": {
+      "type": "string",
+      "default": "4"
+    },
+    "itemRowGapTablet": {
+      "type": "string",
+      "default": "3"
+    },
+    "itemRowGapMobile": {
+      "type": "string",
+      "default": "0"
     },
     "itemPaddingTablet": {
       "type": "object"

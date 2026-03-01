@@ -1,12 +1,10 @@
 .boldpo-post-grid-block-wrap .boldpo-post-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  box-sizing: border-box;
+  margin-bottom: 0px;
 }
-@media screen and (max-width: 575px) {
-  .boldpo-post-grid-block-wrap .boldpo-post-grid .boldpo-grid-item-inner {
-    flex-wrap: wrap;
-  }
+.boldpo-post-grid-block-wrap .boldpo-post-grid .boldpo-grid-item-inner {
+  box-sizing: border-box;
+  height: 100%;
 }
 .boldpo-post-grid-block-wrap .boldpo-post-grid .boldpo-blog-content {
   padding-top: 10px;
@@ -14,8 +12,13 @@
 .boldpo-post-grid-block-wrap .boldpo-post-grid .boldpo-grid-item {
   position: relative;
   transition: var(--boldpo-preset-hover-transition);
-  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+.boldpo-post-grid-block-wrap .boldpo-post-grid .boldpo-grid-item .boldpo-grid-item-inner {
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 .boldpo-post-grid-block-wrap .boldpo-post-grid .boldpo-grid-item img {
   max-width: 100%;

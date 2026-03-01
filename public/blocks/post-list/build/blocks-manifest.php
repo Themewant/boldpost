@@ -223,7 +223,7 @@ return array(
 			),
 			'itemGap' => array(
 				'type' => 'string',
-				'default' => '20px'
+				'default' => '4'
 			),
 			'itemTitleColor' => array(
 				'type' => 'string',
@@ -403,21 +403,17 @@ return array(
 				'type' => 'string',
 				'default' => '1'
 			),
+			'itemRowGap' => array(
+				'type' => 'string',
+				'default' => '4'
+			),
 			'itemRowGapTablet' => array(
 				'type' => 'string',
-				'default' => '30px'
+				'default' => '3'
 			),
 			'itemRowGapMobile' => array(
 				'type' => 'string',
-				'default' => '30px'
-			),
-			'itemColGapTablet' => array(
-				'type' => 'string',
-				'default' => '20px'
-			),
-			'itemColGapMobile' => array(
-				'type' => 'string',
-				'default' => '20px'
+				'default' => '0'
 			),
 			'itemPaddingTablet' => array(
 				'type' => 'object'

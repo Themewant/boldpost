@@ -17,7 +17,8 @@
     "@wordpress/scripts": "^31.2.0"
   },
   "dependencies": {
+    "@ant-design/icons": "^6.1.0",
     "antd": "^6.1.4",
-    "@ant-design/icons": "^6.1.0"
+    "bootstrap": "^5.3.8"
   }
 }

@@ -13,7 +13,6 @@ $order = isset($attributes['order']) ? $attributes['order'] : 'ASC';
 $orderby = isset($attributes['orderby']) ? $attributes['orderby'] : 'date';
 $offset = isset($attributes['offset']) ? $attributes['offset'] : '';
 $columns = isset($attributes['columns']) ? $attributes['columns'] : 3;
-$gap = isset($attributes['itemGap']) ? $attributes['itemGap'] : '20px';
 $style = isset($attributes['gridStyle']) ? $attributes['gridStyle'] : 'default';
 $thumbnail_size = isset($attributes['thumbnailSize']) ? $attributes['thumbnailSize'] : 'large';
 $is_featured = !empty($attributes['isFeatured']) ? true : false;
@@ -45,16 +44,39 @@ $responsive_data = [
 ];
 
 // Columns
-BOLDPO_Helper::add_responsive_vars($attributes, $responsive_data, 'columns', 'grid-template-columns', [], false);
-foreach(['desktop', 'tablet', 'mobile'] as $device) {
-    if(!empty($responsive_data[$device]['grid-template-columns'])) {
-        $responsive_data[$device]['grid-template-columns'] = 'repeat(' . $responsive_data[$device]['grid-template-columns'] . ', 1fr)';
-    }
-}
+$c_desktop = isset($attributes['columns']) ? (int)$attributes['columns'] : 3;
+$c_tablet  = isset($attributes['columnsTablet']) ? (int)$attributes['columnsTablet'] : $c_desktop;
+$c_mobile  = isset($attributes['columnsMobile']) ? (int)$attributes['columnsMobile'] : 1;
+
+$bs_col_lg = (int)(12 / $c_desktop);
+$bs_col_md = (int)(12 / $c_tablet);
+$bs_col_xs = (int)(12 / $c_mobile);
+
+$col_class = "boldpo-col-lg-{$bs_col_lg} boldpo-col-md-{$bs_col_md} boldpo-col-{$bs_col_xs}";
 
 // Gaps
-$item_gap_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
-BOLDPO_Helper::add_responsive_vars($attributes, $item_gap_responsive, 'itemGap', 'gap');
+$g_desktop = isset($attributes['itemGap']) ? $attributes['itemGap'] : '4';
+$g_tablet = isset($attributes['itemGapTablet']) ? $attributes['itemGapTablet'] : $g_desktop;
+$g_mobile = isset($attributes['itemGapMobile']) ? $attributes['itemGapMobile'] : 0;
+
+$gap_class = '';
+if ($g_desktop == $g_tablet && $g_tablet == $g_mobile) {
+    $gap_class = 'boldpo-gx-' . $g_desktop;
+} else {
+    $gap_class = 'boldpo-gx-lg-' . $g_desktop . ' boldpo-gx-md-' . $g_tablet . ' boldpo-gx-sm-' . $g_mobile;
+}
+
+// Row gap
+$rg_desktop = isset($attributes['itemRowGap']) ? $attributes['itemRowGap'] : '4';
+$rg_tablet = isset($attributes['itemRowGapTablet']) ? $attributes['itemRowGapTablet'] : $rg_desktop;
+$rg_mobile = isset($attributes['itemRowGapMobile']) ? $attributes['itemRowGapMobile'] : 0;
+
+$row_gap_class = '';
+if ($rg_desktop == $rg_tablet && $rg_tablet == $rg_mobile) {
+    $row_gap_class = 'boldpo-gy-' . $rg_desktop;
+} else {
+    $row_gap_class = 'boldpo-gy-lg-' . $rg_desktop . ' boldpo-gy-md-' . $rg_tablet . ' boldpo-gy-sm-' . $rg_mobile;
+}
 
 // Item Styles
 $item_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
@@ -249,20 +271,19 @@ $style_handle = 'boldpo-post-grid-style';
 $unique_id    = $attributes['blockId'];
 $selector     = '.boldpo-post-grid-block-wrap.' . $unique_id;
 
-$full_responsive_css = BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid.style-' . $style, $responsive_data);
-$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid.style-' . $style . ' .boldpo-grid-item', $item_responsive);
+$full_responsive_css = ""; 
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid.style-' . $style . ' .boldpo-grid-item .boldpo-grid-item-inner', $item_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid.style-' . $style . ' .boldpo-grid-item .boldpo-blog-title', $title_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid.style-' . $style . ' .boldpo-grid-item .boldpo-blog-excerpt', $excerpt_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid.style-' . $style . ' .boldpo-grid-item .boldpo-blog-content', $content_padding_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid.style-' . $style . ' .boldpo-grid-item .boldpo-blog-img img', $thumbnail_height_responsive);   
-$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid', $item_gap_responsive);   
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid.style-' . $style . ' .boldpo-grid-item .boldpo-read-more-link', $button_text_align_responsive);   
 
 
 wp_enqueue_style( $style_handle );
 BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css, [
-    '.boldpo-post-grid .boldpo-grid-item'    => BOLDPO_Helper::get_inline_styles($item_desktop),
-    '.boldpo-post-grid .boldpo-grid-item:hover'    => BOLDPO_Helper::get_inline_styles($item_hover),
+    '.boldpo-post-grid .boldpo-grid-item .boldpo-grid-item-inner'    => BOLDPO_Helper::get_inline_styles($item_desktop),
+    '.boldpo-post-grid .boldpo-grid-item .boldpo-grid-item-inner:hover'    => BOLDPO_Helper::get_inline_styles($item_hover),
     '.boldpo-post-grid .boldpo-grid-item .boldpo-overlay-all'        => BOLDPO_Helper::get_inline_styles($overlay_styles),
     '.boldpo-post-grid .boldpo-grid-item .boldpo-blog-title a:hover' => BOLDPO_Helper::get_inline_styles($title_hover),
     '.boldpo-post-grid .boldpo-grid-item .boldpo-blog-excerpt a:hover'=> BOLDPO_Helper::get_inline_styles($excerpt_hover),
@@ -345,7 +366,7 @@ $block_wrap_attr = get_block_wrapper_attributes( array( 'class' => 'boldpo-block
 if ( $query->have_posts() ) :
 ?>
     <div <?php echo wp_kses_post($block_wrap_attr); ?>>
-        <div class="boldpo-post-grid style-<?php echo esc_attr($style); ?>">
+        <div class="boldpo-post-grid boldpo-row style-<?php echo esc_attr($style); ?> <?php echo esc_attr($gap_class); ?> <?php echo esc_attr($row_gap_class); ?>">
             <?php
             while ( $query->have_posts() ) : $query->the_post();
                 $sticky_class = is_sticky() ? 'sticky-post' : '';
