@@ -77,7 +77,7 @@ export default function Blocks() {
     return (
         <div className='boldpo-options-content'>
             <h1 className='boldpo-options-title'>Blocks</h1>
-            <Row gutter={[16, 16]} justify="space-between">
+            <Row gutter={[16, 16]} justify="flex-start">
                 {blocks.map((block, index) => (
 
                     <BlockItem

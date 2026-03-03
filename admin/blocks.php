@@ -23,6 +23,15 @@ class BOLDPO_Blocks {
                 'description' => 'Post Grid Block',
                 'iconName'        => 'grid.svg',
                 'status'      => 'enable',
+                "isPro"       => false,
+            ],
+            [
+                'title'       => 'Post Grid 2',
+                'id'        => 'post-grid-2',
+                'description' => 'Post Grid Block',
+                'iconName'        => 'grid.svg',
+                'status'      => 'enable',
+                "isPro"       => false,
             ],
             [
                 'title'       => 'Post List',
@@ -30,6 +39,7 @@ class BOLDPO_Blocks {
                 'description' => 'Post List Block',
                 'iconName'    => 'list.svg',
                 'status'      => 'enable',
+                "isPro"       => false,
             ],
             [
                 'title'       => 'Post Slider',
@@ -37,6 +47,7 @@ class BOLDPO_Blocks {
                 'description' => 'Post Slider Block',
                 'iconName'        => 'slider.svg',
                 'status'      => 'enable',
+                "isPro"       => false,
             ],
             [
                 'title'       => 'Category List',
@@ -44,6 +55,7 @@ class BOLDPO_Blocks {
                 'description' => 'Category List Block',
                 'iconName'        => 'category.svg',
                 'status'      => 'enable',
+                "isPro"       => false,
             ]
         ];
 
@@ -52,7 +64,8 @@ class BOLDPO_Blocks {
             $block['status'] = get_option('boldpo_block_' . $block['id'], 'disable');
         }
         unset($block);
-        
+
+        $blocks = apply_filters('boldpost_blocks', $blocks);
 
         return $blocks;
     }

@@ -6,6 +6,7 @@
 import { __ } from '@wordpress/i18n';
 import { useSelect } from '@wordpress/data';
 import { decodeEntities } from '@wordpress/html-entities';
+import { applyFilters } from '@wordpress/hooks';
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -436,6 +437,7 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(value) => setAttributes({ pagination: value })}
 						__nextHasNoMarginBottom={true}
 					/>
+					{applyFilters('boldpost.post-list.pagination_settings', null, { attributes, setAttributes })}
 				</PanelBody>
 
 			</InspectorControls>

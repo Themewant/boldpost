@@ -25,13 +25,13 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
             </a>
         </div>
         <div class="boldpo-blog-content">
-            <?php if ( $show_meta && 'up_title' === $meta_position ) include( BOLDPO_PL_PATH . 'public/template-parts/blog-meta/blog-meta.php' ); ?>
+            <?php if ( $show_meta && 'up_title' === $meta_position ) BOLDPO_Helper::boldpo_get_meta_html($attributes); ?>
             
             <<?php echo esc_attr( $title_tag ); ?> class="boldpo-blog-title">
                 <a href="<?php the_permalink(); ?>"><?php echo esc_html( $trimmed_title ); ?></a>
             </<?php echo esc_attr( $title_tag ); ?>>
 
-            <?php if ( $show_meta && 'below_title' === $meta_position ) include( BOLDPO_PL_PATH . 'public/template-parts/blog-meta/blog-meta.php' ); ?>
+            <?php if ( $show_meta && 'below_title' === $meta_position ) BOLDPO_Helper::boldpo_get_meta_html($attributes); ?>
             
             <?php if ( $show_excerpt === 'yes' ) : ?>
             <div class="boldpo-blog-excerpt">
@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
             </div>
             <?php endif; ?>
             
-            <?php if ( $show_meta && 'below_content' === $meta_position ) include( BOLDPO_PL_PATH . 'public/template-parts/blog-meta/blog-meta.php' ); ?>
+            <?php if ( $show_meta && 'below_content' === $meta_position ) BOLDPO_Helper::boldpo_get_meta_html($attributes); ?>
             <?php if ( $show_read_more === 'yes' && ! empty( $read_more_text ) ) : ?>
                 <div class="boldpo-read-more">
                     <a href="<?php the_permalink(); ?>" class="boldpo-read-more-link">

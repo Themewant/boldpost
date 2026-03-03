@@ -4,6 +4,7 @@
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
  */
 import { __ } from '@wordpress/i18n';
+import { applyFilters } from '@wordpress/hooks';
 import { useSelect } from '@wordpress/data';
 import { decodeEntities } from '@wordpress/html-entities';
 
@@ -436,6 +437,7 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(value) => setAttributes({ pagination: value })}
 						__nextHasNoMarginBottom={true}
 					/>
+					{applyFilters('boldpost.post-grid.pagination_settings', null, { attributes, setAttributes })}
 				</PanelBody>
 
 			</InspectorControls>

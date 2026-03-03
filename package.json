@@ -5,10 +5,11 @@
   "scripts": {
     "start": "wp-scripts start admin/app/src/index.js --output-path=admin/app/build",
     "start:blockEditor": "wp-scripts start editor/app/src/index.js --output-path=editor/app/build",
-    "build": "wp-scripts build admin/app/src/index.js --output-path=admin/app/build && npm run build:blockEditor && npm run build:postGrid && npm run build:postList && npm run build:postSlider && npm run build:categoryList",
+    "build": "wp-scripts build admin/app/src/index.js --output-path=admin/app/build && npm run build:blockEditor && npm run build:postGrid && npm run build:postList && npm run build:postSlider && npm run build:categoryList && npm run build:postGrid2",
     "build:dashboard": "wp-scripts build admin/app/src/index.js --output-path=admin/app/build",
     "build:postList": "wp-scripts build --blocks-manifest --webpack-src-dir=public/blocks/post-list/src --output-path=public/blocks/post-list/build",
     "build:postGrid": "wp-scripts build --blocks-manifest --webpack-src-dir=public/blocks/post-grid/src --output-path=public/blocks/post-grid/build",
+    "build:postGrid2": "wp-scripts build --blocks-manifest --webpack-src-dir=public/blocks/post-grid-2/src --output-path=public/blocks/post-grid-2/build",
     "build:postSlider": "wp-scripts build --blocks-manifest --webpack-src-dir=public/blocks/post-slider/src --output-path=public/blocks/post-slider/build",
     "build:categoryList": "wp-scripts build --blocks-manifest --webpack-src-dir=public/blocks/category-list/src --output-path=public/blocks/category-list/build",
     "build:blockEditor": "wp-scripts build --blocks-manifest --webpack-src-dir=editor/app/src --output-path=editor/app/build"

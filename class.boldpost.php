@@ -28,6 +28,7 @@ class BOLDPO_Main {
 
     public function includes() {
         require_once BOLDPO_PL_PATH . 'public/class.helper.php';
+        require_once BOLDPO_PL_PATH . 'admin/extension/class.category.php';
         require_once BOLDPO_PL_PATH . 'admin/api.php';
         require_once BOLDPO_PL_PATH . 'admin/blocks.php';
         require_once BOLDPO_PL_PATH . 'editor/featured-posts.php';

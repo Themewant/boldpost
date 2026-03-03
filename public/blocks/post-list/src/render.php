@@ -16,7 +16,20 @@ $style = isset($attributes['listStyle']) ? $attributes['listStyle'] : 'default';
 $thumbnail_size = isset($attributes['thumbnailSize']) ? $attributes['thumbnailSize'] : 'large';
 $is_featured = !empty($attributes['isFeatured']) ? true : false;
 $pagination = !empty($attributes['pagination']) ? true : false;
+$pagination_type = isset($attributes['paginationType']) ? $attributes['paginationType'] : 'numeric';
 $ignore_stikcy_posts = !empty($attributes['ignoreStikcyPosts']) ? 1 : 0;
+$unique_id    = !empty($attributes['blockId']) ? $attributes['blockId'] : 'boldpo-' . substr(md5(serialize($attributes)), 0, 6);
+$page_key = 'paged_' . $unique_id;
+
+if ( ! isset( $paged ) ) {
+    if ( is_archive() ) {
+        $paged = max( 1, get_query_var('paged') );
+    } else {
+        $paged = isset( $_GET[ $page_key ] ) ? max( 1, (int) $_GET[ $page_key ] ) : 1;
+    }
+}
+
+$paged = max( 1, (int) $paged );
 
 // Styles attributes
 $show_meta = !empty($attributes['showMeta']) ? true : false;
@@ -282,7 +295,6 @@ $thumbnail_height_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []]
 BOLDPO_Helper::add_responsive_vars($attributes, $thumbnail_height_responsive, 'thumbnailHeight', 'height', [], false);
 
 $style_handle = 'boldpo-post-list-style';
-$unique_id    = isset($attributes['blockId']) ? $attributes['blockId'] : 'boldpo-' . rand(10000, 99999);
 $selector     = '.boldpo-post-list-block-wrap.' . $unique_id;
 
 $full_responsive_css = BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list.style-' . $style, $responsive_data);
@@ -316,12 +328,6 @@ BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css,
 
 $page_key = 'paged_' . $unique_id;
 
-if ( is_archive() ) {
-    $paged = max( 1, get_query_var('paged') );
-} else {
-    $paged = isset( $_GET[ $page_key ] ) ? max( 1, (int) $_GET[ $page_key ] ) : 1;
-}
-
 $args = array(
     'post_type'      => 'post',
     'posts_per_page' => (int) $per_page,
@@ -332,7 +338,7 @@ $args = array(
     'ignore_sticky_posts' => $ignore_stikcy_posts,
 );
 
-if ( ! empty( $offset ) ) {
+if ( ! empty( $offset ) && (int) $offset > 0 ) {
     $args['offset'] = (int) $offset + ( ( $paged - 1 ) * $per_page );
 }
 
@@ -376,11 +382,19 @@ if($is_featured == true) {
 $query = new WP_Query( $args );
 $block_wrap_attr = get_block_wrapper_attributes( array( 'class' => 'boldpo-block boldpo-post-list-block-wrap ' . $unique_id ) );
 
+if ( empty( $block_wrap_attr ) ) {
+    $block_wrap_attr = 'class="boldpo-block boldpo-post-list-block-wrap ' . esc_attr( $unique_id ) . '"';
+}
+
 
 if ( $query->have_posts() ) :
 ?>
     <div <?php echo wp_kses_post($block_wrap_attr); ?>>
-        <div class="boldpo-post-list boldpo-row style-<?php echo esc_attr($style); ?> <?php echo esc_attr($gap_class); ?> <?php echo esc_attr($row_gap_class); ?>">
+        <div class="boldpo-post-list boldpo-row style-<?php echo esc_attr($style); ?> <?php echo esc_attr($gap_class); ?> <?php echo esc_attr($row_gap_class); ?>" <?php if ( 'numeric' !== $pagination_type ) { 
+            $data_attr = $attributes;
+            $data_attr['blockName'] = 'boldpost/post-list';
+            echo 'data-attributes="' . esc_attr( wp_json_encode( $data_attr ) ) . '" data-query-args="' . esc_attr( wp_json_encode( $args ) ) . '"'; 
+        } ?>>
             <?php
             while ( $query->have_posts() ) : $query->the_post();
                 $item_class = $col_class;
@@ -402,25 +416,22 @@ if ( $query->have_posts() ) :
             endwhile;
             ?>
         </div>
-        <?php
-        if($pagination == true && $query->max_num_pages > 1) {
-        ?>
-        <div class="boldpo-pagination">
+        <div class="boldpo-pagination boldpost-pagination-container">
             <?php
-            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- paginate_links output is already escaped
-            echo wp_kses_post( paginate_links( array(
-                'base'      => is_archive() ? str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ) : str_replace( '999999999', '%#%', add_query_arg( $page_key, '999999999' ) ),
-                'format'    => is_archive() ? '?paged=%#%' : '',
-                'current'   => $paged,
-                'total'     => $query->max_num_pages,
-                'prev_text' => '<i class="boldpo-icon-chevron-left"></i>',
-                'next_text' => '<i class="boldpo-icon-chevron-right"></i>',
-            ) ) );
+            if($pagination == true && $query->max_num_pages > 1) {
+                $pagination_html = paginate_links( array(
+                    'base'      => is_archive() ? str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ) : str_replace( '999999999', '%#%', add_query_arg( $page_key, '999999999' ) ),
+                    'format'    => is_archive() ? '?paged=%#%' : '',
+                    'current'   => $paged,
+                    'total'     => $query->max_num_pages,
+                    'prev_text' => '<i class="boldpo-icon-chevron-left"></i>',
+                    'next_text' => '<i class="boldpo-icon-chevron-right"></i>',
+                ) );
+
+                echo apply_filters( 'boldpost_post_list_pagination_html', $pagination_html, $query, $attributes, $paged, $page_key );
+            } 
             ?>
         </div>
-        <?php
-        } 
-        ?>
     </div>
 <?php
     wp_reset_postdata();
