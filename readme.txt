@@ -157,7 +157,7 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 == Changelog ==
 
 = 1.0.5
-* Add Video Tutorila
+* Add Video Tutorial
 * Added Screenshots
 
 = 1.0.4
