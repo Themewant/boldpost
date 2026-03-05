@@ -147,7 +147,11 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 == Changelog ==
 
 = 1.0.4
-* Fixed Css
+* Add Video Tutorila
+* Added Screenshots
+
+= 1.0.4
+* Fixed CSS
 * Added Custom Bootstrap Support
 
 = 1.0.3 =
