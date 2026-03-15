@@ -52,7 +52,7 @@ return array(
 			),
 			'thumbnailSize' => array(
 				'type' => 'string',
-				'default' => 'eshb_thumbnail'
+				'default' => 'medium'
 			),
 			'thumbnailHeight' => array(
 				'type' => 'string',
@@ -63,6 +63,18 @@ return array(
 				'default' => ''
 			),
 			'thumbnailHeightMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'thumbnailWidth' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'thumbnailWidthTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'thumbnailWidthMobile' => array(
 				'type' => 'string',
 				'default' => ''
 			),

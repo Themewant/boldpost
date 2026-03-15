@@ -1,3 +1,6 @@
+.boldpo-post-grid-2-block-wrap {
+  margin-block-start: 0 !important;
+}
 .boldpo-post-grid-2-block-wrap .boldpo-grid-col-left-wrap,
 .boldpo-post-grid-2-block-wrap .boldpo-grid-col-right-wrap {
   box-sizing: border-box;
@@ -138,6 +141,25 @@
   margin-left: 10px;
   padding-left: 10px;
 }
+.boldpo-post-grid-2-block-wrap .boldpo-post-grid-2 .boldpo-grid-item .boldpo-blog-metas.boldpo-blog-metas-style-1 .bldpost-meta {
+  position: relative;
+}
+.boldpo-post-grid-2-block-wrap .boldpo-post-grid-2 .boldpo-grid-item .boldpo-blog-metas.boldpo-blog-metas-style-1 .bldpost-meta:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  left: -11px;
+  top: 6px;
+  width: 5px;
+  height: 5px;
+  background: currentColor;
+  border-radius: 100%;
+}
+.boldpo-post-grid-2-block-wrap .boldpo-post-grid-2 .boldpo-grid-item .boldpo-blog-metas.boldpo-blog-metas-style-1 a {
+  text-decoration: none;
+}
+.boldpo-post-grid-2-block-wrap .boldpo-post-grid-2 .boldpo-grid-item .boldpo-blog-metas.boldpo-blog-metas-style-1 a:hover {
+  text-decoration: underline;
+}
 .boldpo-post-grid-2-block-wrap .boldpo-post-grid-2 .boldpo-grid-item .boldpo-cat-dot {
   width: 10px;
   height: 10px;
@@ -196,6 +218,18 @@
 }
 .boldpo-post-grid-2-block-wrap .boldpo-post-grid-2 .boldpo-grid-item:hover .boldpo-blog-img.boldpo-animate.top_bottom {
   transform: translateY(15px) scale(1.1);
+}
+.boldpo-post-grid-2-block-wrap .boldpo-post-grid-2.style-default .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-title, .boldpo-post-grid-2-block-wrap .boldpo-post-grid-2.style-1 .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-title {
+  font-size: 36px;
+}
+.boldpo-post-grid-2-block-wrap .boldpo-post-grid-2.style-default .boldpo-grid-col-right-wrap .boldpo-grid-item .boldpo-blog-title, .boldpo-post-grid-2-block-wrap .boldpo-post-grid-2.style-1 .boldpo-grid-col-right-wrap .boldpo-grid-item .boldpo-blog-title {
+  font-size: 24px;
+}
+.boldpo-post-grid-2-block-wrap .boldpo-post-grid-2.style-2 .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-title, .boldpo-post-grid-2-block-wrap .boldpo-post-grid-2.style-3 .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-title {
+  font-size: 24px;
+}
+.boldpo-post-grid-2-block-wrap .boldpo-post-grid-2.style-2 .boldpo-grid-col-right-wrap .boldpo-grid-item .boldpo-blog-title, .boldpo-post-grid-2-block-wrap .boldpo-post-grid-2.style-3 .boldpo-grid-col-right-wrap .boldpo-grid-item .boldpo-blog-title {
+  font-size: 36px;
 }
 .boldpo-post-grid-2-block-wrap .boldpo-pagination {
   margin-top: 40px;

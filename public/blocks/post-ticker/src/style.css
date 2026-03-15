@@ -1,0 +1,46 @@
+.boldpo-post-ticker-block-wrap {
+  margin-block-start: 0 !important;
+}
+.boldpo-post-ticker-block-wrap .boldpo-post-ticker {
+  display: block;
+}
+@media screen and (max-width: 575px) {
+  .boldpo-post-ticker-block-wrap .boldpo-post-ticker .boldpo-grid-item-inner {
+    flex-wrap: wrap;
+  }
+}
+.boldpo-post-ticker-block-wrap .boldpo-post-ticker .boldpo-grid-item {
+  position: relative;
+  transition: all 0.5s ease;
+}
+.boldpo-post-ticker-block-wrap .boldpo-post-ticker .boldpo-grid-item i {
+  font-size: 16px;
+}
+.boldpo-post-ticker-block-wrap .boldpo-post-ticker .boldpo-grid-item .boldpo-blog-title {
+  font-weight: bold;
+  color: currentColor;
+  padding: 10px 0;
+  margin: 0;
+  position: relative;
+  text-transform: capitalize;
+}
+.boldpo-post-ticker-block-wrap .boldpo-post-ticker .boldpo-grid-item .boldpo-blog-title::before {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 100%;
+  background: #fff;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.5;
+}
+.boldpo-post-ticker-block-wrap .boldpo-post-ticker .boldpo-grid-item .boldpo-blog-title a {
+  color: currentColor;
+  transition: var(--boldpo-preset-hover-transition);
+  text-decoration: none;
+}
+.boldpo-post-ticker-block-wrap .boldpo-post-ticker .boldpo-grid-item a:hover {
+  color: var(--boldpo-preset-color-primary);
+}/*# sourceMappingURL=style.css.map */

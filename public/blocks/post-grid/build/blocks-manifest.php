@@ -61,7 +61,7 @@ return array(
 			),
 			'thumbnailSize' => array(
 				'type' => 'string',
-				'default' => 'eshb_thumbnail'
+				'default' => 'medium'
 			),
 			'thumbnailHeight' => array(
 				'type' => 'string',

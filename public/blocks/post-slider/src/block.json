@@ -40,7 +40,7 @@
 		},
 		"thumbnailSize": {
 			"type": "string",
-			"default": "eshb_thumbnail"
+			"default": "medium"
 		},
 		"thumbnailHeight": {
 			"type": "string",

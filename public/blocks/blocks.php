@@ -45,5 +45,8 @@ foreach ($boldpo_blocks as $boldpo_block) {
 	if ($boldpo_block['isPro'] == true) {
 		continue;
 	}
-	require_once __DIR__ . '/' . $boldpo_block['id'] . '/' . $boldpo_block['id'] . '.php';
+	$file = __DIR__ . '/' . $boldpo_block['id'] . '/' . $boldpo_block['id'] . '.php';
+	if (file_exists($file)) {
+		require_once $file;
+	}
 }

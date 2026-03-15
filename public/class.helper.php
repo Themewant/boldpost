@@ -108,92 +108,38 @@ class BOLDPO_Helper {
 		return "$width $style $color";
 	}
 
-	public static function boldpo_get_meta_html($attributes) {    
-		$boldpo_allowed_metas = isset($attributes['allowedMetas']) ? $attributes['allowedMetas'] : [];
-		$boldpo_meta_html = '';
-		if ( in_array( 'date', $boldpo_allowed_metas ) && empty($attributes['showDateOnTop'])) {
-			$boldpo_meta_html .= '<span class="bldpost-meta"><i class="boldpo-meta-icon boldpo-icon-calendar-two"></i>' . esc_html( get_the_date() ) . '</span>';
-		}
-		if ( in_array( 'author', $boldpo_allowed_metas ) ) {
-				$boldpo_meta_html .= '<span class="bldpost-meta"><i class="boldpo-meta-icon boldpo-icon-user-avatar"></i><a href="' . esc_url(get_author_posts_url(get_the_author_meta('ID'))) . '">' . esc_html( $attributes['authorPrefix'] ) . ' ' . esc_html( get_the_author() ) . '</a></span>';
-		}
-		if ( in_array( 'category', $boldpo_allowed_metas ) ) {
-			$boldpo_categories = get_the_category();
-			if ( ! empty($boldpo_categories) ) {
-				$cat_links = [];
-				foreach ($boldpo_categories as $boldpo_category) {
-					if ( $boldpo_category->slug === 'uncategorized' ) {
-						continue;
-					}
-					$cat_links[] = '<a href="' . esc_url(get_category_link($boldpo_category->term_id)) . '">' . esc_html( $boldpo_category->name ) . '</a>';
-				}
-				if ( ! empty( $cat_links ) ) {
-					$boldpo_meta_html .= '<span class="bldpost-meta"><i class="boldpo-meta-icon boldpo-icon-notification-status"></i>';
-					$boldpo_meta_html .= implode( ', ', $cat_links );
-					$boldpo_meta_html .= '</span>';
-				}
-			}
-		}
-		if ( in_array( 'tag', $boldpo_allowed_metas ) ) {
-			$boldpo_tags = get_the_tags();
-			if ( $boldpo_tags ) {
-				$boldpo_meta_html .= '<span class="bldpost-meta"><i class="boldpo-meta-icon boldpo-icon-tags"></i>';
-				$tag_links = [];
-				foreach ($boldpo_tags as $boldpo_tag) {
-					$tag_links[] = '<a href="' . esc_url(get_tag_link($boldpo_tag->term_id)) . '">' . esc_html( $boldpo_tag->name ) . '</a>';
-				}
-				$boldpo_meta_html .= implode( ', ', $tag_links );
-				$boldpo_meta_html .= '</span>';
-			}
-		}
-		?>
-		<div class="boldpo-blog-metas">
-			<?php 
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML is escaped during generation
-			echo wp_kses_post( $boldpo_meta_html ); 
-			?>
-		</div>
-		<?php
+	public static function boldpost_time_ago() {
+		return human_time_diff( get_the_time('U'), current_time('timestamp') );
 	}
 
-	public static function boldpo_get_category_html($attributes, $style = 'default') {   
-		$boldpo_allowed_metas = isset($attributes['allowedMetas']) ? $attributes['allowedMetas'] : [];
-		$boldpo_meta_html = '';
-		if ( in_array( 'category', $boldpo_allowed_metas ) ) {
-			$boldpo_categories = get_the_category();
-			if ( ! empty($boldpo_categories) ) {
-				$cat_links = [];
-				foreach ($boldpo_categories as $boldpo_category) {
-					if ( $boldpo_category->slug === 'uncategorized' ) {
-						continue;
-					}
-					if($style == 'default') {
-						$cat_links[] = '<a href="' . esc_url(get_category_link($boldpo_category->term_id)) . '">' . esc_html( $boldpo_category->name ) . '</a>';
-					} else {
-						$cat_color = get_term_meta($boldpo_category->term_id, 'category_color', true);
-						$dot_style = $cat_color ? 'background-color: ' . esc_attr( $cat_color ) : '';
-						$cat_links[] = '<span class="bldpost-meta"><span class="boldpo-cat-dot" style="' . $dot_style . '"></span><a href="' . esc_url(get_category_link($boldpo_category->term_id)) . '">' . esc_html( $boldpo_category->name ) . '</a></span>';
-					}
+	public static function boldpost_get_video_embed($video_url, $autoplay = 0, $mute = 0, $controls = 1, $height = '400px', $width = '100%') {
+
+		$embed_video = '';
+
+		if( !empty($video_url) ) {
+
+			$embed_video = wp_oembed_get( $video_url, ['height' => $height, 'width' => $width, 'mute' => $mute, 'autoplay' => $autoplay, 'controls' => $controls] );
+
+			if( $embed_video ) {
+
+				$mute_param = 'mute=' . $mute;
+
+				// Vimeo uses muted instead of mute
+				if ( strpos($video_url, 'vimeo.com') !== false ) {
+					$mute_param = 'muted=' . $mute;
 				}
-				if ( ! empty( $cat_links ) ) {
-					if($style == 'default') {
-						$boldpo_meta_html .= '<span class="bldpost-meta"><i class="boldpo-meta-icon boldpo-icon-notification-status"></i>';
-						$boldpo_meta_html .= implode( ', ', $cat_links );
-						$boldpo_meta_html .= '</span>';
-					} else {
-						// Each cat_link is already a full <span>, so just join them
-						$boldpo_meta_html .= implode( '', $cat_links );
-					}
-				}
+
+				$params = '&autoplay=' . $autoplay . '&' . $mute_param . '&controls=' . $controls;
+
+				$embed_video = preg_replace(
+					'/src="([^"]+)"/',
+					'src="$1' . $params . '"',
+					$embed_video
+				);
+
 			}
 		}
-		?>
-		<div class="boldpo-blog-categories">
-			<?php 
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML is escaped during generation
-			echo wp_kses_post( $boldpo_meta_html ); 
-			?>
-		</div>
-		<?php
+
+		return $embed_video;
 	}
 }

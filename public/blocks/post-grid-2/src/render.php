@@ -50,6 +50,16 @@ $excerpt_trim = isset($attributes['excerptTrim']) ? $attributes['excerptTrim'] :
 $anim_style = isset($attributes['animStyle']) ? $attributes['animStyle'] : '';
 $thumb_anim = isset($attributes['thumbAnim']) ? 'boldpo-animate' : '';
 
+$meta_style = 'default';
+if ( $style === '1' || $style === '3' ) {
+    $meta_style = '1';
+}
+
+$cat_style = 'default';
+if ( $style === '1' || $style === '3' ) {
+    $cat_style = '1';
+}
+
 // styles
 $responsive_data = [
     'desktop' => [],
@@ -57,22 +67,15 @@ $responsive_data = [
     'mobile'  => []
 ];
 
+$wrap_one_col_class = 'boldpo-col-lg-8 boldpo-col-md-8 boldpo-col-sm-12 boldpo-col-12';
+$wrap_two_col_class = 'boldpo-col-lg-4 boldpo-col-md-4 boldpo-col-sm-12 boldpo-col-12';
+
 // Columns
-if($style == 'default') {
-    $c_desktop = 1;
-    $c_tablet  = 1;
-    $c_mobile  = 1;
-} else {
-    $c_desktop = isset($attributes['columns']) ? (int)$attributes['columns'] : 3;
-    $c_tablet  = isset($attributes['columnsTablet']) ? (int)$attributes['columnsTablet'] : $c_desktop;
-    $c_mobile  = isset($attributes['columnsMobile']) ? (int)$attributes['columnsMobile'] : 1;
-}
+if($style == '2' || $style == '3') {
+   $wrap_one_col_class = 'boldpo-col-lg-4 boldpo-col-md-4 boldpo-col-sm-12 boldpo-col-12';
+   $wrap_two_col_class = 'boldpo-col-lg-8 boldpo-col-md-8 boldpo-col-sm-12 boldpo-col-12';
+} 
 
-$bs_col_lg = (int)(12 / $c_desktop);
-$bs_col_md = (int)(12 / $c_tablet);
-$bs_col_xs = (int)(12 / $c_mobile);
-
-$col_class = "boldpo-col-lg-{$bs_col_lg} boldpo-col-md-{$bs_col_md} boldpo-col-{$bs_col_xs}";
 
 // Gaps
 $g_desktop = isset($attributes['itemGap']) ? $attributes['itemGap'] : '4';
@@ -408,6 +411,11 @@ if ( $query->have_posts() ) :
              } ?>>
             <?php
             $i = 0;
+            if($style == 'default') {
+                $template_pl_path = BOLDPO_PL_PATH;
+            } else {
+                $template_pl_path = BOLDPO_PRO_PL_PATH;
+            }
             while ( $query->have_posts() ) : $query->the_post();
                 $i++;
                 $item_class = '';
@@ -421,59 +429,73 @@ if ( $query->have_posts() ) :
 
                 $trimmed_title = wp_trim_words( get_the_title(), $title_trim, '...' );
                 $trimmed_excerpt = wp_trim_words( get_the_excerpt(), $excerpt_trim, '...' );
-               
-                if($style == '1' && class_exists('BOLDPO_Pro')) {
-                    $style_file = BOLDPO_PRO_PL_PATH . 'public/template-parts/blog-grid-2/style-' . $style . '.php';
-                } else {
-                    $style_file = BOLDPO_PL_PATH . 'public/template-parts/blog-grid-2/style-' . $style . '.php';
-                }
+                
+                $style_file = $template_pl_path . 'public/template-parts/blog-grid-2/style-' . $style . '.php';
+            
+                if ( ($style == 'default' || $style == '1') && file_exists( $style_file ) ) {
 
-                if ( file_exists( $style_file ) ) {
-                    if($i == 1) {
+                    if ($i == 1) {
+
+                        // LEFT BIG POST
                         $title_tag = $title_left_tag;
-                        echo '<div class="boldpo-grid-col-left-wrap boldpo-col-lg-8 boldpo-col-md-8 boldpo-col-sm-12 boldpo-col-12">';
+
+                        echo '<div class="boldpo-grid-col-left-wrap ' . esc_attr($wrap_one_col_class) . '">';
                         include $style_file;
                         echo '</div>';
+
+                        // RIGHT SMALL POSTS
                         if ($query->post_count > 1) {
                             $title_tag = $title_right_tag;
-                            echo '<div class="boldpo-grid-col-right-wrap boldpo-col-lg-4 boldpo-col-md-4 boldpo-col-sm-12 boldpo-col-12">';
+
+                            echo '<div class="boldpo-grid-col-right-wrap ' . esc_attr($wrap_two_col_class) . '">';
                             echo '<div class="boldpo-grid-row boldpo-row ' . esc_attr($row_gap_class) . '">';
                         }
+
                     } else {
                         include $style_file;
                     }
+
+                } elseif ( ($style == '2' || $style == '3') && file_exists( $style_file ) ) {
+
+                    if ($i == 1 && $query->post_count > 1) {
+
+                        // LEFT SMALL POSTS (open first)
+                        $title_tag = $title_right_tag;
+
+                        echo '<div class="boldpo-grid-col-left-wrap ' . esc_attr($wrap_one_col_class) . '">';
+                        echo '<div class="boldpo-grid-row boldpo-row ' . esc_attr($row_gap_class) . '">';
+
+                    }
+
+                    if ($i == $query->post_count) {
+
+                        // CLOSE LEFT SMALL POSTS
+                        echo '</div></div>';
+
+                        // RIGHT BIG POST
+                        $title_tag = $title_left_tag;
+
+                        echo '<div class="boldpo-grid-col-right-wrap ' . esc_attr($wrap_two_col_class) . '">';
+                        include $style_file;
+                        echo '</div>';
+
+                    } else {
+                        include $style_file;
+                    }
+
                 }
+
+
             endwhile;
             if ($query->post_count > 1) {
                 // Close inner boldpo-row then the right-wrap
-                echo '</div></div>';
+                echo '</div>';
             }
             ?>
+            <?php include BOLDPO_PL_PATH . 'public/template-parts/pagination/pagination.php'; ?>
         </div>
-        <div class="boldpost-pagination-container">
-            <?php
-            if($pagination == true && $query->max_num_pages > 1) {
-                $pagination_html = '';
-                
-                if ($pagination_type === 'numeric') {
-                    $pagination_html = paginate_links( array(
-                        'base'      => is_archive() ? str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ) : str_replace( '999999999', '%#%', add_query_arg( $page_key, '999999999' ) ),
-                        'format'    => is_archive() ? '?paged=%#%' : '',
-                        'current'   => $paged,
-                        'total'     => $query->max_num_pages,
-                        'prev_text' => '<i class="boldpo-icon-chevron-left"></i>',
-                        'next_text' => '<i class="boldpo-icon-chevron-right"></i>',
-                    ) );
-
-                    if ($pagination_html) {
-                        $pagination_html = '<div class="boldpo-pagination">' . $pagination_html . '</div>';
-                    }
-                }
-
-                echo apply_filters('boldpost_post_grid_2_pagination_html', $pagination_html, $query, $attributes, $paged, $page_key);
-            } 
-            ?>
         </div>
+        
     </div>
 <?php
     wp_reset_postdata();

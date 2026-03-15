@@ -1,3 +1,6 @@
+.boldpo-post-grid-block-wrap {
+  margin-block-start: 0 !important;
+}
 .boldpo-post-grid-block-wrap .boldpo-post-grid {
   box-sizing: border-box;
   margin-bottom: 0px;

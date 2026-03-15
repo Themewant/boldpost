@@ -1,4 +1,5 @@
 .boldpo-post-grid-2-block-wrap {
+	margin-block-start: 0 !important;
 
 	// Ensure gutter padding doesn't overflow the column widths
 	.boldpo-grid-col-left-wrap,
@@ -158,6 +159,35 @@
 				}
 			}
 
+			.boldpo-blog-metas {
+				&.boldpo-blog-metas-style-1 {
+					.bldpost-meta {
+						position: relative;
+
+						&:not(:first-child) {
+							&::before {
+								content: "";
+								position: absolute;
+								left: -11px;
+								top: 6px;
+								width: 5px;
+								height: 5px;
+								background: currentColor;
+								border-radius: 100%;
+							}
+						}
+					}
+
+					a {
+						text-decoration: none;
+
+						&:hover {
+							text-decoration: underline;
+						}
+					}
+				}
+			}
+
 			.boldpo-cat-dot {
 				width: 10px;
 				height: 10px;
@@ -243,8 +273,42 @@
 
 		}
 
+		&.style-default,
 		&.style-1 {
-			.boldpo-grid-item {}
+			.boldpo-grid-col-left-wrap {
+				.boldpo-grid-item {
+					.boldpo-blog-title {
+						font-size: 36px;
+					}
+				}
+			}
+
+			.boldpo-grid-col-right-wrap {
+				.boldpo-grid-item {
+					.boldpo-blog-title {
+						font-size: 24px;
+					}
+				}
+			}
+		}
+
+		&.style-2,
+		&.style-3 {
+			.boldpo-grid-col-left-wrap {
+				.boldpo-grid-item {
+					.boldpo-blog-title {
+						font-size: 24px;
+					}
+				}
+			}
+
+			.boldpo-grid-col-right-wrap {
+				.boldpo-grid-item {
+					.boldpo-blog-title {
+						font-size: 36px;
+					}
+				}
+			}
 		}
 	}
 

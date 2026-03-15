@@ -52,6 +52,16 @@ $excerpt_trim = isset($attributes['excerptTrim']) ? $attributes['excerptTrim'] :
 $anim_style = isset($attributes['animStyle']) ? $attributes['animStyle'] : '';
 $thumb_anim = isset($attributes['thumbAnim']) ? 'boldpo-animate' : '';
 
+$meta_style = 'default';
+if ( $style === '1' ) {
+    $meta_style = '1';
+}
+
+$cat_style = 'default';
+if ( $style === '1' ) {
+    $cat_style = '1';
+}
+
 // styles
 $responsive_data = [
     'desktop' => [],

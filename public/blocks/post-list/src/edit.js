@@ -283,6 +283,19 @@ export default function Edit({ attributes, setAttributes }) {
 							/>
 						)}
 					</ResponsiveWrapper>
+					<ResponsiveWrapper label={__('Thumbnail Width', 'boldpost')}>
+						{(device) => (
+							<RangeControlWithUnit
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('thumbnailWidth', device)}
+								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+								min={0}
+								max={500}
+								step={1}
+							/>
+						)}
+					</ResponsiveWrapper>
 					<SelectControl
 						label={__('Animation', 'boldpost')}
 						value={attributes.animStyle}

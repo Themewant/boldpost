@@ -4,6 +4,9 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
+.boldpo-post-list-block-wrap {
+  margin-block-start: 0 !important;
+}
 .boldpo-post-list-block-wrap .boldpo-post-list {
   box-sizing: border-box;
   margin-bottom: 0px;

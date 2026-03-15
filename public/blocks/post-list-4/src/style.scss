@@ -1,0 +1,366 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.boldpo-post-list-4-block-wrap {
+	margin-block-start: 0 !important;
+
+	.boldpo-post-list-4 {
+		box-sizing: border-box;
+		margin-bottom: 0px;
+
+		.boldpo-blog-content {
+			line-height: 1.4;
+			width: calc(100% - 70px);
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			height: -webkit-fill-available;
+
+			@media screen and (max-width: 767px) {
+				padding-top: 8px;
+				padding-bottom: 8px;
+			}
+
+			@media screen and (max-width: 1024px) {
+				justify-content: center;
+			}
+		}
+
+
+		.boldpo-list-item {
+			position: relative;
+			transition: var(--boldpo-preset-hover-transition);
+			box-sizing: border-box;
+
+			.boldpo-list-item-inner {
+				align-items: self-start;
+				display: flex;
+				background-color: var(--boldpo-preset-color-tertiary);
+				overflow: hidden;
+				box-sizing: border-box;
+				height: 100%;
+				padding: 8px;
+			}
+
+			img {
+				max-width: 100%;
+				height: auto;
+				display: block;
+				object-fit: cover;
+				transition: transform var(--boldpo-preset-hover-transition);
+			}
+
+			i {
+				font-size: 16px;
+			}
+
+			.boldpo-blog-date-top {
+				z-index: 1;
+				background-color: var(--boldpo-preset-color-primary);
+
+				h4 {
+					margin: 0;
+					color: #fff;
+					font-size: 36px;
+					line-height: 1;
+				}
+
+				position: absolute;
+				top: 0;
+				right: 0;
+				display: inline-block;
+				padding: 20px;
+				padding-bottom: 6px;
+				text-align: center;
+				border-radius: 4px;
+				color: #fff;
+				margin: 25px;
+
+				h4,
+				span {
+					color: inherit;
+				}
+
+				@media screen and (max-width: 767px) {
+					display: none;
+				}
+
+				@media screen and (max-width: 1024px) {
+					display: none;
+				}
+			}
+
+			.boldpo-blog-img {
+				width: 70px;
+				max-width: 100%;
+				height: auto;
+				display: block;
+				margin: 0 auto;
+				overflow: hidden;
+				position: relative;
+				border-radius: 5px;
+
+				img {
+					display: block;
+					object-fit: cover;
+					width: 70px;
+					height: 85px;
+				}
+
+				&.boldpo-animate {
+					overflow: hidden;
+
+					img {
+						transition: transform var(--boldpo-preset-hover-transition);
+					}
+
+					&.left_right {
+						&:hover img {
+							transform: translateX(15px) scale(1.1);
+						}
+					}
+
+					&.top_bottom {
+						&:hover img {
+							transform: translateY(15px) scale(1.1);
+						}
+					}
+				}
+			}
+
+			.boldpo-blog-title {
+				font-weight: bold;
+				color: var(--boldpo-preset-color-contrast-1);
+				margin: 0;
+
+				@media screen and (max-width: 767px) {
+					font-size: 1em;
+				}
+
+				a {
+					color: currentColor;
+					transition: var(--boldpo-preset-hover-transition);
+					text-decoration: none;
+				}
+			}
+
+			.boldpo-blog-metas {
+				margin: 20px 0 5px;
+				padding: 0;
+				list-style: none;
+				display: inline-flex;
+				flex-wrap: wrap;
+				font-size: 14px;
+				line-height: 120%;
+				align-items: center;
+				gap: 18px;
+
+				.bldpost-meta {
+					display: flex;
+					align-items: center;
+				}
+
+				a {
+					text-decoration: none;
+
+					&:hover {
+						text-decoration: underline;
+					}
+				}
+
+				li {
+					position: relative;
+				}
+
+				li+li {
+					margin-left: 10px;
+					padding-left: 10px;
+				}
+			}
+
+			.boldpo-read-more {
+				display: inline-block;
+				margin-top: 10px;
+				text-decoration: none;
+
+				@media screen and (max-width: 767px) {
+					display: none;
+				}
+
+				.boldpo-read-more-link {
+					display: inline-flex;
+					align-items: center;
+					text-decoration: none;
+					padding: 7px 16px;
+					background-color: var(--boldpo-preset-color-primary);
+					color: var(--boldpo-preset-color-white);
+					font-size: 14px;
+					font-weight: 600;
+					transition: 0.3s ease-in-out;
+
+					&:hover {
+						background-color: var(--boldpo-preset-color-secondary);
+					}
+				}
+
+				.boldpo-read-more-icon.after {
+					margin-left: 6px;
+					top: 1px;
+				}
+
+				.boldpo-read-more-icon.before {
+					margin-right: 6px;
+					top: 1px;
+				}
+			}
+
+			.boldpo-blog-excerpt {
+				margin-bottom: 20px;
+				font-size: 18px;
+				color: var(--boldpo-preset-color-contrast-2);
+
+				a {
+					color: currentColor;
+				}
+
+				@media screen and (max-width: 767px) {
+					display: none;
+				}
+
+				@media screen and (max-width: 1024px) {
+					display: none;
+				}
+			}
+
+			.boldpo-video-wrapper {
+				position: relative;
+
+				span.play-icon {
+					width: 0;
+					height: 0;
+					border-bottom: 10px solid transparent;
+					border-right: 15px solid #ffffff;
+					border-top: 10px solid transparent;
+					position: absolute;
+					left: 50%;
+					top: 50%;
+					transform: translate(-50%, -50%);
+				}
+
+
+				iframe {
+					width: 100%;
+					transform: scale(3.1);
+				}
+			}
+
+			a {
+				&:hover {
+					color: var(--boldpo-preset-color-primary);
+				}
+			}
+
+		}
+
+		&.style-1 {
+			.boldpo-list-item-inner {
+				position: relative;
+			}
+
+			.boldpo-list-item {
+				position: relative;
+
+				.boldpo-blog-content {
+					position: absolute;
+					bottom: 0;
+					padding: 30px;
+				}
+
+				.boldpo-overlay-all {
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					background: rgb(0 0 0 / 47%);
+				}
+
+				.boldpo-blog-img {
+					width: 100%;
+
+					img {
+						height: 400px;
+						object-fit: cover;
+						width: 100%;
+					}
+				}
+
+				.boldpo-blog-title,
+				.boldpo-blog-metas,
+				.boldpo-blog-excerpt,
+				.boldpo-read-more a {
+					color: #fff;
+				}
+			}
+		}
+
+	}
+
+
+	.boldpo-pagination {
+		margin-top: 40px;
+		display: flex;
+		justify-content: center;
+		gap: 8px;
+
+		a,
+		span {
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			width: 30px;
+			height: 30px;
+			font-size: 14px;
+			border-radius: 50%;
+			text-decoration: none;
+			transition: var(--boldpo-preset-hover-transition);
+			box-shadow: 0 5px 10px #0e0d0d1a;
+		}
+
+		span.current {
+			cursor: default;
+		}
+	}
+
+	.boldpo-page-nav {
+		&.boldpo-page-prev {
+			margin-bottom: 10px;
+		}
+
+		&.boldpo-page-next {
+			margin-top: 10px;
+		}
+
+		a {
+			background-color: var(--boldpo-preset-color-primary);
+			color: var(--boldpo-preset-color-white);
+			text-align: center;
+			padding: 7px 16px;
+			font-size: 14px;
+			font-weight: 600;
+			transition: 0.3s ease-in-out;
+			box-sizing: border-box;
+			width: 100%;
+			display: block;
+			text-decoration: none;
+
+			&:hover {
+				background-color: var(--boldpo-preset-color-secondary);
+			}
+		}
+	}
+}

@@ -46,6 +46,8 @@ import IconPicker from '../../custom-components/IconPicker';
 import './editor.scss';
 import grid1 from './assets/img/grid-1.png';
 import grid2 from './assets/img/grid-2.png';
+import grid3 from './assets/img/grid-2.png';
+import grid4 from './assets/img/grid-2.png';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -234,6 +236,8 @@ export default function Edit({ attributes, setAttributes }) {
 						options={[
 							{ label: __('Default', 'boldpost'), value: 'default', src: grid1 },
 							{ label: __('Style 1', 'boldpost'), value: '1', src: grid2 },
+							{ label: __('Style 2', 'boldpost'), value: '2', src: grid3 },
+							{ label: __('Style 3', 'boldpost'), value: '3', src: grid4 },
 						]}
 					/>
 				</PanelBody>

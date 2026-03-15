@@ -47,7 +47,7 @@
 		},
 		"thumbnailSize": {
 			"type": "string",
-			"default": "eshb_thumbnail"
+			"default": "medium"
 		},
 		"thumbnailHeight": {
 			"type": "string",
@@ -58,6 +58,18 @@
 			"default": ""
 		},
 		"thumbnailHeightMobile": {
+			"type": "string",
+			"default": ""
+		},
+		"thumbnailWidth": {
+			"type": "string",
+			"default": ""
+		},
+		"thumbnailWidthTablet": {
+			"type": "string",
+			"default": ""
+		},
+		"thumbnailWidthMobile": {
 			"type": "string",
 			"default": ""
 		},

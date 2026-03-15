@@ -61,7 +61,7 @@ return array(
 			),
 			'thumbnailSize' => array(
 				'type' => 'string',
-				'default' => 'eshb_thumbnail'
+				'default' => 'medium'
 			),
 			'thumbnailLeftHeight' => array(
 				'type' => 'string',
@@ -146,7 +146,7 @@ return array(
 				'type' => 'object',
 				'default' => array(
 					'fontFamily' => '',
-					'fontSize' => '36px',
+					'fontSize' => '',
 					'fontWeight' => '',
 					'fontStyle' => '',
 					'textTransform' => '',
@@ -158,7 +158,7 @@ return array(
 				'type' => 'object',
 				'default' => array(
 					'fontFamily' => '',
-					'fontSize' => '24px',
+					'fontSize' => '',
 					'fontWeight' => '',
 					'fontStyle' => '',
 					'textTransform' => '',
