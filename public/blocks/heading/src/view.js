@@ -1,0 +1,3 @@
+/**
+ * Heading Block Frontend Script
+ */

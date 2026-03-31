@@ -1,5 +1,6 @@
 .boldpo-post-grid-2-block-wrap {
   margin-block-start: 0 !important;
+  overflow: hidden;
 }
 .boldpo-post-grid-2-block-wrap .boldpo-grid-col-left-wrap,
 .boldpo-post-grid-2-block-wrap .boldpo-grid-col-right-wrap {
@@ -8,6 +9,7 @@
 .boldpo-post-grid-2-block-wrap .boldpo-post-grid-2 {
   box-sizing: border-box;
   margin-bottom: 0px;
+  overflow: hidden;
 }
 .boldpo-post-grid-2-block-wrap .boldpo-post-grid-2 .boldpo-grid-item-inner {
   box-sizing: border-box;

@@ -137,6 +137,11 @@ class BOLDPO_Helper {
 					$embed_video
 				);
 
+				// Force the height and width since wp_oembed_get ignores these for most providers
+				$embed_video = preg_replace( '/\s+height="[^"]*"/', '', $embed_video );
+				$embed_video = preg_replace( '/\s+width="[^"]*"/', '', $embed_video );
+				$embed_video = preg_replace( '/<iframe/', '<iframe width="' . esc_attr( $width ) . '" height="' . esc_attr( $height ) . '"', $embed_video );
+
 			}
 		}
 

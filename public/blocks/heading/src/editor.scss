@@ -1,0 +1,12 @@
+/**
+ * Heading Block Editor Styles
+ */
+
+.wp-block-boldpo-heading {
+    // Editor specific styles
+    min-height: 100px;
+
+    .components-placeholder {
+        min-height: 200px;
+    }
+}

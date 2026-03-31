@@ -1,5 +1,6 @@
 .boldpo-post-grid-2-block-wrap {
 	margin-block-start: 0 !important;
+	overflow: hidden;
 
 	// Ensure gutter padding doesn't overflow the column widths
 	.boldpo-grid-col-left-wrap,
@@ -12,6 +13,7 @@
 
 		box-sizing: border-box;
 		margin-bottom: 0px; // Reset any previous margins
+		overflow: hidden;
 
 		.boldpo-grid-item-inner {
 			box-sizing: border-box;

@@ -112,6 +112,14 @@ class BOLDPO_Blocks {
                 'iconName'        => 'category.svg',
                 'status'      => 'enable',
                 "isPro"       => false,
+            ],
+            [
+                'title'       => 'Heading',
+                'id'        => 'heading',
+                'description' => 'Heading Block',
+                'iconName'        => 'heading.svg',
+                'status'      => 'enable',
+                "isPro"       => false,
             ]
         ];
 

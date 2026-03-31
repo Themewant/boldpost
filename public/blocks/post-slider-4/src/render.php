@@ -43,6 +43,11 @@ $title_trim = isset($attributes['titleTrim']) ? $attributes['titleTrim'] : 100;
 $excerpt_trim = isset($attributes['excerptTrim']) ? $attributes['excerptTrim'] : 20;
 $anim_style = isset($attributes['animStyle']) ? $attributes['animStyle'] : '';
 $thumb_anim = isset($attributes['thumbAnim']) ? 'boldpo-animate' : '';
+$video_autoplay = isset($attributes['videoAutoplay']) && $attributes['videoAutoplay'] ? 1 : 0;
+$video_mute = isset($attributes['videoMute']) && $attributes['videoMute'] ? 1 : 0;
+$video_height = isset($attributes['videoHeight']) ? $attributes['videoHeight'] : '400px';
+$video_width = isset($attributes['videoWidth']) ? $attributes['videoWidth'] : '100%';
+$video_controls = isset($attributes['videoControls']) && $attributes['videoControls'] ? 1 : 0;
 
 $meta_style = 'default';
 if ( $style === '1' || $style === '3' ) {
@@ -438,6 +443,12 @@ if ( $query->have_posts() ) :
                                         $trimmed_title = wp_trim_words( get_the_title(), $title_trim, '...' );
                                         $trimmed_excerpt = wp_trim_words( get_the_excerpt(), $excerpt_trim, '...' );
                                         $title_tag = $title_left_tag;
+
+                                        $video_url = get_post_meta( get_the_ID(), '_video_url', true );
+                                        $embed_video = BOLDPO_Helper::boldpost_get_video_embed($video_url, $video_autoplay, $video_mute, $video_controls, $video_height, $video_width);
+                                        if(!empty($embed_video)) {
+                                            $item_class .= ' boldpo-has-video';
+                                        }
                                     
                                         $style_file = $template_pl_path . 'public/template-parts/blog-slider-4/grid/style-' . $style . '.php';
                                         ?>
@@ -476,6 +487,12 @@ if ( $query->have_posts() ) :
                                         $trimmed_title = wp_trim_words( get_the_title(), $title_trim, '...' );
                                         $trimmed_excerpt = wp_trim_words( get_the_excerpt(), $excerpt_trim, '...' );
                                         $thumbnail_size = 'thumbnail';
+
+                                        $video_url = get_post_meta( get_the_ID(), '_video_url', true );
+                                        $embed_video = BOLDPO_Helper::boldpost_get_video_embed($video_url, $video_autoplay, $video_mute, $video_controls, $video_height, $video_width);
+                                        if(!empty($embed_video)) {
+                                            $item_class .= ' boldpo-has-video';
+                                        }
                                         ?>
                                             <div class="swiper-slide">
                                                 <div class="slider__image">                            

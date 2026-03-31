@@ -281,6 +281,50 @@ export default function Edit({ attributes, setAttributes }) {
 
 				</PanelBody>
 
+				<PanelBody title={__('Video', 'boldpost')} initialOpen={false}>
+					<ToggleControl
+						label={__('Autoplay', 'boldpost')}
+						checked={attributes.videoAutoplay}
+						onChange={(value) => setAttributes({ videoAutoplay: value })}
+					/>
+					<ToggleControl
+						label={__('Mute', 'boldpost')}
+						checked={attributes.videoMute}
+						onChange={(value) => setAttributes({ videoMute: value })}
+					/>
+					<ResponsiveWrapper label={__('Video Height', 'boldpost')}>
+						{(device) => (
+							<RangeControlWithUnit
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('videoHeight', device)}
+								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+								min={0}
+								max={1080}
+								step={1}
+							/>
+						)}
+					</ResponsiveWrapper>
+					<ResponsiveWrapper label={__('Video Width', 'boldpost')}>
+						{(device) => (
+							<RangeControlWithUnit
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('videoWidth', device)}
+								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+								min={0}
+								max={1080}
+								step={1}
+							/>
+						)}
+					</ResponsiveWrapper>
+					<ToggleControl
+						label={__('Show Controls', 'boldpost')}
+						checked={attributes.videoControls}
+						onChange={(value) => setAttributes({ videoControls: value })}
+					/>
+				</PanelBody>
+
 				<PanelBody title={__('Thumbnail', 'boldpost')} initialOpen={false}>
 					<SelectControl
 						label={__('Size', 'boldpost')}

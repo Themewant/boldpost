@@ -1,0 +1,210 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "boldpost/heading",
+  "version": "0.1.0",
+  "title": "Heading",
+  "category": "boldpost",
+  "icon": "category",
+  "description": "Display a list of categories with customizable styles",
+  "example": {},
+  "supports": {
+    "html": false,
+    "spacing": {
+      "padding": true,
+      "margin": true
+    },
+    "color": {
+      "background": true,
+      "text": false,
+      "gradients": true
+    }
+  },
+  "textdomain": "boldpost",
+  "editorScript": "file:./index.js",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php",
+  "attributes": {
+    "layoutStyle": {
+      "type": "string",
+      "default": "1"
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "titleMargin": {
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "10px",
+        "left": "0px"
+      }
+    },
+    "titleMarginTablet": {
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "10px",
+        "left": "0px"
+      }
+    },
+    "titleMarginMobile": {
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "10px",
+        "left": "0px"
+      }
+    },
+    "descriptionMargin": {
+      "type": "object"
+    },
+    "descriptionMarginTablet": {
+      "type": "object"
+    },
+    "descriptionMarginMobile": {
+      "type": "object"
+    },
+    "titleTypography": {
+      "type": "object",
+      "default": {
+        "fontFamily": "",
+        "fontSize": "",
+        "fontWeight": "",
+        "fontStyle": "",
+        "textTransform": "",
+        "lineHeight": "",
+        "letterSpacing": ""
+      }
+    },
+    "titleTypographyTablet": {
+      "type": "object",
+      "default": {
+        "fontFamily": "",
+        "fontSize": "",
+        "fontWeight": "",
+        "fontStyle": "",
+        "textTransform": "",
+        "lineHeight": "",
+        "letterSpacing": ""
+      }
+    },
+    "titleTypographyMobile": {
+      "type": "object",
+      "default": {
+        "fontFamily": "",
+        "fontSize": "",
+        "fontWeight": "",
+        "fontStyle": "",
+        "textTransform": "",
+        "lineHeight": "",
+        "letterSpacing": ""
+      }
+    },
+    "titleColor": {
+      "type": "string",
+      "default": ""
+    },
+    "titleColorHover": {
+      "type": "string",
+      "default": ""
+    },
+    "titleTag": {
+      "type": "string",
+      "default": "h2"
+    },
+    "showDescription": {
+      "type": "boolean",
+      "default": false
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "descriptionTypography": {
+      "type": "object",
+      "default": {
+        "fontFamily": "",
+        "fontSize": "",
+        "fontWeight": "",
+        "fontStyle": "",
+        "textTransform": "",
+        "lineHeight": "",
+        "letterSpacing": ""
+      }
+    },
+    "descriptionTypographyTablet": {
+      "type": "object",
+      "default": {
+        "fontFamily": "",
+        "fontSize": "",
+        "fontWeight": "",
+        "fontStyle": "",
+        "textTransform": "",
+        "lineHeight": "",
+        "letterSpacing": ""
+      }
+    },
+    "descriptionTypographyMobile": {
+      "type": "object",
+      "default": {
+        "fontFamily": "",
+        "fontSize": "",
+        "fontWeight": "",
+        "fontStyle": "",
+        "textTransform": "",
+        "lineHeight": "",
+        "letterSpacing": ""
+      }
+    },
+    "descriptionColor": {
+      "type": "string",
+      "default": ""
+    },
+    "titlePadding": {
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      }
+    },
+    "descriptionPadding": {
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      }
+    },
+    "textAlign": {
+      "type": "string",
+      "default": ""
+    },
+    "borderLineColor": {
+      "type": "string",
+      "default": ""
+    },
+    "borderLineWidth": {
+      "type": "number"
+    },
+    "borderLineHeight": {
+      "type": "number",
+      "default": 3
+    },
+    "dotColor": {
+      "type": "string",
+      "default": ""
+    },
+    "dotSize": {
+      "type": "number",
+      "default": 12
+    }
+  }
+}

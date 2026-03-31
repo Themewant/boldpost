@@ -30,6 +30,7 @@
             <?php if ( ! empty($embed_video) ) { ?>
                 <div class="boldpo-video-wrapper">
                     <?php echo $embed_video; ?>
+                    <span class="play-icon"></span>
                 </div>
             <?php } ?>
         </div>

@@ -449,6 +449,26 @@ return array(
 				'type' => 'boolean',
 				'default' => true
 			),
+			'videoAutoplay' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'videoMute' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'videoHeight' => array(
+				'type' => 'string',
+				'default' => '500px'
+			),
+			'videoWidth' => array(
+				'type' => 'string',
+				'default' => '100%'
+			),
+			'videoControls' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
 			'spaceBetween' => array(
 				'type' => 'string',
 				'default' => '15'

@@ -444,6 +444,26 @@
 			"type": "boolean",
 			"default": true
 		},
+		"videoAutoplay": {
+			"type": "boolean",
+			"default": false
+		},
+		"videoMute": {
+			"type": "boolean",
+			"default": true
+		},
+		"videoHeight": {
+			"type": "string",
+			"default": "500px"
+		},
+		"videoWidth": {
+			"type": "string",
+			"default": "100%"
+		},
+		"videoControls": {
+			"type": "boolean",
+			"default": false
+		},
 		"spaceBetween": {
 			"type": "string",
 			"default": "15"
