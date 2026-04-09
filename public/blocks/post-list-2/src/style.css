@@ -229,6 +229,9 @@
   left: 0;
   right: auto;
 }
+.boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-default .boldpo-list-col-two-wrap .boldpo-blog-content {
+  padding-left: 20px;
+}
 .boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-1 .boldpo-blog-content {
   padding-left: 20px;
 }

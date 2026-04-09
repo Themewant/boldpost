@@ -17,6 +17,8 @@ Display posts beautifully with customizable grids, lists, sliders & category dis
 👉 [Plugin Demo](https://boldpost.themewant.com/)
 👉 [Documentation](https://documentation.themewant.com/docs/boldpost/)
 
+https://www.youtube.com/watch?v=1FM8cl7MEA8
+
 = Key Features =
 
 **🎨 Multiple Display Styles**
@@ -69,6 +71,16 @@ BoldPost integrates seamlessly with the WordPress block editor, providing you wi
 = Performance Optimized =
 
 Built with performance in mind, BoldPost uses efficient queries and minimal JavaScript to ensure your site stays fast. The plugin only loads assets when needed and follows WordPress best practices for optimal performance.
+
+**🔥 WHAT’S NEXT**
+
+If you like The Our Plugin, then consider checking out other WordPress Plugins:
+
+[Easy Hotel Booking](https://wordpress.org/plugins/easy-hotel/) Powerful Hotel Booking Pluing
+[RT Mega Menu](https://wordpress.org/plugins/rt-mega-menu/) Advanced WordPress Mega Menu Builder for Elementor & Gutenberg
+[Easy Currency](https://wordpress.org/plugins/easy-currency/) Easy Currency Converter plugin for WooCommerce.
+[Easy Elements](https://wordpress.org/plugins/easy-elements/) Easy Elements for Elementor
+[Easy Menu Iocns](https://wordpress.org/plugins/easy-menu-icons/) WordPress Menu Icon Plugin
 
 == Installation ==
 
@@ -135,11 +147,11 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 == Changelog ==
 
 = 1.0.5
-* Made Compatible with Pro Version
-* Added Grid 2
+* Add Video Tutorial
+* Added Screenshots
 
 = 1.0.4
-* Fixed Css
+* Fixed CSS
 * Added Custom Bootstrap Support
 
 = 1.0.3 =
