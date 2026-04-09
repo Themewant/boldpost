@@ -58,14 +58,11 @@ $video_width = isset($attributes['videoWidth']) ? $attributes['videoWidth'] : '1
 $video_controls = isset($attributes['videoControls']) && $attributes['videoControls'] ? 1 : 0;
 
 $meta_style = 'default';
-if ( $style === '1' || $style === '3' ) {
+if ( $style === '1' || $style === '2' ) {
     $meta_style = '2';
 }
 
 $cat_style = 'default';
-if ( $style === '1' || $style === '3' ) {
-    $cat_style = '1';
-}
 
 // styles
 $responsive_data = [
@@ -430,12 +427,13 @@ if ( $query->have_posts() ) :
                         }
                         $trimmed_title = wp_trim_words( get_the_title(), $title_trim, '...' );
                         $trimmed_excerpt = wp_trim_words( get_the_excerpt(), $excerpt_trim, '...' );
+                        $last_modified_date = BOLDPO_Helper::boldpost_time_ago();
                         $video_url = get_post_meta( get_the_ID(), '_video_url', true );
                         $embed_video = BOLDPO_Helper::boldpost_get_video_embed($video_url, $video_autoplay, $video_mute, $video_controls, $video_height, $video_width);
                         if(!empty($embed_video)) {
                             $item_class .= ' boldpo-has-video';
                         }
-                        $style_file = $template_pl_path . 'public/template-parts/blog-grid-2/style-' . $style . '.php';
+                        $style_file = $template_pl_path . 'public/template-parts/blog-slider-2/style-' . $style . '.php';
 
                         if ( file_exists( $style_file ) ) {
                             ?>

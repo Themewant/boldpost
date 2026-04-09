@@ -1,0 +1,29 @@
+.wp-block-boldpost-social-icons {
+  min-height: 50px;
+}
+.wp-block-boldpost-social-icons .boldpo-social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.wp-block-boldpost-social-icons .boldpo-social-icon-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: default;
+  pointer-events: none;
+}
+
+.boldpo-social-icon-item-control {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+.boldpo-social-icon-item-control .boldpo-social-icon-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}/*# sourceMappingURL=editor.css.map */

@@ -42,7 +42,6 @@
 				background-color: var(--boldpo-preset-color-tertiary);
 				overflow: hidden;
 				box-sizing: border-box;
-				height: 100%;
 			}
 
 			img {
@@ -280,6 +279,24 @@
 				.boldpo-read-more a {
 					color: #fff;
 				}
+			}
+		}
+
+		&.style-2 {
+			.boldpo-list-item-divider {
+				margin: 0;
+				border-color: var(--boldpo-preset-color-border);
+				border-style: solid;
+				border-width: 1px 0 0 0;
+			}
+
+			.boldpo-list-item-inner {
+				flex-direction: row-reverse;
+				background-color: transparent;
+			}
+
+			.boldpo-list-item .boldpo-blog-content {
+				padding: 0;
 			}
 		}
 

@@ -40,9 +40,27 @@ if ( ! empty( $t_padding['bottom'] ) ) $title_responsive['desktop']['padding-bot
 if ( ! empty( $t_padding['left'] ) )   $title_responsive['desktop']['padding-left']   = BOLDPO_Helper::ensure_unit( $t_padding['left'] );
 
 // Title hover
-$item_hover = [];
+$title_hover = [];
 if ( ! empty( $attributes['titleColorHover'] ) ) {
-    $item_hover['color'] = $attributes['titleColorHover'] . ' !important';
+    $title_hover['color'] = $attributes['titleColorHover'] . ' !important';
+}
+
+// Description hover
+$description_hover = [];
+if ( ! empty( $attributes['descriptionColorHover'] ) ) {
+    $description_hover['color'] = $attributes['descriptionColorHover'] . ' !important';
+}
+
+// Border line hover
+$border_line_hover = [];
+if ( ! empty( $attributes['borderLineColorHover'] ) ) {
+    $border_line_hover['background-color'] = $attributes['borderLineColorHover'] . ' !important';
+}
+
+// Dot hover
+$dot_hover = [];
+if ( ! empty( $attributes['dotColorHover'] ) ) {
+    $dot_hover['background-color'] = $attributes['dotColorHover'] . ' !important';
 }
 
 // Description
@@ -100,15 +118,33 @@ if ( $style === '2' ) {
 }
 
 $full_responsive_css  = BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style, $responsive_data);
-$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-title-wrap', $title_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-title-wrap .boldpo-heading-title', $title_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-description', $description_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-border-line', $border_line_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-dot', $dot_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-title-wrap .boldpo-heading-right-icon', $title_responsive);
 
 wp_enqueue_style( $style_handle );
-BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css, [
-    $selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-title:hover' => BOLDPO_Helper::get_inline_styles($item_hover),
-] );
+$sub_styles = [];
+$title_hover_css = BOLDPO_Helper::get_inline_styles($title_hover);
+if ( $title_hover_css ) {
+    $sub_styles['.boldpo-heading.style-' . $style . ' .boldpo-heading-title-wrap:hover'] = $title_hover_css;
+}
+$description_hover_css = BOLDPO_Helper::get_inline_styles($description_hover);
+if ( $description_hover_css ) {
+    $sub_styles['.boldpo-heading.style-' . $style . ' .boldpo-heading-description:hover'] = $description_hover_css;
+}
+if ( $style === '2' ) {
+    $border_line_hover_css = BOLDPO_Helper::get_inline_styles($border_line_hover);
+    if ( $border_line_hover_css ) {
+        $sub_styles['.boldpo-heading.style-' . $style . ' .boldpo-heading-title-wrap:hover .boldpo-heading-border-line'] = $border_line_hover_css;
+    }
+    $dot_hover_css = BOLDPO_Helper::get_inline_styles($dot_hover);
+    if ( $dot_hover_css ) {
+        $sub_styles['.boldpo-heading.style-' . $style . ' .boldpo-heading-title-wrap:hover .boldpo-heading-dot'] = $dot_hover_css;
+    }
+}
+BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css, $sub_styles );
 
 $block_wrap_attr = get_block_wrapper_attributes( array( 'class' => 'boldpo-block boldpo-heading-block-wrap ' . $unique_id ) );
 
@@ -117,21 +153,32 @@ if ( ! empty( $attributes['title'] ) ) :
     <div <?php echo wp_kses_post($block_wrap_attr); ?>>
         <div class="boldpo-heading style-<?php echo esc_attr($style); ?>">
             <?php
-            if($style == '1') {
+            if($style == '3'){
                 ?>
                 <div class="boldpo-heading-title-wrap">
+                    <span class="boldpo-heading-dot"></span>
                     <<?php echo esc_attr($title_tag); ?> class="boldpo-heading-title"><?php echo esc_html($attributes['title']); ?></<?php echo esc_attr($title_tag); ?>>
+                    <i class="boldpo-heading-right-icon boldpo-icon-chevron-right"></i>
                 </div>
                 <?php if($attributes['showDescription']) { ?>
                     <p class="boldpo-heading-description"><?php echo esc_html($attributes['description']); ?></p>
                 <?php } ?>
                 <?php
-            }else{
+            }else if($style == '2'){
                 ?>
                 <div class="boldpo-heading-title-wrap">
                     <span class="boldpo-heading-dot"></span>
                     <<?php echo esc_attr($title_tag); ?> class="boldpo-heading-title"><?php echo esc_html($attributes['title']); ?></<?php echo esc_attr($title_tag); ?>>
                     <span class="boldpo-heading-border-line"></span>
+                </div>
+                <?php if($attributes['showDescription']) { ?>
+                    <p class="boldpo-heading-description"><?php echo esc_html($attributes['description']); ?></p>
+                <?php } ?>
+                <?php
+            }else  {
+                ?>
+                <div class="boldpo-heading-title-wrap">
+                    <<?php echo esc_attr($title_tag); ?> class="boldpo-heading-title"><?php echo esc_html($attributes['title']); ?></<?php echo esc_attr($title_tag); ?>>
                 </div>
                 <?php if($attributes['showDescription']) { ?>
                     <p class="boldpo-heading-description"><?php echo esc_html($attributes['description']); ?></p>

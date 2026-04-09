@@ -50,12 +50,13 @@ $excerpt_trim = isset($attributes['excerptTrim']) ? $attributes['excerptTrim'] :
 $anim_style = isset($attributes['animStyle']) ? $attributes['animStyle'] : '';
 $thumb_anim = isset($attributes['thumbAnim']) ? 'boldpo-animate' : '';
 
-$meta_style = 'default';
-if ( $style === '1' || $style === '3' ) {
-    $meta_style = '1';
+$meta_style = '1';
+
+if( $style == '1' || $style == '2' ) {
+    $meta_style = '2';
 }
 
-$cat_style = '1';
+$cat_style = 'default';
 
 // styles
 $responsive_data = [
@@ -68,17 +69,12 @@ $col_class_1 = '';
 $col_class_2 = '';
 $wrap_one_col_class_1 = '';
 $wrap_two_col_class_1 = '';
-if($style == 'default' || $style == '1') {
-    $col_class_1 = " boldpo-col-12";
-    $col_class_2 = " boldpo-col-lg-6 boldpo-col-md-6 boldpo-col-12";
-    $wrap_one_col_class_1 = " boldpo-col-12";
-    $wrap_two_col_class_1 = " boldpo-col-12";
-}else{
-    $col_class_1 = " boldpo-col-12";
-    $col_class_2 = " boldpo-col-12";
-    $wrap_one_col_class_1 = " boldpo-col-lg-6 boldpo-col-md-12 boldpo-col-12";
-    $wrap_two_col_class_1 = " boldpo-col-lg-6 boldpo-col-md-12 boldpo-col-12";
-}
+
+$col_class_1 = "";
+$col_class_2 = " boldpo-col-12";
+$wrap_one_col_class_1 = " boldpo-col-lg-6 boldpo-col-md-12 boldpo-col-12";
+$wrap_two_col_class_1 = " boldpo-col-lg-6 boldpo-col-md-12 boldpo-col-12";
+
 
 
 
@@ -99,10 +95,13 @@ $row_gap_tablet = isset($attributes['itemRowGapTablet']) ? $attributes['itemRowG
 $row_gap_mobile = isset($attributes['itemRowGapMobile']) ? $attributes['itemRowGapMobile'] : 0;
 
 $row_gap_class = '';
+$row_mt_class = '';
 if ($row_gap_desktop == $row_gap_tablet && $row_gap_tablet == $row_gap_mobile) {
     $row_gap_class = 'boldpo-gy-' . $row_gap_desktop;
+    $row_mt_class = 'boldpo-mt-' . $row_gap_desktop;
 } else {
     $row_gap_class = 'boldpo-gy-lg-' . $row_gap_desktop . ' boldpo-gy-md-' . $row_gap_tablet . ' boldpo-gy-sm-' . $row_gap_mobile;
+    $row_mt_class = 'boldpo-mt-lg-' . $row_gap_desktop . ' boldpo-mt-md-' . $row_gap_tablet . ' boldpo-mt-sm-' . $row_gap_mobile;
 }
 
 // Item Styles
@@ -444,6 +443,8 @@ if ( $query->have_posts() ) :
             } else {
                 $template_pl_path = BOLDPO_PRO_PL_PATH;
             }
+
+            $last_modified_date = false;
             while ( $query->have_posts() ) : $query->the_post();
                 $i++;
                 $item_class = '';
@@ -457,14 +458,18 @@ if ( $query->have_posts() ) :
 
                 $trimmed_title = wp_trim_words( get_the_title(), $title_trim, '...' );
                 $trimmed_excerpt = wp_trim_words( get_the_excerpt(), $excerpt_trim, '...' );
+                $last_modified_date = BOLDPO_Helper::boldpost_time_ago();
+                
                 $style_file = $template_pl_path . 'public/template-parts/blog-list-3/style-' . $style . '.php';
 
                 if ( file_exists( $style_file ) ) {
                     if ( $i == 1 && $paged == 1 ) {
+                        
                         $title_tag = $title_one_tag;
                         $thumbnail_size = $thumbnail_one_size;
                         $item_class = $item_class . $col_class_1;
                         $wrap_one_col_class_1 = 'boldpo-col-lg-6 boldpo-col-md-12 boldpo-col-sm-12 boldpo-col-12';
+
                         echo '<div class="boldpo-list-col-one-wrap ' . esc_attr($wrap_one_col_class_1) . '">';
                         include $style_file;
                         echo '</div>';
@@ -479,6 +484,7 @@ if ( $query->have_posts() ) :
                         $title_tag = $title_two_tag;
                         $thumbnail_size = $thumbnail_two_size;
                         $item_class = $item_class . $col_class_2;
+                        $wrap_one_col_class_1 = 'boldpo-col-lg-12 boldpo-col-md-12 boldpo-col-sm-12 boldpo-col-12';
                         include $style_file;
                     }
                 }

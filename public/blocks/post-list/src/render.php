@@ -51,6 +51,8 @@ $thumb_anim = isset($attributes['thumbAnim']) ? 'boldpo-animate' : '';
 $meta_style = 'default';
 if ( $style === '1' ) {
     $meta_style = '1';
+}else if ($style === '2') {
+    $meta_style = '2';
 }
 
 $cat_style = 'default';
@@ -93,10 +95,13 @@ $row_gap_tablet = isset($attributes['itemRowGapTablet']) ? $attributes['itemRowG
 $row_gap_mobile = isset($attributes['itemRowGapMobile']) ? $attributes['itemRowGapMobile'] : 0;
 
 $row_gap_class = '';
+$row_mt_class = '';
 if ($row_gap_desktop == $row_gap_tablet && $row_gap_tablet == $row_gap_mobile) {
     $row_gap_class = 'boldpo-gy-' . $row_gap_desktop;
+    $row_mt_class = 'boldpo-mt-' . $row_gap_desktop;
 } else {
     $row_gap_class = 'boldpo-gy-lg-' . $row_gap_desktop . ' boldpo-gy-md-' . $row_gap_tablet . ' boldpo-gy-sm-' . $row_gap_mobile;
+    $row_mt_class = 'boldpo-mt-lg-' . $row_gap_desktop . ' boldpo-mt-md-' . $row_gap_tablet . ' boldpo-mt-sm-' . $row_gap_mobile;
 }
 
 // Item Styles
@@ -419,7 +424,9 @@ if ( $query->have_posts() ) :
             echo 'data-attributes="' . esc_attr( wp_json_encode( $data_attr ) ) . '" data-query-args="' . esc_attr( wp_json_encode( $args ) ) . '"'; 
         } ?>>
             <?php
+            $i = 0;
             while ( $query->have_posts() ) : $query->the_post();
+                $i++;
                 $item_class = $col_class;
                 if(is_sticky()) {
                     $item_class .= ' boldpo-sticky-post';
@@ -430,6 +437,7 @@ if ( $query->have_posts() ) :
                 }
                 $trimmed_title = wp_trim_words( get_the_title(), $title_trim, '...' );
                 $trimmed_excerpt = wp_trim_words( get_the_excerpt(), $excerpt_trim, '...' );
+                $last_modified_date = BOLDPO_Helper::boldpost_time_ago();
                
                 $style_file = BOLDPO_PL_PATH . 'public/template-parts/blog-list/style-' . $style . '.php';
 

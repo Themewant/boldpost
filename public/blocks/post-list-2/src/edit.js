@@ -48,6 +48,7 @@ import './editor.scss';
 import list1 from './assets/img/style-1.png';
 import list2 from './assets/img/style-2.png';
 import list3 from './assets/img/style-2.png';
+import list4 from './assets/img/style-2.png';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -236,6 +237,7 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('Default', 'boldpost'), value: 'default', src: list1 },
 							{ label: __('Style 1', 'boldpost'), value: '1', src: list2 },
 							{ label: __('Style 2', 'boldpost'), value: '2', src: list3 },
+							{ label: __('Style 3', 'boldpost'), value: '3', src: list4 },
 						]}
 					/>
 				</PanelBody>
@@ -371,6 +373,7 @@ export default function Edit({ attributes, setAttributes }) {
 									{ label: __('Date', 'boldpost'), value: 'date' },
 									{ label: __('Category', 'boldpost'), value: 'category' },
 									{ label: __('Tag', 'boldpost'), value: 'tag' },
+									{ label: __('Comments Count', 'boldpost'), value: 'comments_count' },
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
@@ -393,6 +396,18 @@ export default function Edit({ attributes, setAttributes }) {
 									{ label: __('Up Title', 'boldpost'), value: 'up_title' },
 									{ label: __('Below Title', 'boldpost'), value: 'below_title' },
 									{ label: __('Below Content', 'boldpost'), value: 'below_content' },
+								]}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
+							/>
+							<SelectControl
+								label={__('Style', 'boldpost')}
+								value={attributes.metaStyle}
+								onChange={(value) => setAttributes({ metaStyle: value })}
+								options={[
+									{ label: __('Default', 'boldpost'), value: 'default' },
+									{ label: __('Style 1', 'boldpost'), value: '1' },
+									{ label: __('Style 2', 'boldpost'), value: '2' },
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}

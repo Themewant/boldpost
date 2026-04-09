@@ -242,7 +242,7 @@
 		},
 		"itemGap": {
 			"type": "string",
-			"default": ""
+			"default": "4"
 		},
 		"itemTitleColor": {
 			"type": "string",

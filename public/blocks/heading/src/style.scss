@@ -5,7 +5,7 @@
         .boldpo-heading-title-wrap {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            row-gap: 10px;
         }
 
         .boldpo-heading-title {
@@ -20,7 +20,7 @@
             .boldpo-heading-title-wrap {
                 position: relative;
                 width: 100%;
-
+                column-gap: 10px;
 
             }
 
@@ -42,6 +42,18 @@
                 height: 3px;
                 background-color: var(--boldpo-preset-color-tertiary);
             }
+        }
+
+        &.style-3 {
+            .boldpo-heading-title-wrap {
+                width: 100%;
+
+                .boldpo-heading-right-icon {
+                    font-size: var(--wp--preset--font-size--x-large);
+                    margin-bottom: -3px;
+                }
+            }
+
         }
     }
 }

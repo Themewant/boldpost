@@ -170,6 +170,10 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
+			'descriptionColorHover' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'titlePadding' => array(
 				'type' => 'object',
 				'default' => array(
@@ -196,6 +200,10 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
+			'borderLineColorHover' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'borderLineWidth' => array(
 				'type' => 'number'
 			),
@@ -204,6 +212,10 @@ return array(
 				'default' => 3
 			),
 			'dotColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'dotColorHover' => array(
 				'type' => 'string',
 				'default' => ''
 			),

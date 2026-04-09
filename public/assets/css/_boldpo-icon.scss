@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'boldpo-icon';
-  src: url('../font/boldpo-icon.eot?79017106');
-  src: url('../font/boldpo-icon.eot?79017106#iefix') format('embedded-opentype'),
-    url('../font/boldpo-icon.woff2?79017106') format('woff2'),
-    url('../font/boldpo-icon.woff?79017106') format('woff'),
-    url('../font/boldpo-icon.ttf?79017106') format('truetype'),
-    url('../font/boldpo-icon.svg?79017106#boldpo-icon') format('svg');
+  src: url('../font/boldpo-icon.eot?83516218');
+  src: url('../font/boldpo-icon.eot?83516218#iefix') format('embedded-opentype'),
+    url('../font/boldpo-icon.woff2?83516218') format('woff2'),
+    url('../font/boldpo-icon.woff?83516218') format('woff'),
+    url('../font/boldpo-icon.ttf?83516218') format('truetype'),
+    url('../font/boldpo-icon.svg?83516218#boldpo-icon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -16,7 +16,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'boldpo-icon';
-    src: url('../font/boldpo-icon.svg?79017106#boldpo-icon') format('svg');
+    src: url('../font/boldpo-icon.svg?83516218#boldpo-icon') format('svg');
   }
 }
 */
@@ -86,6 +86,21 @@
 }
 
 /* '' */
+.boldpo-icon-facebook-f:before {
+  content: '\e84e';
+}
+
+/* '' */
+.boldpo-icon-twitter-x:before {
+  content: '\e84f';
+}
+
+/* '' */
+.boldpo-icon-fire:before {
+  content: '\e850';
+}
+
+/* '' */
 .boldpo-icon-move:before {
   content: '\e87e';
 }

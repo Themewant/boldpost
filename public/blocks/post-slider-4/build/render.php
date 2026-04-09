@@ -55,9 +55,6 @@ if ( $style === '1' || $style === '3' ) {
 }
 
 $cat_style = 'default';
-if ( $style === '1' || $style === '3' ) {
-    $cat_style = '1';
-}
 
 // styles
 $responsive_data = [

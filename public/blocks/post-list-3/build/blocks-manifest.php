@@ -247,7 +247,7 @@ return array(
 			),
 			'itemGap' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '4'
 			),
 			'itemTitleColor' => array(
 				'type' => 'string',

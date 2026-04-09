@@ -18,18 +18,9 @@ if ( in_array( 'category', $boldpo_allowed_metas ) ) {
             
         }
         if ( ! empty( $cat_links ) ) {
-            if($cat_style == 'default') {
-                $boldpo_meta_html .= '<span class="bldpost-meta"><i class="boldpo-meta-icon boldpo-icon-notification-status"></i>';
-                $boldpo_meta_html .= implode( ', ', $cat_links );
-                $boldpo_meta_html .= '</span>';
-            }if($cat_style == '1') {
-                $boldpo_meta_html .= '<span class="bldpost-meta">';
-                $boldpo_meta_html .= implode( ', ', $cat_links );
-                $boldpo_meta_html .= '</span>';
-            } else {
-                // Each cat_link is already a full <span>, so just join them
-                $boldpo_meta_html .= implode( '', $cat_links );
-            }
+            $boldpo_meta_html = '<span class="bldpost-meta">';
+            $boldpo_meta_html .= implode( ', ', $cat_links );
+            $boldpo_meta_html .= '</span>';
         }
     }
 }

@@ -41,7 +41,6 @@
   background-color: var(--boldpo-preset-color-tertiary);
   overflow: hidden;
   box-sizing: border-box;
-  height: 100%;
 }
 .boldpo-post-list-block-wrap .boldpo-post-list .boldpo-list-item img {
   max-width: 100%;
@@ -243,6 +242,19 @@
 .boldpo-post-list-block-wrap .boldpo-post-list.style-1 .boldpo-list-item .boldpo-blog-excerpt,
 .boldpo-post-list-block-wrap .boldpo-post-list.style-1 .boldpo-list-item .boldpo-read-more a {
   color: #fff;
+}
+.boldpo-post-list-block-wrap .boldpo-post-list.style-2 .boldpo-list-item-divider {
+  margin: 0;
+  border-color: var(--boldpo-preset-color-border);
+  border-style: solid;
+  border-width: 1px 0 0 0;
+}
+.boldpo-post-list-block-wrap .boldpo-post-list.style-2 .boldpo-list-item-inner {
+  flex-direction: row-reverse;
+  background-color: transparent;
+}
+.boldpo-post-list-block-wrap .boldpo-post-list.style-2 .boldpo-list-item .boldpo-blog-content {
+  padding: 0;
 }
 .boldpo-post-list-block-wrap .boldpo-pagination {
   margin-top: 40px;

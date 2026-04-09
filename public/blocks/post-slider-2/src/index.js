@@ -69,8 +69,8 @@ domReady(() => {
 	});
 
 	document.addEventListener('boldpoInitSliders', () => {
-		if (typeof window.initBoldpoSlider === 'function') {
-			window.initBoldpoSlider(document);
+		if (typeof window.initBoldpoSliderTwo === 'function') {
+			window.initBoldpoSliderTwo(document);
 		}
 	});
 });

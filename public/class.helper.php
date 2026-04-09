@@ -118,6 +118,34 @@ class BOLDPO_Helper {
 
 		if( !empty($video_url) ) {
 
+			// Self-hosted video files: render a <video> tag directly (works in both frontend and editor)
+			$video_extensions = ['mp4', 'webm', 'ogg', 'mov'];
+			$url_path = strtolower( wp_parse_url( $video_url, PHP_URL_PATH ) );
+			$ext = pathinfo( $url_path, PATHINFO_EXTENSION );
+
+			if ( in_array( $ext, $video_extensions, true ) ) {
+				$attrs  = $controls ? ' controls' : '';
+				$attrs .= $autoplay ? ' autoplay' : '';
+				$attrs .= $mute ? ' muted' : '';
+
+				$embed_video = '<video width="' . esc_attr( $width ) . '" height="' . esc_attr( $height ) . '"' . $attrs . ' playsinline>'
+					. '<source src="' . esc_url( $video_url ) . '" type="' . esc_attr( wp_check_filetype( $video_url )['type'] ) . '">'
+					. '</video>';
+
+				return $embed_video;
+			}
+
+			// In the block editor, iframes (YouTube/Vimeo) fail with player errors (e.g. YouTube Error 153)
+			// because they run inside a sandboxed iframe. Show a thumbnail instead.
+			if ( is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+				if ( preg_match( '/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $video_url, $m ) ) {
+					$thumb = 'https://img.youtube.com/vi/' . $m[1] . '/hqdefault.jpg';
+					return '<img src="' . esc_url( $thumb ) . '" alt="' . esc_attr__( 'Video thumbnail', 'boldpost' ) . '" style="width:' . esc_attr( $width ) . ';height:' . esc_attr( $height ) . ';object-fit:cover;">';
+				}
+				// Non-YouTube providers: skip the embed in editor to avoid player errors.
+				return '';
+			}
+
 			$embed_video = wp_oembed_get( $video_url, ['height' => $height, 'width' => $width, 'mute' => $mute, 'autoplay' => $autoplay, 'controls' => $controls] );
 
 			if( $embed_video ) {

@@ -1,0 +1,40 @@
+.boldpo-button-block-wrap {
+  width: 100%;
+}
+.boldpo-button-block-wrap .boldpo-button .boldpo-button-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 30px;
+  background-color: var(--boldpo-preset-color-primary);
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0px;
+  cursor: pointer;
+  transition: all var(--boldpo-preset-hover-transition);
+  border: none;
+  line-height: 1.2;
+  box-sizing: border-box;
+}
+.boldpo-button-block-wrap .boldpo-button .boldpo-button-link.icon-left {
+  flex-direction: row;
+}
+.boldpo-button-block-wrap .boldpo-button .boldpo-button-link.icon-right {
+  flex-direction: row;
+}
+.boldpo-button-block-wrap .boldpo-button .boldpo-button-link i {
+  transform: scale(1.2);
+}
+.boldpo-button-block-wrap .boldpo-button .boldpo-button-link i::before {
+  margin-right: -8px;
+}
+.boldpo-button-block-wrap .boldpo-button .boldpo-button-text {
+  display: inline-block;
+}
+.boldpo-button-block-wrap .boldpo-button .boldpo-button-icon {
+  display: inline-flex;
+  align-items: center;
+  transition: color var(--boldpo-preset-hover-transition);
+}/*# sourceMappingURL=style.css.map */

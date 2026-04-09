@@ -1,0 +1,68 @@
+.boldpo-social-icons-block-wrap {
+    --icon-size: 17px;
+    --icon-padding: .5em;
+
+    @keyframes boldpo-social-icon-float {
+        0% {
+            transform: translateY(0px);
+        }
+
+        100% {
+            transform: translateY(-10px);
+        }
+    }
+
+    @keyframes boldpo-social-icon-bob {
+        0% {
+            transform: translateY(-10px);
+        }
+
+        100% {
+            transform: translateY(0px);
+        }
+    }
+
+    box-sizing: border-box;
+    width: 100%;
+
+    .boldpo-social-icons {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .boldpo-social-icon-item {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+        border: 1px solid #83838340;
+        border-radius: 50%;
+        font-size: var(--icon-size, 25px);
+        height: calc(var(--icon-size, 25px) + 2 * var(--icon-padding, .5em));
+        line-height: var(--icon-size, 25px);
+        width: calc(var(--icon-size, 25px) + 2 * var(--icon-padding, .5em));
+
+        .boldpo-icon {
+            display: inline-block;
+            line-height: 1;
+            transition: color 0.2s ease;
+        }
+
+        .boldpo-social-icon-label {
+            line-height: 1;
+        }
+
+        &:hover {
+            animation-name: boldpo-social-icon-float, boldpo-social-icon-bob;
+            animation-duration: .3s, 1.5s;
+            animation-delay: 0s, .3s;
+            animation-timing-function: ease-out, ease-in-out;
+            animation-iteration-count: 1, infinite;
+            animation-fill-mode: forwards;
+            animation-direction: normal, alternate;
+        }
+    }
+}

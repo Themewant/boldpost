@@ -133,34 +133,6 @@
   transition: var(--boldpo-preset-hover-transition);
   text-decoration: none;
 }
-.boldpo-post-list-4-block-wrap .boldpo-post-list-4 .boldpo-list-item .boldpo-blog-metas {
-  margin: 20px 0 5px;
-  padding: 0;
-  list-style: none;
-  display: inline-flex;
-  flex-wrap: wrap;
-  font-size: 14px;
-  line-height: 120%;
-  align-items: center;
-  gap: 18px;
-}
-.boldpo-post-list-4-block-wrap .boldpo-post-list-4 .boldpo-list-item .boldpo-blog-metas .bldpost-meta {
-  display: flex;
-  align-items: center;
-}
-.boldpo-post-list-4-block-wrap .boldpo-post-list-4 .boldpo-list-item .boldpo-blog-metas a {
-  text-decoration: none;
-}
-.boldpo-post-list-4-block-wrap .boldpo-post-list-4 .boldpo-list-item .boldpo-blog-metas a:hover {
-  text-decoration: underline;
-}
-.boldpo-post-list-4-block-wrap .boldpo-post-list-4 .boldpo-list-item .boldpo-blog-metas li {
-  position: relative;
-}
-.boldpo-post-list-4-block-wrap .boldpo-post-list-4 .boldpo-list-item .boldpo-blog-metas li + li {
-  margin-left: 10px;
-  padding-left: 10px;
-}
 .boldpo-post-list-4-block-wrap .boldpo-post-list-4 .boldpo-list-item .boldpo-read-more {
   display: inline-block;
   margin-top: 10px;

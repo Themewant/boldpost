@@ -56,9 +56,6 @@ if ( $style === '1' || $style === '3' ) {
 }
 
 $cat_style = 'default';
-if ( $style === '1' || $style === '3' ) {
-    $cat_style = '1';
-}
 
 // styles
 $responsive_data = [
@@ -427,6 +424,7 @@ if ( $query->have_posts() ) :
                     $item_class .= ' ' . $anim_style;
                 }
 
+                $post_id = get_the_ID();
                 $trimmed_title = wp_trim_words( get_the_title(), $title_trim, '...' );
                 $trimmed_excerpt = wp_trim_words( get_the_excerpt(), $excerpt_trim, '...' );
                 

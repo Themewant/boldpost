@@ -40,6 +40,7 @@ import ResponsiveWrapper from '../../custom-components/ResponsiveWrapper';
 import './editor.scss';
 import style1 from './assets/img/style-1.png';
 import style2 from './assets/img/style-2.png';
+import style3 from './assets/img/style-3.png';
 /**
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
@@ -90,6 +91,14 @@ export default function Edit({ attributes, setAttributes }) {
         ...buildBoxStyles(attributes.titlePadding, 'padding'),
     };
 
+    const titleHoverStyle = {
+        color: attributes.titleColorHover || undefined,
+    };
+
+    const descriptionHoverStyle = {
+        color: attributes.descriptionColorHover || undefined,
+    };
+
     const descriptionStyle = {
         color: attributes.descriptionColor || undefined,
         ...buildTypographyStyles(attributes.descriptionTypography),
@@ -127,6 +136,7 @@ export default function Edit({ attributes, setAttributes }) {
                         options={[
                             { label: __('Style 1', 'boldpost'), value: '1', src: style1 },
                             { label: __('Style 2', 'boldpost'), value: '2', src: style2 },
+                            { label: __('Style 3', 'boldpost'), value: '3', src: style3 },
                         ]}
                         __next40pxDefaultSize={true}
                         __nextHasNoMarginBottom={true}
@@ -217,15 +227,31 @@ export default function Edit({ attributes, setAttributes }) {
                 </PanelBody>
 
                 <PanelBody title={__('Description', 'boldpost')} initialOpen={false}>
-                    <ColorPopover
-                        label={__('Color', 'boldpost')}
-                        color={attributes.descriptionColor}
-                        defaultColor={''}
-                        onChange={(value) => {
-                            const hex = (value && typeof value === 'object') ? value.hex : value;
-                            setAttributes({ descriptionColor: hex });
+                    <TabPanel
+                        className="eshb-tab-panel"
+                        activeClass="is-active"
+                        tabs={[
+                            { name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
+                            { name: 'hover', title: __('Hover', 'boldpost'), className: 'eshb-tab-hover' },
+                        ]}
+                    >
+                        {(tab) => {
+                            const isHover = tab.name === 'hover';
+                            return (
+                                <div style={{ marginTop: '15px' }}>
+                                    <ColorPopover
+                                        label={isHover ? __('Color (Hover)', 'boldpost') : __('Color', 'boldpost')}
+                                        color={isHover ? attributes.descriptionColorHover : attributes.descriptionColor}
+                                        defaultColor={''}
+                                        onChange={(value) => {
+                                            const hex = (value && typeof value === 'object') ? value.hex : value;
+                                            setAttributes({ [isHover ? 'descriptionColorHover' : 'descriptionColor']: hex });
+                                        }}
+                                    />
+                                </div>
+                            );
                         }}
-                    />
+                    </TabPanel>
                     <Divider />
                     <BoxControl
                         label={__('Padding', 'boldpost')}
@@ -255,15 +281,31 @@ export default function Edit({ attributes, setAttributes }) {
 
                 {attributes.layoutStyle === '2' && (
                     <PanelBody title={__('Border Line', 'boldpost')} initialOpen={false}>
-                        <ColorPopover
-                            label={__('Line Color', 'boldpost')}
-                            color={attributes.borderLineColor}
-                            defaultColor={''}
-                            onChange={(value) => {
-                                const hex = (value && typeof value === 'object') ? value.hex : value;
-                                setAttributes({ borderLineColor: hex });
+                        <TabPanel
+                            className="eshb-tab-panel"
+                            activeClass="is-active"
+                            tabs={[
+                                { name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
+                                { name: 'hover', title: __('Hover', 'boldpost'), className: 'eshb-tab-hover' },
+                            ]}
+                        >
+                            {(tab) => {
+                                const isHover = tab.name === 'hover';
+                                return (
+                                    <div style={{ marginTop: '15px' }}>
+                                        <ColorPopover
+                                            label={isHover ? __('Line Color (Hover)', 'boldpost') : __('Line Color', 'boldpost')}
+                                            color={isHover ? attributes.borderLineColorHover : attributes.borderLineColor}
+                                            defaultColor={''}
+                                            onChange={(value) => {
+                                                const hex = (value && typeof value === 'object') ? value.hex : value;
+                                                setAttributes({ [isHover ? 'borderLineColorHover' : 'borderLineColor']: hex });
+                                            }}
+                                        />
+                                    </div>
+                                );
                             }}
-                        />
+                        </TabPanel>
                         <Divider />
                         <NumberControl
                             label={__('Width (px)', 'boldpost')}
@@ -283,15 +325,31 @@ export default function Edit({ attributes, setAttributes }) {
                             __nextHasNoMarginBottom={true}
                         />
                         <Divider />
-                        <ColorPopover
-                            label={__('Dot Color', 'boldpost')}
-                            color={attributes.dotColor}
-                            defaultColor={''}
-                            onChange={(value) => {
-                                const hex = (value && typeof value === 'object') ? value.hex : value;
-                                setAttributes({ dotColor: hex });
+                        <TabPanel
+                            className="eshb-tab-panel"
+                            activeClass="is-active"
+                            tabs={[
+                                { name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
+                                { name: 'hover', title: __('Hover', 'boldpost'), className: 'eshb-tab-hover' },
+                            ]}
+                        >
+                            {(tab) => {
+                                const isHover = tab.name === 'hover';
+                                return (
+                                    <div style={{ marginTop: '15px' }}>
+                                        <ColorPopover
+                                            label={isHover ? __('Dot Color (Hover)', 'boldpost') : __('Dot Color', 'boldpost')}
+                                            color={isHover ? attributes.dotColorHover : attributes.dotColor}
+                                            defaultColor={''}
+                                            onChange={(value) => {
+                                                const hex = (value && typeof value === 'object') ? value.hex : value;
+                                                setAttributes({ [isHover ? 'dotColorHover' : 'dotColor']: hex });
+                                            }}
+                                        />
+                                    </div>
+                                );
                             }}
-                        />
+                        </TabPanel>
                         <Divider />
                         <NumberControl
                             label={__('Dot Size (px)', 'boldpost')}
@@ -305,8 +363,17 @@ export default function Edit({ attributes, setAttributes }) {
                 )}
             </InspectorControls>
 
+            <div className="boldpo-heading-hover-styles">
+                <style>
+                    {`
+                        ${titleHoverStyle.color ? `.boldpo-heading.style-${attributes.layoutStyle} .boldpo-heading-title-wrap:hover { color: ${titleHoverStyle.color} !important; }` : ''}
+                        ${descriptionHoverStyle.color ? `.boldpo-heading.style-${attributes.layoutStyle} .boldpo-heading-description:hover { color: ${descriptionHoverStyle.color} !important; }` : ''}
+                    `}
+                </style>
+            </div>
+
             <div className={`boldpo-heading style-${attributes.layoutStyle}`} style={{ textAlign: attributes.textAlign || undefined }}>
-                <div className="boldpo-heading-title-wrap" style={titleStyle}>
+                <div className="boldpo-heading-title-wrap">
                     {attributes.layoutStyle === '2' && (
                         <span className="boldpo-heading-dot" style={dotStyle}></span>
                     )}
@@ -316,10 +383,14 @@ export default function Edit({ attributes, setAttributes }) {
                         value={attributes.title}
                         onChange={(value) => setAttributes({ title: value })}
                         placeholder={__('Add a title…', 'boldpost')}
+                        style={titleStyle}
 
                     />
                     {attributes.layoutStyle === '2' && (
                         <span className="boldpo-heading-border-line" style={borderLineStyle}></span>
+                    )}
+                    {attributes.layoutStyle === '3' && (
+                        <i className="boldpo-heading-right-icon boldpo-icon-chevron-right" style={titleStyle}></i>
                     )}
                 </div>
                 {attributes.showDescription && (

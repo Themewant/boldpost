@@ -1,0 +1,193 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "boldpost/button",
+    "version": "0.1.0",
+    "title": "Button",
+    "category": "boldpost",
+    "icon": "button",
+    "description": "A customizable button block with icon support",
+    "example": {},
+    "supports": {
+        "html": false,
+        "spacing": {
+            "padding": true,
+            "margin": true
+        },
+        "color": {
+            "background": false,
+            "text": false,
+            "gradients": false
+        }
+    },
+    "textdomain": "boldpost",
+    "editorScript": "file:./index.js",
+    "viewScript": "file:./view.js",
+    "render": "file:./render.php",
+    "attributes": {
+        "text": {
+            "type": "string",
+            "default": "View all posts"
+        },
+        "url": {
+            "type": "string",
+            "default": ""
+        },
+        "openInNewTab": {
+            "type": "boolean",
+            "default": false
+        },
+        "rel": {
+            "type": "string",
+            "default": ""
+        },
+        "showIcon": {
+            "type": "boolean",
+            "default": true
+        },
+        "iconPosition": {
+            "type": "string",
+            "default": "right"
+        },
+        "iconType": {
+            "type": "string",
+            "default": "boldpo-icon-chevron-right"
+        },
+        "iconSize": {
+            "type": "string",
+            "default": ""
+        },
+        "iconSizeTablet": {
+            "type": "string",
+            "default": ""
+        },
+        "iconSizeMobile": {
+            "type": "string",
+            "default": ""
+        },
+        "iconGap": {
+            "type": "string",
+            "default": ""
+        },
+        "buttonBackground": {
+            "type": "string",
+            "default": ""
+        },
+        "buttonBackgroundHover": {
+            "type": "string",
+            "default": ""
+        },
+        "textColor": {
+            "type": "string",
+            "default": ""
+        },
+        "textColorHover": {
+            "type": "string",
+            "default": ""
+        },
+        "iconColor": {
+            "type": "string",
+            "default": ""
+        },
+        "iconColorHover": {
+            "type": "string",
+            "default": ""
+        },
+        "borderRadius": {
+            "type": "object",
+            "default": {
+                "top": "0px",
+                "right": "0px",
+                "bottom": "0px",
+                "left": "0px"
+            }
+        },
+        "buttonPadding": {
+            "type": "object",
+            "default": {
+                "top": "14px",
+                "right": "30px",
+                "bottom": "14px",
+                "left": "30px"
+            }
+        },
+        "buttonPaddingTablet": {
+            "type": "object",
+            "default": {
+                "top": "14px",
+                "right": "30px",
+                "bottom": "14px",
+                "left": "30px"
+            }
+        },
+        "buttonPaddingMobile": {
+            "type": "object",
+            "default": {
+                "top": "12px",
+                "right": "24px",
+                "bottom": "12px",
+                "left": "24px"
+            }
+        },
+        "typography": {
+            "type": "object",
+            "default": {
+                "fontFamily": "",
+                "fontSize": "",
+                "fontWeight": "600",
+                "fontStyle": "",
+                "textTransform": "",
+                "lineHeight": "",
+                "letterSpacing": ""
+            }
+        },
+        "typographyTablet": {
+            "type": "object",
+            "default": {
+                "fontFamily": "",
+                "fontSize": "",
+                "fontWeight": "",
+                "fontStyle": "",
+                "textTransform": "",
+                "lineHeight": "",
+                "letterSpacing": ""
+            }
+        },
+        "typographyMobile": {
+            "type": "object",
+            "default": {
+                "fontFamily": "",
+                "fontSize": "",
+                "fontWeight": "",
+                "fontStyle": "",
+                "textTransform": "",
+                "lineHeight": "",
+                "letterSpacing": ""
+            }
+        },
+        "textAlign": {
+            "type": "string",
+            "default": ""
+        },
+        "buttonWidth": {
+            "type": "string",
+            "default": "auto"
+        },
+        "borderType": {
+            "type": "string",
+            "default": "none"
+        },
+        "borderWidth": {
+            "type": "number",
+            "default": 0
+        },
+        "borderColor": {
+            "type": "string",
+            "default": ""
+        },
+        "borderColorHover": {
+            "type": "string",
+            "default": ""
+        }
+    }
+}

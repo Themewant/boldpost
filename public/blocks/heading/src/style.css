@@ -4,7 +4,7 @@
 .boldpo-heading-block-wrap .boldpo-heading .boldpo-heading-title-wrap {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  row-gap: 10px;
 }
 .boldpo-heading-block-wrap .boldpo-heading .boldpo-heading-title {
   margin: 0;
@@ -15,6 +15,7 @@
 .boldpo-heading-block-wrap .boldpo-heading.style-2 .boldpo-heading-title-wrap {
   position: relative;
   width: 100%;
+  column-gap: 10px;
 }
 .boldpo-heading-block-wrap .boldpo-heading.style-2 .boldpo-heading-title {
   white-space: nowrap !important;
@@ -31,4 +32,11 @@
   width: 100%;
   height: 3px;
   background-color: var(--boldpo-preset-color-tertiary);
+}
+.boldpo-heading-block-wrap .boldpo-heading.style-3 .boldpo-heading-title-wrap {
+  width: 100%;
+}
+.boldpo-heading-block-wrap .boldpo-heading.style-3 .boldpo-heading-title-wrap .boldpo-heading-right-icon {
+  font-size: var(--wp--preset--font-size--x-large);
+  margin-bottom: -3px;
 }/*# sourceMappingURL=style.css.map */

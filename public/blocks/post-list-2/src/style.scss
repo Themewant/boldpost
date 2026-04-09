@@ -41,7 +41,6 @@
 				display: flex;
 				overflow: hidden;
 				box-sizing: border-box;
-				height: 100%;
 			}
 
 			img {
@@ -144,98 +143,6 @@
 				}
 			}
 
-			.boldpo-blog-metas {
-				margin: 26px 0 5px;
-				padding: 0;
-				list-style: none;
-				display: inline-flex;
-				flex-wrap: wrap;
-				font-size: 14px;
-				line-height: 120%;
-				align-items: center;
-				gap: 18px;
-
-				.bldpost-meta {
-					display: flex;
-					align-items: center;
-				}
-
-				a {
-					text-decoration: none;
-
-					&:hover {
-						text-decoration: underline;
-					}
-				}
-
-				li {
-					position: relative;
-				}
-
-				li+li {
-					margin-left: 10px;
-					padding-left: 10px;
-				}
-			}
-
-			.boldpo-blog-categories {
-				padding: 0;
-				list-style: none;
-				display: inline-flex;
-				flex-wrap: wrap;
-				font-size: 14px;
-				line-height: 120%;
-				align-items: center;
-				gap: 18px;
-
-				.bldpost-meta {
-					display: flex;
-					align-items: center;
-				}
-
-				a {
-					text-decoration: none;
-
-					&:hover {
-						text-decoration: underline;
-					}
-				}
-
-				li {
-					position: relative;
-				}
-
-				li+li {
-					margin-left: 10px;
-					padding-left: 10px;
-				}
-
-				.boldpo-cat-dot {
-					width: 10px;
-					height: 10px;
-					border-radius: 50%;
-					background-color: var(--boldpo-preset-color-primary);
-					margin-right: 6px;
-				}
-
-				&.boldpo-blog-categories-style-1 {
-					.bldpost-meta {
-						background: var(--boldpo-preset-color-white);
-						color: var(--boldpo-preset-color-contrast-1);
-						padding: 8px 8px 7px;
-						border-radius: 4px;
-						margin: 0;
-						display: flex;
-						align-items: center;
-						line-height: 1;
-						flex-wrap: wrap;
-						gap: 1px;
-						margin: 10px;
-						text-transform: uppercase;
-					}
-				}
-			}
-
 			.boldpo-read-more {
 				display: inline-block;
 				margin-top: 10px;
@@ -290,6 +197,22 @@
 				}
 			}
 
+			.boldpo-overlay-all {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(to top, #000, transparent)
+			}
+
+			.boldpo-last-modified {
+				color: #fff;
+				font-size: 0.75rem;
+				text-transform: uppercase;
+			}
+
+
 			a {
 				&:hover {
 					color: var(--boldpo-preset-color-primary);
@@ -299,12 +222,14 @@
 		}
 
 		.boldpo-list-col-one-wrap {
+
 			.boldpo-list-item-inner {
 				flex-direction: column;
 			}
 
 			.boldpo-blog-content {
 				width: 100%;
+				padding: 20px 0;
 			}
 
 			.boldpo-list-item {
@@ -345,29 +270,111 @@
 
 		&.style-default {
 			.boldpo-list-col-one-wrap {
-				.boldpo-blog-content {
-					padding: 20px 0;
-				}
-			}
-
-			.boldpo-list-col-two-wrap {
-				.boldpo-blog-content {
-					padding: 5px 20px;
-				}
-			}
-		}
-
-		&.style-1,
-		&.style-2 {
-
-
-			.boldpo-list-col-one-wrap {
 				.boldpo-blog-categories {
 					position: absolute;
 					top: 0;
 					left: 0;
 					right: auto;
 				}
+			}
+		}
+
+		&.style-1 {
+			.boldpo-blog-content {
+				padding-left: 20px;
+			}
+		}
+
+		&.style-1,
+		&.style-2 {
+			.boldpo-list-item-divider {
+				border-color: var(--boldpo-preset-color-border);
+				border-style: solid;
+				border-width: 1px 0 0;
+				margin: 0;
+			}
+
+			.boldpo-blog-content {
+				width: calc(100% - 40px);
+			}
+
+			.boldpo-list-col-one-wrap {
+
+				.boldpo-list-item-inner {
+					flex-direction: column;
+				}
+
+				.boldpo-blog-content {
+					height: auto;
+					position: absolute;
+					left: 20px;
+					bottom: 20px;
+					padding: 20px 0;
+				}
+
+				.boldpo-list-item {
+
+					.boldpo-blog-title,
+					.boldpo-blog-metas,
+					.boldpo-blog-categories,
+					.boldpo-blog-excerpt,
+					.boldpo-read-more a {
+						color: #fff;
+					}
+
+				}
+			}
+
+
+		}
+
+		&.style-2 {
+			.boldpo-list-item-inner {
+				flex-direction: row-reverse;
+			}
+
+			.boldpo-blog-content {
+				padding-right: 20px;
+			}
+		}
+
+		&.style-3 {
+
+
+			.boldpo-list-col-one-wrap {
+
+				.boldpo-list-item-inner {
+					flex-direction: column;
+				}
+
+				.boldpo-blog-content {
+					height: auto;
+					position: absolute;
+					left: 40px;
+					bottom: 20px;
+				}
+
+				.boldpo-list-item {
+					.boldpo-blog-img {
+						width: 100%;
+					}
+
+					.boldpo-blog-title {
+						margin: 20px 0 0 0;
+					}
+
+					.boldpo-blog-title,
+					.boldpo-blog-metas,
+					.boldpo-blog-categories,
+					.boldpo-blog-excerpt,
+					.boldpo-read-more a {
+						color: #fff;
+					}
+
+				}
+
+
+
 
 				.boldpo-blog-content {
 					padding: 20px 0;
@@ -380,8 +387,6 @@
 				}
 			}
 		}
-
-
 
 	}
 

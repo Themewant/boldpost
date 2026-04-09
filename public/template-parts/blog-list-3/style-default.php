@@ -20,12 +20,22 @@
                     echo '<img src="' . esc_url( plugins_url( 'public/assets/img/placeholder.png', dirname(dirname(dirname(__DIR__))) ) ) . '" alt="Placeholder">';
                 }
             ?>
-            <?php if ( $i == 1 ) { ?>
+             <?php if ( $i == 1 ) { ?>
                 <div class="boldpo-overlay-all"></div>
             <?php } ?>
             </a>
+            <?php
+            
+            ?>
         </div>
         <div class="boldpo-blog-content">
+            <?php 
+            if ( $show_meta && $i == 1 && $paged == 1 ) include BOLDPO_PL_PATH . 'public/template-parts/blog-meta/blog-cat.php'; 
+            
+            // Save original, then strip 'category' only for blog-meta.php (blog-cat.php handles it above)
+            $_saved_metas = $attributes['allowedMetas'];
+            $attributes['allowedMetas'] = array_values( array_diff( $attributes['allowedMetas'], ['category'] ) );
+            ?>
             <?php if ( $show_meta && 'up_title' === $meta_position ) include BOLDPO_PL_PATH . 'public/template-parts/blog-meta/blog-meta.php'; ?>
             
             <<?php echo esc_attr( $title_tag ); ?> class="boldpo-blog-title">
@@ -41,6 +51,7 @@
             <?php endif; ?>
             
             <?php if ( $show_meta && 'below_content' === $meta_position ) include BOLDPO_PL_PATH . 'public/template-parts/blog-meta/blog-meta.php'; ?>
+            <?php $attributes['allowedMetas'] = $_saved_metas; // Restore for next post iteration ?>
             <?php if ( $show_read_more === 'yes' && ! empty( $read_more_text ) ) : ?>
             <div class="boldpo-read-more">
                 <a href="<?php the_permalink(); ?>" class="boldpo-read-more-link">

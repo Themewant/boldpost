@@ -1,0 +1,255 @@
+.boldpo-post-grid-4-block-wrap {
+	margin-block-start: 0 !important;
+	overflow: hidden;
+
+	// Ensure gutter padding doesn't overflow the column widths
+	.boldpo-grid-col-left-wrap,
+	.boldpo-grid-col-right-wrap {
+		box-sizing: border-box;
+	}
+
+	.boldpo-post-grid-4 {
+		// Grid handled by Bootstrap classes
+
+		box-sizing: border-box;
+		margin-bottom: 0px; // Reset any previous margins
+		overflow: hidden;
+
+		.boldpo-grid-item-inner {
+			box-sizing: border-box;
+			height: 100%;
+			position: relative;
+		}
+
+		.boldpo-blog-content {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end;
+		}
+
+		.boldpo-grid-item {
+			position: relative;
+			transition: var(--boldpo-preset-hover-transition);
+			box-sizing: border-box;
+
+			.boldpo-grid-item-inner {
+				overflow: hidden;
+				display: flex;
+				flex-direction: column;
+				height: 100%;
+			}
+
+			img {
+				max-width: 100%;
+				height: auto;
+				display: block;
+				object-fit: cover;
+				transition: transform var(--boldpo-preset-hover-transition);
+			}
+
+			i {
+				font-size: 16px;
+			}
+
+			.boldpo-blog-date-top {
+				z-index: 1;
+				background-color: var(--boldpo-preset-color-primary);
+
+				h4 {
+					margin: 0;
+					color: #fff;
+					font-size: 36px;
+					line-height: 1;
+				}
+
+				position: absolute;
+				top: 0;
+				right: 0;
+				display: inline-block;
+				padding: 16px 26px 16px;
+				text-align: center;
+				border-radius: 4px;
+				color: #fff;
+				margin: 25px;
+
+				h4,
+				span {
+					color: inherit;
+				}
+			}
+
+			.boldpo-blog-img {
+				max-width: 100%;
+				height: auto;
+				display: block;
+				margin: 0 auto;
+				overflow: hidden;
+				width: 100%;
+				transition: transform var(--boldpo-preset-hover-transition);
+				position: relative;
+
+				img {
+					display: block;
+					object-fit: cover;
+					width: 100%;
+					min-height: 200px;
+					object-fit: cover;
+					width: 100%;
+				}
+
+				&.boldpo-animate {
+					overflow: hidden;
+				}
+			}
+
+			.boldpo-blog-title {
+				font-weight: bold;
+				margin: 10px 0 5px;
+
+				a {
+					color: currentColor;
+					transition: var(--boldpo-preset-hover-transition);
+					text-decoration: none;
+				}
+			}
+
+			.boldpo-read-more {
+				display: inline-block;
+				margin-top: 10px;
+				text-decoration: none;
+
+				.boldpo-read-more-link {
+					display: inline-flex;
+					align-items: center;
+					text-decoration: none;
+					padding: 7px 16px;
+					background-color: var(--boldpo-preset-color-primary);
+					color: var(--boldpo-preset-color-white);
+					font-size: 14px;
+					font-weight: 600;
+					transition: 0.3s ease-in-out;
+
+					&:hover {
+						background-color: var(--boldpo-preset-color-secondary);
+					}
+				}
+
+				.boldpo-read-more-icon.after {
+					margin-left: 6px;
+					top: 1px;
+				}
+
+				.boldpo-read-more-icon.before {
+					margin-right: 6px;
+					top: 1px;
+				}
+			}
+
+			.boldpo-blog-excerpt {
+				margin-top: 20px;
+				margin-bottom: 20px;
+				font-size: 18px;
+				color: var(--boldpo-preset-color-contrast-2);
+
+				a {
+					color: currentColor;
+				}
+			}
+
+			.boldpo-video-wrapper {
+				position: relative;
+				background-color: #000;
+
+				span.play-icon {
+					width: 0;
+					height: 0;
+					border-bottom: 8px solid transparent;
+					border-left: 10px solid #ffffff;
+					border-top: 8px solid transparent;
+					position: absolute;
+					right: 15px;
+					top: 12px;
+				}
+			}
+
+			a {
+				&:hover {
+					color: var(--boldpo-preset-color-primary);
+				}
+			}
+
+			&:hover {
+				.boldpo-blog-img {
+					&.boldpo-animate {
+						&.left_right {
+
+							img {
+								transform: translateX(15px) scale(1.1);
+							}
+
+						}
+
+						&.top_bottom {
+
+							img {
+								transform: translateY(15px) scale(1.1);
+							}
+
+						}
+					}
+				}
+			}
+
+		}
+
+		&.style-default,
+		&.style-1 {
+			.boldpo-blog-categories {
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+
+			.boldpo-grid-col-left-wrap {
+				.boldpo-grid-item {
+					.boldpo-blog-title {
+						font-size: 36px;
+					}
+				}
+			}
+
+			.boldpo-grid-col-right-wrap {
+				.boldpo-grid-item {
+					.boldpo-blog-title {
+						font-size: 24px;
+					}
+				}
+			}
+		}
+	}
+
+	.boldpo-pagination {
+		margin-top: 40px;
+		display: flex;
+		justify-content: center;
+		gap: 8px;
+
+		a,
+		span {
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			width: 30px;
+			height: 30px;
+			font-size: 14px;
+			border-radius: 50%;
+			text-decoration: none;
+			transition: var(--boldpo-preset-hover-transition);
+			box-shadow: 0 5px 10px #0e0d0d1a;
+		}
+
+		span.current {
+			cursor: default;
+		}
+	}
+}

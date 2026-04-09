@@ -49,14 +49,10 @@ $title_trim = isset($attributes['titleTrim']) ? $attributes['titleTrim'] : 100;
 $excerpt_trim = isset($attributes['excerptTrim']) ? $attributes['excerptTrim'] : 20;
 $anim_style = isset($attributes['animStyle']) ? $attributes['animStyle'] : '';
 $thumb_anim = isset($attributes['thumbAnim']) ? 'boldpo-animate' : '';
-
-$meta_style = 'default';
-if ( $style === '1' ) {
-    $meta_style = '1';
-}
+$meta_style = isset($attributes['metaStyle']) ? $attributes['metaStyle'] : 'default';
 
 $cat_style = 'default';
-if ( $style === '1' ) {
+if ( $style === 'default' ) {
     $cat_style = '1';
 }
 
@@ -69,8 +65,7 @@ $responsive_data = [
 
 $col_class_1 = '';
 $col_class_2 = '';
-if($style == '2') {
-    $col_class_1 = " boldpo-col-12";
+if($style == '3') {
     $col_class_2 = " boldpo-col-lg-6 boldpo-col-md-6 boldpo-col-12";
 }
 
@@ -91,10 +86,13 @@ $row_gap_tablet = isset($attributes['itemRowGapTablet']) ? $attributes['itemRowG
 $row_gap_mobile = isset($attributes['itemRowGapMobile']) ? $attributes['itemRowGapMobile'] : 0;
 
 $row_gap_class = '';
+$row_mt_class = '';
 if ($row_gap_desktop == $row_gap_tablet && $row_gap_tablet == $row_gap_mobile) {
     $row_gap_class = 'boldpo-gy-' . $row_gap_desktop;
+    $row_mt_class = 'boldpo-mt-' . $row_gap_desktop;
 } else {
     $row_gap_class = 'boldpo-gy-lg-' . $row_gap_desktop . ' boldpo-gy-md-' . $row_gap_tablet . ' boldpo-gy-sm-' . $row_gap_mobile;
+    $row_mt_class = 'boldpo-mt-lg-' . $row_gap_desktop . ' boldpo-mt-md-' . $row_gap_tablet . ' boldpo-mt-sm-' . $row_gap_mobile;
 }
 
 // Item Styles
@@ -419,7 +417,7 @@ if ( empty( $block_wrap_attr ) ) {
 if ( $query->have_posts() ) :
 ?>
     <div <?php echo wp_kses_post($block_wrap_attr); ?>>
-        <div class="boldpo-post-list-2 boldpo-row style-<?php echo esc_attr($style); ?> <?php echo esc_attr($gap_class); ?> <?php echo esc_attr($row_gap_class); ?>" <?php if ( 'numeric' !== $pagination_type ) { 
+        <div class="boldpo-post-list-2 boldpo-row style-<?php echo esc_attr($style); ?> <?php echo esc_attr($row_gap_class); ?> boldpo-gx-0" <?php if ( 'numeric' !== $pagination_type ) { 
             $data_attr = $attributes;
             $data_attr['blockName'] = 'boldpost/post-list-2';
             echo 'data-attributes="' . esc_attr( wp_json_encode( $data_attr ) ) . '" data-query-args="' . esc_attr( wp_json_encode( $args ) ) . '"'; 
@@ -428,7 +426,7 @@ if ( $query->have_posts() ) :
             $i = 0;
             if ($paged > 1 && $query->post_count > 0) {
                 echo '<div class="boldpo-list-col-two-wrap">';
-                echo '<div class="boldpo-list-row boldpo-row ' . esc_attr($row_gap_class) . '" data-paged="' . esc_attr($paged) . '">';
+                echo '<div class="boldpo-list-row boldpo-row ' . esc_attr($row_gap_class) . ' ' . esc_attr($gap_class) . '" data-paged="' . esc_attr($paged) . '">';
             }
             
             if($style == 'default') {
@@ -449,6 +447,7 @@ if ( $query->have_posts() ) :
 
                 $trimmed_title = wp_trim_words( get_the_title(), $title_trim, '...' );
                 $trimmed_excerpt = wp_trim_words( get_the_excerpt(), $excerpt_trim, '...' );
+                $last_modified_date = BOLDPO_Helper::boldpost_time_ago();
                 $style_file = $template_pl_path . 'public/template-parts/blog-list-2/style-' . $style . '.php';
 
                 if ( file_exists( $style_file ) ) {

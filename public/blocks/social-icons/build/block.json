@@ -1,0 +1,141 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "boldpost/social-icons",
+  "version": "0.1.0",
+  "title": "Social Icons",
+  "category": "boldpost",
+  "icon": "share",
+  "description": "Display social media icons with links",
+  "example": {},
+  "supports": {
+    "html": false,
+    "spacing": {
+      "padding": true,
+      "margin": true
+    },
+    "color": {
+      "background": true,
+      "text": false,
+      "gradients": true
+    }
+  },
+  "textdomain": "boldpost",
+  "editorScript": "file:./index.js",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php",
+  "attributes": {
+    "items": {
+      "type": "array",
+      "default": [
+        {
+          "icon": "boldpo-icon-facebook-f",
+          "url": "#",
+          "label": "Facebook",
+          "openNewTab": true
+        },
+        {
+          "icon": "boldpo-icon-twitter-x",
+          "url": "#",
+          "label": "Twitter",
+          "openNewTab": true
+        },
+        {
+          "icon": "boldpo-icon-logo-youtube",
+          "url": "#",
+          "label": "Youtube",
+          "openNewTab": true
+        },
+        {
+          "icon": "boldpo-icon-logo-instagram",
+          "url": "#",
+          "label": "Instagram",
+          "openNewTab": true
+        }
+      ]
+    },
+    "iconSize": {
+      "type": "number",
+      "default": 20
+    },
+    "iconSizeTablet": {
+      "type": "number"
+    },
+    "iconSizeMobile": {
+      "type": "number"
+    },
+    "gap": {
+      "type": "number",
+      "default": 10
+    },
+    "gapTablet": {
+      "type": "number"
+    },
+    "gapMobile": {
+      "type": "number"
+    },
+    "alignment": {
+      "type": "string",
+      "default": "left"
+    },
+    "iconColor": {
+      "type": "string",
+      "default": ""
+    },
+    "iconColorHover": {
+      "type": "string",
+      "default": ""
+    },
+    "iconBgColor": {
+      "type": "string",
+      "default": ""
+    },
+    "iconBgColorHover": {
+      "type": "string",
+      "default": ""
+    },
+    "iconBorderColor": {
+      "type": "string",
+      "default": "#83838340"
+    },
+    "iconBorderColorHover": {
+      "type": "string",
+      "default": ""
+    },
+    "iconBorderWidth": {
+      "type": "number",
+      "default": 1
+    },
+    "iconBorderRadius": {
+      "type": "string",
+      "default": "100%"
+    },
+    "iconPadding": {
+      "type": "object"
+    },
+    "showLabel": {
+      "type": "boolean",
+      "default": false
+    },
+    "labelColor": {
+      "type": "string",
+      "default": ""
+    },
+    "labelColorHover": {
+      "type": "string",
+      "default": ""
+    },
+    "labelTypography": {
+      "type": "object",
+      "default": {
+        "fontFamily": "",
+        "fontSize": "",
+        "fontWeight": "",
+        "fontStyle": "",
+        "textTransform": "",
+        "lineHeight": "",
+        "letterSpacing": ""
+      }
+    }
+  }
+}

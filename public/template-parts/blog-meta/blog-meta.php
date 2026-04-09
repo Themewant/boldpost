@@ -60,6 +60,12 @@ if ( in_array( 'tag', $boldpo_allowed_metas ) ) {
         $boldpo_meta_html .= '</span>';
     }
 }
+
+if ( in_array( 'comments_count', $boldpo_allowed_metas ) ) {
+    $boldpo_meta_html .= '<span class="bldpost-meta"><i class="boldpo-meta-icon boldpo-icon-chat"></i>';
+    $boldpo_meta_html .= get_comments_number();
+    $boldpo_meta_html .= '</span>';
+}
 ?>
 <div class="boldpo-blog-metas boldpo-blog-metas-style-<?php echo esc_attr( $meta_style ); ?>">
     <?php 
