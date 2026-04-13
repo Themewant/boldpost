@@ -467,6 +467,18 @@ export default function Edit({ attributes, setAttributes }) {
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
 							/>
+							<SelectControl
+								label={__('Style', 'boldpost')}
+								value={attributes.metaStyle}
+								onChange={(value) => setAttributes({ metaStyle: value })}
+								options={[
+									{ label: __('Default', 'boldpost'), value: 'default' },
+									{ label: __('Style 1', 'boldpost'), value: '1' },
+									{ label: __('Style 2', 'boldpost'), value: '2' },
+								]}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
+							/>
 							<ToggleControl
 								label={__('Show Date Badge', 'boldpost')}
 								checked={attributes.showDateOnTop}

@@ -367,6 +367,10 @@ return array(
 			'metaMargin' => array(
 				'type' => 'object'
 			),
+			'metaStyle' => array(
+				'type' => 'string',
+				'default' => 'default'
+			),
 			'titleLeftTag' => array(
 				'type' => 'string',
 				'default' => 'h3'

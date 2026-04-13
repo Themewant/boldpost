@@ -1,6 +1,7 @@
 import { createElement } from '@wordpress/element';
 import { SVG, Path, Rect } from '@wordpress/primitives';
 import { registerBlockCategory } from './components/registerBlocklCategory';
+import './template-importer';
 
 const catIcon = () => {
     return createElement(

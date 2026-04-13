@@ -3,6 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 class BOLDPO_Block_Editor {
+    
     public static function instance() {
         static $instance = null;
         if ( null === $instance ) {
@@ -24,12 +25,21 @@ class BOLDPO_Block_Editor {
 
 
         
+        $asset_file = include BOLDPO_PL_PATH . 'editor/app/build/index.asset.php';
+
         wp_enqueue_script(
             'boldpo-block-editor-js',
             BOLDPO_PL_URL . 'editor/app/build/index.js',
-            ['wp-element', 'wp-hooks', 'wp-blocks'],
-            BOLDPO_VERSION,
+            $asset_file['dependencies'],
+            $asset_file['version'],
             true
+        );
+
+        wp_enqueue_style(
+            'boldpo-block-editor-css',
+            BOLDPO_PL_URL . 'editor/app/build/index.css',
+            array( 'wp-components' ),
+            $asset_file['version']
         );
 
         wp_localize_script(
@@ -37,6 +47,8 @@ class BOLDPO_Block_Editor {
             'boldpoEditor',
             [
                 'plugin_url' => BOLDPO_PL_URL,
+                'api_url'    => 'https://themewant.com/greenaura/wp-json/boldpost/v1',
+                'nonce'      => wp_create_nonce( 'wp_rest' ),
             ]
         );
     }

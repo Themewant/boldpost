@@ -56,7 +56,7 @@ $video_height = isset($attributes['videoHeight']) ? $attributes['videoHeight'] :
 $video_width = isset($attributes['videoWidth']) ? $attributes['videoWidth'] : '100%';
 $video_controls = isset($attributes['videoControls']) && $attributes['videoControls'] ? 1 : 0;
 
-$meta_style = '1';
+$meta_style = isset($attributes['metaStyle']) ? $attributes['metaStyle'] : 'default';
 
 $cat_style = '1';
 
@@ -331,6 +331,7 @@ $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .bo
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-4.style-' . $style . ' .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-img img', $thumbnail_left_height_responsive);   
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-4.style-' . $style . ' .boldpo-grid-col-right-wrap .boldpo-grid-item .boldpo-blog-img img', $thumbnail_right_height_responsive);   
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-4.style-' . $style . ' .boldpo-grid-item .boldpo-read-more-link', $button_text_align_responsive);   
+
 if( $style == 'default') {
     $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-4.style-' . $style . ' .boldpo-grid-item .boldpo-blog-img img', $thumbnail_right_height_responsive);   
 }
@@ -415,6 +416,11 @@ if ( empty( $block_wrap_attr ) ) {
     $block_wrap_attr = 'class="boldpo-block boldpo-post-grid-4-block-wrap ' . esc_attr( $unique_id ) . '"';
 }
 
+$template_pl_path = BOLDPO_PL_PATH;
+if($style !== 'default' && defined('BOLDPO_PRO_PL_PATH')) {
+    $template_pl_path = BOLDPO_PRO_PL_PATH;
+}
+
 if ( $query->have_posts() ) :
 ?>
     <div <?php echo wp_kses_post($block_wrap_attr); ?>>
@@ -426,12 +432,6 @@ if ( $query->have_posts() ) :
              } ?>>
             <?php
             $i = 0;
-            if($style == 'default') {
-                $template_pl_path = BOLDPO_PL_PATH;
-            } else {
-                $template_pl_path = BOLDPO_PRO_PL_PATH;
-            }
-            
             while ( $query->have_posts() ) : $query->the_post();
                 $i++;
                 $item_class = '';

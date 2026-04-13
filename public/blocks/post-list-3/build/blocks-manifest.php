@@ -333,6 +333,10 @@ return array(
 			'metaMargin' => array(
 				'type' => 'object'
 			),
+			'metaStyle' => array(
+				'type' => 'string',
+				'default' => 'default'
+			),
 			'TitleOneTag' => array(
 				'type' => 'string',
 				'default' => 'h2'

@@ -53,10 +53,7 @@ $video_height = isset($attributes['videoHeight']) ? $attributes['videoHeight'] :
 $video_width = isset($attributes['videoWidth']) ? $attributes['videoWidth'] : '100%';
 $video_controls = isset($attributes['videoControls']) && $attributes['videoControls'] ? 1 : 0;
 
-$meta_style = 'default';
-if ( $style === '1' ) {
-    $meta_style = '1';
-}
+$meta_style = isset($attributes['metaStyle']) ? $attributes['metaStyle'] : 'default';
 
 $cat_style = 'default';
 if ( $style === '1' ) {
@@ -447,6 +444,11 @@ if ( $paged > 1 ) {
 
 if ( $paged < $query->max_num_pages ) {
     $next_page = is_archive() ? get_pagenum_link( $paged + 1 ) : add_query_arg( $page_key, $paged + 1 );
+}
+
+$template_pl_path = BOLDPO_PL_PATH;
+if($style !== 'default' && defined('BOLDPO_PRO_PL_PATH')) {
+    $template_pl_path = BOLDPO_PRO_PL_PATH;
 }
 
 if ( $query->have_posts() ) :

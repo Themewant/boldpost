@@ -227,6 +227,20 @@
 .boldpo-post-list-3-block-wrap .boldpo-post-list-3 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-read-more a {
   color: #fff;
 }
+.boldpo-post-list-3-block-wrap .boldpo-post-list-3.style-default .boldpo-list-col-one-wrap .boldpo-blog-img img {
+  height: 474px;
+}
+.boldpo-post-list-3-block-wrap .boldpo-post-list-3.style-default .boldpo-list-col-two-wrap .boldpo-blog-img {
+  width: 100px;
+  height: 100px;
+}
+.boldpo-post-list-3-block-wrap .boldpo-post-list-3.style-default .boldpo-list-col-two-wrap .boldpo-blog-img img {
+  height: 100%;
+  width: 100%;
+}
+.boldpo-post-list-3-block-wrap .boldpo-post-list-3.style-default .boldpo-list-col-two-wrap .boldpo-blog-content {
+  padding-left: 20px;
+}
 .boldpo-post-list-3-block-wrap .boldpo-post-list-3.style-1 .boldpo-list-col-one-wrap .boldpo-blog-img img, .boldpo-post-list-3-block-wrap .boldpo-post-list-3.style-2 .boldpo-list-col-one-wrap .boldpo-blog-img img {
   height: 547px;
 }

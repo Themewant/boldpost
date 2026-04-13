@@ -250,13 +250,7 @@ return array(
 				'default' => ''
 			),
 			'contentPadding' => array(
-				'type' => 'object',
-				'default' => array(
-					'top' => '30px',
-					'right' => '20px',
-					'bottom' => '30px',
-					'left' => '20px'
-				)
+				'type' => 'object'
 			),
 			'readMoreBackgroundColor' => array(
 				'type' => 'string',
@@ -323,6 +317,10 @@ return array(
 			),
 			'metaMargin' => array(
 				'type' => 'object'
+			),
+			'metaStyle' => array(
+				'type' => 'string',
+				'default' => 'default'
 			),
 			'titleTag' => array(
 				'type' => 'string',
@@ -552,6 +550,46 @@ return array(
 			'buttonTextAlignMobile' => array(
 				'type' => 'string',
 				'default' => ''
+			),
+			'itemSerialColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'itemSerialTypography' => array(
+				'type' => 'object',
+				'default' => array(
+					'fontFamily' => '',
+					'fontSize' => '',
+					'fontWeight' => '',
+					'fontStyle' => '',
+					'textTransform' => '',
+					'lineHeight' => '',
+					'letterSpacing' => ''
+				)
+			),
+			'itemSerialTypographyTablet' => array(
+				'type' => 'object',
+				'default' => array(
+					'fontFamily' => '',
+					'fontSize' => '',
+					'fontWeight' => '',
+					'fontStyle' => '',
+					'textTransform' => '',
+					'lineHeight' => '',
+					'letterSpacing' => ''
+				)
+			),
+			'itemSerialTypographyMobile' => array(
+				'type' => 'object',
+				'default' => array(
+					'fontFamily' => '',
+					'fontSize' => '',
+					'fontWeight' => '',
+					'fontStyle' => '',
+					'textTransform' => '',
+					'lineHeight' => '',
+					'letterSpacing' => ''
+				)
 			)
 		)
 	)

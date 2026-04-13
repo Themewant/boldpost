@@ -9,7 +9,7 @@ function boldpo_create_block_post_grid_3_block_init() {
 		'boldpo-post-grid-3-style',
 		plugins_url( 'build/style-index.css', __FILE__ ),
 		array('boldpo-public-style'),
-		BOLDPO_PRO_VERSION
+		BOLDPO_VERSION
 	);
 
 	register_block_type( __DIR__ . '/build', array(

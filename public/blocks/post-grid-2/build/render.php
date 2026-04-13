@@ -50,10 +50,7 @@ $excerpt_trim = isset($attributes['excerptTrim']) ? $attributes['excerptTrim'] :
 $anim_style = isset($attributes['animStyle']) ? $attributes['animStyle'] : '';
 $thumb_anim = isset($attributes['thumbAnim']) ? 'boldpo-animate' : '';
 
-$meta_style = 'default';
-if ( $style === '1' || $style === '3' ) {
-    $meta_style = '1';
-}
+$meta_style = isset($attributes['metaStyle']) ? $attributes['metaStyle'] : 'default';
 
 $cat_style = 'default';
 
@@ -397,6 +394,11 @@ if ( empty( $block_wrap_attr ) ) {
     $block_wrap_attr = 'class="boldpo-block boldpo-post-grid-2-block-wrap ' . esc_attr( $unique_id ) . '"';
 }
 
+$template_pl_path = BOLDPO_PL_PATH;
+if($style !== 'default' && defined('BOLDPO_PRO_PL_PATH')) {
+    $template_pl_path = BOLDPO_PRO_PL_PATH;
+}
+
 if ( $query->have_posts() ) :
 ?>
     <div <?php echo wp_kses_post($block_wrap_attr); ?>>
@@ -408,11 +410,6 @@ if ( $query->have_posts() ) :
              } ?>>
             <?php
             $i = 0;
-            if($style == 'default') {
-                $template_pl_path = BOLDPO_PL_PATH;
-            } else {
-                $template_pl_path = BOLDPO_PRO_PL_PATH;
-            }
             while ( $query->have_posts() ) : $query->the_post();
                 $i++;
                 $item_class = '';
@@ -424,7 +421,6 @@ if ( $query->have_posts() ) :
                     $item_class .= ' ' . $anim_style;
                 }
 
-                $post_id = get_the_ID();
                 $trimmed_title = wp_trim_words( get_the_title(), $title_trim, '...' );
                 $trimmed_excerpt = wp_trim_words( get_the_excerpt(), $excerpt_trim, '...' );
                 

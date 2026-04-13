@@ -23,9 +23,8 @@
                 ?>
                 </a>
             <?php } ?>
-            <?php if ('default' == $style ) { ?>
-                <div class="boldpo-overlay-all"></div>
-            <?php } ?>
+           
+            <div class="boldpo-overlay-all"></div>
             
             <?php if ( ! empty($embed_video) ) { ?>
                 <div class="boldpo-video-wrapper">

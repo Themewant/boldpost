@@ -52,10 +52,7 @@ $excerpt_trim = isset($attributes['excerptTrim']) ? $attributes['excerptTrim'] :
 $anim_style = isset($attributes['animStyle']) ? $attributes['animStyle'] : '';
 $thumb_anim = isset($attributes['thumbAnim']) ? 'boldpo-animate' : '';
 
-$meta_style = 'default';
-if ( $style === '1' ) {
-    $meta_style = '1';
-}
+$meta_style = isset($attributes['metaStyle']) ? $attributes['metaStyle'] : 'default';
 
 $cat_style = 'default';
 if ( $style === '1' ) {
@@ -392,6 +389,11 @@ if($is_featured == true) {
 
 $unique      = wp_rand(2012, 35120);
 $query = new WP_Query( $args );
+
+$template_pl_path = BOLDPO_PL_PATH;
+if($style !== 'default' && defined('BOLDPO_PRO_PL_PATH')) {
+    $template_pl_path = BOLDPO_PRO_PL_PATH;
+}
 
 if ( $query->have_posts() ) :
 ?>

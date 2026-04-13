@@ -414,6 +414,11 @@ if ( empty( $block_wrap_attr ) ) {
     $block_wrap_attr = 'class="boldpo-block boldpo-post-list-2-block-wrap ' . esc_attr( $unique_id ) . '"';
 }
 
+$template_pl_path = BOLDPO_PL_PATH;
+if($style !== 'default' && defined('BOLDPO_PRO_PL_PATH')) {
+    $template_pl_path = BOLDPO_PRO_PL_PATH;
+}
+
 if ( $query->have_posts() ) :
 ?>
     <div <?php echo wp_kses_post($block_wrap_attr); ?>>
@@ -429,11 +434,6 @@ if ( $query->have_posts() ) :
                 echo '<div class="boldpo-list-row boldpo-row ' . esc_attr($row_gap_class) . ' ' . esc_attr($gap_class) . '" data-paged="' . esc_attr($paged) . '">';
             }
             
-            if($style == 'default') {
-                $template_pl_path = BOLDPO_PL_PATH;
-            } else {
-                $template_pl_path = BOLDPO_PRO_PL_PATH;
-            }
             while ( $query->have_posts() ) : $query->the_post();
                 $i++;
                 $item_class = '';

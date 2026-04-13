@@ -48,6 +48,7 @@ import './editor.scss';
 import list1 from './assets/img/style-1.png';
 import list2 from './assets/img/style-2.png';
 import list3 from './assets/img/style-2.png';
+import list4 from './assets/img/style-2.png';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -236,6 +237,7 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('Default', 'boldpost'), value: 'default', src: list1 },
 							{ label: __('Style 1', 'boldpost'), value: '1', src: list2 },
 							{ label: __('Style 2', 'boldpost'), value: '2', src: list3 },
+							{ label: __('Style 3', 'boldpost'), value: '3', src: list4 },
 						]}
 					/>
 				</PanelBody>
@@ -336,23 +338,27 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 				</PanelBody>
 
-				<PanelBody title={__('Excerpt', 'boldpost')} initialOpen={false}>
-					<ToggleControl
-						label={__('Show / Hide', 'boldpost')}
-						checked={attributes.showExcerpt}
-						onChange={(value) => setAttributes({ showExcerpt: value })}
-						__nextHasNoMarginBottom={true}
-					/>
-					{attributes.showExcerpt && (
-						<NumberControl
-							label={__('Excerpt Trim', 'boldpost')}
-							value={attributes.excerptTrim}
-							onChange={(value) => setAttributes({ excerptTrim: value })}
-							__next40pxDefaultSize={true}
-							__nextHasNoMarginBottom={true}
-						/>
-					)}
-				</PanelBody>
+				{
+					attributes.listStyle !== '3' && (
+						<PanelBody title={__('Excerpt', 'boldpost')} initialOpen={false}>
+							<ToggleControl
+								label={__('Show / Hide', 'boldpost')}
+								checked={attributes.showExcerpt}
+								onChange={(value) => setAttributes({ showExcerpt: value })}
+								__nextHasNoMarginBottom={true}
+							/>
+							{attributes.showExcerpt && (
+								<NumberControl
+									label={__('Excerpt Trim', 'boldpost')}
+									value={attributes.excerptTrim}
+									onChange={(value) => setAttributes({ excerptTrim: value })}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
+								/>
+							)}
+						</PanelBody>
+					)
+				}
 
 				<PanelBody title={__('Meta', 'boldpost')} initialOpen={false}>
 					<ToggleControl
@@ -373,6 +379,7 @@ export default function Edit({ attributes, setAttributes }) {
 									{ label: __('Date', 'boldpost'), value: 'date' },
 									{ label: __('Category', 'boldpost'), value: 'category' },
 									{ label: __('Tag', 'boldpost'), value: 'tag' },
+									{ label: __('Comments Count', 'boldpost'), value: 'comments_count' },
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
@@ -399,6 +406,18 @@ export default function Edit({ attributes, setAttributes }) {
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
 							/>
+							<SelectControl
+								label={__('Style', 'boldpost')}
+								value={attributes.metaStyle}
+								onChange={(value) => setAttributes({ metaStyle: value })}
+								options={[
+									{ label: __('Default', 'boldpost'), value: 'default' },
+									{ label: __('Style 1', 'boldpost'), value: '1' },
+									{ label: __('Style 2', 'boldpost'), value: '2' },
+								]}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
+							/>
 							<ToggleControl
 								label={__('Show Date Badge', 'boldpost')}
 								checked={attributes.showDateOnTop}
@@ -409,41 +428,46 @@ export default function Edit({ attributes, setAttributes }) {
 					)}
 				</PanelBody>
 
-				<PanelBody title={__('Button', 'boldpost')} initialOpen={false}>
-					<ToggleControl
-						label={__('Show / Hide', 'boldpost')}
-						checked={attributes.showReadMore}
-						onChange={(value) => setAttributes({ showReadMore: value })}
-						__nextHasNoMarginBottom={true}
-					/>
-					{attributes.showReadMore && (
-						<>
-							<TextControl
-								label={__('Text', 'boldpost')}
-								value={attributes.readMoreText}
-								onChange={(value) => setAttributes({ readMoreText: value })}
-								__next40pxDefaultSize={true}
+
+				{
+					attributes.listStyle !== '3' && (
+						<PanelBody title={__('Button', 'boldpost')} initialOpen={false}>
+							<ToggleControl
+								label={__('Show / Hide', 'boldpost')}
+								checked={attributes.showReadMore}
+								onChange={(value) => setAttributes({ showReadMore: value })}
 								__nextHasNoMarginBottom={true}
 							/>
-							<IconPicker
-								label={__('Icon', 'boldpost')}
-								value={attributes.readMoreIcon}
-								onChange={(value) => setAttributes({ readMoreIcon: value })}
-							/>
-							<SelectControl
-								label={__('Icon Position', 'boldpost')}
-								value={attributes.readMoreIconPosition}
-								onChange={(value) => setAttributes({ readMoreIconPosition: value })}
-								options={[
-									{ label: __('Before', 'boldpost'), value: 'before' },
-									{ label: __('After', 'boldpost'), value: 'after' },
-								]}
-								__next40pxDefaultSize={true}
-								__nextHasNoMarginBottom={true}
-							/>
-						</>
-					)}
-				</PanelBody>
+							{attributes.showReadMore && (
+								<>
+									<TextControl
+										label={__('Text', 'boldpost')}
+										value={attributes.readMoreText}
+										onChange={(value) => setAttributes({ readMoreText: value })}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
+									/>
+									<IconPicker
+										label={__('Icon', 'boldpost')}
+										value={attributes.readMoreIcon}
+										onChange={(value) => setAttributes({ readMoreIcon: value })}
+									/>
+									<SelectControl
+										label={__('Icon Position', 'boldpost')}
+										value={attributes.readMoreIconPosition}
+										onChange={(value) => setAttributes({ readMoreIconPosition: value })}
+										options={[
+											{ label: __('Before', 'boldpost'), value: 'before' },
+											{ label: __('After', 'boldpost'), value: 'after' },
+										]}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
+									/>
+								</>
+							)}
+						</PanelBody>
+					)
+				}
 
 				<PanelBody title={__('Pagination', 'boldpost')} initialOpen={false}>
 					<ToggleControl
@@ -637,56 +661,87 @@ export default function Edit({ attributes, setAttributes }) {
 					</ResponsiveWrapper>
 				</PanelBody>
 
-				<PanelBody title={__('Excerpt', 'boldpost')} initialOpen={false}>
-					<ColorPopover
-						label={__('Color', 'boldpost')}
-						color={attributes.itemExcerptColor}
-						defaultColor={''}
-						onChange={(value) => {
-							const hex = (value && typeof value === 'object') ? value.hex : value;
-							setAttributes({ itemExcerptColor: hex });
-						}}
-					/>
-					<Divider />
-					<ResponsiveWrapper label={__('Padding', 'boldpost')}>
-						{(device) => (
-							<BoxControl
-								values={attributes[getAttrKey('itemExcerptPadding', device)]}
-								onChange={(value) => setAttributes({ [getAttrKey('itemExcerptPadding', device)]: value })}
+				{
+					attributes.listStyle !== '3' && (
+						<PanelBody title={__('Excerpt', 'boldpost')} initialOpen={false}>
+							<ColorPopover
+								label={__('Color', 'boldpost')}
+								color={attributes.itemExcerptColor}
+								defaultColor={''}
+								onChange={(value) => {
+									const hex = (value && typeof value === 'object') ? value.hex : value;
+									setAttributes({ itemExcerptColor: hex });
+								}}
 							/>
-						)}
-					</ResponsiveWrapper>
-					<Divider />
-					<ResponsiveWrapper label={__('Margin', 'boldpost')}>
-						{(device) => (
-							<BoxControl
-								values={attributes[getAttrKey('itemExcerptMargin', device)]}
-								onChange={(value) => setAttributes({ [getAttrKey('itemExcerptMargin', device)]: value })}
+							<Divider />
+							<ResponsiveWrapper label={__('Padding', 'boldpost')}>
+								{(device) => (
+									<BoxControl
+										values={attributes[getAttrKey('itemExcerptPadding', device)]}
+										onChange={(value) => setAttributes({ [getAttrKey('itemExcerptPadding', device)]: value })}
+									/>
+								)}
+							</ResponsiveWrapper>
+							<Divider />
+							<ResponsiveWrapper label={__('Margin', 'boldpost')}>
+								{(device) => (
+									<BoxControl
+										values={attributes[getAttrKey('itemExcerptMargin', device)]}
+										onChange={(value) => setAttributes({ [getAttrKey('itemExcerptMargin', device)]: value })}
+									/>
+								)}
+							</ResponsiveWrapper>
+							<Divider />
+							<ResponsiveWrapper label={__('Text Align', 'boldpost')}>
+								{(device) => (
+									<TextAlignControl
+										attributes={attributes}
+										setAttributes={setAttributes}
+										attributeKey={getAttrKey('excerptTextAlign', device)}
+									/>
+								)}
+							</ResponsiveWrapper>
+							<Divider />
+							<ResponsiveWrapper label={__('Typography', 'boldpost')}>
+								{(device) => (
+									<TypographyControls
+										label={__('Typography', 'boldpost')}
+										attributes={attributes}
+										setAttributes={setAttributes}
+										attributeKey={getAttrKey('itemExcerptTypography', device)}
+									/>
+								)}
+							</ResponsiveWrapper>
+						</PanelBody>
+					)
+				}
+
+				{
+					attributes.listStyle == '3' && (
+						<PanelBody title={__('Serial', 'boldpost')} initialOpen={false}>
+							<ColorPopover
+								label={__('Color', 'boldpost')}
+								color={attributes.itemSerialColor}
+								defaultColor={''}
+								onChange={(value) => {
+									const hex = (value && typeof value === 'object') ? value.hex : value;
+									setAttributes({ itemSerialColor: hex });
+								}}
 							/>
-						)}
-					</ResponsiveWrapper>
-					<Divider />
-					<ResponsiveWrapper label={__('Text Align', 'boldpost')}>
-						{(device) => (
-							<TextAlignControl
-								attributes={attributes}
-								setAttributes={setAttributes}
-								attributeKey={getAttrKey('excerptTextAlign', device)}
-							/>
-						)}
-					</ResponsiveWrapper>
-					<Divider />
-					<ResponsiveWrapper label={__('Typography', 'boldpost')}>
-						{(device) => (
-							<TypographyControls
-								label={__('Typography', 'boldpost')}
-								attributes={attributes}
-								setAttributes={setAttributes}
-								attributeKey={getAttrKey('itemExcerptTypography', device)}
-							/>
-						)}
-					</ResponsiveWrapper>
-				</PanelBody>
+							<Divider />
+							<ResponsiveWrapper label={__('Typography', 'boldpost')}>
+								{(device) => (
+									<TypographyControls
+										label={__('Typography', 'boldpost')}
+										attributes={attributes}
+										setAttributes={setAttributes}
+										attributeKey={getAttrKey('itemSerialTypography', device)}
+									/>
+								)}
+							</ResponsiveWrapper>
+						</PanelBody>
+					)
+				}
 
 				<PanelBody title={__('Date Badge', 'boldpost')} initialOpen={false}>
 					<ColorPopover
@@ -758,80 +813,84 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 				</PanelBody>
 
-				<PanelBody title={__('Button', 'boldpost')} initialOpen={false}>
-					<TabPanel
-						className="eshb-tab-panel"
-						activeClass="is-active"
-						tabs={[
-							{ name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
-							{ name: 'hover', title: __('Hover', 'boldpost'), className: 'eshb-tab-hover' },
-						]}
-					>
-						{(tab) => {
-							const isHover = tab.name === 'hover';
-							return (
-								<div style={{ marginTop: '15px' }}>
-									<BackgroundControl
-										label={isHover ? __('Background', 'boldpost') : __('Background', 'boldpost')}
-										colorValue={isHover ? attributes.readMoreBackgroundColorHover : attributes.readMoreBackgroundColor}
-										gradientValue={isHover ? attributes.readMoreBackgroundGradientHover : attributes.readMoreBackgroundGradient}
-										onColorChange={(value) => {
-											const hex = (value && typeof value === 'object') ? value.hex : value;
-											setAttributes({ [isHover ? 'readMoreBackgroundColorHover' : 'readMoreBackgroundColor']: hex });
-										}}
-										onGradientChange={(value) => setAttributes({ [isHover ? 'readMoreBackgroundGradientHover' : 'readMoreBackgroundGradient']: value })}
+				{
+					attributes.listStyle !== '3' && (
+						<PanelBody title={__('Button', 'boldpost')} initialOpen={false}>
+							<TabPanel
+								className="eshb-tab-panel"
+								activeClass="is-active"
+								tabs={[
+									{ name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
+									{ name: 'hover', title: __('Hover', 'boldpost'), className: 'eshb-tab-hover' },
+								]}
+							>
+								{(tab) => {
+									const isHover = tab.name === 'hover';
+									return (
+										<div style={{ marginTop: '15px' }}>
+											<BackgroundControl
+												label={isHover ? __('Background', 'boldpost') : __('Background', 'boldpost')}
+												colorValue={isHover ? attributes.readMoreBackgroundColorHover : attributes.readMoreBackgroundColor}
+												gradientValue={isHover ? attributes.readMoreBackgroundGradientHover : attributes.readMoreBackgroundGradient}
+												onColorChange={(value) => {
+													const hex = (value && typeof value === 'object') ? value.hex : value;
+													setAttributes({ [isHover ? 'readMoreBackgroundColorHover' : 'readMoreBackgroundColor']: hex });
+												}}
+												onGradientChange={(value) => setAttributes({ [isHover ? 'readMoreBackgroundGradientHover' : 'readMoreBackgroundGradient']: value })}
+											/>
+											<ColorPopover
+												label={isHover ? __('Color', 'boldpost') : __('Color', 'boldpost')}
+												color={isHover ?
+													attributes.readMoreColorHover
+													: attributes.readMoreColor}
+												defaultColor={isHover ? '' : ''}
+												onChange={(value) => {
+													const hex = (value && typeof value === 'object') ? value.hex : value;
+													setAttributes({ [isHover ? 'readMoreColorHover' : 'readMoreColor']: hex });
+												}}
+											/>
+										</div>
+									);
+								}}
+							</TabPanel>
+							<Divider />
+							<BoxControl
+								label={__('Padding', 'boldpost')}
+								values={attributes.readMorePadding}
+								onChange={(value) => setAttributes({ readMorePadding: value })}
+							/>
+							<Divider />
+							<BoxControl
+								label={__('Margin', 'boldpost')}
+								values={attributes.readMoreMargin}
+								onChange={(value) => setAttributes({ readMoreMargin: value })}
+							/>
+							<Divider />
+							<BoxControl
+								label={__('Border Radius', 'boldpost')}
+								values={attributes.readMoreBorderRadius}
+								onChange={(value) => setAttributes({ readMoreBorderRadius: value })}
+							/>
+							<Divider />
+							<ResponsiveWrapper label={__('Text Align', 'boldpost')}>
+								{(device) => (
+									<TextAlignControl
+										attributes={attributes}
+										setAttributes={setAttributes}
+										attributeKey={getAttrKey('buttonTextAlign', device)}
 									/>
-									<ColorPopover
-										label={isHover ? __('Color', 'boldpost') : __('Color', 'boldpost')}
-										color={isHover ?
-											attributes.readMoreColorHover
-											: attributes.readMoreColor}
-										defaultColor={isHover ? '' : ''}
-										onChange={(value) => {
-											const hex = (value && typeof value === 'object') ? value.hex : value;
-											setAttributes({ [isHover ? 'readMoreColorHover' : 'readMoreColor']: hex });
-										}}
-									/>
-								</div>
-							);
-						}}
-					</TabPanel>
-					<Divider />
-					<BoxControl
-						label={__('Padding', 'boldpost')}
-						values={attributes.readMorePadding}
-						onChange={(value) => setAttributes({ readMorePadding: value })}
-					/>
-					<Divider />
-					<BoxControl
-						label={__('Margin', 'boldpost')}
-						values={attributes.readMoreMargin}
-						onChange={(value) => setAttributes({ readMoreMargin: value })}
-					/>
-					<Divider />
-					<BoxControl
-						label={__('Border Radius', 'boldpost')}
-						values={attributes.readMoreBorderRadius}
-						onChange={(value) => setAttributes({ readMoreBorderRadius: value })}
-					/>
-					<Divider />
-					<ResponsiveWrapper label={__('Text Align', 'boldpost')}>
-						{(device) => (
-							<TextAlignControl
+								)}
+							</ResponsiveWrapper>
+							<Divider />
+							<TypographyControls
+								label={__('Typography', 'boldpost')}
 								attributes={attributes}
 								setAttributes={setAttributes}
-								attributeKey={getAttrKey('buttonTextAlign', device)}
+								attributeKey="readMoreTypography"
 							/>
-						)}
-					</ResponsiveWrapper>
-					<Divider />
-					<TypographyControls
-						label={__('Typography', 'boldpost')}
-						attributes={attributes}
-						setAttributes={setAttributes}
-						attributeKey="readMoreTypography"
-					/>
-				</PanelBody>
+						</PanelBody>
+					)
+				}
 
 				<PanelBody title={__('Pagination', 'boldpost')} initialOpen={false}>
 					<TabPanel

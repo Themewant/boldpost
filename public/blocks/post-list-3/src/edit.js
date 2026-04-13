@@ -237,8 +237,8 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(value) => setAttributes({ listStyle: value })}
 						options={[
 							{ label: __('Default', 'boldpost'), value: 'default', src: list1 },
-							{ label: __('Style 1', 'boldpost'), value: '1', src: list2 },
-							{ label: __('Style 2', 'boldpost'), value: '2', src: list3 }
+							{ label: __('Style 1', 'boldpost'), value: '1', src: list2, isPro: true },
+							{ label: __('Style 2', 'boldpost'), value: '2', src: list3, isPro: true }
 						]}
 					/>
 				</PanelBody>
@@ -397,6 +397,18 @@ export default function Edit({ attributes, setAttributes }) {
 									{ label: __('Up Title', 'boldpost'), value: 'up_title' },
 									{ label: __('Below Title', 'boldpost'), value: 'below_title' },
 									{ label: __('Below Content', 'boldpost'), value: 'below_content' },
+								]}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
+							/>
+							<SelectControl
+								label={__('Style', 'boldpost')}
+								value={attributes.metaStyle}
+								onChange={(value) => setAttributes({ metaStyle: value })}
+								options={[
+									{ label: __('Default', 'boldpost'), value: 'default' },
+									{ label: __('Style 1', 'boldpost'), value: '1' },
+									{ label: __('Style 2', 'boldpost'), value: '2' },
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}

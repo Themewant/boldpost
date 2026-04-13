@@ -245,13 +245,7 @@
       "default": ""
     },
     "contentPadding": {
-      "type": "object",
-      "default": {
-        "top": "30px",
-        "right": "20px",
-        "bottom": "30px",
-        "left": "20px"
-      }
+      "type": "object"
     },
     "readMoreBackgroundColor": {
       "type": "string",
@@ -318,6 +312,10 @@
     },
     "metaMargin": {
       "type": "object"
+    },
+    "metaStyle": {
+      "type": "string",
+      "default": "default"
     },
     "titleTag": {
       "type": "string",
@@ -547,6 +545,46 @@
     "buttonTextAlignMobile": {
       "type": "string",
       "default": ""
+    },
+    "itemSerialColor": {
+      "type": "string",
+      "default": ""
+    },
+    "itemSerialTypography": {
+      "type": "object",
+      "default": {
+        "fontFamily": "",
+        "fontSize": "",
+        "fontWeight": "",
+        "fontStyle": "",
+        "textTransform": "",
+        "lineHeight": "",
+        "letterSpacing": ""
+      }
+    },
+    "itemSerialTypographyTablet": {
+      "type": "object",
+      "default": {
+        "fontFamily": "",
+        "fontSize": "",
+        "fontWeight": "",
+        "fontStyle": "",
+        "textTransform": "",
+        "lineHeight": "",
+        "letterSpacing": ""
+      }
+    },
+    "itemSerialTypographyMobile": {
+      "type": "object",
+      "default": {
+        "fontFamily": "",
+        "fontSize": "",
+        "fontWeight": "",
+        "fontStyle": "",
+        "textTransform": "",
+        "lineHeight": "",
+        "letterSpacing": ""
+      }
     }
   }
 }

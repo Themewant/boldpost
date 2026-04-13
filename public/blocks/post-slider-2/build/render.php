@@ -57,10 +57,7 @@ $video_height = isset($attributes['videoHeight']) ? $attributes['videoHeight'] :
 $video_width = isset($attributes['videoWidth']) ? $attributes['videoWidth'] : '100%';
 $video_controls = isset($attributes['videoControls']) && $attributes['videoControls'] ? 1 : 0;
 
-$meta_style = 'default';
-if ( $style === '1' || $style === '2' ) {
-    $meta_style = '2';
-}
+$meta_style = isset($attributes['metaStyle']) ? $attributes['metaStyle'] : 'default';
 
 $cat_style = 'default';
 
@@ -387,6 +384,11 @@ if($is_featured == true) {
 $unique      = wp_rand(2012, 35120);
 $query = new WP_Query( $args );
 
+$template_pl_path = BOLDPO_PL_PATH;
+if($style !== 'default' && defined('BOLDPO_PRO_PL_PATH')) {
+    $template_pl_path = BOLDPO_PRO_PL_PATH;
+}
+
 if ( $query->have_posts() ) :
 ?>
     <div <?php echo wp_kses_post(get_block_wrapper_attributes( array( 
@@ -411,11 +413,6 @@ if ( $query->have_posts() ) :
         <div class="boldpo-post-slider-2 swiper boldpo-post-slider-2-<?php echo esc_attr($unique); ?> style-<?php echo esc_attr($style); ?>">
             <div class="swiper-wrapper swiper-wrapper-<?php echo esc_attr($unique); ?>">
                 <?php
-                    if($style == 'default') {
-                        $template_pl_path = BOLDPO_PL_PATH;
-                    } else {
-                        $template_pl_path = BOLDPO_PRO_PL_PATH;
-                    }
                     while ( $query->have_posts() ) : $query->the_post();
                         $item_class = '';
                         if(is_sticky()) {

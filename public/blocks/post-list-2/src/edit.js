@@ -45,10 +45,10 @@ import IconPicker from '../../custom-components/IconPicker';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
-import list1 from './assets/img/style-1.png';
-import list2 from './assets/img/style-2.png';
-import list3 from './assets/img/style-2.png';
-import list4 from './assets/img/style-2.png';
+import layout1 from './assets/img/layout-1.png';
+import layout2 from './assets/img/layout-2.png';
+import layout3 from './assets/img/layout-3.png';
+import layout4 from './assets/img/layout-4.png';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -234,10 +234,10 @@ export default function Edit({ attributes, setAttributes }) {
 						value={attributes.listStyle}
 						onChange={(value) => setAttributes({ listStyle: value })}
 						options={[
-							{ label: __('Default', 'boldpost'), value: 'default', src: list1 },
-							{ label: __('Style 1', 'boldpost'), value: '1', src: list2 },
-							{ label: __('Style 2', 'boldpost'), value: '2', src: list3 },
-							{ label: __('Style 3', 'boldpost'), value: '3', src: list4 },
+							{ label: __('Default', 'boldpost'), value: 'default', src: layout1 },
+							{ label: __('Style 1', 'boldpost'), value: '1', src: layout2 },
+							{ label: __('Style 2', 'boldpost'), value: '2', src: layout3, isPro: true },
+							{ label: __('Style 3', 'boldpost'), value: '3', src: layout4, isPro: true },
 						]}
 					/>
 				</PanelBody>

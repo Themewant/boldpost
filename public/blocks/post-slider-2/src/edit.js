@@ -44,9 +44,9 @@ import IconPicker from '../../custom-components/IconPicker';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
-import grid1 from './assets/img/grid-1.png';
-import grid2 from './assets/img/grid-2.png';
-import grid3 from './assets/img/grid-3.png';
+import layout1 from './assets/img/layout-1.png';
+import layout2 from './assets/img/layout-2.png';
+import layout3 from './assets/img/layout-3.png';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -253,9 +253,9 @@ export default function Edit({ attributes, setAttributes }) {
 						value={attributes.sliderStyle}
 						onChange={(value) => setAttributes({ sliderStyle: value })}
 						options={[
-							{ label: __('Default', 'boldpost'), value: 'default', src: grid1 },
-							{ label: __('Style 1', 'boldpost'), value: '1', src: grid2 },
-							{ label: __('Style 2', 'boldpost'), value: '2', src: grid3 }
+							{ label: __('Default', 'boldpost'), value: 'default', src: layout1 },
+							{ label: __('Style 1', 'boldpost'), value: '1', src: layout2, isPro: true },
+							{ label: __('Style 2', 'boldpost'), value: '2', src: layout3, isPro: true }
 						]}
 					/>
 				</PanelBody>
@@ -442,6 +442,18 @@ export default function Edit({ attributes, setAttributes }) {
 									{ label: __('Up Title', 'boldpost'), value: 'up_title' },
 									{ label: __('Below Title', 'boldpost'), value: 'below_title' },
 									{ label: __('Below Content', 'boldpost'), value: 'below_content' },
+								]}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
+							/>
+							<SelectControl
+								label={__('Style', 'boldpost')}
+								value={attributes.metaStyle}
+								onChange={(value) => setAttributes({ metaStyle: value })}
+								options={[
+									{ label: __('Default', 'boldpost'), value: 'default' },
+									{ label: __('Style 1', 'boldpost'), value: '1' },
+									{ label: __('Style 2', 'boldpost'), value: '2' },
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}

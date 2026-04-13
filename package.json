@@ -5,7 +5,7 @@
   "scripts": {
     "start": "wp-scripts start admin/app/src/index.js --output-path=admin/app/build",
     "start:blockEditor": "wp-scripts start editor/app/src/index.js --output-path=editor/app/build",
-    "build": "wp-scripts build admin/app/src/index.js --output-path=admin/app/build && npm run build:blockEditor && npm run build:postGrid && npm run build:postList && npm run build:postList2 && npm run build:postList3 && npm run build:postList4 && npm run build:postSlider && npm run build:postSlider2 && npm run build:postSlider3 && npm run build:postSlider4 && npm run build:categoryList && npm run build:postGrid2 && npm run build:postTicker && npm run build:postTicker2 && npm run build:heading && npm run build:button",
+    "build": "wp-scripts build admin/app/src/index.js --output-path=admin/app/build && npm run build:blockEditor && npm run build:postGrid && npm run build:postList && npm run build:postList2 && npm run build:postList3 && npm run build:postList4 && npm run build:postSlider && npm run build:postSlider2 && npm run build:postSlider3 && npm run build:postSlider4 && npm run build:categoryList && npm run build:postGrid2 && npm run build:postGrid3 && npm run build:postGrid4 && npm run build:postTicker && npm run build:postTicker2 && npm run build:heading && npm run build:button",
     "build:dashboard": "wp-scripts build admin/app/src/index.js --output-path=admin/app/build",
     "build:postList": "wp-scripts build --blocks-manifest --webpack-src-dir=public/blocks/post-list/src --output-path=public/blocks/post-list/build",
     "build:postList2": "wp-scripts build --blocks-manifest --webpack-src-dir=public/blocks/post-list-2/src --output-path=public/blocks/post-list-2/build",

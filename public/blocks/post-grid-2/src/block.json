@@ -338,6 +338,10 @@
 		"metaMargin": {
 			"type": "object"
 		},
+		"metaStyle": {
+			"type": "string",
+			"default": "default"
+		},
 		"titleLeftTag": {
 			"type": "string",
 			"default": "h3"

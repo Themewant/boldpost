@@ -50,11 +50,7 @@ $excerpt_trim = isset($attributes['excerptTrim']) ? $attributes['excerptTrim'] :
 $anim_style = isset($attributes['animStyle']) ? $attributes['animStyle'] : '';
 $thumb_anim = isset($attributes['thumbAnim']) ? 'boldpo-animate' : '';
 
-$meta_style = '1';
-
-if( $style == '1' || $style == '2' ) {
-    $meta_style = '2';
-}
+$meta_style = isset($attributes['metaStyle']) ? $attributes['metaStyle'] : 'default';
 
 $cat_style = 'default';
 
@@ -423,6 +419,11 @@ if ( empty( $block_wrap_attr ) ) {
     $block_wrap_attr = 'class="boldpo-block boldpo-post-list-3-block-wrap ' . esc_attr( $unique_id ) . '"';
 }
 
+$template_pl_path = BOLDPO_PL_PATH;
+if($style !== 'default' && defined('BOLDPO_PRO_PL_PATH')) {
+    $template_pl_path = BOLDPO_PRO_PL_PATH;
+}
+
 if ( $query->have_posts() ) :
 ?>
     <div <?php echo wp_kses_post($block_wrap_attr); ?>>
@@ -438,11 +439,6 @@ if ( $query->have_posts() ) :
                 echo '<div class="boldpo-list-row boldpo-row ' . esc_attr($gap_class) . ' ' . esc_attr($row_gap_class) . '" data-paged="' . esc_attr($paged) . '">';
             }
             
-            if($style == 'default') {
-                $template_pl_path = BOLDPO_PL_PATH;
-            } else {
-                $template_pl_path = BOLDPO_PRO_PL_PATH;
-            }
 
             $last_modified_date = false;
             while ( $query->have_posts() ) : $query->the_post();
