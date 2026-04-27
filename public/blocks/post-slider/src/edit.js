@@ -46,6 +46,7 @@ import IconPicker from '../../custom-components/IconPicker';
 import './editor.scss';
 import grid1 from './assets/img/grid-1.png';
 import grid2 from './assets/img/grid-2.png';
+import grid3 from './assets/img/grid-3.png';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -138,27 +139,60 @@ export default function Edit({ attributes, setAttributes }) {
 	// add all
 	includesOptions.unshift({ label: __('All', 'boldpost'), value: 'all' });
 
+	const lastInitRef = useRef(null);
+
 	useEffect(() => {
-		const init = () => {
-			if (typeof window.initBoldpoSlider === 'function') {
-				window.initBoldpoSlider(blockRef.current);
+		let timer;
+		let attempts = 0;
+
+		// Reset initialized flag on existing wraps so they can be re-initialized
+		if (blockRef.current) {
+			const wraps = blockRef.current.querySelectorAll('.boldpo-post-slider-block-wrap');
+			wraps.forEach((wrap) => {
+				wrap.dataset.initialized = '';
+			});
+		}
+
+		const tryInit = () => {
+			if (attempts++ >= 80) return; // max ~8 seconds to allow SSR time
+
+			const wrap = blockRef.current?.querySelector('.boldpo-post-slider-block-wrap');
+
+			if (
+				blockRef.current &&
+				typeof window.initBoldpoSliderOne === 'function' &&
+				typeof window.Swiper !== 'undefined' &&
+				wrap
+			) {
+				// Get current unique ID to detect DOM replacement by SSR
+				const currentUnique = wrap.dataset.unique;
+
+				if (wrap.dataset.initialized === 'true') {
+					// Already initialized — but SSR may replace DOM soon
+					// Check if DOM has been replaced (unique ID changes each render)
+					if (currentUnique !== lastInitRef.current) {
+						// SSR replaced DOM, reset and re-init
+						wrap.dataset.initialized = '';
+						window.initBoldpoSliderOne(blockRef.current);
+						lastInitRef.current = currentUnique;
+					} else {
+						// Same DOM, keep polling in case SSR replaces it
+						timer = setTimeout(tryInit, 100);
+					}
+				} else {
+					// Not initialized yet, do it
+					window.initBoldpoSliderOne(blockRef.current);
+					lastInitRef.current = currentUnique;
+					// Keep polling to catch SSR DOM replacement
+					timer = setTimeout(tryInit, 100);
+				}
+			} else {
+				timer = setTimeout(tryInit, 100);
 			}
 		};
 
-		init();
-
-		const observer = new MutationObserver(init);
-		if (blockRef.current) {
-			observer.observe(blockRef.current, { childList: true, subtree: true });
-		}
-
-		// Also trigger on a small delay to handle ServerSideRender completion
-		const timer = setTimeout(init, 1000);
-
-		return () => {
-			observer.disconnect();
-			clearTimeout(timer);
-		};
+		tryInit();
+		return () => clearTimeout(timer);
 	}, [attributes]);
 
 
@@ -254,6 +288,7 @@ export default function Edit({ attributes, setAttributes }) {
 						options={[
 							{ label: __('Default', 'boldpost'), value: 'default', src: grid1 },
 							{ label: __('Style 1', 'boldpost'), value: '1', src: grid2 },
+							{ label: __('Style 2', 'boldpost'), value: '2', src: grid3 },
 						]}
 					/>
 				</PanelBody>
@@ -279,6 +314,55 @@ export default function Edit({ attributes, setAttributes }) {
 						)}
 					</ResponsiveWrapper>
 
+				</PanelBody>
+
+				<PanelBody title={__('Video', 'boldpost')} initialOpen={false}>
+					<ToggleControl
+						label={__('Show Video', 'boldpost')}
+						checked={attributes.showVideo}
+						onChange={(value) => setAttributes({ showVideo: value })}
+					/>
+					<ToggleControl
+						label={__('Autoplay', 'boldpost')}
+						checked={attributes.videoAutoplay}
+						onChange={(value) => setAttributes({ videoAutoplay: value })}
+					/>
+					<ToggleControl
+						label={__('Mute', 'boldpost')}
+						checked={attributes.videoMute}
+						onChange={(value) => setAttributes({ videoMute: value })}
+					/>
+					<ResponsiveWrapper label={__('Video Height', 'boldpost')}>
+						{(device) => (
+							<RangeControlWithUnit
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('videoHeight', device)}
+								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+								min={0}
+								max={1080}
+								step={1}
+							/>
+						)}
+					</ResponsiveWrapper>
+					<ResponsiveWrapper label={__('Video Width', 'boldpost')}>
+						{(device) => (
+							<RangeControlWithUnit
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('videoWidth', device)}
+								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+								min={0}
+								max={1080}
+								step={1}
+							/>
+						)}
+					</ResponsiveWrapper>
+					<ToggleControl
+						label={__('Show Controls', 'boldpost')}
+						checked={attributes.videoControls}
+						onChange={(value) => setAttributes({ videoControls: value })}
+					/>
 				</PanelBody>
 
 				<PanelBody title={__('Thumbnail', 'boldpost')} initialOpen={false}>
@@ -412,6 +496,7 @@ export default function Edit({ attributes, setAttributes }) {
 									{ label: __('Default', 'boldpost'), value: 'default' },
 									{ label: __('Style 1', 'boldpost'), value: '1' },
 									{ label: __('Style 2', 'boldpost'), value: '2' },
+									{ label: __('Style 3', 'boldpost'), value: '3' }
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
@@ -469,6 +554,20 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(value) => setAttributes({ showNav: value })}
 						__nextHasNoMarginBottom={true}
 					/>
+					<SelectControl
+						label={__('Nav Position', 'boldpost')}
+						value={attributes.navPosition}
+						onChange={(value) => setAttributes({ navPosition: value })}
+						options={[
+							{ label: __('Middle', 'boldpost'), value: 'middle' },
+							{ label: __('Top Left', 'boldpost'), value: 'top-left' },
+							{ label: __('Top Right', 'boldpost'), value: 'top-right' },
+							{ label: __('Bottom Left', 'boldpost'), value: 'bottom-left' },
+							{ label: __('Bottom Right', 'boldpost'), value: 'bottom-right' },
+						]}
+						__next40pxDefaultSize={true}
+						__nextHasNoMarginBottom={true}
+					/>
 				</PanelBody>
 
 				<PanelBody title={__('Dots', 'boldpost')} initialOpen={false}>
@@ -491,7 +590,11 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('3', 'boldpost'), value: '3' },
 							{ label: __('3.3', 'boldpost'), value: '3.3' },
 							{ label: __('4', 'boldpost'), value: '4' },
-							{ label: __('4.3', 'boldpost'), value: '4.3' }
+							{ label: __('4.3', 'boldpost'), value: '4.3' },
+							{ label: __('5', 'boldpost'), value: '5' },
+							{ label: __('5.3', 'boldpost'), value: '5.3' },
+							{ label: __('6', 'boldpost'), value: '6' },
+							{ label: __('6.3', 'boldpost'), value: '6.3' }
 						]}
 						onChange={(value) => setAttributes({ slidesPerView: value })}
 						help={__('Choose which effect this booking form is for', 'boldpost')}
@@ -974,6 +1077,12 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(value) => setAttributes({ readMoreBorderRadius: value })}
 					/>
 					<Divider />
+					<BorderControl
+						label={__('Border', 'boldpost')}
+						value={attributes.readMoreBorder}
+						onChange={(value) => setAttributes({ readMoreBorder: value })}
+					/>
+					<Divider />
 					<ResponsiveWrapper label={__('Text Align', 'boldpost')}>
 						{(device) => (
 							<TextAlignControl
@@ -1080,7 +1189,11 @@ export default function Edit({ attributes, setAttributes }) {
 								values={attributes.navBorderRadius}
 								onChange={(value) => setAttributes({ navBorderRadius: value })}
 							/>
-							<Divider />
+							<BorderControl
+								label={__('Border', 'boldpost')}
+								value={attributes.navBorder}
+								onChange={(value) => setAttributes({ navBorder: value })}
+							/>
 							<BoxControl
 								label={__('Padding', 'boldpost')}
 								values={attributes.navPadding}
@@ -1090,6 +1203,63 @@ export default function Edit({ attributes, setAttributes }) {
 						</PanelBody>
 					)
 				}
+
+				<PanelBody title={__('Thumbnail', 'boldpost')} initialOpen={false}>
+					<BoxControl
+						label={__('Border Radius', 'boldpost')}
+						values={attributes.thumbnailBorderRadius}
+						onChange={(value) => setAttributes({ thumbnailBorderRadius: value })}
+					/>
+				</PanelBody>
+
+				<PanelBody title={__('Category', 'boldpost')} initialOpen={false}>
+					<TabPanel
+						className="eshb-tab-panel"
+						activeClass="is-active"
+						tabs={[
+							{ name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
+							{ name: 'hover', title: __('Hover', 'boldpost'), className: 'eshb-tab-hover' },
+						]}
+					>
+						{(tab) => {
+							const isHover = tab.name === 'hover';
+							return (
+								<div style={{ marginTop: '15px' }}>
+									<ColorPopover
+										label={__('Color', 'boldpost')}
+										color={isHover ? attributes.categoryColorHover : attributes.categoryColor}
+										defaultColor={''}
+										onChange={(value) => {
+											const hex = (value && typeof value === 'object') ? value.hex : value;
+											setAttributes({ [isHover ? 'categoryColorHover' : 'categoryColor']: hex });
+										}}
+									/>
+									<ColorPopover
+										label={__('Background Color', 'boldpost')}
+										color={isHover ? attributes.categoryBackgroundColorHover : attributes.categoryBackgroundColor}
+										defaultColor={''}
+										onChange={(value) => {
+											const hex = (value && typeof value === 'object') ? value.hex : value;
+											setAttributes({ [isHover ? 'categoryBackgroundColorHover' : 'categoryBackgroundColor']: hex });
+										}}
+									/>
+								</div>
+							);
+						}}
+					</TabPanel>
+					<Divider />
+					<BoxControl
+						label={__('Padding', 'boldpost')}
+						values={attributes.categoryPadding}
+						onChange={(value) => setAttributes({ categoryPadding: value })}
+					/>
+					<Divider />
+					<BoxControl
+						label={__('Margin', 'boldpost')}
+						values={attributes.categoryMargin}
+						onChange={(value) => setAttributes({ categoryMargin: value })}
+					/>
+				</PanelBody>
 
 			</InspectorControls>
 

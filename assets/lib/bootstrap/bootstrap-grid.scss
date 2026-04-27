@@ -42,9 +42,11 @@ $enable-grid-classes: false;
 // Step 5: Manually add prefixed grid classes
 .#{$prefix}row {
     @include make-row();
+    box-sizing: border-box;
 
     >* {
         @include make-col-ready();
+        box-sizing: border-box;
     }
 }
 

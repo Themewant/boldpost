@@ -22,6 +22,7 @@ define( 'BOLDPO_DIR_URL', plugin_dir_url( BOLDPO_PL_ROOT ) );
 define( 'BOLDPO_PLUGIN_BASE', plugin_basename( BOLDPO_PL_ROOT ) );
 
 require_once BOLDPO_PL_PATH . 'class.boldpost.php';
+require_once BOLDPO_PL_PATH . 'admin/post-types.php';
 require_once BOLDPO_PL_PATH . 'public/blocks/blocks.php';
 require_once BOLDPO_PL_PATH . 'editor/index.php';
 

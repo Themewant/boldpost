@@ -32,7 +32,7 @@ return array(
 		'attributes' => array(
 			'listStyle' => array(
 				'type' => 'string',
-				'default' => '1'
+				'default' => 'default'
 			),
 			'columns' => array(
 				'type' => 'string',
@@ -87,13 +87,7 @@ return array(
 				)
 			),
 			'itemPadding' => array(
-				'type' => 'object',
-				'default' => array(
-					'top' => '10px',
-					'right' => '10px',
-					'bottom' => '10px',
-					'left' => '10px'
-				)
+				'type' => 'object'
 			),
 			'itemPaddingTablet' => array(
 				'type' => 'object',
@@ -323,6 +317,51 @@ return array(
 			'titleTag' => array(
 				'type' => 'string',
 				'default' => 'h3'
+			),
+			'thumbnailSize' => array(
+				'type' => 'string',
+				'default' => 'medium'
+			),
+			'thumbnailBorderRadius' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '',
+					'right' => '',
+					'bottom' => '',
+					'left' => ''
+				)
+			),
+			'detailsBtnLabel' => array(
+				'type' => 'string',
+				'default' => 'Visit'
+			),
+			'detailsBtnTypography' => array(
+				'type' => 'object',
+				'default' => array(
+					'fontFamily' => '',
+					'fontSize' => '14px',
+					'fontWeight' => '500',
+					'fontStyle' => '',
+					'textTransform' => '',
+					'lineHeight' => '',
+					'letterSpacing' => ''
+				)
+			),
+			'detailsBtnColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'detailsBtnColorHover' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'detailsBtnBackgroundColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'detailsBtnBackgroundColorHover' => array(
+				'type' => 'string',
+				'default' => ''
 			)
 		)
 	)

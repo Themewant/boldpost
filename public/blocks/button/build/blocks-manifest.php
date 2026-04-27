@@ -30,6 +30,10 @@ return array(
 		'viewScript' => 'file:./view.js',
 		'render' => 'file:./render.php',
 		'attributes' => array(
+			'buttonStyle' => array(
+				'type' => 'string',
+				'default' => 'default'
+			),
 			'text' => array(
 				'type' => 'string',
 				'default' => 'View all posts'

@@ -2,7 +2,7 @@
 
 	.boldpo-post-slider {
 		display: block; // Swiper needs block, children are absolute
-		padding-bottom: 80px;
+		padding-bottom: 30px;
 
 		.boldpo-grid-item-inner {
 			@media screen and (max-width: 575px) {
@@ -21,6 +21,8 @@
 
 			&:hover {
 				.boldpo-blog-img {
+					position: relative;
+
 					&.boldpo-animate {
 						overflow: hidden;
 
@@ -84,6 +86,7 @@
 			}
 
 			.boldpo-blog-img {
+				position: relative;
 				max-width: 100%;
 				height: auto;
 				display: block;
@@ -264,17 +267,45 @@
 			}
 		}
 
+		&.style-2 {
+			.boldpo-grid-item {
+				.boldpo-blog-img {
+					border-radius: 10px;
+
+					img {
+						height: 250px;
+					}
+				}
+
+				.boldpo-blog-title {
+					font-size: 1.025rem;
+				}
+
+				.boldpo-blog-metas {
+					margin: 6px 0 5px;
+				}
+			}
+
+			.nav-btn {
+				--swiper-navigation-size: 32px;
+				padding: 13px;
+				border-radius: 50%;
+			}
+		}
+
 		.swiper-pagination-bullet {
 			&.swiper-pagination-bullet-active {
 				background-color: #000;
 			}
 		}
 
+
 		.nav-btn {
 			background-color: #fff;
 			border-radius: 5px;
 			transition: var(--boldpo-preset-hover-transition);
 			top: 45%;
+			box-sizing: border-box;
 
 			svg {
 				height: 20px;
@@ -301,5 +332,81 @@
 				}
 			}
 		}
+
+		&.nav-position {
+			&-middle {
+				top: 45%;
+			}
+
+			&-top-left {
+				padding-top: 100px;
+
+				.swiper-button-prev {
+					top: 30px;
+					left: 0;
+					right: unset !important;
+				}
+
+				.swiper-button-next {
+					top: 30px;
+					left: 50px;
+					right: unset !important;
+				}
+			}
+
+			&-top-right {
+
+				padding-top: 100px;
+
+				.swiper-button-prev {
+					top: 30px;
+					right: 50px;
+					left: unset !important;
+				}
+
+				.swiper-button-next {
+					top: 30px;
+					right: 0;
+					left: unset !important;
+				}
+			}
+
+			&-bottom-left {
+				padding-bottom: 100px;
+
+				.swiper-button-prev {
+					top: unset !important;
+					bottom: 30px;
+					left: 0;
+				}
+
+				.swiper-button-next {
+					top: unset !important;
+					bottom: 30px;
+					left: 50px;
+				}
+			}
+
+			&-bottom-right {
+				padding-bottom: 100px;
+
+				.swiper-button-prev {
+					top: unset !important;
+					bottom: 30px;
+					left: unset !important;
+					right: 50px;
+				}
+
+				.swiper-button-next {
+					top: unset !important;
+					bottom: 30px;
+					left: unset !important;
+					right: 0;
+				}
+			}
+		}
+
+
+
 	}
 }

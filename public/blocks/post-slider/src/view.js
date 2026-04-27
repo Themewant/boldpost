@@ -25,4 +25,4 @@
 /* eslint-enable no-console */
 import './slider-init.js';
 
-window.initBoldpoSlider(document);
+window.initBoldpoSliderOne(document);

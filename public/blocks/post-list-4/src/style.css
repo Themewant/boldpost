@@ -4,9 +4,6 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
-.boldpo-post-list-4-block-wrap {
-  margin-block-start: 0 !important;
-}
 .boldpo-post-list-4-block-wrap .boldpo-post-list-4 {
   box-sizing: border-box;
   margin-bottom: 0px;
@@ -91,6 +88,7 @@
   }
 }
 .boldpo-post-list-4-block-wrap .boldpo-post-list-4 .boldpo-list-item .boldpo-blog-img {
+  position: relative;
   width: 70px;
   max-width: 100%;
   height: auto;
@@ -224,6 +222,7 @@
   background: rgba(0, 0, 0, 0.47);
 }
 .boldpo-post-list-4-block-wrap .boldpo-post-list-4.style-1 .boldpo-list-item .boldpo-blog-img {
+  position: relative;
   width: 100%;
 }
 .boldpo-post-list-4-block-wrap .boldpo-post-list-4.style-1 .boldpo-list-item .boldpo-blog-img img {

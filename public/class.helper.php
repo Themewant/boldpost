@@ -101,11 +101,47 @@ class BOLDPO_Helper {
 		return "$x $y $b $s $c";
 	}
 
-	public static function border_to_css($border) {
-		$width = self::ensure_unit($border['width'] ?? 0);
+	public static function border_to_css_props($border) {
 		$style = $border['style'] ?? 'solid';
 		$color = $border['color'] ?? 'rgba(0,0,0,0)';
-		return "$width $style $color";
+		$width = $border['width'] ?? 0;
+
+		if ( is_array( $width ) ) {
+			$top    = self::ensure_unit( $width['top']    ?? 0 );
+			$right  = self::ensure_unit( $width['right']  ?? 0 );
+			$bottom = self::ensure_unit( $width['bottom'] ?? 0 );
+			$left   = self::ensure_unit( $width['left']   ?? 0 );
+
+			// Skip if every side is zero
+			if ( (int) $top === 0 && (int) $right === 0 && (int) $bottom === 0 && (int) $left === 0 ) {
+				return [];
+			}
+
+			return [
+				'border-style' => $style,
+				'border-color' => $color,
+				'border-width' => "$top $right $bottom $left",
+			];
+		}
+
+		// Skip if width is zero
+		if ( (int) $width === 0 ) {
+			return [];
+		}
+
+		$w = self::ensure_unit( $width );
+		return [ 'border' => "$w $style $color" ];
+	}
+
+	public static function border_to_css($border) {
+		$width = $border['width'] ?? 0;
+		if ( is_array( $width ) ) {
+			$width = $width['top'] ?? 0;
+		}
+		$w     = self::ensure_unit( $width );
+		$style = $border['style'] ?? 'solid';
+		$color = $border['color'] ?? 'rgba(0,0,0,0)';
+		return "$w $style $color";
 	}
 
 	public static function boldpost_time_ago() {

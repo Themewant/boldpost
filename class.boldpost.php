@@ -35,6 +35,11 @@ class BOLDPO_Main {
         require_once BOLDPO_PL_PATH . 'editor/video.php';
         require_once BOLDPO_PL_PATH . 'admin/index.php';
         require_once BOLDPO_PL_PATH . 'public/scripts.php';
+
+        // Elementor integration
+        if ( did_action( 'elementor/loaded' ) ) {
+            require_once BOLDPO_PL_PATH . 'admin/extension/elementor/class.elementor.php';
+        }
     }
 
     public function add_menu() {

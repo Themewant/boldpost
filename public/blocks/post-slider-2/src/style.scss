@@ -88,7 +88,6 @@
 				display: inline-block;
 				padding: 20px;
 				padding-bottom: 6px;
-				text-align: center;
 				border-radius: 4px;
 				color: #fff;
 				margin: 25px;
@@ -106,6 +105,7 @@
 				margin: 0 auto;
 				overflow: hidden;
 				width: 100%;
+				position: relative;
 
 				img {
 					display: block;
@@ -139,7 +139,9 @@
 				color: currentColor;
 				margin-top: 10px;
 				margin-bottom: 5px;
-				font-size: 2rem;
+				font-size: 3rem;
+				font-weight: 600;
+				line-height: 100%;
 
 				a {
 					color: currentColor;
@@ -228,8 +230,6 @@
 				justify-content: flex-end;
 			}
 
-
-
 			.boldpo-overlay-all {
 				position: absolute;
 				bottom: 0;
@@ -270,8 +270,6 @@
 			}
 		}
 
-
-
 		.swiper-pagination-bullets {
 			position: relative;
 			text-align: right;
@@ -294,6 +292,14 @@
 			border-radius: 5px;
 			transition: var(--boldpo-preset-hover-transition);
 			top: 45%;
+
+			&.swiper-button-prev {
+				left: 30px;
+			}
+
+			&.swiper-button-next {
+				right: 30px;
+			}
 
 			svg {
 				height: 20px;
@@ -318,6 +324,90 @@
 						stroke: currentColor;
 					}
 				}
+			}
+		}
+
+		&.style-3 {
+			.boldpo-grid-item {
+				.boldpo-blog-content {
+					// Override base: reset bottom/height/justify and center the content
+					bottom: unset;
+					height: auto;
+					justify-content: center;
+					// Center positioning
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%) !important;
+					width: 100%;
+					max-width: 750px;
+					// Style
+					align-items: center;
+					text-align: center;
+					padding: 40px 30px;
+				}
+
+				.boldpo-overlay-all {
+					height: 100%;
+					background-image: linear-gradient(to top,
+							rgba(0, 0, 0, 0.75) 0%,
+							rgba(0, 0, 0, 0.45) 50%,
+							rgba(0, 0, 0, 0.25) 100%);
+				}
+
+				.boldpo-blog-categories {
+					margin-bottom: 12px;
+				}
+
+				.boldpo-blog-title {
+					a {
+						color: #fff;
+					}
+				}
+
+				.boldpo-blog-metas {
+					display: flex;
+					flex-direction: row;
+					justify-content: center;
+					flex-wrap: wrap;
+					gap: 12px;
+				}
+			}
+
+			.nav-btn {
+				display: none;
+				border-radius: 100%;
+				height: 36px;
+				width: 36px;
+				color: var(--boldpo-preset-color-contrast-2);
+
+				&:hover {
+					color: var(--boldpo-preset-color-white);
+				}
+
+				&.swiper-button-prev {
+					left: 20px;
+				}
+
+				&.swiper-button-next {
+					right: 20px;
+				}
+
+				svg {
+					height: 12px;
+					width: auto;
+				}
+			}
+
+			&:hover {
+				.nav-btn {
+					display: flex;
+				}
+			}
+
+			.swiper-pagination-bullets {
+				text-align: center;
+				right: unset;
+				bottom: 50px;
 			}
 		}
 

@@ -481,6 +481,13 @@ export default function Edit({ attributes, setAttributes }) {
 						)}
 					</ResponsiveWrapper>
 				</PanelBody>
+				<PanelBody title={__('Thumbnail', 'boldpost')} initialOpen={false}>
+					<BoxControl
+						label={__('Border Radius', 'boldpost')}
+						values={attributes.thumbnailBorderRadius}
+						onChange={(value) => setAttributes({ thumbnailBorderRadius: value })}
+					/>
+				</PanelBody>
 				<PanelBody title={__('Title', 'boldpost')} initialOpen={false}>
 					<TabPanel
 						className="eshb-tab-panel"

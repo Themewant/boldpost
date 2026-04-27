@@ -4,11 +4,15 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 $boldpo_allowed_metas = isset($attributes['allowedMetas']) ? $attributes['allowedMetas'] : [];
 $boldpo_meta_html = '';
 
+if(empty($boldpo_allowed_metas)) {
+    return;
+}
+
 if ( in_array( 'author', $boldpo_allowed_metas ) ) {
         $author_icon = '<i class="boldpo-meta-icon boldpo-icon-user-avatar"></i>';
         if($meta_style == '1') {
             $author_icon = '';
-        }else if($meta_style == '2') {
+        }else if($meta_style == '2' || $meta_style == '3') {
             $author_id = get_the_author_meta('ID');
             $avatar_url = get_avatar_url($author_id, array(
                 'size' => 150
@@ -19,18 +23,20 @@ if ( in_array( 'author', $boldpo_allowed_metas ) ) {
         $boldpo_meta_html .= '<span class="bldpost-meta">' . $author_icon . '<a href="' . esc_url(get_author_posts_url(get_the_author_meta('ID'))) . '">' . esc_html( $attributes['authorPrefix'] ) . ' ' . esc_html( get_the_author() ) . '</a></span>';
 }
 
+$boldpo_date_html = '';
 if ( in_array( 'date', $boldpo_allowed_metas ) && empty($attributes['showDateOnTop'])) {
     $date_icon = '<i class="boldpo-meta-icon boldpo-icon-calendar-two"></i>';
     $date = get_the_date();
     if(in_array($meta_style, ['1', '2'])) {
         $date_icon = '';
     }
-    if(in_array($meta_style, ['2'])) {
+    if(in_array($meta_style, ['2', '3'])) {
         $date = BOLDPO_Helper::boldpost_time_ago();
     }
-    $boldpo_meta_html .= '<span class="bldpost-meta">' . $date_icon . esc_html( $date ) . '</span>';
+    $boldpo_date_html = '<span class="bldpost-meta">' . $date_icon . esc_html( $date ) . '</span>';
 }
 
+$boldpo_category_html = '';
 if ( in_array( 'category', $boldpo_allowed_metas ) ) {
     $boldpo_categories = get_the_category();
     if ( ! empty($boldpo_categories) ) {
@@ -39,14 +45,20 @@ if ( in_array( 'category', $boldpo_allowed_metas ) ) {
             if ( $boldpo_category->slug === 'uncategorized' ) {
                 continue;
             }
-            $cat_links[] = '<a href="' . esc_url(get_category_link($boldpo_category->term_id)) . '">' . esc_html( $boldpo_category->name ) . '</a>';
+            $cat_links[] = '<a href="' . esc_url(get_category_link($boldpo_category->term_id)) . '" class="boldpo-meta-cat">' . esc_html( $boldpo_category->name ) . '</a>';
         }
         if ( ! empty( $cat_links ) ) {
-            $boldpo_meta_html .= '<span class="bldpost-meta"><i class="boldpo-meta-icon boldpo-icon-notification-status"></i>';
-            $boldpo_meta_html .= implode( ', ', $cat_links );
-            $boldpo_meta_html .= '</span>';
+            $boldpo_category_html  = '<span class="bldpost-meta"><i class="boldpo-meta-icon boldpo-icon-notification-status"></i>';
+            $boldpo_category_html .= implode( ', ', $cat_links );
+            $boldpo_category_html .= '</span>';
         }
     }
+}
+
+if ( $meta_style == '3' ) {
+    $boldpo_meta_html .= $boldpo_category_html . $boldpo_date_html;
+} else {
+    $boldpo_meta_html .= $boldpo_date_html . $boldpo_category_html;
 }
 if ( in_array( 'tag', $boldpo_allowed_metas ) ) {
     $boldpo_tags = get_the_tags();

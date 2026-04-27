@@ -40,6 +40,8 @@ import ResponsiveWrapper from '../../custom-components/ResponsiveWrapper';
  */
 import './editor.scss';
 import style1 from './assets/img/style-1.png';
+import style2 from './assets/img/style-2.png';
+import style3 from './assets/img/style-3.png';
 /**
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
@@ -63,6 +65,19 @@ export default function Edit({ attributes, setAttributes }) {
             ),
         []
     );
+
+    const imageSizeOptions = useSelect((select) => {
+        const blockEditorSettings = select('core/block-editor').getSettings();
+        const sizes = blockEditorSettings?.imageSizes;
+        let options = [];
+        if (sizes && Array.isArray(sizes)) {
+            options = sizes.map((size) => ({
+                label: size.name,
+                value: size.slug,
+            }));
+        }
+        return options;
+    }, []);
 
     let categoriesOptions = (categories || []).map((category) => ({
         label: decodeEntities(category.name),
@@ -147,7 +162,9 @@ export default function Edit({ attributes, setAttributes }) {
                         value={attributes.listStyle}
                         onChange={(value) => setAttributes({ listStyle: value })}
                         options={[
-                            { label: __('Style 1', 'boldpost'), value: '1', src: style1 },
+                            { label: __('Style 1', 'boldpost'), value: 'default', src: style1 },
+                            { label: __('Style 2', 'boldpost'), value: '1', src: style2 },
+                            { label: __('Style 3', 'boldpost'), value: '2', src: style3, isPro: true },
                         ]}
                         __next40pxDefaultSize={true}
                         __nextHasNoMarginBottom={true}
@@ -165,7 +182,14 @@ export default function Edit({ attributes, setAttributes }) {
                                     { label: __('2 Column', 'boldpost'), value: '2' },
                                     { label: __('3 Column', 'boldpost'), value: '3' },
                                     { label: __('4 Column', 'boldpost'), value: '4' },
+                                    { label: __('5 Column', 'boldpost'), value: '5' },
                                     { label: __('6 Column', 'boldpost'), value: '6' },
+                                    { label: __('7 Column', 'boldpost'), value: '7' },
+                                    { label: __('8 Column', 'boldpost'), value: '8' },
+                                    { label: __('9 Column', 'boldpost'), value: '9' },
+                                    { label: __('10 Column', 'boldpost'), value: '10' },
+                                    { label: __('11 Column', 'boldpost'), value: '11' },
+                                    { label: __('12 Column', 'boldpost'), value: '12' },
                                 ]}
                                 __next40pxDefaultSize={true}
                                 __nextHasNoMarginBottom={true}
@@ -211,6 +235,16 @@ export default function Edit({ attributes, setAttributes }) {
                         label={__('Show Empty Count', 'boldpost')}
                         checked={attributes.showEmptyCount}
                         onChange={(value) => setAttributes({ showEmptyCount: value })}
+                        __nextHasNoMarginBottom={true}
+                    />
+                </PanelBody>
+
+                <PanelBody title={__('Details Button', 'boldpost')} initialOpen={false}>
+                    <TextControl
+                        label={__('Label', 'boldpost')}
+                        value={attributes.detailsBtnLabel}
+                        onChange={(value) => setAttributes({ detailsBtnLabel: value })}
+                        __next40pxDefaultSize={true}
                         __nextHasNoMarginBottom={true}
                     />
                 </PanelBody>
@@ -408,6 +442,100 @@ export default function Edit({ attributes, setAttributes }) {
                         setAttributes={setAttributes}
                         attributeKey="countTypography"
                     />
+                </PanelBody>
+
+                <PanelBody title={__('Thumbnail', 'boldpost')} initialOpen={false}>
+                    <SelectControl
+                        label={__('Size', 'boldpost')}
+                        value={attributes.thumbnailSize}
+                        onChange={(value) => setAttributes({ thumbnailSize: value })}
+                        options={imageSizeOptions}
+                        __next40pxDefaultSize={true}
+                        __nextHasNoMarginBottom={true}
+                    />
+                    <Divider />
+                    <BoxControl
+                        label={__('Border Radius', 'boldpost')}
+                        values={attributes.thumbnailBorderRadius}
+                        onChange={(value) => setAttributes({ thumbnailBorderRadius: value })}
+                    />
+                </PanelBody>
+
+                <PanelBody title={__('Details Button', 'boldpost')} initialOpen={false}>
+                    <TabPanel
+                        className="eshb-tab-panel"
+                        activeClass="is-active"
+                        tabs={[
+                            { name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
+                            { name: 'hover', title: __('Hover', 'boldpost'), className: 'eshb-tab-hover' },
+                        ]}
+                    >
+                        {(tab) => {
+                            const isHover = tab.name === 'hover';
+                            return (
+                                <div style={{ marginTop: '15px' }}>
+                                    <BackgroundControl
+                                        label={isHover ? __('Background (Hover)', 'boldpost') : __('Background', 'boldpost')}
+                                        colorValue={isHover ? attributes.detailsBtnBackgroundColorHover : attributes.detailsBtnBackgroundColor}
+                                        gradientValue={isHover ? attributes.detailsBtnBackgroundGradientHover : attributes.detailsBtnBackgroundGradient}
+                                        onColorChange={(value) => {
+                                            const hex = (value && typeof value === 'object') ? value.hex : value;
+                                            setAttributes({ [isHover ? 'detailsBtnBackgroundColorHover' : 'detailsBtnBackgroundColor']: hex });
+                                        }}
+                                        onGradientChange={(value) => setAttributes({ [isHover ? 'detailsBtnBackgroundGradientHover' : 'detailsBtnBackgroundGradient']: value })}
+                                    />
+                                    <ColorPopover
+                                        label={isHover ? __('Text Color (Hover)', 'boldpost') : __('Text Color', 'boldpost')}
+                                        color={isHover ? attributes.detailsBtnColorHover : attributes.detailsBtnColor}
+                                        defaultColor={attributes.detailsBtnColor}
+                                        onChange={(value) => {
+                                            const hex = (value && typeof value === 'object') ? value.hex : value;
+                                            setAttributes({ [isHover ? 'detailsBtnColorHover' : 'detailsBtnColor']: hex });
+                                        }}
+                                    />
+                                    <Divider />
+                                    <TypographyControls
+                                        label={__('Typography', 'boldpost')}
+                                        attributes={attributes}
+                                        setAttributes={setAttributes}
+                                        attributeKey="detailsBtnTypography"
+                                    />
+                                    <Divider />
+                                    <BoxControl
+                                        label={__('Padding', 'boldpost')}
+                                        values={attributes.detailsBtnPadding}
+                                        onChange={(value) => setAttributes({ detailsBtnPadding: value })}
+                                    />
+                                    <Divider />
+                                    <BoxControl
+                                        label={__('Margin', 'boldpost')}
+                                        values={attributes.detailsBtnMargin}
+                                        onChange={(value) => setAttributes({ detailsBtnMargin: value })}
+                                    />
+                                    <Divider />
+                                    <BoxControl
+                                        label={__('Border Radius', 'boldpost')}
+                                        values={attributes.detailsBtnBorderRadius}
+                                        onChange={(value) => setAttributes({ detailsBtnBorderRadius: value })}
+                                    />
+                                    <Divider />
+                                    <ResponsiveWrapper label={__('Border', 'boldpost')}>
+                                        {(device) => (
+                                            <BoxControl
+                                                label={isHover ? __('Border (Hover)', 'boldpost') : __('Border', 'boldpost')}
+                                                values={attributes[`detailsBtnBorder${device === '' ? '' : capitalizeFirstLetter(device)}`]}
+                                                onChange={(value) => {
+                                                    const key = `detailsBtnBorder${device === '' ? '' : capitalizeFirstLetter(device)}`;
+                                                    setAttributes({ [key]: value });
+                                                }}
+                                            />
+                                        )}
+                                    </ResponsiveWrapper>
+
+                                </div>
+                            );
+                        }}
+                    </TabPanel>
                 </PanelBody>
 
             </InspectorControls>

@@ -15,6 +15,10 @@ body.toplevel_page_boldpost #wpcontent {
 #boldpo-dashboard .boldpo-logo img {
   height: 24px;
 }
+#boldpo-dashboard .boldpo-options-content input[type=search] {
+  min-height: 100%;
+  height: 100%;
+}
 
 .ant-notification {
   top: 50px !important;

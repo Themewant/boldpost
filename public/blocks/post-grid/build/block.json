@@ -70,6 +70,30 @@
       "type": "string",
       "default": ""
     },
+    "showVideo": {
+      "type": "boolean",
+      "default": true
+    },
+    "videoAutoplay": {
+      "type": "boolean",
+      "default": false
+    },
+    "videoMute": {
+      "type": "boolean",
+      "default": true
+    },
+    "videoHeight": {
+      "type": "string",
+      "default": "312px"
+    },
+    "videoWidth": {
+      "type": "string",
+      "default": "100%"
+    },
+    "videoControls": {
+      "type": "boolean",
+      "default": false
+    },
     "perPage": {
       "type": "string",
       "default": "6"
@@ -172,6 +196,14 @@
     },
     "readMoreBorderRadius": {
       "type": "object"
+    },
+    "readMoreBorder": {
+      "type": "object",
+      "default": {
+        "width": 0,
+        "color": "",
+        "style": "solid"
+      }
     },
     "itemBackgroundColor": {
       "type": "string",
@@ -546,6 +578,37 @@
     "buttonTextAlignMobile": {
       "type": "string",
       "default": ""
+    },
+    "thumbnailBorderRadius": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      }
+    },
+    "categoryColor": {
+      "type": "string",
+      "default": ""
+    },
+    "categoryColorHover": {
+      "type": "string",
+      "default": ""
+    },
+    "categoryBackgroundColor": {
+      "type": "string",
+      "default": ""
+    },
+    "categoryBackgroundColorHover": {
+      "type": "string",
+      "default": ""
+    },
+    "categoryPadding": {
+      "type": "object"
+    },
+    "categoryMargin": {
+      "type": "object"
     }
   }
 }

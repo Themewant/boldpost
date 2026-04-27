@@ -4,9 +4,6 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
-.boldpo-post-list-2-block-wrap {
-  margin-block-start: 0 !important;
-}
 .boldpo-post-list-2-block-wrap .boldpo-post-list-2 {
   box-sizing: border-box;
   margin-bottom: 0px;
@@ -88,6 +85,7 @@
   }
 }
 .boldpo-post-list-2-block-wrap .boldpo-post-list-2 .boldpo-list-item .boldpo-blog-img {
+  position: relative;
   width: 30%;
   max-width: 100%;
   height: auto;
@@ -202,6 +200,7 @@
   padding: 20px 0;
 }
 .boldpo-post-list-2-block-wrap .boldpo-post-list-2 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-img {
+  position: relative;
   width: 100%;
 }
 .boldpo-post-list-2-block-wrap .boldpo-post-list-2 .boldpo-blog-metas.boldpo-blog-metas-style-1 .bldpost-meta {
@@ -281,6 +280,7 @@
   bottom: 20px;
 }
 .boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-3 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-img {
+  position: relative;
   width: 100%;
 }
 .boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-3 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-title {

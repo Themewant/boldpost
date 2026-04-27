@@ -94,26 +94,28 @@ $style_handle = 'boldpo-heading-style';
 $unique_id    = 'boldpo-' . wp_rand( 100, 99999 );
 $selector     = '.' . $unique_id;
 
-// Border line & dot (style 2 only)
+// Border line & dot (style 2 and style 4)
 $border_line_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
 $dot_responsive         = ['desktop' => [], 'tablet' => [], 'mobile' => []];
-if ( $style === '2' ) {
+if ( $style === '2' || $style === '4' ) {
     if ( ! empty( $attributes['borderLineColor'] ) ) {
         $border_line_responsive['desktop']['background-color'] = $attributes['borderLineColor'];
-    }
-    if ( ! empty( $attributes['borderLineWidth'] ) ) {
-        $border_line_responsive['desktop']['width'] = intval( $attributes['borderLineWidth'] ) . 'px';
     }
     if ( ! empty( $attributes['borderLineHeight'] ) ) {
         $border_line_responsive['desktop']['height'] = intval( $attributes['borderLineHeight'] ) . 'px';
     }
-    if ( ! empty( $attributes['dotColor'] ) ) {
-        $dot_responsive['desktop']['background-color'] = $attributes['dotColor'];
-    }
-    if ( ! empty( $attributes['dotSize'] ) ) {
-        $dot_size = intval( $attributes['dotSize'] ) . 'px';
-        $dot_responsive['desktop']['width']  = $dot_size;
-        $dot_responsive['desktop']['height'] = $dot_size;
+    if ( $style === '2' ) {
+        if ( ! empty( $attributes['borderLineWidth'] ) ) {
+            $border_line_responsive['desktop']['width'] = intval( $attributes['borderLineWidth'] ) . 'px';
+        }
+        if ( ! empty( $attributes['dotColor'] ) ) {
+            $dot_responsive['desktop']['background-color'] = $attributes['dotColor'];
+        }
+        if ( ! empty( $attributes['dotSize'] ) ) {
+            $dot_size = intval( $attributes['dotSize'] ) . 'px';
+            $dot_responsive['desktop']['width']  = $dot_size;
+            $dot_responsive['desktop']['height'] = $dot_size;
+        }
     }
 }
 
@@ -134,14 +136,16 @@ $description_hover_css = BOLDPO_Helper::get_inline_styles($description_hover);
 if ( $description_hover_css ) {
     $sub_styles['.boldpo-heading.style-' . $style . ' .boldpo-heading-description:hover'] = $description_hover_css;
 }
-if ( $style === '2' ) {
+if ( $style === '2' || $style === '4' ) {
     $border_line_hover_css = BOLDPO_Helper::get_inline_styles($border_line_hover);
     if ( $border_line_hover_css ) {
         $sub_styles['.boldpo-heading.style-' . $style . ' .boldpo-heading-title-wrap:hover .boldpo-heading-border-line'] = $border_line_hover_css;
     }
-    $dot_hover_css = BOLDPO_Helper::get_inline_styles($dot_hover);
-    if ( $dot_hover_css ) {
-        $sub_styles['.boldpo-heading.style-' . $style . ' .boldpo-heading-title-wrap:hover .boldpo-heading-dot'] = $dot_hover_css;
+    if ( $style === '2' ) {
+        $dot_hover_css = BOLDPO_Helper::get_inline_styles($dot_hover);
+        if ( $dot_hover_css ) {
+            $sub_styles['.boldpo-heading.style-' . $style . ' .boldpo-heading-title-wrap:hover .boldpo-heading-dot'] = $dot_hover_css;
+        }
     }
 }
 BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css, $sub_styles );
@@ -153,7 +157,18 @@ if ( ! empty( $attributes['title'] ) ) :
     <div <?php echo wp_kses_post($block_wrap_attr); ?>>
         <div class="boldpo-heading style-<?php echo esc_attr($style); ?>">
             <?php
-            if($style == '3'){
+            if($style == '4'){
+                ?>
+                <div class="boldpo-heading-title-wrap">
+                    <span class="boldpo-heading-border-line boldpo-heading-border-line-left"></span>
+                    <<?php echo esc_attr($title_tag); ?> class="boldpo-heading-title"><?php echo esc_html($attributes['title']); ?></<?php echo esc_attr($title_tag); ?>>
+                    <span class="boldpo-heading-border-line boldpo-heading-border-line-right"></span>
+                </div>
+                <?php if($attributes['showDescription']) { ?>
+                    <p class="boldpo-heading-description"><?php echo esc_html($attributes['description']); ?></p>
+                <?php } ?>
+                <?php
+            }else if($style == '3'){
                 ?>
                 <div class="boldpo-heading-title-wrap">
                     <span class="boldpo-heading-dot"></span>

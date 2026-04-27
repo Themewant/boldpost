@@ -25,12 +25,19 @@
             <?php } ?>
            
             <div class="boldpo-overlay-all"></div>
-         
+
             <?php if ( ! empty($embed_video) ) { ?>
                 <div class="boldpo-video-wrapper">
                     <?php echo $embed_video; ?>
                 </div>
             <?php } ?>
+            <?php if ( $show_meta ) include BOLDPO_PL_PATH . 'public/template-parts/blog-meta/blog-cat.php'; ?>
+            <?php
+            // Strip 'category' from meta row (blog-cat.php handles it above)
+            $_saved_metas = $attributes['allowedMetas'];
+            $attributes['allowedMetas'] = array_values( array_diff( $attributes['allowedMetas'], ['category'] ) );
+            $allowed_metas = $attributes['allowedMetas'];
+            ?>
         </div>
         <div class="boldpo-blog-content">
             <?php if ( $show_meta && 'up_title' === $meta_position ) include BOLDPO_PL_PATH . 'public/template-parts/blog-meta/blog-meta.php'; ?>
@@ -48,6 +55,7 @@
             <?php endif; ?>
             
             <?php if ( $show_meta && 'below_content' === $meta_position ) include BOLDPO_PL_PATH . 'public/template-parts/blog-meta/blog-meta.php'; ?>
+            <?php $attributes['allowedMetas'] = $_saved_metas; $allowed_metas = $_saved_metas; // Restore for next post iteration ?>
             <?php if ( $show_read_more === 'yes' && ! empty( $read_more_text ) ) : ?>
             <div class="boldpo-read-more">
                 <a href="<?php the_permalink(); ?>" class="boldpo-read-more-link">

@@ -497,6 +497,10 @@
   display: flex;
   align-items: center;
 }
+.boldpo-blog-categories .bldpost-meta a,
+.boldpo-blog-metas .bldpost-meta a {
+  overflow: visible !important;
+}
 .boldpo-blog-categories a,
 .boldpo-blog-metas a {
   text-decoration: none;
@@ -544,6 +548,28 @@
   gap: 1px;
   margin: 10px;
 }
+.boldpo-blog-categories.boldpo-blog-categories-style-2 .bldpost-meta {
+  font-size: 0.875rem;
+  background: var(--boldpo-preset-color-primary);
+  color: var(--boldpo-preset-color-white);
+  display: inline-block;
+  max-width: -moz-max-content;
+  max-width: max-content;
+  padding: 8px 16px;
+  border-radius: 30px;
+  margin: 3px 2px 3px;
+  line-height: 1;
+  text-transform: capitalize;
+}
+.boldpo-blog-categories.boldpo-blog-categories-style-2 .bldpost-meta a {
+  color: currentColor;
+}
+.boldpo-blog-categories.boldpo-blog-categories-style-2 .bldpost-meta a:hover {
+  color: var(--boldpo-preset-color-tertiary) !important;
+}
+.boldpo-blog-categories.boldpo-blog-categories-style-2 .bldpost-meta .boldpo-cat-dot {
+  display: none;
+}
 
 .boldpo-blog-metas.boldpo-blog-metas-style-1 .bldpost-meta {
   position: relative;
@@ -564,14 +590,67 @@
 .boldpo-blog-metas.boldpo-blog-metas-style-1 a:hover {
   text-decoration: underline;
 }
-.boldpo-blog-metas.boldpo-blog-metas-style-2 .bldpost-meta img {
+.boldpo-blog-metas.boldpo-blog-metas-style-2 .bldpost-meta img, .boldpo-blog-metas.boldpo-blog-metas-style-3 .bldpost-meta img {
   width: 24px;
   margin-right: 10px;
   border-radius: 100%;
 }
-.boldpo-blog-metas.boldpo-blog-metas-style-2 a {
+.boldpo-blog-metas.boldpo-blog-metas-style-2 a, .boldpo-blog-metas.boldpo-blog-metas-style-3 a {
   text-decoration: none;
 }
-.boldpo-blog-metas.boldpo-blog-metas-style-2 a:hover {
+.boldpo-blog-metas.boldpo-blog-metas-style-2 a:hover, .boldpo-blog-metas.boldpo-blog-metas-style-3 a:hover {
   text-decoration: underline;
+}
+.boldpo-blog-metas.boldpo-blog-metas-style-3 .bldpost-meta {
+  position: relative;
+  font-weight: 800;
+}
+.boldpo-blog-metas.boldpo-blog-metas-style-3 .bldpost-meta .boldpo-meta-cat {
+  color: var(--boldpo-preset-color-primary);
+}
+.boldpo-blog-metas.boldpo-blog-metas-style-3 .bldpost-meta:not(:first-child)::before {
+  content: "|";
+  position: absolute;
+  left: -11px;
+  font-weight: 500;
+  color: currentColor;
+}
+.boldpo-blog-metas.boldpo-blog-metas-style-3 i {
+  display: none;
+}
+
+.boldpo-post-grid .boldpo-blog-title a,
+.boldpo-post-grid-2 .boldpo-blog-title a,
+.boldpo-post-grid-3 .boldpo-blog-title a,
+.boldpo-post-grid-4 .boldpo-blog-title a,
+.boldpo-post-list .boldpo-blog-title a,
+.boldpo-post-list-2 .boldpo-blog-title a,
+.boldpo-post-list-3 .boldpo-blog-title a,
+.boldpo-post-list-4 .boldpo-blog-title a,
+.boldpo-post-slider .boldpo-blog-title a,
+.boldpo-post-slider-2 .boldpo-blog-title a,
+.boldpo-post-slider-3 .boldpo-blog-title a,
+.boldpo-post-slider-4 .boldpo-blog-title a {
+  background-size: 0% 1px;
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  transition: all 1000ms;
+  display: unset !important;
+}
+.boldpo-post-grid .boldpo-blog-title a:hover,
+.boldpo-post-grid-2 .boldpo-blog-title a:hover,
+.boldpo-post-grid-3 .boldpo-blog-title a:hover,
+.boldpo-post-grid-4 .boldpo-blog-title a:hover,
+.boldpo-post-list .boldpo-blog-title a:hover,
+.boldpo-post-list-2 .boldpo-blog-title a:hover,
+.boldpo-post-list-3 .boldpo-blog-title a:hover,
+.boldpo-post-list-4 .boldpo-blog-title a:hover,
+.boldpo-post-slider .boldpo-blog-title a:hover,
+.boldpo-post-slider-2 .boldpo-blog-title a:hover,
+.boldpo-post-slider-3 .boldpo-blog-title a:hover,
+.boldpo-post-slider-4 .boldpo-blog-title a:hover {
+  background-size: 100% 1px;
+  background-position: 0% 100%;
+  background-image: linear-gradient(to right, currentColor 100%, transparent 100%);
+  width: fit-content;
 }/*# sourceMappingURL=public.css.map */

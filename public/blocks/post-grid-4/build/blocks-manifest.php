@@ -222,6 +222,14 @@ return array(
 			'readMoreBorderRadius' => array(
 				'type' => 'object'
 			),
+			'readMoreBorder' => array(
+				'type' => 'object',
+				'default' => array(
+					'width' => 0,
+					'color' => '',
+					'style' => 'solid'
+				)
+			),
 			'itemBackgroundColor' => array(
 				'type' => 'string',
 				'default' => ''
@@ -599,6 +607,37 @@ return array(
 			'buttonTextAlignMobile' => array(
 				'type' => 'string',
 				'default' => ''
+			),
+			'thumbnailBorderRadius' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '',
+					'right' => '',
+					'bottom' => '',
+					'left' => ''
+				)
+			),
+			'categoryColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'categoryColorHover' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'categoryBackgroundColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'categoryBackgroundColorHover' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'categoryPadding' => array(
+				'type' => 'object'
+			),
+			'categoryMargin' => array(
+				'type' => 'object'
 			)
 		)
 	)

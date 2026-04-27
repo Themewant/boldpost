@@ -438,6 +438,15 @@ return array(
 			'labelTextAlignMobile' => array(
 				'type' => 'string',
 				'default' => ''
+			),
+			'thumbnailBorderRadius' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '',
+					'right' => '',
+					'bottom' => '',
+					'left' => ''
+				)
 			)
 		)
 	)

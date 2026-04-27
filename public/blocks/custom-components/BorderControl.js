@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
 import {
-    RangeControl,
+    BoxControl,
     ColorPicker,
     BaseControl,
     Popover,
@@ -10,18 +10,31 @@ import {
     SelectControl
 } from '@wordpress/components';
 
+const toUnit = (v) => {
+    if (!v && v !== 0) return '0px';
+    return typeof v === 'number' ? `${v}px` : v;
+};
+
+const normalizeWidth = (width) => {
+    if (!width && width !== 0) {
+        return { top: '0px', right: '0px', bottom: '0px', left: '0px' };
+    }
+    if (typeof width === 'object') {
+        return {
+            top:    toUnit(width.top    ?? 0),
+            right:  toUnit(width.right  ?? 0),
+            bottom: toUnit(width.bottom ?? 0),
+            left:   toUnit(width.left   ?? 0),
+        };
+    }
+    // Legacy single number — apply to all sides
+    const px = toUnit(width);
+    return { top: px, right: px, bottom: px, left: px };
+};
+
 const BorderControl = ({ label, value, onChange }) => {
 
-    // Handle potential object for width if coming from default block.json with side values
-    let currentWidth = 0;
-    if (value?.width) {
-        if (typeof value.width === 'object') {
-            // Fallback if user defined it as object in block.json
-            currentWidth = value.width.top ?? 0;
-        } else {
-            currentWidth = value.width;
-        }
-    }
+    const currentWidth = normalizeWidth(value?.width);
 
     const borderValue = {
         width: currentWidth,
@@ -31,13 +44,17 @@ const BorderControl = ({ label, value, onChange }) => {
 
     const { width, style, color } = borderValue;
 
-    // Preview style
+    // Use top value for the preview square
+    const previewTopPx = parseInt(width.top) || 0;
     const previewStyle = {
         width: '24px',
         height: '24px',
         borderRadius: '4px',
-        borderWidth: (parseInt(width) || 0) + 'px',
-        borderStyle: style,
+        borderTopWidth:    (parseInt(width.top)    || 0) + 'px',
+        borderRightWidth:  (parseInt(width.right)  || 0) + 'px',
+        borderBottomWidth: (parseInt(width.bottom) || 0) + 'px',
+        borderLeftWidth:   (parseInt(width.left)   || 0) + 'px',
+        borderStyle: previewTopPx > 0 ? style : 'solid',
         borderColor: color || '#ddd',
         backgroundColor: '#fff',
     };
@@ -79,28 +96,29 @@ const BorderControl = ({ label, value, onChange }) => {
             {isVisible && (
                 <Popover position="bottom center" onFocusOutside={() => setIsVisible(false)}>
                     <div style={{ padding: '16px', width: '280px' }}>
-                        <RangeControl
+                        <BoxControl
                             label={__('Width', 'boldpost')}
-                            value={parseInt(width) || 0}
+                            values={width}
                             onChange={(val) => updateBorder({ width: val })}
-                            min={0}
-                            max={50}
+                            units={[{ value: 'px', label: 'px', default: 0 }]}
+                            __nextHasNoMarginBottom={true}
                         />
                         <SelectControl
                             label={__('Style', 'boldpost')}
                             value={style}
                             options={[
-                                { label: 'Solid', value: 'solid' },
+                                { label: 'Solid',  value: 'solid' },
                                 { label: 'Dashed', value: 'dashed' },
                                 { label: 'Dotted', value: 'dotted' },
                                 { label: 'Double', value: 'double' },
                                 { label: 'Groove', value: 'groove' },
-                                { label: 'Ridge', value: 'ridge' },
-                                { label: 'Inset', value: 'inset' },
+                                { label: 'Ridge',  value: 'ridge' },
+                                { label: 'Inset',  value: 'inset' },
                                 { label: 'Outset', value: 'outset' },
-                                { label: 'None', value: 'none' },
+                                { label: 'None',   value: 'none' },
                             ]}
                             onChange={(val) => updateBorder({ style: val })}
+                            __next40pxDefaultSize={true}
                             __nextHasNoMarginBottom={true}
                         />
                         <BaseControl label={__('Color', 'boldpost')} style={{ marginTop: '15px' }} __nextHasNoMarginBottom={true}>
@@ -114,7 +132,11 @@ const BorderControl = ({ label, value, onChange }) => {
                             variant="secondary"
                             isSmall
                             onClick={() => {
-                                onChange({ width: 0, style: 'solid', color: '' });
+                                onChange({
+                                    width: { top: '0px', right: '0px', bottom: '0px', left: '0px' },
+                                    style: 'solid',
+                                    color: '',
+                                });
                                 setIsVisible(false);
                             }}
                             style={{ marginTop: '15px', width: '100%', justifyContent: 'center' }}

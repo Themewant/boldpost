@@ -588,6 +588,15 @@
 		"buttonTextAlignMobile": {
 			"type": "string",
 			"default": ""
+		},
+		"thumbnailBorderRadius": {
+			"type": "object",
+			"default": {
+				"top": "",
+				"right": "",
+				"bottom": "",
+				"left": ""
+			}
 		}
 	}
 }

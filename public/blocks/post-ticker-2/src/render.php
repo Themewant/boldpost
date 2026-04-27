@@ -125,6 +125,14 @@ if(!empty($attributes['labelColorHover'])) {
     $label_hover['color'] = $attributes['labelColorHover'];
 }
 
+// Thumbnail Border Radius
+$thumbnail_border_radius_styles = [];
+$t_border_radius = $attributes['thumbnailBorderRadius'] ?? [];
+if ( ! empty( $t_border_radius['top'] ) ) $thumbnail_border_radius_styles['border-top-left-radius'] = BOLDPO_Helper::ensure_unit( $t_border_radius['top'] );
+if ( ! empty( $t_border_radius['right'] ) ) $thumbnail_border_radius_styles['border-top-right-radius'] = BOLDPO_Helper::ensure_unit( $t_border_radius['right'] );
+if ( ! empty( $t_border_radius['bottom'] ) ) $thumbnail_border_radius_styles['border-bottom-left-radius'] = BOLDPO_Helper::ensure_unit( $t_border_radius['bottom'] );
+if ( ! empty( $t_border_radius['left'] ) ) $thumbnail_border_radius_styles['border-bottom-right-radius'] = BOLDPO_Helper::ensure_unit( $t_border_radius['left'] );
+
 $style_handle = 'boldpo-post-ticker-2-style';
 $unique_id    = 'boldpo-' . wp_rand( 100, 99999 );
 $selector     = '.boldpo-post-ticker-2-block-wrap.' . $unique_id;
@@ -140,6 +148,7 @@ BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css,
     '.boldpo-post-ticker-2 .boldpo-grid-item:hover'    => BOLDPO_Helper::get_inline_styles($item_hover),
     '.boldpo-post-ticker-2 .boldpo-grid-item .boldpo-blog-title a:hover' => BOLDPO_Helper::get_inline_styles($title_hover),
     '.boldpo-post-ticker-2 .boldpo-grid-item .boldpo-blog-title::before' => BOLDPO_Helper::get_inline_styles($title_dot),
+    '.boldpo-post-ticker-2 .boldpo-grid-item .boldpo-blog-img'   => BOLDPO_Helper::get_inline_styles($thumbnail_border_radius_styles),
 ] );
 
 $args = array(

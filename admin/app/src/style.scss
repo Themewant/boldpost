@@ -17,6 +17,13 @@ body.toplevel_page_boldpost #wpcontent {
             height: 24px
         }
     }
+
+    .boldpo-options-content {
+        input[type=search] {
+            min-height: 100%;
+            height: 100%;
+        }
+    }
 }
 
 .ant-notification {

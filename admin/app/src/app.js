@@ -4,8 +4,9 @@ import {
 } from 'antd';
 import Dashboard from './custom-components/dashboard';
 import Blocks from './custom-components/blocks';
+import Templates from './custom-components/templates';
 import Settings from './custom-components/settings';
-import { DashboardOutlined, SettingOutlined, BlockOutlined } from '@ant-design/icons';
+import { DashboardOutlined, SettingOutlined, BlockOutlined, PicRightOutlined } from '@ant-design/icons';
 import { icons } from 'antd/es/image/PreviewGroup';
 
 
@@ -17,6 +18,11 @@ const items = [
         key: 'blocks',
         label: 'Blocks',
         icon: <BlockOutlined />
+    },
+    {
+        key: 'templates',
+        label: 'Templates',
+        icon: <PicRightOutlined />
     }
 ]
 
@@ -73,6 +79,8 @@ export default function BoldPostApp() {
                         >
 
                             {current === 'blocks' && <Blocks />}
+                            {current === 'templates' && <Templates />}
+
                         </div>
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>

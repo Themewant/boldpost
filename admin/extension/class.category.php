@@ -16,15 +16,24 @@ class BOLDPO_Category {
         add_action( 'category_add_form_fields', array( $this, 'category_image_color_field' ) );
         add_action( 'edited_category', array( $this, 'save_category_image_color' ) );
         add_action( 'created_category', array( $this, 'save_category_image_color' ) );
-        add_action( 'admin_footer', array( $this, 'category_image_color_enqueue' ) );
+        add_action( 'admin_enqueue_scripts', array( $this, 'category_image_color_enqueue_scripts' ) );
+        add_action( 'admin_footer', array( $this, 'category_image_color_inline_script' ) );
     }
     
-    // Category Image and Color Metabox
-    function category_image_color_enqueue() {
+    function category_image_color_enqueue_scripts( $hook ) {
+        if ( $hook !== 'edit-tags.php' && $hook !== 'term.php' ) {
+            return;
+        }
         wp_enqueue_media();
         wp_enqueue_style( 'wp-color-picker' );
         wp_enqueue_script( 'wp-color-picker' );
+    }
 
+    function category_image_color_inline_script() {
+        $screen = get_current_screen();
+        if ( ! $screen || $screen->taxonomy !== 'category' ) {
+            return;
+        }
         ?>
         <script>
             jQuery(document).ready(function($) {

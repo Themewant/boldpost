@@ -14,6 +14,7 @@
 
         .boldpo-heading-description {
             margin: 0;
+            color: var(--boldpo-preset-color-contrast-2);
         }
 
         &.style-2 {
@@ -39,6 +40,27 @@
             .boldpo-heading-border-line {
                 display: block;
                 width: 100%;
+                height: 3px;
+                background-color: var(--boldpo-preset-color-tertiary);
+            }
+        }
+
+        &.style-4 {
+            .boldpo-heading-title-wrap {
+                display: flex;
+                align-items: center;
+                column-gap: 15px;
+                width: 100%;
+            }
+
+            .boldpo-heading-title {
+                white-space: nowrap !important;
+                min-width: unset !important;
+            }
+
+            .boldpo-heading-border-line {
+                display: block;
+                flex: 1;
                 height: 3px;
                 background-color: var(--boldpo-preset-color-tertiary);
             }

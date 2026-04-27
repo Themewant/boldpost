@@ -59,6 +59,30 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
+			'showVideo' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'videoAutoplay' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'videoMute' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'videoHeight' => array(
+				'type' => 'string',
+				'default' => '312px'
+			),
+			'videoWidth' => array(
+				'type' => 'string',
+				'default' => '100%'
+			),
+			'videoControls' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
 			'perPage' => array(
 				'type' => 'string',
 				'default' => '6'
@@ -241,6 +265,14 @@ return array(
 			),
 			'readMoreBorderRadius' => array(
 				'type' => 'object'
+			),
+			'readMoreBorder' => array(
+				'type' => 'object',
+				'default' => array(
+					'width' => 0,
+					'color' => '',
+					'style' => 'solid'
+				)
 			),
 			'itemBackgroundColor' => array(
 				'type' => 'string',
@@ -523,6 +555,18 @@ return array(
 			'navPadding' => array(
 				'type' => 'object'
 			),
+			'navPosition' => array(
+				'type' => 'string',
+				'default' => 'middle'
+			),
+			'navBorder' => array(
+				'type' => 'object',
+				'default' => array(
+					'width' => 0,
+					'color' => '',
+					'style' => 'solid'
+				)
+			),
 			'showDots' => array(
 				'type' => 'boolean',
 				'default' => false
@@ -593,6 +637,37 @@ return array(
 			'buttonTextAlignMobile' => array(
 				'type' => 'string',
 				'default' => ''
+			),
+			'thumbnailBorderRadius' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '',
+					'right' => '',
+					'bottom' => '',
+					'left' => ''
+				)
+			),
+			'categoryColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'categoryColorHover' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'categoryBackgroundColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'categoryBackgroundColorHover' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'categoryPadding' => array(
+				'type' => 'object'
+			),
+			'categoryMargin' => array(
+				'type' => 'object'
 			)
 		)
 	)

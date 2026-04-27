@@ -16,6 +16,8 @@ $show_count = !empty($attributes['showCount']) ? true : false;
 $show_empty_count = !empty($attributes['showEmptyCount']) ? true : false;
 $show_description = !empty($attributes['showDescription']) ? true : false;
 $title_tag = isset($attributes['titleTag']) ? $attributes['titleTag'] : 'h3';
+$thumbnail_size = isset($attributes['thumbnailSize']) ? $attributes['thumbnailSize'] : 'medium';
+$details_btn_text = isset($attributes['detailsBtnText']) ? $attributes['detailsBtnText'] : 'Details';
 
 // styles
 $responsive_data = [
@@ -36,7 +38,14 @@ $bs_col_xs = (int)(12 / $c_mobile);
 $col_class = "boldpo-col-lg-{$bs_col_lg} boldpo-col-md-{$bs_col_md} boldpo-col-{$bs_col_xs}";
 
 // Gaps
-$g_desktop = isset($attributes['itemGap']) ? $attributes['itemGap'] : '4';
+$g_desktop = isset($attributes['itemGap']) ? $attributes['itemGap'] : '';
+
+if (empty($g_desktop) && $style === '2') {
+    $g_desktop = 3;
+}else{
+    $g_desktop = 4;
+}
+
 $g_tablet = isset($attributes['itemGapTablet']) ? $attributes['itemGapTablet'] : $g_desktop;
 $g_mobile = isset($attributes['itemGapMobile']) ? $attributes['itemGapMobile'] : 0;
 
@@ -144,19 +153,79 @@ if ( ! empty( $c_typo['lineHeight'] ) ) $count_styles['line-height'] = $c_typo['
 if ( ! empty( $c_typo['textTransform'] ) ) $count_styles['text-transform'] = $c_typo['textTransform'];
 if ( ! empty( $c_typo['letterSpacing'] ) ) $count_styles['letter-spacing'] = $c_typo['letterSpacing'];
 
+// Thumbnail Styles
+$thumbnail_styles = [];
+$t_border_radius = $attributes['thumbnailBorderRadius'] ?? [];
+if ( ! empty( $t_border_radius['top'] ) ) $thumbnail_styles['border-top-left-radius'] = BOLDPO_Helper::ensure_unit( $t_border_radius['top'] );
+if ( ! empty( $t_border_radius['right'] ) ) $thumbnail_styles['border-top-right-radius'] = BOLDPO_Helper::ensure_unit( $t_border_radius['right'] );
+if ( ! empty( $t_border_radius['bottom'] ) ) $thumbnail_styles['border-bottom-left-radius'] = BOLDPO_Helper::ensure_unit( $t_border_radius['bottom'] );
+if ( ! empty( $t_border_radius['left'] ) ) $thumbnail_styles['border-bottom-right-radius'] = BOLDPO_Helper::ensure_unit( $t_border_radius['left'] );
+
+
+
+// Details Button
+$details_btn_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+BOLDPO_Helper::add_responsive_vars($attributes, $details_btn_responsive, 'detailsBtnPadding', '', ['top'=>'padding-top','right'=>'padding-right','bottom'=>'padding-bottom','left'=>'padding-left'], true);
+BOLDPO_Helper::add_responsive_vars($attributes, $details_btn_responsive, 'detailsBtnTypography', '', [
+    'fontSize'=>'font-size', 
+    'fontWeight'=>'font-weight', 
+    'lineHeight'=>'line-height', 
+    'textTransform'=>'text-transform', 
+    'letterSpacing'=>'letter-spacing'
+], true);
+BOLDPO_Helper::add_responsive_vars($attributes, $details_btn_responsive, 'detailsBtnMargin', '', ['top'=>'margin-top','right'=>'margin-right','bottom'=>'margin-bottom','left'=>'margin-left'], true);
+BOLDPO_Helper::add_responsive_vars($attributes, $details_btn_responsive, 'detailsBtnBorderRadius', '', ['top'=>'border-top-left-radius','right'=>'border-top-right-radius','bottom'=>'border-bottom-left-radius','left'=>'border-bottom-right-radius'], true);
+
+if ( ! empty( $attributes['detailsBtnColor'] ) ) {
+    $details_btn_responsive['desktop']['color'] = $attributes['detailsBtnColor'];
+}
+if ( ! empty( $attributes['detailsBtnBackgroundColor'] ) ) {
+    $details_btn_responsive['desktop']['background-color'] = $attributes['detailsBtnBackgroundColor'];
+}
+if ( ! empty( $attributes['detailsBtnBackgroundGradient'] ) ) {
+    $details_btn_responsive['desktop']['background'] = $attributes['detailsBtnBackgroundGradient'];
+}
+if ( ! empty( $attributes['detailsBtnBorderColor'] ) ) {
+    $details_btn_responsive['desktop']['border-color'] = $attributes['detailsBtnBorderColor'];
+}
+if ( ! empty( $attributes['detailsBtnBorderWidth'] ) ) {
+    $details_btn_responsive['desktop']['border-width'] = $attributes['detailsBtnBorderWidth'];
+}
+
+// Details Button Hover
+$details_btn_hover = [];
+if(!empty($attributes['detailsBtnBackgroundColorHover'])) {
+    $details_btn_hover['background-color'] = $attributes['detailsBtnBackgroundColorHover'] . ' !important';
+}
+if(!empty($attributes['detailsBtnBackgroundGradientHover'])) {
+    $details_btn_hover['background'] = $attributes['detailsBtnBackgroundGradientHover'] . ' !important';
+}
+if(!empty($attributes['detailsBtnColorHover'])) {
+    $details_btn_hover['color'] = $attributes['detailsBtnColorHover'] . ' !important';
+}
+if(!empty($attributes['detailsBtnBorderColorHover'])) {
+    $details_btn_hover['border-color'] = $attributes['detailsBtnBorderColorHover'] . ' !important';
+}
+if(!empty($attributes['detailsBtnBorderWidthHover'])) {
+    $details_btn_hover['border-width'] = $attributes['detailsBtnBorderWidthHover'] . ' !important';
+}
+
 $style_handle = 'boldpo-category-list-style';
 $unique_id    = 'boldpo-' . wp_rand( 100, 99999 );
-$selector     = '.' . $unique_id;
+$selector     = '.boldpo-category-list-block-wrap.' . $unique_id;
 
 $full_responsive_css = BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-category-list', $responsive_data);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-category-list.style-' . $style . ' .boldpo-category-item', $item_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-category-list.style-' . $style . ' .boldpo-category-item .boldpo-category-title', $title_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-category-list.style-' . $style . ' .boldpo-category-item .boldpo-category-description', $description_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-category-list.style-' . $style . ' .boldpo-category-item .boldpo-category-details-btn', $details_btn_responsive);
+
 
 wp_enqueue_style( $style_handle );
 BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css, [
-    '.boldpo-category-list .boldpo-category-item .boldpo-category-item:hover'  => BOLDPO_Helper::get_inline_styles($item_hover),
-    '.boldpo-category-list .boldpo-category-item .boldpo-category-count'       => BOLDPO_Helper::get_inline_styles($count_styles),
+    '.boldpo-category-list.style-' . $style . ' .boldpo-category-item .boldpo-category-item:hover'  => BOLDPO_Helper::get_inline_styles($item_hover),
+    '.boldpo-category-list.style-' . $style . ' .boldpo-category-item .boldpo-category-count'       => BOLDPO_Helper::get_inline_styles($count_styles),
+    '.boldpo-category-list.style-' . $style . ' .boldpo-category-item .boldpo-category-image'   => BOLDPO_Helper::get_inline_styles($thumbnail_styles),
 ] );
 
 // Build query arguments
@@ -180,6 +249,11 @@ if ( ! empty( $attributes['excludes'] ) && ! in_array( 'no-excludes', $attribute
 $categories = get_terms( $args );
 $block_wrap_attr = get_block_wrapper_attributes( array( 'class' => 'boldpo-block boldpo-category-list-block-wrap ' . $unique_id ) );
 
+$template_pl_path = BOLDPO_PL_PATH;
+if($style !== 'default' && defined('BOLDPO_PRO_PL_PATH')) {
+    $template_pl_path = BOLDPO_PRO_PL_PATH;
+}
+
 if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) :
 ?>
     <div <?php echo wp_kses_post($block_wrap_attr); ?>>
@@ -190,32 +264,14 @@ if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) :
                 if ( is_wp_error( $category_link ) ) {
                     continue;
                 }
-            ?>
-                <div class="<?php echo esc_attr($col_class); ?>">
-                    <div class="boldpo-category-item">
-                        <a href="<?php echo esc_url( $category_link ); ?>" class="boldpo-category-link">
-                            <div class="boldpo-category-content">
-                                <div class="boldpo-category-content-text">
-                                    <<?php echo esc_attr($title_tag); ?> class="boldpo-category-title">
-                                    <?php echo esc_html( $category->name ); ?>
-                                </<?php echo esc_attr($title_tag); ?>>
-                                <?php if ( $show_description && ! empty( $category->description ) ) : ?>
-                                    <div class="boldpo-category-description">
-                                        <?php echo esc_html( $category->description ); ?>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-                            
-                            <?php if ( $show_count && ( $category->count > 0 || $show_empty_count ) ) : ?>
-                                <span class="boldpo-category-count">
-                                    <?php echo esc_html( $category->count ); ?>
-                                </span>
-                            <?php endif; ?>
-                        </div>
-                    </a>
-                    </div>
-                </div>
-            <?php
+                $category_image_id = get_term_meta( $category->term_id, 'category_image', true );
+                $category_image = wp_get_attachment_image_url( $category_image_id, $thumbnail_size );
+                $category_color = get_term_meta( $category->term_id, 'category_color', true );
+                $category_gradient = 'linear-gradient(to top, '.$category_color.', rgba(255, 255, 255, 0))';
+                $style_file = $template_pl_path . 'public/template-parts/category-list/style-' . $style . '.php';
+                if ( file_exists( $style_file ) ) {
+                    include $style_file;
+                }
             endforeach;
             ?>
         </div>

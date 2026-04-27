@@ -6,20 +6,36 @@
         
         <div class="boldpo-blog-img <?php echo esc_attr( $thumb_anim ); ?> <?php echo esc_attr( $anim_style ); ?>">
             <a href="<?php the_permalink(); ?>">
-            <?php
-                if ( has_post_thumbnail() ) {
-                    // Simple size for now
-                    the_post_thumbnail( $thumbnail_size );
-                } else {
-                    echo '<img src="' . esc_url( plugins_url( 'public/assets/img/placeholder.png', dirname(dirname(dirname(__DIR__))) ) ) . '" alt="Placeholder">';
-                }
-            ?>
-            <?php if ( '1' == $style ) { ?>
+                <?php if( $show_meta && in_array('date', $allowed_metas) && $show_date_on_top === 'yes' ): ?>
+                    <div class="boldpo-blog-date-top">
+                        <h4><?php echo esc_html( get_the_time('d') ); ?></h4>
+                        <span><?php echo esc_html( get_the_time('M') ); ?></span>
+                    </div>
+                <?php endif; ?>
+                <?php if(empty($video_url)){ ?>
+                    <a href="<?php the_permalink(); ?>">
+                    <?php
+                        if ( has_post_thumbnail() ) {
+                            // Simple size for now
+                            the_post_thumbnail( $thumbnail_size );
+                        } else {
+                            echo '<img src="' . esc_url( plugins_url( 'public/assets/img/placeholder.png', dirname(dirname(dirname(__DIR__))) ) ) . '" alt="Placeholder">';
+                        }
+                    ?>
+                    </a>
+                <?php } ?>
+                
                 <div class="boldpo-overlay-all"></div>
-            <?php } ?>
+            
+                <?php if ( ! empty($embed_video) ) { ?>
+                    <div class="boldpo-video-wrapper">
+                        <?php echo $embed_video; ?>
+                        <span class="play-icon"></span>
+                    </div>
+                <?php } ?>
             </a>
         </div>
-        
+
         <div class="boldpo-blog-content">
             <?php if ( $show_meta && 'up_title' === $meta_position ) include BOLDPO_PL_PATH . 'public/template-parts/blog-meta/blog-meta.php'; ?>
             

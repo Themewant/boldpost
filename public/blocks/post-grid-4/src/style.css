@@ -1,5 +1,4 @@
 .boldpo-post-grid-4-block-wrap {
-  margin-block-start: 0 !important;
   overflow: hidden;
 }
 .boldpo-post-grid-4-block-wrap .boldpo-grid-col-left-wrap,
@@ -68,6 +67,7 @@
   color: inherit;
 }
 .boldpo-post-grid-4-block-wrap .boldpo-post-grid-4 .boldpo-grid-item .boldpo-blog-img {
+  position: relative;
   max-width: 100%;
   height: auto;
   display: block;
@@ -149,6 +149,9 @@
 }
 .boldpo-post-grid-4-block-wrap .boldpo-post-grid-4 .boldpo-grid-item a:hover {
   color: var(--boldpo-preset-color-primary);
+}
+.boldpo-post-grid-4-block-wrap .boldpo-post-grid-4 .boldpo-grid-item:hover .boldpo-blog-img {
+  position: relative;
 }
 .boldpo-post-grid-4-block-wrap .boldpo-post-grid-4 .boldpo-grid-item:hover .boldpo-blog-img.boldpo-animate.left_right img {
   transform: translateX(15px) scale(1.1);

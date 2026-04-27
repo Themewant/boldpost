@@ -15,7 +15,11 @@ import TypographyControls from '../../custom-components/TypographyControls';
 import ColorPopover from '../../custom-components/ColorPopover';
 import ResponsiveWrapper from '../../custom-components/ResponsiveWrapper';
 import IconPicker from '../../custom-components/IconPicker';
+import ImageRadioControl from '../../custom-components/ImageRadioControl';
+
 import './editor.scss';
+
+import layout1 from './assets/img/layout-1.png';
 
 const buildTypographyStyles = (typo) => {
     if (!typo) return {};
@@ -86,6 +90,16 @@ export default function Edit({ attributes, setAttributes }) {
             </BlockControls>
 
             <InspectorControls>
+                <PanelBody title={__('Layout', 'boldpost')} initialOpen={false}>
+                    <ImageRadioControl
+                        value={attributes.buttonStyle}
+                        onChange={(value) => setAttributes({ buttonStyle: value })}
+                        options={[
+                            { label: __('Default', 'boldpost'), value: 'default', src: layout1 },
+                            { label: __('Style 1', 'boldpost'), value: '1', src: layout1 },
+                        ]}
+                    />
+                </PanelBody>
                 <PanelBody title={__('Button Settings', 'boldpost')} initialOpen={true}>
                     <TextControl
                         label={__('URL', 'boldpost')}

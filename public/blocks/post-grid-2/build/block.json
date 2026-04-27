@@ -83,8 +83,7 @@
       "default": ""
     },
     "perPage": {
-      "type": "string",
-      "default": "3"
+      "type": "string"
     },
     "order": {
       "type": "string",
@@ -196,6 +195,14 @@
     },
     "readMoreBorderRadius": {
       "type": "object"
+    },
+    "readMoreBorder": {
+      "type": "object",
+      "default": {
+        "width": 0,
+        "color": "",
+        "style": "solid"
+      }
     },
     "itemBackgroundColor": {
       "type": "string",
@@ -575,6 +582,37 @@
     "buttonTextAlignMobile": {
       "type": "string",
       "default": ""
+    },
+    "thumbnailBorderRadius": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      }
+    },
+    "categoryColor": {
+      "type": "string",
+      "default": ""
+    },
+    "categoryColorHover": {
+      "type": "string",
+      "default": ""
+    },
+    "categoryBackgroundColor": {
+      "type": "string",
+      "default": ""
+    },
+    "categoryBackgroundColorHover": {
+      "type": "string",
+      "default": ""
+    },
+    "categoryPadding": {
+      "type": "object"
+    },
+    "categoryMargin": {
+      "type": "object"
     }
   }
 }

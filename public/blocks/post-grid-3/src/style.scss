@@ -92,6 +92,7 @@
 			}
 
 			.boldpo-blog-img {
+				position: relative;
 				max-width: 100%;
 				height: auto;
 				display: block;
@@ -256,6 +257,7 @@
 
 			&:hover {
 				.boldpo-blog-img {
+					position: relative;
 					&.boldpo-animate {
 						&.left_right {
 

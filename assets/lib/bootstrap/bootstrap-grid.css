@@ -4786,6 +4786,7 @@
   margin-top: calc(-1 * var(--boldpo-gutter-y));
   margin-right: calc(-0.5 * var(--boldpo-gutter-x));
   margin-left: calc(-0.5 * var(--boldpo-gutter-x));
+  box-sizing: border-box;
 }
 .boldpo-row > * {
   flex-shrink: 0;
@@ -4794,6 +4795,7 @@
   padding-right: calc(var(--boldpo-gutter-x) * 0.5);
   padding-left: calc(var(--boldpo-gutter-x) * 0.5);
   margin-top: var(--boldpo-gutter-y);
+  box-sizing: border-box;
 }
 
 .boldpo-col {

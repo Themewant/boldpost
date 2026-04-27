@@ -1,5 +1,4 @@
 .boldpo-post-grid-3-block-wrap {
-  margin-block-start: 0 !important;
   overflow: hidden;
 }
 .boldpo-post-grid-3-block-wrap .boldpo-grid-col-left-wrap,
@@ -81,6 +80,7 @@
   background-image: linear-gradient(to top, #000, transparent);
 }
 .boldpo-post-grid-3-block-wrap .boldpo-post-grid-3 .boldpo-grid-item .boldpo-blog-img {
+  position: relative;
   max-width: 100%;
   height: auto;
   display: block;
@@ -214,6 +214,9 @@
 }
 .boldpo-post-grid-3-block-wrap .boldpo-post-grid-3 .boldpo-grid-item a:hover {
   color: var(--boldpo-preset-color-primary);
+}
+.boldpo-post-grid-3-block-wrap .boldpo-post-grid-3 .boldpo-grid-item:hover .boldpo-blog-img {
+  position: relative;
 }
 .boldpo-post-grid-3-block-wrap .boldpo-post-grid-3 .boldpo-grid-item:hover .boldpo-blog-img.boldpo-animate.left_right {
   transform: translateX(15px) scale(1.1);
