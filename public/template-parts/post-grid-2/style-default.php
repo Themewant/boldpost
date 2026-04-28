@@ -1,0 +1,65 @@
+<?php 
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+?>
+<div class="boldpo-grid-item <?php echo esc_attr( $item_class ); ?>">
+    <div class="boldpo-grid-item-inner">
+        <div class="boldpo-blog-img <?php echo esc_attr( $thumb_anim ); ?> <?php echo esc_attr( $anim_style ); ?>">
+            <?php if( $show_meta && in_array('date', $allowed_metas) && $show_date_on_top === 'yes' ): ?>
+                <div class="boldpo-blog-date-top">
+                    <h4><?php echo esc_html( get_the_time('d') ); ?></h4>
+                    <span><?php echo esc_html( get_the_time('M') ); ?></span>
+                </div>
+            <?php endif; ?>
+
+                <a href="<?php the_permalink(); ?>">
+                <?php
+                    if ( has_post_thumbnail() ) {
+                        // Simple size for now
+                        the_post_thumbnail( $thumbnail_size );
+                    } else {
+                        echo '<img src="' . esc_url( plugins_url( 'public/assets/img/placeholder.png', dirname(dirname(dirname(__DIR__))) ) ) . '" alt="Placeholder">';
+                    }
+                ?>
+                    <?php if ('default' == $style ) { ?>
+                        <div class="boldpo-overlay-all"></div>
+                    <?php } ?>
+                </a>
+            <?php
+            
+            ?>
+        </div>
+        <div class="boldpo-blog-content">
+            <?php if ( $show_meta ) include BOLDPO_PL_PATH . 'public/template-parts/post-meta/post-cat.php'; ?>
+            <?php
+            // Strip 'category' from meta row (post-cat.php handles it above)
+            $_saved_metas = $attributes['allowedMetas'];
+            $attributes['allowedMetas'] = array_values( array_diff( $attributes['allowedMetas'], ['category'] ) );
+            ?>
+            <?php if ( $show_meta && 'up_title' === $meta_position ) include BOLDPO_PL_PATH . 'public/template-parts/post-meta/post-meta.php'; ?>
+            
+            <<?php echo esc_attr( $title_tag ); ?> class="boldpo-blog-title">
+                <a href="<?php the_permalink(); ?>"><?php echo esc_html( $trimmed_title ); ?></a>
+            </<?php echo esc_attr( $title_tag ); ?>>
+
+            <?php if ( $show_meta && 'below_title' === $meta_position ) include BOLDPO_PL_PATH . 'public/template-parts/post-meta/post-meta.php'; ?>
+            
+            <?php if ( $show_excerpt === 'yes' ) : ?>
+            <div class="boldpo-blog-excerpt">
+                <?php echo esc_html( $trimmed_excerpt ); ?>
+            </div>
+            <?php endif; ?>
+            
+            <?php if ( $show_meta && 'below_content' === $meta_position ) include BOLDPO_PL_PATH . 'public/template-parts/post-meta/post-meta.php'; ?>
+            <?php if ( $show_read_more === 'yes' && ! empty( $read_more_text ) ) : ?>
+                <div class="boldpo-read-more">
+                    <a href="<?php the_permalink(); ?>" class="boldpo-read-more-link">
+                        <?php if ( $read_more_icon_pos === 'before' && $read_more_icon !== 'none') echo '<i class="' . esc_attr( $read_more_icon ) . ' boldpo-read-more-icon before"></i>'; ?>
+                        <?php echo esc_html( $read_more_text ); ?>
+                        <?php if ( $read_more_icon_pos === 'after' && $read_more_icon !== 'none') echo '<i class="' . esc_attr( $read_more_icon ) . ' boldpo-read-more-icon after"></i>'; ?>
+                    </a>
+                </div>
+            <?php endif; ?>
+        </div>
+        <?php $attributes['allowedMetas'] = $_saved_metas; // Restore for next post iteration ?>
+    </div>
+</div>

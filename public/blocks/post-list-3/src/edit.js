@@ -239,7 +239,8 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('Default', 'boldpost'), value: 'default', src: list1 },
 							{ label: __('Style 1', 'boldpost'), value: '1', src: list2, isPro: true },
 							{ label: __('Style 2', 'boldpost'), value: '2', src: list3, isPro: true },
-							{ label: __('Style 3', 'boldpost'), value: '3', src: list3, isPro: true }
+							{ label: __('Style 3', 'boldpost'), value: '3', src: list3 },
+							{ label: __('Style 4', 'boldpost'), value: '4', src: list4, isPro: true }
 						]}
 					/>
 				</PanelBody>
@@ -395,6 +396,7 @@ export default function Edit({ attributes, setAttributes }) {
 								value={attributes.metaPosition}
 								onChange={(value) => setAttributes({ metaPosition: value })}
 								options={[
+									{ label: __('Default', 'boldpost'), value: 'default' },
 									{ label: __('Up Title', 'boldpost'), value: 'up_title' },
 									{ label: __('Below Title', 'boldpost'), value: 'below_title' },
 									{ label: __('Below Content', 'boldpost'), value: 'below_content' },
@@ -410,7 +412,7 @@ export default function Edit({ attributes, setAttributes }) {
 									{ label: __('Default', 'boldpost'), value: 'default' },
 									{ label: __('Style 1', 'boldpost'), value: '1' },
 									{ label: __('Style 2', 'boldpost'), value: '2' },
-									{ label: __('Style 3', 'boldpost'), value: '3' },
+									{ label: __('Style 3', 'boldpost'), value: '3' }
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}

@@ -50,6 +50,7 @@ import list2 from './assets/img/style-2.png';
 import list3 from './assets/img/style-3.png';
 import list4 from './assets/img/style-4.png';
 import list5 from './assets/img/style-5.png';
+import list6 from './assets/img/style-6.png';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -240,6 +241,7 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('Style 2', 'boldpost'), value: '2', src: list3 },
 							{ label: __('Style 3', 'boldpost'), value: '3', src: list4 },
 							{ label: __('Style 4', 'boldpost'), value: '4', src: list5 },
+							{ label: __('Style 5', 'boldpost'), value: '5', src: list6 },
 						]}
 					/>
 				</PanelBody>
@@ -314,7 +316,7 @@ export default function Edit({ attributes, setAttributes }) {
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
-					</PanelBody>
+				</PanelBody>
 
 				<PanelBody title={__('Title', 'boldpost')} initialOpen={false}>
 					<SelectControl
@@ -416,6 +418,7 @@ export default function Edit({ attributes, setAttributes }) {
 									{ label: __('Default', 'boldpost'), value: 'default' },
 									{ label: __('Style 1', 'boldpost'), value: '1' },
 									{ label: __('Style 2', 'boldpost'), value: '2' },
+									{ label: __('Style 3', 'boldpost'), value: '3' }
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
@@ -929,6 +932,31 @@ export default function Edit({ attributes, setAttributes }) {
 							);
 						}}
 					</TabPanel>
+
+					<ResponsiveWrapper label={__('Button Width (%)', 'boldpost')}>
+						{(device) => (
+							<RangeControlWithUnit
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('paginationBtnWidth', device)}
+								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+								min={0}
+								max={500}
+								step={1}
+							/>
+						)}
+					</ResponsiveWrapper>
+
+					<BorderControl
+						label={__('Border', 'boldpost')}
+						value={attributes.paginationBtnBorder}
+						onChange={(value) => setAttributes({ paginationBtnBorder: value })}
+					/>
+					<BoxControl
+						label={__('Border Radius', 'boldpost')}
+						values={attributes.paginationBtnBorderRadius}
+						onChange={(value) => setAttributes({ paginationBtnBorderRadius: value })}
+					/>
 
 				</PanelBody>
 

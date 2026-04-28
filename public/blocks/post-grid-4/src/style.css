@@ -159,7 +159,7 @@
 .boldpo-post-grid-4-block-wrap .boldpo-post-grid-4 .boldpo-grid-item:hover .boldpo-blog-img.boldpo-animate.top_bottom img {
   transform: translateY(15px) scale(1.1);
 }
-.boldpo-post-grid-4-block-wrap .boldpo-post-grid-4.style-default .boldpo-blog-categories, .boldpo-post-grid-4-block-wrap .boldpo-post-grid-4.style-1 .boldpo-blog-categories {
+.boldpo-post-grid-4-block-wrap .boldpo-post-grid-4.style-default .boldpo-post-categories, .boldpo-post-grid-4-block-wrap .boldpo-post-grid-4.style-1 .boldpo-post-categories {
   position: absolute;
   left: 0;
   top: 0;

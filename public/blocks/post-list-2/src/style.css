@@ -203,10 +203,10 @@
   position: relative;
   width: 100%;
 }
-.boldpo-post-list-2-block-wrap .boldpo-post-list-2 .boldpo-blog-metas.boldpo-blog-metas-style-1 .bldpost-meta {
+.boldpo-post-list-2-block-wrap .boldpo-post-list-2 .boldpo-post-metas.boldpo-post-metas-style-1 .bldpost-meta {
   position: relative;
 }
-.boldpo-post-list-2-block-wrap .boldpo-post-list-2 .boldpo-blog-metas.boldpo-blog-metas-style-1 .bldpost-meta:not(:first-child)::before {
+.boldpo-post-list-2-block-wrap .boldpo-post-list-2 .boldpo-post-metas.boldpo-post-metas-style-1 .bldpost-meta:not(:first-child)::before {
   content: "";
   position: absolute;
   left: -11px;
@@ -216,13 +216,13 @@
   background: currentColor;
   border-radius: 100%;
 }
-.boldpo-post-list-2-block-wrap .boldpo-post-list-2 .boldpo-blog-metas.boldpo-blog-metas-style-1 a {
+.boldpo-post-list-2-block-wrap .boldpo-post-list-2 .boldpo-post-metas.boldpo-post-metas-style-1 a {
   text-decoration: none;
 }
-.boldpo-post-list-2-block-wrap .boldpo-post-list-2 .boldpo-blog-metas.boldpo-blog-metas-style-1 a:hover {
+.boldpo-post-list-2-block-wrap .boldpo-post-list-2 .boldpo-post-metas.boldpo-post-metas-style-1 a:hover {
   text-decoration: underline;
 }
-.boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-default .boldpo-list-col-one-wrap .boldpo-blog-categories {
+.boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-default .boldpo-list-col-one-wrap .boldpo-post-categories {
   position: absolute;
   top: 0;
   left: 0;
@@ -254,12 +254,12 @@
   padding: 20px 0;
 }
 .boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-1 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-title,
-.boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-1 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-metas,
-.boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-1 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-categories,
+.boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-1 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-post-metas,
+.boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-1 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-post-categories,
 .boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-1 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-excerpt,
 .boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-1 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-read-more a, .boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-2 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-title,
-.boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-2 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-metas,
-.boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-2 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-categories,
+.boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-2 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-post-metas,
+.boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-2 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-post-categories,
 .boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-2 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-excerpt,
 .boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-2 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-read-more a {
   color: #fff;
@@ -287,8 +287,8 @@
   margin: 20px 0 0 0;
 }
 .boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-3 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-title,
-.boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-3 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-metas,
-.boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-3 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-categories,
+.boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-3 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-post-metas,
+.boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-3 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-post-categories,
 .boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-3 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-excerpt,
 .boldpo-post-list-2-block-wrap .boldpo-post-list-2.style-3 .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-read-more a {
   color: #fff;

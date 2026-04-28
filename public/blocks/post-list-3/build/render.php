@@ -22,7 +22,7 @@ $ignore_stikcy_posts = !empty($attributes['ignoreStikcyPosts']) ? 1 : 0;
 $unique_id    = !empty($attributes['blockId']) ? $attributes['blockId'] : 'boldpo-' . substr(md5(serialize($attributes)), 0, 6);
 $page_key = 'paged_' . $unique_id;
 
-if ( $style == '3' ) {
+if ( $style == '3' || $style == '4') {
     $per_page = 6;
 }else{
     $per_page = 5;
@@ -41,7 +41,7 @@ $paged = max( 1, (int) $paged );
 // Styles attributes
 $show_meta = !empty($attributes['showMeta']) ? true : false;
 $allowed_metas = isset($attributes['allowedMetas']) ? $attributes['allowedMetas'] : [];
-$meta_position = isset($attributes['metaPosition']) ? $attributes['metaPosition'] : 'below_title';
+$meta_position = isset($attributes['metaPosition']) ? $attributes['metaPosition'] : '';
 $author_prefix = isset($attributes['authorPrefix']) ? $attributes['authorPrefix'] : 'by';
 $title_one_tag = isset($attributes['TitleOneTag']) ? $attributes['TitleOneTag'] : 'h3';
 $title_two_tag = isset($attributes['TitleTwoTag']) ? $attributes['TitleTwoTag'] : 'h3';
@@ -56,7 +56,23 @@ $excerpt_trim = isset($attributes['excerptTrim']) ? $attributes['excerptTrim'] :
 $anim_style = isset($attributes['animStyle']) ? $attributes['animStyle'] : '';
 $thumb_anim = isset($attributes['thumbAnim']) ? 'boldpo-animate' : '';
 
-$meta_style = isset($attributes['metaStyle']) ? $attributes['metaStyle'] : 'default';
+$meta_style = isset($attributes['metaStyle']) ? $attributes['metaStyle'] : '';
+
+if($attributes['metaPosition'] == 'default' || $attributes['metaPosition'] == ''){
+    if($style == '3' || $style == '4'){
+        $attributes['metaPosition'] = 'up_title';
+    }else{
+        $attributes['metaPosition'] = 'below_title';
+    }
+}
+
+if($meta_style == 'default' || $meta_style == ''){
+    if($style == '3' || $style == '4'){
+        $meta_style = '3';
+    }else{
+        $meta_style = '1';
+    }
+}
 
 $cat_style = 'default';
 
@@ -80,6 +96,9 @@ $wrap_two_col_class_1 = " boldpo-col-lg-6 boldpo-col-md-12 boldpo-col-12";
 if($style == '3') {
     $wrap_one_col_class_1 = " boldpo-col-lg-8 boldpo-col-md-12 boldpo-col-12";
     $wrap_two_col_class_1 = " boldpo-col-lg-4 boldpo-col-md-12 boldpo-col-12";
+}else if($style == '4') {
+    $wrap_one_col_class_1 = " boldpo-col-lg-7 boldpo-col-md-12 boldpo-col-12";
+    $wrap_two_col_class_1 = " boldpo-col-lg-5 boldpo-col-md-12 boldpo-col-12";
 }
 
 
@@ -394,19 +413,19 @@ BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css,
     '.boldpo-post-list-3 .boldpo-list-item .boldpo-read-more .boldpo-read-more-link'     => BOLDPO_Helper::get_inline_styles($button_styles),
     '.boldpo-post-list-3 .boldpo-list-item .boldpo-read-more .boldpo-read-more-link:hover'=> BOLDPO_Helper::get_inline_styles($button_hover),
     '.boldpo-post-list-3 .boldpo-list-item .boldpo-blog-date-top'      => BOLDPO_Helper::get_inline_styles($td_styles),
-    '.boldpo-post-list-3 .boldpo-list-item .boldpo-blog-metas'         => BOLDPO_Helper::get_inline_styles($metas_styles),
-    '.boldpo-post-list-3 .boldpo-list-item .boldpo-blog-metas a'         => BOLDPO_Helper::get_inline_styles($meta_styles),
-    '.boldpo-post-list-3 .boldpo-list-item .boldpo-blog-metas a:hover'         => BOLDPO_Helper::get_inline_styles($meta_hover),
-    '.boldpo-post-list-3 .boldpo-list-item .boldpo-blog-metas i'         => BOLDPO_Helper::get_inline_styles($meta_icon_styles),
-    '.boldpo-post-list-3 .boldpo-list-item .boldpo-blog-metas i:hover'         => BOLDPO_Helper::get_inline_styles($meta_icon_hover),
+    '.boldpo-post-list-3 .boldpo-list-item .boldpo-post-metas'         => BOLDPO_Helper::get_inline_styles($metas_styles),
+    '.boldpo-post-list-3 .boldpo-list-item .boldpo-post-metas a'         => BOLDPO_Helper::get_inline_styles($meta_styles),
+    '.boldpo-post-list-3 .boldpo-list-item .boldpo-post-metas a:hover'         => BOLDPO_Helper::get_inline_styles($meta_hover),
+    '.boldpo-post-list-3 .boldpo-list-item .boldpo-post-metas i'         => BOLDPO_Helper::get_inline_styles($meta_icon_styles),
+    '.boldpo-post-list-3 .boldpo-list-item .boldpo-post-metas i:hover'         => BOLDPO_Helper::get_inline_styles($meta_icon_hover),
     '.boldpo-post-list-3 .boldpo-list-item .boldpo-blog-content'       => BOLDPO_Helper::get_inline_styles($item_content_styles),
     '.boldpo-pagination a, .boldpo-pagination span' => BOLDPO_Helper::get_inline_styles($pag_styles),
     '.boldpo-pagination a:hover, .boldpo-pagination span.current' => BOLDPO_Helper::get_inline_styles($pag_hover),
     '.boldpo-post-list-3 .boldpo-list-item .boldpo-blog-img'   => BOLDPO_Helper::get_inline_styles($thumbnail_border_radius_styles),
-    '.boldpo-blog-categories .bldpost-meta' => BOLDPO_Helper::get_inline_styles($cat_container_styles),
-    '.boldpo-blog-categories .bldpost-meta:hover' => BOLDPO_Helper::get_inline_styles($cat_container_hover),
-    '.boldpo-blog-categories .bldpost-meta a' => BOLDPO_Helper::get_inline_styles($cat_link_styles),
-    '.boldpo-blog-categories .bldpost-meta a:hover' => BOLDPO_Helper::get_inline_styles($cat_link_hover),
+    '.boldpo-post-categories .bldpost-meta' => BOLDPO_Helper::get_inline_styles($cat_container_styles),
+    '.boldpo-post-categories .bldpost-meta:hover' => BOLDPO_Helper::get_inline_styles($cat_container_hover),
+    '.boldpo-post-categories .bldpost-meta a' => BOLDPO_Helper::get_inline_styles($cat_link_styles),
+    '.boldpo-post-categories .bldpost-meta a:hover' => BOLDPO_Helper::get_inline_styles($cat_link_hover),
 ] );
 
 $page_key = 'paged_' . $unique_id;
@@ -506,13 +525,13 @@ if ( $query->have_posts() ) :
                 $trimmed_excerpt = wp_trim_words( get_the_excerpt(), $excerpt_trim, '...' );
                 $last_modified_date = BOLDPO_Helper::boldpost_time_ago();
 
-                if($i == 1 && $style == '3') {
+                if( ($i == 1 && $style == '3') || ($i == 1 && $style == '4')) {
                     $meta_position = 'below_content';
                 }else{
                     $meta_position = $attributes['metaPosition'];
                 }
                 
-                $style_file = $template_pl_path . 'public/template-parts/blog-list-3/style-' . $style . '.php';
+                $style_file = $template_pl_path . 'public/template-parts/post-list-3/style-' . $style . '.php';
 
                 if ( file_exists( $style_file ) ) {
                     if ( $i == 1 && $paged == 1 ) {
@@ -520,7 +539,6 @@ if ( $query->have_posts() ) :
                         $title_tag = $title_one_tag;
                         $thumbnail_size = $thumbnail_one_size;
                         $item_class = $item_class . $col_class_1;
-                        // $wrap_one_col_class_1 = 'boldpo-col-lg-6 boldpo-col-md-12 boldpo-col-sm-12 boldpo-col-12';
 
                         echo '<div class="boldpo-list-col-one-wrap ' . esc_attr($wrap_one_col_class_1) . '">';
                         include $style_file;
@@ -536,7 +554,6 @@ if ( $query->have_posts() ) :
                         $title_tag = $title_two_tag;
                         $thumbnail_size = $thumbnail_two_size;
                         $item_class = $item_class . $col_class_2;
-                        // $wrap_one_col_class_1 = 'boldpo-col-lg-12 boldpo-col-md-12 boldpo-col-sm-12 boldpo-col-12';
                         include $style_file;
                     }
                 }

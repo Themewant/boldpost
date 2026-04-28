@@ -47,6 +47,7 @@ import './editor.scss';
 import grid1 from './assets/img/grid-1.png';
 import grid2 from './assets/img/grid-2.png';
 import grid3 from './assets/img/grid-3.png';
+import grid4 from './assets/img/grid-4.png';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -289,6 +290,7 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('Default', 'boldpost'), value: 'default', src: grid1 },
 							{ label: __('Style 1', 'boldpost'), value: '1', src: grid2 },
 							{ label: __('Style 2', 'boldpost'), value: '2', src: grid3 },
+							{ label: __('Style 3', 'boldpost'), value: '3', src: grid4 },
 						]}
 					/>
 				</PanelBody>
@@ -560,6 +562,8 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(value) => setAttributes({ navPosition: value })}
 						options={[
 							{ label: __('Middle', 'boldpost'), value: 'middle' },
+							{ label: __('Top Middle', 'boldpost'), value: 'top-middle' },
+							{ label: __('Bottom Middle', 'boldpost'), value: 'bottom-middle' },
 							{ label: __('Top Left', 'boldpost'), value: 'top-left' },
 							{ label: __('Top Right', 'boldpost'), value: 'top-right' },
 							{ label: __('Bottom Left', 'boldpost'), value: 'bottom-left' },

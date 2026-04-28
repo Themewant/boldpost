@@ -126,8 +126,8 @@
 				}
 			}
 
-			.boldpo-blog-categories,
-			.boldpo-blog-metas {
+			.boldpo-post-categories,
+			.boldpo-post-metas {
 				margin: 20px 0 5px;
 				padding: 0;
 				list-style: none;
@@ -161,8 +161,8 @@
 				}
 			}
 
-			.boldpo-blog-metas {
-				&.boldpo-blog-metas-style-1 {
+			.boldpo-post-metas {
+				&.boldpo-post-metas-style-1 {
 					.bldpost-meta {
 						position: relative;
 
@@ -242,8 +242,8 @@
 			}
 
 			.boldpo-blog-title,
-			.boldpo-blog-metas,
-			.boldpo-blog-categories,
+			.boldpo-post-metas,
+			.boldpo-post-categories,
 			.boldpo-blog-excerpt,
 			.boldpo-read-more a {
 				color: #fff;
@@ -258,6 +258,7 @@
 			&:hover {
 				.boldpo-blog-img {
 					position: relative;
+
 					&.boldpo-animate {
 						&.left_right {
 

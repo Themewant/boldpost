@@ -146,8 +146,8 @@
   color: currentColor;
 }
 .boldpo-post-grid-2-block-wrap .boldpo-post-grid-2 .boldpo-grid-item .boldpo-blog-title,
-.boldpo-post-grid-2-block-wrap .boldpo-post-grid-2 .boldpo-grid-item .boldpo-blog-metas,
-.boldpo-post-grid-2-block-wrap .boldpo-post-grid-2 .boldpo-grid-item .boldpo-blog-categories,
+.boldpo-post-grid-2-block-wrap .boldpo-post-grid-2 .boldpo-grid-item .boldpo-post-metas,
+.boldpo-post-grid-2-block-wrap .boldpo-post-grid-2 .boldpo-grid-item .boldpo-post-categories,
 .boldpo-post-grid-2-block-wrap .boldpo-post-grid-2 .boldpo-grid-item .boldpo-blog-excerpt,
 .boldpo-post-grid-2-block-wrap .boldpo-post-grid-2 .boldpo-grid-item .boldpo-read-more a {
   color: #fff;

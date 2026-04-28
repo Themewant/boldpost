@@ -319,7 +319,7 @@ return array(
 			),
 			'metaPosition' => array(
 				'type' => 'string',
-				'default' => 'below_title'
+				'default' => 'default'
 			),
 			'metaColor' => array(
 				'type' => 'string',

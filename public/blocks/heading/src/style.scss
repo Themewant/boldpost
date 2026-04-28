@@ -17,7 +17,8 @@
             color: var(--boldpo-preset-color-contrast-2);
         }
 
-        &.style-2 {
+        &.style-2,
+        &.style-5 {
             .boldpo-heading-title-wrap {
                 position: relative;
                 width: 100%;
@@ -42,6 +43,12 @@
                 width: 100%;
                 height: 3px;
                 background-color: var(--boldpo-preset-color-tertiary);
+            }
+        }
+
+        &.style-5 {
+            .boldpo-heading-dot {
+                border-radius: 0;
             }
         }
 

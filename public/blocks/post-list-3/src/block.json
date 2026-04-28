@@ -314,7 +314,7 @@
 		},
 		"metaPosition": {
 			"type": "string",
-			"default": "below_title"
+			"default": "default"
 		},
 		"metaColor": {
 			"type": "string",

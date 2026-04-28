@@ -36,7 +36,7 @@ if ( ! isset( $paged ) ) {
 
 $paged = max( 1, (int) $paged );
 
-if( ($style == 4 || $style == '5') && empty($per_page)) {
+if( $style == 4 && empty($per_page)) {
     $per_page = 5;
 }else{
     $per_page = 3;
@@ -79,7 +79,7 @@ $item_class = '';
 if($style == '2' || $style == '3') {
    $wrap_one_col_class = 'boldpo-col-lg-4 boldpo-col-md-4 boldpo-col-sm-12 boldpo-col-12';
    $wrap_two_col_class = 'boldpo-col-lg-8 boldpo-col-md-8 boldpo-col-sm-12 boldpo-col-12';
-}else if($style == '4' || $style == '5') {
+}else if($style == '4') {
     $wrap_one_col_class = 'boldpo-col-lg-6 boldpo-col-md-6 boldpo-col-sm-12 boldpo-col-12';
     $wrap_two_col_class = 'boldpo-col-lg-6 boldpo-col-md-6 boldpo-col-sm-12 boldpo-col-12';
 }
@@ -373,18 +373,18 @@ BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css,
     '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-read-more .boldpo-read-more-link'     => BOLDPO_Helper::get_inline_styles($button_styles),
     '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-read-more .boldpo-read-more-link:hover'=> BOLDPO_Helper::get_inline_styles($button_hover),
     '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-blog-date-top'      => BOLDPO_Helper::get_inline_styles($td_styles),
-    '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-blog-metas'         => BOLDPO_Helper::get_inline_styles($metas_styles),
-    '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-blog-metas a'         => BOLDPO_Helper::get_inline_styles($meta_styles),
-    '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-blog-metas a:hover'   => BOLDPO_Helper::get_inline_styles($meta_hover),
-    '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-blog-metas i'       => BOLDPO_Helper::get_inline_styles($meta_icon_styles),
-    '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-blog-metas i:hover' => BOLDPO_Helper::get_inline_styles($meta_icon_hover),
+    '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-post-metas'         => BOLDPO_Helper::get_inline_styles($metas_styles),
+    '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-post-metas a'         => BOLDPO_Helper::get_inline_styles($meta_styles),
+    '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-post-metas a:hover'   => BOLDPO_Helper::get_inline_styles($meta_hover),
+    '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-post-metas i'       => BOLDPO_Helper::get_inline_styles($meta_icon_styles),
+    '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-post-metas i:hover' => BOLDPO_Helper::get_inline_styles($meta_icon_hover),
     '.boldpo-pagination a, .boldpo-pagination span' => BOLDPO_Helper::get_inline_styles($pag_styles),
     '.boldpo-pagination a:hover, .boldpo-pagination span.current' => BOLDPO_Helper::get_inline_styles($pag_hover),
     '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-blog-img'   => BOLDPO_Helper::get_inline_styles($thumbnail_border_radius_styles),
-    '.boldpo-blog-categories .bldpost-meta' => BOLDPO_Helper::get_inline_styles($cat_container_styles),
-    '.boldpo-blog-categories .bldpost-meta:hover' => BOLDPO_Helper::get_inline_styles($cat_container_hover),
-    '.boldpo-blog-categories .bldpost-meta a' => BOLDPO_Helper::get_inline_styles($cat_link_styles),
-    '.boldpo-blog-categories .bldpost-meta a:hover' => BOLDPO_Helper::get_inline_styles($cat_link_hover),
+    '.boldpo-post-categories .bldpost-meta' => BOLDPO_Helper::get_inline_styles($cat_container_styles),
+    '.boldpo-post-categories .bldpost-meta:hover' => BOLDPO_Helper::get_inline_styles($cat_container_hover),
+    '.boldpo-post-categories .bldpost-meta a' => BOLDPO_Helper::get_inline_styles($cat_link_styles),
+    '.boldpo-post-categories .bldpost-meta a:hover' => BOLDPO_Helper::get_inline_styles($cat_link_hover),
 ] );
 
 
@@ -467,7 +467,7 @@ if ( $query->have_posts() ) :
             while ( $query->have_posts() ) : $query->the_post();
                 $i++;
 
-                if($i > 1 && ($style == '4' || $style == '5')) {
+                if($i > 1 && $style == '4') {
                     $item_class = ' boldpo-col-lg-6 boldpo-col-md-6 boldpo-col-sm-12 boldpo-col-12';
                 }
 
@@ -482,11 +482,11 @@ if ( $query->have_posts() ) :
                 $trimmed_title = wp_trim_words( get_the_title(), $title_trim, '...' );
                 $trimmed_excerpt = wp_trim_words( get_the_excerpt(), $excerpt_trim, '...' );
                 
-                $style_file = $template_pl_path . 'public/template-parts/blog-grid-2/style-' . $style . '.php';
+                $style_file = $template_pl_path . 'public/template-parts/post-grid-2/style-' . $style . '.php';
 
                 
             
-                if ( ($style == 'default' || $style == '1' || $style == '4' || $style == '5') && file_exists( $style_file ) ) {
+                if ( ($style == 'default' || $style == '1' || $style == '4') && file_exists( $style_file ) ) {
 
                     if ($i == 1) {
                         // LEFT BIG POST

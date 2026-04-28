@@ -32,6 +32,12 @@ if ( ! empty( $attributes['titleColor'] ) ) {
     $title_responsive['desktop']['color'] = $attributes['titleColor'];
 }
 
+$text_align = $attributes['textAlign'] ?? '';
+if ( ! empty( $text_align ) ) {
+    $title_responsive['desktop']['text-align'] = $text_align;
+    $title_responsive['desktop']['justify-content'] = $text_align;
+}
+
 // Title padding (non-responsive)
 $t_padding = $attributes['titlePadding'] ?? [];
 if ( ! empty( $t_padding['top'] ) )    $title_responsive['desktop']['padding-top']    = BOLDPO_Helper::ensure_unit( $t_padding['top'] );
@@ -78,6 +84,10 @@ if ( ! empty( $attributes['descriptionColor'] ) ) {
     $description_responsive['desktop']['color'] = $attributes['descriptionColor'];
 }
 
+if ( ! empty( $text_align ) ) {
+    $description_responsive['desktop']['text-align'] = $text_align;
+}
+
 // Description padding (non-responsive)
 $d_padding = $attributes['descriptionPadding'] ?? [];
 if ( ! empty( $d_padding['top'] ) )    $description_responsive['desktop']['padding-top']    = BOLDPO_Helper::ensure_unit( $d_padding['top'] );
@@ -120,7 +130,7 @@ if ( $style === '2' || $style === '4' ) {
 }
 
 $full_responsive_css  = BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style, $responsive_data);
-$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-title-wrap .boldpo-heading-title', $title_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-title-wrap', $title_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-description', $description_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-border-line', $border_line_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-dot', $dot_responsive);
@@ -161,42 +171,44 @@ if ( ! empty( $attributes['title'] ) ) :
                 ?>
                 <div class="boldpo-heading-title-wrap">
                     <span class="boldpo-heading-border-line boldpo-heading-border-line-left"></span>
-                    <<?php echo esc_attr($title_tag); ?> class="boldpo-heading-title"><?php echo esc_html($attributes['title']); ?></<?php echo esc_attr($title_tag); ?>>
+                    <<?php echo esc_attr($title_tag); ?> class="boldpo-heading-title"><?php echo wp_kses_post($attributes['title']); ?></<?php echo esc_attr($title_tag); ?>>
                     <span class="boldpo-heading-border-line boldpo-heading-border-line-right"></span>
                 </div>
                 <?php if($attributes['showDescription']) { ?>
-                    <p class="boldpo-heading-description"><?php echo esc_html($attributes['description']); ?></p>
+                    <p class="boldpo-heading-description"><?php echo wp_kses_post($attributes['description']); ?></p>
                 <?php } ?>
                 <?php
             }else if($style == '3'){
                 ?>
                 <div class="boldpo-heading-title-wrap">
                     <span class="boldpo-heading-dot"></span>
-                    <<?php echo esc_attr($title_tag); ?> class="boldpo-heading-title"><?php echo esc_html($attributes['title']); ?></<?php echo esc_attr($title_tag); ?>>
+                    <<?php echo esc_attr($title_tag); ?> class="boldpo-heading-title"><?php echo wp_kses_post($attributes['title']); ?></<?php echo esc_attr($title_tag); ?>>
                     <i class="boldpo-heading-right-icon boldpo-icon-chevron-right"></i>
                 </div>
                 <?php if($attributes['showDescription']) { ?>
-                    <p class="boldpo-heading-description"><?php echo esc_html($attributes['description']); ?></p>
+                    <p class="boldpo-heading-description"><?php echo wp_kses_post($attributes['description']); ?></p>
                 <?php } ?>
                 <?php
-            }else if($style == '2'){
+            }else if($style == '2' || $style == '5'){
                 ?>
                 <div class="boldpo-heading-title-wrap">
                     <span class="boldpo-heading-dot"></span>
-                    <<?php echo esc_attr($title_tag); ?> class="boldpo-heading-title"><?php echo esc_html($attributes['title']); ?></<?php echo esc_attr($title_tag); ?>>
-                    <span class="boldpo-heading-border-line"></span>
+                    <<?php echo esc_attr($title_tag); ?> class="boldpo-heading-title"><?php echo wp_kses_post($attributes['title']); ?></<?php echo esc_attr($title_tag); ?>>
+                    <?php if($style == '2'){ ?>
+                        <span class="boldpo-heading-border-line"></span>
+                    <?php } ?>
                 </div>
                 <?php if($attributes['showDescription']) { ?>
-                    <p class="boldpo-heading-description"><?php echo esc_html($attributes['description']); ?></p>
+                    <p class="boldpo-heading-description"><?php echo wp_kses_post($attributes['description']); ?></p>
                 <?php } ?>
                 <?php
             }else  {
                 ?>
                 <div class="boldpo-heading-title-wrap">
-                    <<?php echo esc_attr($title_tag); ?> class="boldpo-heading-title"><?php echo esc_html($attributes['title']); ?></<?php echo esc_attr($title_tag); ?>>
+                    <<?php echo esc_attr($title_tag); ?> class="boldpo-heading-title"><?php echo wp_kses_post($attributes['title']); ?></<?php echo esc_attr($title_tag); ?>>
                 </div>
                 <?php if($attributes['showDescription']) { ?>
-                    <p class="boldpo-heading-description"><?php echo esc_html($attributes['description']); ?></p>
+                    <p class="boldpo-heading-description"><?php echo wp_kses_post($attributes['description']); ?></p>
                 <?php } ?>
                 <?php
             }

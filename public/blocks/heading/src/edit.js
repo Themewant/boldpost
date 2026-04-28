@@ -42,6 +42,7 @@ import style1 from './assets/img/style-1.png';
 import style2 from './assets/img/style-2.png';
 import style3 from './assets/img/style-3.png';
 import style4 from './assets/img/style-4.png';
+import style5 from './assets/img/style-5.png';
 /**
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
@@ -90,6 +91,8 @@ export default function Edit({ attributes, setAttributes }) {
         ...buildTypographyStyles(attributes.titleTypography),
         ...buildBoxStyles(attributes.titleMargin, 'margin'),
         ...buildBoxStyles(attributes.titlePadding, 'padding'),
+        justifyContent: attributes.textAlign,
+        textAlign: attributes.textAlign,
     };
 
     const titleHoverStyle = {
@@ -139,6 +142,7 @@ export default function Edit({ attributes, setAttributes }) {
                             { label: __('Style 2', 'boldpost'), value: '2', src: style2 },
                             { label: __('Style 3', 'boldpost'), value: '3', src: style3 },
                             { label: __('Style 4', 'boldpost'), value: '4', src: style4 },
+                            { label: __('Style 5', 'boldpost'), value: '5', src: style5 },
                         ]}
                         __next40pxDefaultSize={true}
                         __nextHasNoMarginBottom={true}
@@ -383,8 +387,8 @@ export default function Edit({ attributes, setAttributes }) {
             </div>
 
             <div className={`boldpo-heading style-${attributes.layoutStyle}`} style={{ textAlign: attributes.textAlign || undefined }}>
-                <div className="boldpo-heading-title-wrap">
-                    {attributes.layoutStyle === '2' && (
+                <div className="boldpo-heading-title-wrap" style={titleStyle}>
+                    {(attributes.layoutStyle === '2' || attributes.layoutStyle === '5') && (
                         <span className="boldpo-heading-dot" style={dotStyle}></span>
                     )}
                     {attributes.layoutStyle === '4' && (
@@ -396,8 +400,6 @@ export default function Edit({ attributes, setAttributes }) {
                         value={attributes.title}
                         onChange={(value) => setAttributes({ title: value })}
                         placeholder={__('Add a title…', 'boldpost')}
-                        style={titleStyle}
-
                     />
                     {attributes.layoutStyle === '2' && (
                         <span className="boldpo-heading-border-line" style={borderLineStyle}></span>

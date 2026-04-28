@@ -240,8 +240,8 @@
 			}
 		}
 
-		.boldpo-blog-metas {
-			&.boldpo-blog-metas-style-1 {
+		.boldpo-post-metas {
+			&.boldpo-post-metas-style-1 {
 				.bldpost-meta {
 					position: relative;
 
@@ -271,7 +271,7 @@
 
 		&.style-default {
 			.boldpo-list-col-one-wrap {
-				.boldpo-blog-categories {
+				.boldpo-post-categories {
 					position: absolute;
 					top: 0;
 					left: 0;
@@ -323,8 +323,8 @@
 				.boldpo-list-item {
 
 					.boldpo-blog-title,
-					.boldpo-blog-metas,
-					.boldpo-blog-categories,
+					.boldpo-post-metas,
+					.boldpo-post-categories,
 					.boldpo-blog-excerpt,
 					.boldpo-read-more a {
 						color: #fff;
@@ -373,8 +373,8 @@
 					}
 
 					.boldpo-blog-title,
-					.boldpo-blog-metas,
-					.boldpo-blog-categories,
+					.boldpo-post-metas,
+					.boldpo-post-categories,
 					.boldpo-blog-excerpt,
 					.boldpo-read-more a {
 						color: #fff;
