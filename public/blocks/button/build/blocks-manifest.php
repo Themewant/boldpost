@@ -36,7 +36,7 @@ return array(
 			),
 			'text' => array(
 				'type' => 'string',
-				'default' => 'View all posts'
+				'default' => 'Click Me'
 			),
 			'url' => array(
 				'type' => 'string',
@@ -197,6 +197,10 @@ return array(
 			'borderColorHover' => array(
 				'type' => 'string',
 				'default' => ''
+			),
+			'iconHoverAnimation' => array(
+				'type' => 'string',
+				'default' => 'none'
 			)
 		)
 	)

@@ -73,6 +73,93 @@ class BOLDPO_API {
                 return current_user_can('edit_posts');
             },
         ) );
+
+        // Colors endpoints
+        register_rest_route( 'boldpo/v1', '/colors', array(
+            array(
+                'methods'  => 'GET',
+                'callback' => array( $this, 'get_colors' ),
+                'permission_callback' => function () {
+                    return current_user_can('manage_options');
+                },
+            ),
+            array(
+                'methods'  => 'POST',
+                'callback' => array( $this, 'save_colors' ),
+                'permission_callback' => function () {
+                    return current_user_can('manage_options');
+                },
+            ),
+        ) );
+    }
+
+    public static function get_color_defaults() {
+        return array(
+            'primary'    => '#126bf0',
+            'secondary'  => '#5096ff',
+            'tertiary'   => '#f3f3f3',
+            'white'      => '#ffffff',
+            'contrast_1' => '#1e1e1e',
+            'contrast_2' => '#11111194',
+            'border'     => '#8383831f',
+        );
+    }
+
+    public static function get_saved_colors() {
+        $defaults = self::get_color_defaults();
+        $saved    = get_option( 'boldpo_colors', array() );
+        if ( ! is_array( $saved ) ) {
+            $saved = array();
+        }
+        return array_merge( $defaults, $saved );
+    }
+
+    private function sanitize_color( $value ) {
+        $value = is_string( $value ) ? trim( $value ) : '';
+        if ( $value === '' ) {
+            return '';
+        }
+        // Accept #rgb, #rrggbb, #rrggbbaa, rgb(), rgba()
+        if ( preg_match( '/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/', $value ) ) {
+            return strtolower( $value );
+        }
+        if ( preg_match( '/^rgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*(?:,\s*(?:0|1|0?\.\d+)\s*)?\)$/', $value ) ) {
+            return $value;
+        }
+        return '';
+    }
+
+    public function get_colors() {
+        return rest_ensure_response( array(
+            'colors'   => self::get_saved_colors(),
+            'defaults' => self::get_color_defaults(),
+        ) );
+    }
+
+    public function save_colors( $request ) {
+        $input    = $request->get_param( 'colors' );
+        $defaults = self::get_color_defaults();
+
+        if ( ! is_array( $input ) ) {
+            return new WP_Error( 'invalid_payload', 'Colors payload must be an object.', array( 'status' => 400 ) );
+        }
+
+        $clean = array();
+        foreach ( $defaults as $key => $default ) {
+            if ( isset( $input[ $key ] ) ) {
+                $sanitized = $this->sanitize_color( $input[ $key ] );
+                $clean[ $key ] = $sanitized !== '' ? $sanitized : $default;
+            } else {
+                $clean[ $key ] = $default;
+            }
+        }
+
+        update_option( 'boldpo_colors', $clean );
+
+        return rest_ensure_response( array(
+            'status' => 'success',
+            'colors' => $clean,
+        ) );
     }
 
     public function update_block_status( $request ) {

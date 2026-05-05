@@ -58,6 +58,8 @@
 
 .boldpo-post-categories {
     margin: 0;
+    gap: 0;
+    display: flex;
 
     .boldpo-cat-dot {
         width: 10px;
@@ -76,18 +78,19 @@
     }
 
     &.boldpo-post-categories-style-1 {
+        margin-left: 12px;
+        margin-top: 12px;
+
         .bldpost-meta {
             background: var(--boldpo-preset-color-white);
             color: var(--boldpo-preset-color-contrast-1);
             padding: 8px 8px 7px;
             border-radius: 4px;
-            margin: 0;
             display: flex;
             align-items: center;
             line-height: 1;
             flex-wrap: wrap;
             gap: 1px;
-            margin: 10px;
         }
     }
 
@@ -118,9 +121,35 @@
             }
         }
     }
+
+    &.boldpo-post-categories-style-3 {
+        .bldpost-meta {
+            font-size: 0.875rem;
+            padding: 0;
+            margin: 3px 2px 3px;
+            line-height: 1;
+            text-transform: capitalize;
+
+            a {
+                color: currentColor;
+
+                &:hover {
+                    color: var(--boldpo-preset-color-tertiary) !important;
+                }
+            }
+
+            .boldpo-cat-dot {
+                display: none;
+            }
+        }
+    }
 }
 
 .boldpo-post-metas {
+    &.boldpo-upper-metas {
+        margin-top: 0px !important;
+    }
+
     &.boldpo-post-metas-style-1 {
         .bldpost-meta {
             position: relative;
@@ -172,7 +201,7 @@
             position: relative;
 
             .boldpo-meta-cat {
-                color: var(--boldpo-preset-color-primary);
+                //color: var(--boldpo-preset-color-primary);
             }
 
             &:not(:first-child) {
@@ -193,6 +222,11 @@
 
     &.boldpo-post-meta-position-up_title {
         margin-top: 0 !important;
+        margin-bottom: 8px;
+    }
+
+    &.boldpo-post-meta-position-below_title {
+        margin: 12px 0 0 !important;
     }
 }
 
@@ -208,6 +242,10 @@
 .boldpo-post-slider-2,
 .boldpo-post-slider-3,
 .boldpo-post-slider-4 {
+    .boldpo-blog-content {
+        box-sizing: border-box;
+    }
+
     .boldpo-blog-title {
         a {
             background-size: 0% 1px;

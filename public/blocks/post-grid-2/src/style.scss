@@ -183,34 +183,44 @@
 				}
 			}
 
-			&:hover {
-				.boldpo-blog-img {
-					position: relative;
 
-					&.boldpo-animate {
-						&.left_right {
+
+			.boldpo-blog-img {
+				position: relative;
+				overflow: hidden;
+
+				&.boldpo-animate {
+					&:hover {
+
+						&.left_right img {
 
 							transform: translateX(15px) scale(1.1);
 
 						}
 
-						&.top_bottom {
+						&.top_bottom img {
 
 							transform: translateY(15px) scale(1.1);
 
 						}
 					}
 				}
+
 			}
 
 		}
 
 		&.style-default,
-		&.style-1 {
+		&.style-1,
+		&.style-5 {
 			.boldpo-grid-col-left-wrap {
 				.boldpo-grid-item {
 					.boldpo-blog-title {
 						font-size: 36px;
+
+						@media (max-width: 768px) {
+							font-size: 24px;
+						}
 					}
 				}
 			}
@@ -238,8 +248,19 @@
 				.boldpo-grid-item {
 					.boldpo-blog-title {
 						font-size: 36px;
+
+						@media (max-width: 768px) {
+							font-size: 24px;
+						}
 					}
 				}
+			}
+		}
+
+		&.style-5 {
+			.boldpo-blog-content {
+				position: static;
+				padding: 20px 30px 30px 0px;
 			}
 		}
 	}

@@ -66,6 +66,18 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
+			'thumbnailOneWidth' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'thumbnailOneWidthTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'thumbnailOneWidthMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'thumbnailTwoHeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -75,6 +87,18 @@ return array(
 				'default' => ''
 			),
 			'thumbnailTwoHeightMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'thumbnailTwoWidth' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'thumbnailTwoWidthTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'thumbnailTwoWidthMobile' => array(
 				'type' => 'string',
 				'default' => ''
 			),
@@ -339,6 +363,18 @@ return array(
 			),
 			'metaMargin' => array(
 				'type' => 'object'
+			),
+			'metaTypography' => array(
+				'type' => 'object',
+				'default' => array(
+					'fontFamily' => '',
+					'fontSize' => '',
+					'fontWeight' => '',
+					'fontStyle' => '',
+					'textTransform' => '',
+					'lineHeight' => '',
+					'letterSpacing' => ''
+				)
 			),
 			'metaStyle' => array(
 				'type' => 'string',

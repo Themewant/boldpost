@@ -328,8 +328,7 @@ return array(
 				'default' => 'by'
 			),
 			'metaPosition' => array(
-				'type' => 'string',
-				'default' => 'below_title'
+				'type' => 'string'
 			),
 			'metaColor' => array(
 				'type' => 'string',
@@ -349,6 +348,18 @@ return array(
 			),
 			'metaMargin' => array(
 				'type' => 'object'
+			),
+			'metaTypography' => array(
+				'type' => 'object',
+				'default' => array(
+					'fontFamily' => '',
+					'fontSize' => '',
+					'fontWeight' => '',
+					'fontStyle' => '',
+					'textTransform' => '',
+					'lineHeight' => '',
+					'letterSpacing' => ''
+				)
 			),
 			'metaStyle' => array(
 				'type' => 'string',

@@ -46,6 +46,7 @@ import IconPicker from '../../custom-components/IconPicker';
 import './editor.scss';
 import layout1 from './assets/img/layout-1.png';
 import layout2 from './assets/img/layout-2.png';
+import layout3 from './assets/img/layout-3.png';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -254,6 +255,7 @@ export default function Edit({ attributes, setAttributes }) {
 						options={[
 							{ label: __('Default', 'boldpost'), value: 'default', src: layout1 },
 							{ label: __('Style 1', 'boldpost'), value: '1', src: layout2, isPro: true },
+							{ label: __('Style 2', 'boldpost'), value: '2', src: layout3, isPro: true },
 						]}
 					/>
 				</PanelBody>
@@ -282,6 +284,11 @@ export default function Edit({ attributes, setAttributes }) {
 				</PanelBody>
 
 				<PanelBody title={__('Video', 'boldpost')} initialOpen={false}>
+					<ToggleControl
+						label={__('Show Video', 'boldpost')}
+						checked={attributes.showVideo}
+						onChange={(value) => setAttributes({ showVideo: value })}
+					/>
 					<ToggleControl
 						label={__('Autoplay', 'boldpost')}
 						checked={attributes.videoAutoplay}
@@ -436,6 +443,7 @@ export default function Edit({ attributes, setAttributes }) {
 									{ label: __('Date', 'boldpost'), value: 'date' },
 									{ label: __('Category', 'boldpost'), value: 'category' },
 									{ label: __('Tag', 'boldpost'), value: 'tag' },
+									{ label: __('Comments Count', 'boldpost'), value: 'comments_count' },
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
@@ -470,6 +478,7 @@ export default function Edit({ attributes, setAttributes }) {
 									{ label: __('Default', 'boldpost'), value: 'default' },
 									{ label: __('Style 1', 'boldpost'), value: '1' },
 									{ label: __('Style 2', 'boldpost'), value: '2' },
+									{ label: __('Style 3', 'boldpost'), value: '3' }
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
@@ -873,6 +882,12 @@ export default function Edit({ attributes, setAttributes }) {
 						label={__('Margin', 'boldpost')}
 						values={attributes.metaMargin}
 						onChange={(value) => setAttributes({ metaMargin: value })}
+					/>
+					<TypographyControls
+						label={__('Typography', 'boldpost')}
+						attributes={attributes}
+						setAttributes={setAttributes}
+						attributeKey="metaTypography"
 					/>
 				</PanelBody>
 

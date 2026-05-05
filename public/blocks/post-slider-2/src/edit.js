@@ -959,6 +959,12 @@ export default function Edit({ attributes, setAttributes }) {
 						values={attributes.metaMargin}
 						onChange={(value) => setAttributes({ metaMargin: value })}
 					/>
+					<TypographyControls
+						label={__('Typography', 'boldpost')}
+						attributes={attributes}
+						setAttributes={setAttributes}
+						attributeKey="metaTypography"
+					/>
 				</PanelBody>
 
 				<PanelBody title={__('Button', 'boldpost')} initialOpen={false}>

@@ -1,0 +1,66 @@
+.wp-block-boldpost-info-box .boldpo-info-box-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.wp-block-boldpost-info-box .boldpo-info-box-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.wp-block-boldpost-info-box .boldpo-info-box-image {
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.wp-block-boldpost-info-box .boldpo-info-box-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.wp-block-boldpost-info-box .boldpo-info-box-image .boldpo-info-box-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f0f0;
+  color: #888;
+  font-size: 12px;
+  text-align: center;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.boldpo-info-box-item-control {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+.boldpo-info-box-item-control .boldpo-info-box-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.boldpo-info-box-item-control .boldpo-info-box-image-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.boldpo-info-box-item-control .boldpo-info-box-image-control .boldpo-info-box-image-preview {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.boldpo-info-box-item-control .boldpo-info-box-image-control .boldpo-info-box-image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}/*# sourceMappingURL=editor.css.map */

@@ -160,6 +160,14 @@ class BOLDPO_Blocks {
                 'iconName'    => 'heading.svg',
                 'status'      => 'enable',
                 "isPro"       => false,
+            ],
+            [
+                'title'       => 'Info Box',
+                'id'          => 'info-box',
+                'description' => 'Info Box Block',
+                'iconName'    => 'list.svg',
+                'status'      => 'enable',
+                "isPro"       => false,
             ]
         ];
 

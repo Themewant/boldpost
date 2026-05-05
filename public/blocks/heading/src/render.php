@@ -114,7 +114,9 @@ if ( $style === '2' || $style === '4' ) {
     if ( ! empty( $attributes['borderLineHeight'] ) ) {
         $border_line_responsive['desktop']['height'] = intval( $attributes['borderLineHeight'] ) . 'px';
     }
-    if ( $style === '2' ) {
+}
+
+if ( $style === '2' || $style === '6' ) {
         if ( ! empty( $attributes['borderLineWidth'] ) ) {
             $border_line_responsive['desktop']['width'] = intval( $attributes['borderLineWidth'] ) . 'px';
         }
@@ -127,14 +129,12 @@ if ( $style === '2' || $style === '4' ) {
             $dot_responsive['desktop']['height'] = $dot_size;
         }
     }
-}
 
 $full_responsive_css  = BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style, $responsive_data);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-title-wrap', $title_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-description', $description_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-border-line', $border_line_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-dot', $dot_responsive);
-$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-title-wrap .boldpo-heading-right-icon', $title_responsive);
 
 wp_enqueue_style( $style_handle );
 $sub_styles = [];
@@ -189,7 +189,7 @@ if ( ! empty( $attributes['title'] ) ) :
                     <p class="boldpo-heading-description"><?php echo wp_kses_post($attributes['description']); ?></p>
                 <?php } ?>
                 <?php
-            }else if($style == '2' || $style == '5'){
+            }else if($style == '2' || $style == '5' || $style == '6'){
                 ?>
                 <div class="boldpo-heading-title-wrap">
                     <span class="boldpo-heading-dot"></span>

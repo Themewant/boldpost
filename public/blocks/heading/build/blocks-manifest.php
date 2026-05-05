@@ -39,31 +39,13 @@ return array(
 				'default' => ''
 			),
 			'titleMargin' => array(
-				'type' => 'object',
-				'default' => array(
-					'top' => '0px',
-					'right' => '0px',
-					'bottom' => '10px',
-					'left' => '0px'
-				)
+				'type' => 'object'
 			),
 			'titleMarginTablet' => array(
-				'type' => 'object',
-				'default' => array(
-					'top' => '0px',
-					'right' => '0px',
-					'bottom' => '10px',
-					'left' => '0px'
-				)
+				'type' => 'object'
 			),
 			'titleMarginMobile' => array(
-				'type' => 'object',
-				'default' => array(
-					'top' => '0px',
-					'right' => '0px',
-					'bottom' => '10px',
-					'left' => '0px'
-				)
+				'type' => 'object'
 			),
 			'descriptionMargin' => array(
 				'type' => 'object'

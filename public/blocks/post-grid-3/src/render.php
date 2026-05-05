@@ -294,6 +294,15 @@ if(!empty($meta_margin['right'])) $metas_styles['margin-right'] = BOLDPO_Helper:
 if(!empty($meta_margin['bottom'])) $metas_styles['margin-bottom'] = BOLDPO_Helper::ensure_unit($meta_margin['bottom']);
 if(!empty($meta_margin['left'])) $metas_styles['margin-left'] = BOLDPO_Helper::ensure_unit($meta_margin['left']);
 
+$meta_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+BOLDPO_Helper::add_responsive_vars($attributes, $meta_responsive, 'metaTypography', '', [
+    'fontSize'=>'font-size',
+    'fontWeight'=>'font-weight',
+    'lineHeight'=>'line-height',
+    'textTransform'=>'text-transform',
+    'letterSpacing'=>'letter-spacing'
+], true);
+
 $meta_hover = [];
 if(!empty($attributes['metaColorHover'])) $meta_hover['color'] = $attributes['metaColorHover'];
 
@@ -361,6 +370,7 @@ if ( $style == 'default' || $style == '1' ) {
 }
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-3.style-' . $style . ' .boldpo-grid-item .boldpo-grid-item-inner', $item_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-3.style-' . $style . ' .boldpo-grid-item .boldpo-blog-title', $title_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-3.style-' . $style . ' .boldpo-grid-item .boldpo-post-metas', $meta_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-3.style-' . $style . ' .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-title', $title_left_typo_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-3.style-' . $style . ' .boldpo-grid-col-middle-wrap .boldpo-grid-item .boldpo-blog-title', $title_middle_typo_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-3.style-' . $style . ' .boldpo-grid-col-right-wrap .boldpo-grid-item .boldpo-blog-title', $title_right_typo_responsive);

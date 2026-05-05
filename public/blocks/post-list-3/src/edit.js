@@ -240,7 +240,8 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('Style 1', 'boldpost'), value: '1', src: list2, isPro: true },
 							{ label: __('Style 2', 'boldpost'), value: '2', src: list3, isPro: true },
 							{ label: __('Style 3', 'boldpost'), value: '3', src: list3 },
-							{ label: __('Style 4', 'boldpost'), value: '4', src: list4, isPro: true }
+							{ label: __('Style 4', 'boldpost'), value: '4', src: list4, isPro: true },
+							{ label: __('Style 5', 'boldpost'), value: '5', src: list5, isPro: true }
 						]}
 					/>
 				</PanelBody>
@@ -274,12 +275,38 @@ export default function Edit({ attributes, setAttributes }) {
 							/>
 						)}
 					</ResponsiveWrapper>
+					<ResponsiveWrapper label={__('Thumbnail One Width', 'boldpost')}>
+						{(device) => (
+							<RangeControlWithUnit
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('thumbnailOneWidth', device)}
+								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+								min={0}
+								max={1000}
+								step={1}
+							/>
+						)}
+					</ResponsiveWrapper>
 					<ResponsiveWrapper label={__('Thumbnail Two Height', 'boldpost')}>
 						{(device) => (
 							<RangeControlWithUnit
 								attributes={attributes}
 								setAttributes={setAttributes}
 								attributeKey={getAttrKey('thumbnailTwoHeight', device)}
+								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+								min={0}
+								max={1000}
+								step={1}
+							/>
+						)}
+					</ResponsiveWrapper>
+					<ResponsiveWrapper label={__('Thumbnail Two Width', 'boldpost')}>
+						{(device) => (
+							<RangeControlWithUnit
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('thumbnailTwoWidth', device)}
 								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
 								min={0}
 								max={1000}
@@ -791,6 +818,12 @@ export default function Edit({ attributes, setAttributes }) {
 						label={__('Margin', 'boldpost')}
 						values={attributes.metaMargin}
 						onChange={(value) => setAttributes({ metaMargin: value })}
+					/>
+					<TypographyControls
+						label={__('Typography', 'boldpost')}
+						attributes={attributes}
+						setAttributes={setAttributes}
+						attributeKey="metaTypography"
 					/>
 				</PanelBody>
 

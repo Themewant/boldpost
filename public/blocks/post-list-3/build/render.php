@@ -22,9 +22,9 @@ $ignore_stikcy_posts = !empty($attributes['ignoreStikcyPosts']) ? 1 : 0;
 $unique_id    = !empty($attributes['blockId']) ? $attributes['blockId'] : 'boldpo-' . substr(md5(serialize($attributes)), 0, 6);
 $page_key = 'paged_' . $unique_id;
 
-if ( $style == '3' || $style == '4') {
+if ( $per_page == '' && ($style == '3' || $style == '4' || $style == '5')) {
     $per_page = 6;
-}else{
+}else if($per_page == ''){
     $per_page = 5;
 }
 
@@ -57,6 +57,7 @@ $anim_style = isset($attributes['animStyle']) ? $attributes['animStyle'] : '';
 $thumb_anim = isset($attributes['thumbAnim']) ? 'boldpo-animate' : '';
 
 $meta_style = isset($attributes['metaStyle']) ? $attributes['metaStyle'] : '';
+$meta_wrapper_class = '';
 
 if($attributes['metaPosition'] == 'default' || $attributes['metaPosition'] == ''){
     if($style == '3' || $style == '4'){
@@ -322,6 +323,15 @@ if(!empty($meta_margin['right'])) $metas_styles['margin-right'] = BOLDPO_Helper:
 if(!empty($meta_margin['bottom'])) $metas_styles['margin-bottom'] = BOLDPO_Helper::ensure_unit($meta_margin['bottom']);
 if(!empty($meta_margin['left'])) $metas_styles['margin-left'] = BOLDPO_Helper::ensure_unit($meta_margin['left']);
 
+$meta_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+BOLDPO_Helper::add_responsive_vars($attributes, $meta_responsive, 'metaTypography', '', [
+    'fontSize'=>'font-size',
+    'fontWeight'=>'font-weight',
+    'lineHeight'=>'line-height',
+    'textTransform'=>'text-transform',
+    'letterSpacing'=>'letter-spacing'
+], true);
+
 $meta_hover = [];
 if(!empty($attributes['metaColorHover'])) $meta_hover['color'] = $attributes['metaColorHover'];
 
@@ -375,9 +385,13 @@ if ( ! empty( $attributes['paginationBackgroundColorHover'] ) ) {
 
 $thumbnail_one_height_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
 BOLDPO_Helper::add_responsive_vars($attributes, $thumbnail_one_height_responsive, 'thumbnailOneHeight', 'height', [], false);
+$thumbnail_one_width_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+BOLDPO_Helper::add_responsive_vars($attributes, $thumbnail_one_width_responsive, 'thumbnailOneWidth', 'width', [], false);
 
 $thumbnail_two_height_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
 BOLDPO_Helper::add_responsive_vars($attributes, $thumbnail_two_height_responsive, 'thumbnailTwoHeight', 'height', [], false);
+$thumbnail_two_width_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+BOLDPO_Helper::add_responsive_vars($attributes, $thumbnail_two_width_responsive, 'thumbnailTwoWidth', 'width', [], false);
 
 // Thumbnail Border Radius
 $thumbnail_border_radius_styles = [];
@@ -393,13 +407,16 @@ $selector     = '.boldpo-post-list-3-block-wrap.' . $unique_id;
 $full_responsive_css = BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list-3.style-' . $style, $responsive_data);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list-3.style-' . $style . ' .boldpo-list-item .boldpo-list-item-inner', $item_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list-3.style-' . $style . ' .boldpo-list-item .boldpo-blog-title', $title_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list-3.style-' . $style . ' .boldpo-list-item .boldpo-post-metas', $meta_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list-3.style-' . $style . ' .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-title', $title_one_typo_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list-3.style-' . $style . ' .boldpo-list-col-two-wrap .boldpo-list-item .boldpo-blog-title', $title_two_typo_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list-3.style-' . $style . ' .boldpo-list-item .boldpo-blog-excerpt', $excerpt_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list-3.style-' . $style . ' .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-content', $content_padding_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list-3.style-' . $style . ' .boldpo-list-col-two-wrap .boldpo-list-item .boldpo-blog-content', $content_two_padding_responsive);
-$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list-3.style-' . $style . ' .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-img img', $thumbnail_one_height_responsive);
-$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list-3.style-' . $style . ' .boldpo-list-col-two-wrap .boldpo-list-item .boldpo-blog-img img', $thumbnail_two_height_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list-3.style-' . $style . ' .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-img', $thumbnail_one_height_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list-3.style-' . $style . ' .boldpo-list-col-one-wrap .boldpo-list-item .boldpo-blog-img', $thumbnail_one_width_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list-3.style-' . $style . ' .boldpo-list-col-two-wrap .boldpo-list-item .boldpo-blog-img', $thumbnail_two_height_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list-3.style-' . $style . ' .boldpo-list-col-two-wrap .boldpo-list-item .boldpo-blog-img', $thumbnail_two_width_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list-3.style-' . $style . ' .boldpo-list-item .boldpo-read-more .boldpo-read-more-link', $button_text_align_responsive);
 
 
@@ -525,8 +542,14 @@ if ( $query->have_posts() ) :
                 $trimmed_excerpt = wp_trim_words( get_the_excerpt(), $excerpt_trim, '...' );
                 $last_modified_date = BOLDPO_Helper::boldpost_time_ago();
 
-                if( ($i == 1 && $style == '3') || ($i == 1 && $style == '4')) {
+                if( $i == 1 && in_array($style, ['1', '2', '4', '5'])) {
+                    $meta_wrapper_class = ' boldpo-upper-metas';
+                }
+
+                if( ($i == 1 && in_array($style, ['3', '4']))) {
                     $meta_position = 'below_content';
+                }else if($i == 1 && in_array($style, ['5'])){
+                    $meta_position = 'up_title';
                 }else{
                     $meta_position = $attributes['metaPosition'];
                 }

@@ -59,6 +59,10 @@ return array(
 					)
 				)
 			),
+			'layoutStyle' => array(
+				'type' => 'string',
+				'default' => '1'
+			),
 			'iconSize' => array(
 				'type' => 'number',
 				'default' => 20
@@ -71,7 +75,7 @@ return array(
 			),
 			'gap' => array(
 				'type' => 'number',
-				'default' => 10
+				'default' => 5
 			),
 			'gapTablet' => array(
 				'type' => 'number'
@@ -92,28 +96,22 @@ return array(
 				'default' => ''
 			),
 			'iconBgColor' => array(
-				'type' => 'string',
-				'default' => ''
+				'type' => 'string'
 			),
 			'iconBgColorHover' => array(
-				'type' => 'string',
-				'default' => ''
+				'type' => 'string'
 			),
 			'iconBorderColor' => array(
-				'type' => 'string',
-				'default' => '#83838340'
+				'type' => 'string'
 			),
 			'iconBorderColorHover' => array(
-				'type' => 'string',
-				'default' => ''
+				'type' => 'string'
 			),
 			'iconBorderWidth' => array(
-				'type' => 'number',
-				'default' => 1
+				'type' => 'number'
 			),
 			'iconBorderRadius' => array(
-				'type' => 'string',
-				'default' => '100%'
+				'type' => 'string'
 			),
 			'iconPadding' => array(
 				'type' => 'object'

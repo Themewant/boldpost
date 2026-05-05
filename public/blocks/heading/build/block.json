@@ -34,31 +34,13 @@
       "default": ""
     },
     "titleMargin": {
-      "type": "object",
-      "default": {
-        "top": "0px",
-        "right": "0px",
-        "bottom": "10px",
-        "left": "0px"
-      }
+      "type": "object"
     },
     "titleMarginTablet": {
-      "type": "object",
-      "default": {
-        "top": "0px",
-        "right": "0px",
-        "bottom": "10px",
-        "left": "0px"
-      }
+      "type": "object"
     },
     "titleMarginMobile": {
-      "type": "object",
-      "default": {
-        "top": "0px",
-        "right": "0px",
-        "bottom": "10px",
-        "left": "0px"
-      }
+      "type": "object"
     },
     "descriptionMargin": {
       "type": "object"

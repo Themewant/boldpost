@@ -12,6 +12,7 @@ $rel            = isset($attributes['rel']) ? $attributes['rel'] : '';
 $show_icon      = !empty($attributes['showIcon']) && !empty($attributes['iconType']) && $attributes['iconType'] !== 'none';
 $icon_position  = isset($attributes['iconPosition']) ? $attributes['iconPosition'] : 'right';
 $icon_type      = isset($attributes['iconType']) ? $attributes['iconType'] : 'chevron-right';
+$icon_hover_animation  = isset($attributes['iconHoverAnimation']) ? $attributes['iconHoverAnimation'] : 'none';
 $button_width   = isset($attributes['buttonWidth']) ? $attributes['buttonWidth'] : 'auto';
 $text_align     = isset($attributes['textAlign']) ? $attributes['textAlign'] : '';
 $border_type    = isset($attributes['borderType']) ? $attributes['borderType'] : 'none';
@@ -65,10 +66,7 @@ if ( $border_type !== 'none' ) {
 }
 
 // Button width
-if ( $button_width === 'full' ) {
-    $button_responsive['desktop']['width'] = '100%';
-    $button_responsive['desktop']['justify-content'] = 'center';
-}
+BOLDPO_Helper::add_responsive_vars($attributes, $button_responsive, 'buttonWidth', 'width', [], false);
 
 // Icon gap
 if ( ! empty( $attributes['iconGap'] ) ) {
@@ -153,7 +151,7 @@ if ( ! empty( $text ) ) :
 ?>
     <div <?php echo wp_kses_post( $block_wrap_attr ); ?>>
         <div class="boldpo-button">
-            <a href="<?php echo esc_url( $url ); ?>" class="boldpo-button-link icon-<?php echo esc_attr( $icon_position ); ?>"<?php echo $link_attrs; ?>>
+            <a href="<?php echo esc_url( $url ); ?>" class="boldpo-button-link icon-<?php echo esc_attr( $icon_position ); ?> icon-animation-<?php echo esc_attr( $icon_hover_animation ); ?>"<?php echo $link_attrs; ?>>
                 <?php if ( $show_icon && $icon_position === 'left' ) : ?>
                     <i class="boldpo-button-icon <?php echo esc_attr( $icon_type ); ?>"></i>
                 <?php endif; ?>

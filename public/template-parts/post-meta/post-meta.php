@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $boldpo_allowed_metas = isset($attributes['allowedMetas']) ? $attributes['allowedMetas'] : [];
 $boldpo_meta_html = '';
-$boldpo_meta_position = isset($attributes['metaPosition']) ? $attributes['metaPosition'] : 'up_title';
+// $boldpo_meta_position = isset($attributes['metaPosition']) ? $attributes['metaPosition'] : 'up_title';
 
 if(empty($boldpo_allowed_metas)) {
     return;
@@ -33,6 +33,9 @@ if ( in_array( 'date', $boldpo_allowed_metas ) && empty($attributes['showDateOnT
     }
     if(in_array($meta_style, ['2', '3'])) {
         $date = BOLDPO_Helper::boldpost_time_ago();
+    }
+    if(isset($modified_date) && $modified_date == false) {
+        $date = get_the_date();
     }
     $boldpo_date_html = '<span class="bldpost-meta">' . $date_icon . esc_html( $date ) . '</span>';
 }
@@ -80,7 +83,7 @@ if ( in_array( 'comments_count', $boldpo_allowed_metas ) ) {
     $boldpo_meta_html .= '</span>';
 }
 ?>
-<div class="boldpo-post-metas boldpo-post-metas-style-<?php echo esc_attr( $meta_style ); ?> boldpo-post-meta-position-<?php echo esc_attr( $boldpo_meta_position ); ?>">
+<div class="boldpo-post-metas boldpo-post-metas-style-<?php echo esc_attr( $meta_style ); ?> boldpo-post-meta-position-<?php echo esc_attr( $meta_position ); ?>">
     <?php 
     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML is escaped during generation
     echo wp_kses_post( $boldpo_meta_html ); 

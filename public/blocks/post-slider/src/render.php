@@ -39,7 +39,7 @@ $nav_position = isset($attributes['navPosition']) ? $attributes['navPosition'] :
 // Styles attributes
 $show_meta = !empty($attributes['showMeta']) ? true : false;
 $allowed_metas = isset($attributes['allowedMetas']) ? $attributes['allowedMetas'] : [];
-$meta_position = isset($attributes['metaPosition']) ? $attributes['metaPosition'] : 'below_title';
+$meta_position = isset($attributes['metaPosition']) ? $attributes['metaPosition'] : '';
 $author_prefix = isset($attributes['authorPrefix']) ? $attributes['authorPrefix'] : 'by';
 $title_tag = isset($attributes['titleTag']) ? $attributes['titleTag'] : 'h3';
 $show_excerpt = !empty($attributes['showExcerpt']) ? 'yes' : 'no';
@@ -61,13 +61,23 @@ $video_controls = isset($attributes['videoControls']) && $attributes['videoContr
 
 $meta_style = isset($attributes['metaStyle']) ? $attributes['metaStyle'] : 'default';
 
-if($style == '3' && $meta_style == 'default') {
+if(($style == '3' || $style == '4') && $meta_style == 'default') {
     $meta_style = '3';
+}
+
+if(empty($meta_position)) {
+    if($style == 5) {
+        $meta_position = 'below_title';
+    }else{
+        $meta_position = 'up_title';
+    }
 }
 
 $cat_style = 'default';
 if ( $style === '1' ) {
     $cat_style = '1';
+}else if ($style === '5') {
+    $cat_style = '3';
 }
 
 // styles
@@ -255,6 +265,15 @@ if(!empty($meta_margin['right'])) $metas_styles['margin-right'] = BOLDPO_Helper:
 if(!empty($meta_margin['bottom'])) $metas_styles['margin-bottom'] = BOLDPO_Helper::ensure_unit($meta_margin['bottom']);
 if(!empty($meta_margin['left'])) $metas_styles['margin-left'] = BOLDPO_Helper::ensure_unit($meta_margin['left']);
 
+$meta_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+BOLDPO_Helper::add_responsive_vars($attributes, $meta_responsive, 'metaTypography', '', [
+    'fontSize'=>'font-size',
+    'fontWeight'=>'font-weight',
+    'lineHeight'=>'line-height',
+    'textTransform'=>'text-transform',
+    'letterSpacing'=>'letter-spacing'
+], true);
+
 $meta_hover = [];
 if(!empty($attributes['metaColorHover'])) $meta_hover['color'] = $attributes['metaColorHover'];
 
@@ -349,6 +368,7 @@ $selector     = '.boldpo-post-slider-block-wrap.' . $unique_id;
 $full_responsive_css = BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider.style-' . $style, $responsive_data);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider.style-' . $style . ' .boldpo-grid-item', $item_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider.style-' . $style . ' .boldpo-grid-item .boldpo-blog-title', $title_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider.style-' . $style . ' .boldpo-grid-item .boldpo-post-metas', $meta_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider.style-' . $style . ' .boldpo-grid-item .boldpo-blog-excerpt', $excerpt_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider.style-' . $style . ' .boldpo-grid-item .boldpo-blog-content', $content_padding_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider.style-' . $style . ' .boldpo-grid-item .boldpo-blog-img img', $thumbnail_height_responsive);
@@ -463,7 +483,7 @@ if ( $query->have_posts() ) :
         'data-autoplay' => esc_attr($autoplay),
             ) )); ?>>
        
-        <div class="boldpo-post-slider swiper boldpo-post-slider-<?php echo esc_attr($unique); ?> style-<?php echo esc_attr($style); ?> nav-position-<?php echo esc_attr($nav_position); ?>">
+        <div class="boldpo-post-slider swiper boldpo-post-slider-<?php echo esc_attr($unique); ?> style-<?php echo esc_attr($style); ?> nav-position-<?php echo esc_attr($nav_position); ?> <?php echo esc_attr($show_dots == true) ? 'boldpo-post-slider-has-dots' : ''; ?>">
             <div class="swiper-wrapper swiper-wrapper-<?php echo esc_attr($unique); ?>">
                 <?php
                     while ( $query->have_posts() ) : $query->the_post();

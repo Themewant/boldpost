@@ -401,6 +401,18 @@ return array(
 			'metaMargin' => array(
 				'type' => 'object'
 			),
+			'metaTypography' => array(
+				'type' => 'object',
+				'default' => array(
+					'fontFamily' => '',
+					'fontSize' => '',
+					'fontWeight' => '',
+					'fontStyle' => '',
+					'textTransform' => '',
+					'lineHeight' => '',
+					'letterSpacing' => ''
+				)
+			),
 			'metaStyle' => array(
 				'type' => 'string',
 				'default' => 'default'
@@ -461,6 +473,10 @@ return array(
 				'type' => 'boolean',
 				'default' => true
 			),
+			'showVideo' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
 			'videoAutoplay' => array(
 				'type' => 'boolean',
 				'default' => false
@@ -483,7 +499,7 @@ return array(
 			),
 			'spaceBetween' => array(
 				'type' => 'string',
-				'default' => '15'
+				'default' => '5'
 			),
 			'effect' => array(
 				'type' => 'string',

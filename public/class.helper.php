@@ -211,4 +211,16 @@ class BOLDPO_Helper {
 
 		return $embed_video;
 	}
+
+	public static function boldpost_reading_time($content = null, $wpm = 200, $suffix = '') {
+		if ( $content === null ) {
+			$content = get_the_content();
+		}
+		$word_count    = str_word_count( strip_tags( $content ) );
+		$total_seconds = (int) round( ( $word_count / $wpm ) * 60 );
+		$minutes       = (int) floor( $total_seconds / 60 );
+		$seconds       = $total_seconds % 60;
+		$time          = sprintf( '%02d:%02d', $minutes, $seconds );
+		return trim( $time . ' ' . $suffix );
+	}
 }

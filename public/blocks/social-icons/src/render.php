@@ -138,7 +138,7 @@ BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_css, array() );
 $block_wrap_attr = get_block_wrapper_attributes( array( 'class' => 'boldpo-block boldpo-social-icons-block-wrap ' . $unique_id ) );
 ?>
 <div <?php echo wp_kses_post( $block_wrap_attr ); ?>>
-    <div class="boldpo-social-icons">
+    <div class="boldpo-social-icons style-<?php echo esc_attr( $attributes['layoutStyle'] ); ?>">
         <?php foreach ( $items as $item ) :
             $icon        = isset( $item['icon'] ) ? $item['icon'] : '';
             $url         = isset( $item['url'] ) ? $item['url'] : '#';

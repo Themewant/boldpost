@@ -386,8 +386,7 @@
 			"default": "by"
 		},
 		"metaPosition": {
-			"type": "string",
-			"default": "up_title"
+			"type": "string"
 		},
 		"metaColor": {
 			"type": "string",
@@ -407,6 +406,18 @@
 		},
 		"metaMargin": {
 			"type": "object"
+		},
+		"metaTypography": {
+			"type": "object",
+			"default": {
+				"fontFamily": "",
+				"fontSize": "",
+				"fontWeight": "",
+				"fontStyle": "",
+				"textTransform": "",
+				"lineHeight": "",
+				"letterSpacing": ""
+			}
 		},
 		"metaStyle": {
 			"type": "string",

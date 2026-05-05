@@ -49,6 +49,7 @@ import layout1 from './assets/img/layout-1.png';
 import layout2 from './assets/img/layout-2.png';
 import layout3 from './assets/img/layout-3.png';
 import layout4 from './assets/img/layout-4.png';
+import layout5 from './assets/img/layout-5.png';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -238,6 +239,7 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('Style 1', 'boldpost'), value: '1', src: layout2 },
 							{ label: __('Style 2', 'boldpost'), value: '2', src: layout3, isPro: true },
 							{ label: __('Style 3', 'boldpost'), value: '3', src: layout4, isPro: true },
+							{ label: __('Style 4', 'boldpost'), value: '4', src: layout5 },
 						]}
 					/>
 				</PanelBody>
@@ -271,12 +273,38 @@ export default function Edit({ attributes, setAttributes }) {
 							/>
 						)}
 					</ResponsiveWrapper>
+					<ResponsiveWrapper label={__('Thumbnail One Width', 'boldpost')}>
+						{(device) => (
+							<RangeControlWithUnit
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('thumbnailOneWidth', device)}
+								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+								min={0}
+								max={1000}
+								step={1}
+							/>
+						)}
+					</ResponsiveWrapper>
 					<ResponsiveWrapper label={__('Thumbnail Two Height', 'boldpost')}>
 						{(device) => (
 							<RangeControlWithUnit
 								attributes={attributes}
 								setAttributes={setAttributes}
 								attributeKey={getAttrKey('thumbnailTwoHeight', device)}
+								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+								min={0}
+								max={1000}
+								step={1}
+							/>
+						)}
+					</ResponsiveWrapper>
+					<ResponsiveWrapper label={__('Thumbnail Two Width', 'boldpost')}>
+						{(device) => (
+							<RangeControlWithUnit
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('thumbnailTwoWidth', device)}
 								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
 								min={0}
 								max={1000}
@@ -296,7 +324,7 @@ export default function Edit({ attributes, setAttributes }) {
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
-					</PanelBody>
+				</PanelBody>
 
 				<PanelBody title={__('Title', 'boldpost')} initialOpen={false}>
 					<SelectControl
@@ -408,6 +436,7 @@ export default function Edit({ attributes, setAttributes }) {
 									{ label: __('Default', 'boldpost'), value: 'default' },
 									{ label: __('Style 1', 'boldpost'), value: '1' },
 									{ label: __('Style 2', 'boldpost'), value: '2' },
+									{ label: __('Style 3', 'boldpost'), value: '3' }
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
@@ -786,6 +815,12 @@ export default function Edit({ attributes, setAttributes }) {
 						label={__('Margin', 'boldpost')}
 						values={attributes.metaMargin}
 						onChange={(value) => setAttributes({ metaMargin: value })}
+					/>
+					<TypographyControls
+						label={__('Typography', 'boldpost')}
+						attributes={attributes}
+						setAttributes={setAttributes}
+						attributeKey="metaTypography"
 					/>
 				</PanelBody>
 

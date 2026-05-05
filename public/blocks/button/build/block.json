@@ -31,7 +31,7 @@
     },
     "text": {
       "type": "string",
-      "default": "View all posts"
+      "default": "Click Me"
     },
     "url": {
       "type": "string",
@@ -192,6 +192,10 @@
     "borderColorHover": {
       "type": "string",
       "default": ""
+    },
+    "iconHoverAnimation": {
+      "type": "string",
+      "default": "none"
     }
   }
 }

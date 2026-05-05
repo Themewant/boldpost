@@ -48,10 +48,19 @@ $video_mute = isset($attributes['videoMute']) && $attributes['videoMute'] ? 1 : 
 $video_height = isset($attributes['videoHeight']) ? $attributes['videoHeight'] : '400px';
 $video_width = isset($attributes['videoWidth']) ? $attributes['videoWidth'] : '100%';
 $video_controls = isset($attributes['videoControls']) && $attributes['videoControls'] ? 1 : 0;
+$show_video = isset($attributes['showVideo']) ? $attributes['showVideo'] : false;
 
 $meta_style = isset($attributes['metaStyle']) ? $attributes['metaStyle'] : 'default';
+$slides_per_view = isset($attributes['slidesPerView']) ? $attributes['slidesPerView'] : 4;
+
 
 $cat_style = 'default';
+
+
+if($style == '2'){
+	$slides_per_view = isset($attributes['slideperview_style2']) ? $attributes['slideperview_style2'] : 3;
+    $cat_style = '1';
+}
 
 // styles
 $responsive_data = [
@@ -250,6 +259,15 @@ if(!empty($meta_margin['right'])) $metas_styles['margin-right'] = BOLDPO_Helper:
 if(!empty($meta_margin['bottom'])) $metas_styles['margin-bottom'] = BOLDPO_Helper::ensure_unit($meta_margin['bottom']);
 if(!empty($meta_margin['left'])) $metas_styles['margin-left'] = BOLDPO_Helper::ensure_unit($meta_margin['left']);
 
+$meta_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+BOLDPO_Helper::add_responsive_vars($attributes, $meta_responsive, 'metaTypography', '', [
+    'fontSize'=>'font-size',
+    'fontWeight'=>'font-weight',
+    'lineHeight'=>'line-height',
+    'textTransform'=>'text-transform',
+    'letterSpacing'=>'letter-spacing'
+], true);
+
 $meta_hover = [];
 if(!empty($attributes['metaColorHover'])) $meta_hover['color'] = $attributes['metaColorHover'];
 
@@ -347,6 +365,7 @@ $selector     = '.boldpo-post-slider-4-block-wrap.' . $unique_id;
 $full_responsive_css = BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style, $responsive_data);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-list-item', $item_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-list-item .boldpo-blog-title', $title_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-list-item .boldpo-post-metas', $meta_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-grid-item .boldpo-blog-title', $title_left_typo_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-list-item .boldpo-blog-title', $title_right_typo_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-list-item .boldpo-blog-excerpt', $excerpt_responsive);
@@ -453,7 +472,8 @@ if ( $query->have_posts() ) :
         'data-loop' => esc_attr($loop),
         'data-effect' => esc_attr($effect),
         'data-speed' => esc_attr($speed),
-        'data-autoplay' => esc_attr($autoplay)
+        'data-autoplay' => esc_attr($autoplay),
+        'data-slides-per-view' => esc_attr($slides_per_view),
             ) )); ?>>
        
         <div class="boldpo-post-slider-4 boldpo-post-slider-4-<?php echo esc_attr($unique); ?> style-<?php echo esc_attr($style); ?>">
@@ -461,6 +481,30 @@ if ( $query->have_posts() ) :
                 <div class="slider__flex">
                     <div class="slider__images">
                         <div class="swiper-container swiper">
+                            <?php
+                                if($style == '2'){
+                                    $modified_date = true;
+                                    ?>
+                                        <div class="boldpo-post-slider-btn-wrapper boldpo-post-slider-btn-wrapper-<?php echo esc_attr($unique); ?>">
+                                            <?php 
+                                            if($show_dots) {
+                                                ?>
+                                                <div class="swiper-pagination"></div>
+                                                <?php
+                                            }
+                                            ?>
+                                            <!-- If we need navigation buttons -->
+                                            <?php if($show_nav) { ?>
+                                                <div class="swiper-button-prev nav-btn"></div>
+                                                <div class="swiper-button-next nav-btn"></div>
+                                            <?php } ?>
+                                            <!-- If we need scrollbar -->
+                                            <div class="swiper-scrollbar"></div>
+                                        </div>
+                                    <?php
+                                } 
+                                
+                            ?>
                             <div class="swiper-wrapper">
                                 <?php
                                 while ($query->have_posts()) : $query->the_post();
@@ -477,8 +521,8 @@ if ( $query->have_posts() ) :
                                         $trimmed_excerpt = wp_trim_words( get_the_excerpt(), $excerpt_trim, '...' );
                                         $title_tag = $title_left_tag;
 
-                                        $video_url = get_post_meta( get_the_ID(), '_video_url', true );
-                                        $embed_video = BOLDPO_Helper::boldpost_get_video_embed($video_url, $video_autoplay, $video_mute, $video_controls, $video_height, $video_width);
+                                        $video_url = $show_video ? get_post_meta( get_the_ID(), '_video_url', true ) : '';
+                                        $embed_video = $show_video ? BOLDPO_Helper::boldpost_get_video_embed($video_url, $video_autoplay, $video_mute, $video_controls, $video_height, $video_width) : '';
                                         if(!empty($embed_video)) {
                                             $item_class .= ' boldpo-has-video';
                                         }
@@ -497,19 +541,31 @@ if ( $query->have_posts() ) :
                                 wp_reset_query();
                                 ?>              
                             </div>
+                            
+                            
                             <div class="swiper-pagination rt-gallery-slider-pagination"></div>                    
                         </div>
                     </div>   
                     <div class="slider__col">
-                        <div class="slider__prev nav-btn"> <?php echo esc_html__( 'Previous', 'boldpost' ); ?> </div>
+                        <?php
+                            if($style !== '2'){
+                                ?>
+                                <div class="swiper-button-prev nav-btn"> <?php echo esc_html__( 'Previous', 'boldpost' ); ?> </div>
+                                <?php 
+                            }
+                        ?>
                         <div class="slider__thumbs">
                             <div class="swiper-container swiper">
                                 <div class="swiper-wrapper">                        
                                         <?php
-                                        $style_file = BOLDPO_PL_PATH . 'public/template-parts/post-slider-4/list/style-' . $style . '.php';
+                                        $modified_date = false;
+                                        $style_file = $template_pl_path . 'public/template-parts/post-slider-4/list/style-' . $style . '.php';
                                         while ($query->have_posts()) : $query->the_post();
                                         $title_tag = $title_right_tag;
-                                        $show_meta = false;
+                                        if($style !== '2') {
+                                            $show_meta = false;
+                                        }
+                                        
                                         $item_class = '';
                                         if(is_sticky()) {
                                             $item_class .= 'boldpo-sticky-post';
@@ -539,8 +595,13 @@ if ( $query->have_posts() ) :
                                 </div>
                             </div>
                         </div>
-                        <div class="slider__next nav-btn"><?php echo esc_html__( 'Next', 'boldpost' ); ?></div>
-                    </div>         
+                        <?php
+                            if($style !== '2'){
+                                ?>
+                                <div class="swiper-button-next nav-btn"><?php echo esc_html__( 'Next', 'boldpost' ); ?></div>
+                                <?php
+                            } 
+                        ?>         
                 </div>
             </div>
         </div>

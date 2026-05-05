@@ -1,11 +1,15 @@
 .boldpo-heading-block-wrap {
     width: 100%;
+    box-sizing: border-box;
 
     .boldpo-heading {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+
         .boldpo-heading-title-wrap {
             display: inline-flex;
             align-items: center;
-            row-gap: 10px;
         }
 
         .boldpo-heading-title {
@@ -13,12 +17,13 @@
         }
 
         .boldpo-heading-description {
-            margin: 0;
+            margin: 10px 0 0 0;
             color: var(--boldpo-preset-color-contrast-2);
         }
 
         &.style-2,
-        &.style-5 {
+        &.style-5,
+        &.style-6 {
             .boldpo-heading-title-wrap {
                 position: relative;
                 width: 100%;
@@ -32,8 +37,8 @@
             }
 
             .boldpo-heading-dot {
-                min-width: 12px;
-                height: 12px;
+                min-width: 9px;
+                height: 9px;
                 background: var(--boldpo-preset-color-primary);
                 border-radius: 100%;
             }
@@ -46,7 +51,8 @@
             }
         }
 
-        &.style-5 {
+        &.style-5,
+        &.style-6 {
             .boldpo-heading-dot {
                 border-radius: 0;
             }
@@ -79,10 +85,34 @@
 
                 .boldpo-heading-right-icon {
                     font-size: var(--wp--preset--font-size--x-large);
-                    margin-bottom: -3px;
+                }
+            }
+        }
+
+        &.style-6 {
+            @keyframes uc-flash {
+                0% {
+                    opacity: 0;
+                }
+
+                50% {
+                    opacity: 1;
+                }
+
+                to {
+                    opacity: 0;
                 }
             }
 
+            .boldpo-heading-dot {
+                content: "";
+                width: 10px;
+                height: 10px;
+                background: var(--boldpo-preset-color-primary);
+                border-radius: 100%;
+                animation: uc-flash 1s linear 0s infinite;
+            }
         }
+
     }
 }

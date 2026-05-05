@@ -1,0 +1,242 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "boldpost/info-box",
+    "version": "0.1.0",
+    "title": "Info Box",
+    "category": "boldpost",
+    "icon": "format-aside",
+    "description": "Display a list of info boxes with image, subtitle and linked title",
+    "example": {},
+    "supports": {
+        "html": false,
+        "spacing": {
+            "padding": true,
+            "margin": true
+        },
+        "color": {
+            "background": true,
+            "text": false,
+            "gradients": true
+        }
+    },
+    "textdomain": "boldpost",
+    "editorScript": "file:./index.js",
+    "viewScript": "file:./view.js",
+    "render": "file:./render.php",
+    "attributes": {
+        "items": {
+            "type": "array",
+            "default": [
+                {
+                    "title": "Your title goes here",
+                    "subtitle": "Subtitle",
+                    "imageId": 0,
+                    "imageUrl": "",
+                    "imageAlt": "",
+                    "url": "#",
+                    "openNewTab": false
+                }
+            ]
+        },
+        "layoutStyle": {
+            "type": "string",
+            "default": "default"
+        },
+        "columns": {
+            "type": "string",
+            "default": "3"
+        },
+        "columnsTablet": {
+            "type": "string",
+            "default": "2"
+        },
+        "columnsMobile": {
+            "type": "string",
+            "default": "1"
+        },
+        "itemGap": {
+            "type": "string",
+            "default": "4"
+        },
+        "itemGapTablet": {
+            "type": "string",
+            "default": "3"
+        },
+        "itemGapMobile": {
+            "type": "string",
+            "default": "2"
+        },
+        "itemRowGap": {
+            "type": "string",
+            "default": "4"
+        },
+        "itemRowGapTablet": {
+            "type": "string",
+            "default": "3"
+        },
+        "itemRowGapMobile": {
+            "type": "string",
+            "default": "2"
+        },
+        "itemPadding": {
+            "type": "object"
+        },
+        "itemPaddingTablet": {
+            "type": "object"
+        },
+        "itemPaddingMobile": {
+            "type": "object"
+        },
+        "itemBorderRadius": {
+            "type": "object",
+            "default": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            }
+        },
+        "itemBackgroundColor": {
+            "type": "string",
+            "default": ""
+        },
+        "itemBackgroundColorHover": {
+            "type": "string",
+            "default": ""
+        },
+        "itemBackgroundGradient": {
+            "type": "string",
+            "default": ""
+        },
+        "itemBackgroundGradientHover": {
+            "type": "string",
+            "default": ""
+        },
+        "titleTag": {
+            "type": "string",
+            "default": "h4"
+        },
+        "titleColor": {
+            "type": "string",
+            "default": ""
+        },
+        "titleColorHover": {
+            "type": "string",
+            "default": ""
+        },
+        "titleMargin": {
+            "type": "object",
+            "default": {
+                "top": "0px",
+                "right": "0px",
+                "bottom": "0px",
+                "left": "0px"
+            }
+        },
+        "titleMarginTablet": {
+            "type": "object"
+        },
+        "titleMarginMobile": {
+            "type": "object"
+        },
+        "titleTypography": {
+            "type": "object",
+            "default": {
+                "fontFamily": "",
+                "fontSize": "18px",
+                "fontWeight": "500",
+                "fontStyle": "",
+                "textTransform": "",
+                "lineHeight": "1.4",
+                "letterSpacing": ""
+            }
+        },
+        "titleTypographyTablet": {
+            "type": "object"
+        },
+        "titleTypographyMobile": {
+            "type": "object"
+        },
+        "subtitleColor": {
+            "type": "string",
+            "default": ""
+        },
+        "subtitleMargin": {
+            "type": "object",
+            "default": {
+                "top": "0px",
+                "right": "0px",
+                "bottom": "8px",
+                "left": "0px"
+            }
+        },
+        "subtitleMarginTablet": {
+            "type": "object"
+        },
+        "subtitleMarginMobile": {
+            "type": "object"
+        },
+        "subtitleTypography": {
+            "type": "object",
+            "default": {
+                "fontFamily": "",
+                "fontSize": "14px",
+                "fontWeight": "400",
+                "fontStyle": "",
+                "textTransform": "",
+                "lineHeight": "1.4",
+                "letterSpacing": ""
+            }
+        },
+        "subtitleTypographyTablet": {
+            "type": "object"
+        },
+        "subtitleTypographyMobile": {
+            "type": "object"
+        },
+        "imageSize": {
+            "type": "string",
+            "default": "thumbnail"
+        },
+        "imageWidth": {
+            "type": "string",
+            "default": "80"
+        },
+        "imageWidthTablet": {
+            "type": "string"
+        },
+        "imageWidthMobile": {
+            "type": "string"
+        },
+        "imageHeight": {
+            "type": "string",
+            "default": "80"
+        },
+        "imageHeightTablet": {
+            "type": "string"
+        },
+        "imageHeightMobile": {
+            "type": "string"
+        },
+        "imageGap": {
+            "type": "string",
+            "default": "16"
+        },
+        "imageGapTablet": {
+            "type": "string"
+        },
+        "imageGapMobile": {
+            "type": "string"
+        },
+        "imageBorderRadius": {
+            "type": "object",
+            "default": {
+                "top": "50%",
+                "right": "50%",
+                "bottom": "50%",
+                "left": "50%"
+            }
+        }
+    }
+}

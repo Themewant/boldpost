@@ -30,13 +30,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                     <?php echo $embed_video; ?>
                 </div>
             <?php } ?>
-            <?php if ( $show_meta ) include BOLDPO_PL_PATH . 'public/template-parts/post-meta/post-cat.php'; ?>
-            <?php
-            // Strip 'category' from meta row (post-cat.php handles it above)
-            $_saved_metas = $attributes['allowedMetas'];
-            $attributes['allowedMetas'] = array_values( array_diff( $attributes['allowedMetas'], ['category'] ) );
-            $allowed_metas = $attributes['allowedMetas'];
-            ?>
         </div>
         <div class="boldpo-blog-content">
             <?php if ( $show_meta && 'up_title' === $meta_position ) include BOLDPO_PL_PATH . 'public/template-parts/post-meta/post-meta.php'; ?>
@@ -66,4 +59,3 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
         </div>
     </div>
 </div>
-<?php $attributes['allowedMetas'] = $_saved_metas; $allowed_metas = $_saved_metas; // Restore for next post iteration ?>

@@ -35,7 +35,7 @@ $paged = max( 1, (int) $paged );
 // Styles attributes
 $show_meta = !empty($attributes['showMeta']) ? true : false;
 $allowed_metas = isset($attributes['allowedMetas']) ? $attributes['allowedMetas'] : [];
-$meta_position = isset($attributes['metaPosition']) ? $attributes['metaPosition'] : 'below_title';
+$meta_position = isset($attributes['metaPosition']) ? $attributes['metaPosition'] : '';
 $author_prefix = isset($attributes['authorPrefix']) ? $attributes['authorPrefix'] : 'by';
 $title_tag = isset($attributes['titleTag']) ? $attributes['titleTag'] : 'h3';
 $show_excerpt = !empty($attributes['showExcerpt']) ? 'yes' : 'no';
@@ -55,12 +55,35 @@ $video_height = isset($attributes['videoHeight']) ? $attributes['videoHeight'] :
 $video_width = isset($attributes['videoWidth']) ? $attributes['videoWidth'] : '100%';
 $video_controls = isset($attributes['videoControls']) && $attributes['videoControls'] ? 1 : 0;
 
-$meta_style = isset($attributes['metaStyle']) ? $attributes['metaStyle'] : 'default';
-
+$meta_style = isset($attributes['metaStyle']) ? $attributes['metaStyle'] : '';
 $cat_style = 'default';
 if ( $style === '1' ) {
     $cat_style = '1';
+}else if($style == 2) {
+    $cat_style = '3';
+    if(empty($meta_position) || $meta_position == 'default') {
+        $meta_position = 'below_title';
+    }else{
+        $meta_position = 'up_title';
+    }
+    if(empty($show_video)) {
+        $show_video = 'yes';
+    }
+    if(empty($meta_style)) {
+        $meta_style = '2';
+    }
 }
+
+
+if(empty($meta_style)) {
+    $meta_style = 'default';
+}
+
+if(empty($meta_position) || $meta_position == 'default') {
+    $meta_position = 'up_title';
+}
+
+
 
 // styles
 $responsive_data = [
@@ -277,6 +300,15 @@ if(!empty($meta_margin['right'])) $metas_styles['margin-right'] = BOLDPO_Helper:
 if(!empty($meta_margin['bottom'])) $metas_styles['margin-bottom'] = BOLDPO_Helper::ensure_unit($meta_margin['bottom']);
 if(!empty($meta_margin['left'])) $metas_styles['margin-left'] = BOLDPO_Helper::ensure_unit($meta_margin['left']);
 
+$meta_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+BOLDPO_Helper::add_responsive_vars($attributes, $meta_responsive, 'metaTypography', '', [
+    'fontSize'=>'font-size',
+    'fontWeight'=>'font-weight',
+    'lineHeight'=>'line-height',
+    'textTransform'=>'text-transform',
+    'letterSpacing'=>'letter-spacing'
+], true);
+
 $meta_hover = [];
 if(!empty($attributes['metaColorHover'])) $meta_hover['color'] = $attributes['metaColorHover'];
 
@@ -335,6 +367,7 @@ $selector     = '.boldpo-post-grid-block-wrap.' . $unique_id;
 $full_responsive_css = ""; 
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid.style-' . $style . ' .boldpo-grid-item .boldpo-grid-item-inner', $item_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid.style-' . $style . ' .boldpo-grid-item .boldpo-blog-title', $title_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid.style-' . $style . ' .boldpo-grid-item .boldpo-post-metas', $meta_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid.style-' . $style . ' .boldpo-grid-item .boldpo-blog-excerpt', $excerpt_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid.style-' . $style . ' .boldpo-grid-item .boldpo-blog-content', $content_padding_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid.style-' . $style . ' .boldpo-grid-item .boldpo-blog-img img', $thumbnail_height_responsive);   
@@ -426,6 +459,11 @@ if ( empty( $block_wrap_attr ) ) {
     $block_wrap_attr = 'class="boldpo-block boldpo-post-grid-block-wrap ' . esc_attr( $unique_id ) . '"';
 }
 
+$template_pl_path = BOLDPO_PL_PATH;
+if(($style !== 'default' && $style !== '1') && defined('BOLDPO_PRO_PL_PATH')) {
+    $template_pl_path = BOLDPO_PRO_PL_PATH;
+}
+
 if ( $query->have_posts() ) :
 ?>
     <div <?php echo wp_kses_post($block_wrap_attr); ?>>
@@ -455,11 +493,11 @@ if ( $query->have_posts() ) :
                     $item_class .= ' boldpo-has-video';
                 }
                
-                $style_file = BOLDPO_PL_PATH . 'public/template-parts/post-grid/style-' . $style . '.php';
+                $style_file = $template_pl_path . 'public/template-parts/post-grid/style-' . $style . '.php';
 
-                if ( file_exists( $style_file ) ) {
+                //if ( file_exists( $style_file ) ) {
                     include $style_file;
-                }
+                //}
             endwhile;
             ?>
         </div>

@@ -46,6 +46,7 @@ import IconPicker from '../../custom-components/IconPicker';
 import './editor.scss';
 import grid1 from './assets/img/grid-1.png';
 import grid2 from './assets/img/grid-2.png';
+import grid3 from './assets/img/grid-3.png';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -234,6 +235,7 @@ export default function Edit({ attributes, setAttributes }) {
 						options={[
 							{ label: __('Default', 'boldpost'), value: 'default', src: grid1 },
 							{ label: __('Style 1', 'boldpost'), value: '1', src: grid2 },
+							{ label: __('Style 2', 'boldpost'), value: '2', src: grid3, isPro: true },
 						]}
 					/>
 				</PanelBody>
@@ -407,6 +409,7 @@ export default function Edit({ attributes, setAttributes }) {
 									{ label: __('Date', 'boldpost'), value: 'date' },
 									{ label: __('Category', 'boldpost'), value: 'category' },
 									{ label: __('Tag', 'boldpost'), value: 'tag' },
+									{ label: __('Comments Count', 'boldpost'), value: 'comments_count' },
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
@@ -426,6 +429,7 @@ export default function Edit({ attributes, setAttributes }) {
 								value={attributes.metaPosition}
 								onChange={(value) => setAttributes({ metaPosition: value })}
 								options={[
+									{ label: __('Default', 'boldpost'), value: '' },
 									{ label: __('Up Title', 'boldpost'), value: 'up_title' },
 									{ label: __('Below Title', 'boldpost'), value: 'below_title' },
 									{ label: __('Below Content', 'boldpost'), value: 'below_content' },
@@ -809,6 +813,12 @@ export default function Edit({ attributes, setAttributes }) {
 						label={__('Margin', 'boldpost')}
 						values={attributes.metaMargin}
 						onChange={(value) => setAttributes({ metaMargin: value })}
+					/>
+					<TypographyControls
+						label={__('Typography', 'boldpost')}
+						attributes={attributes}
+						setAttributes={setAttributes}
+						attributeKey="metaTypography"
 					/>
 				</PanelBody>
 

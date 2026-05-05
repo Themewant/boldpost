@@ -65,8 +65,8 @@ export default function Edit({ attributes, setAttributes }) {
         borderStyle: attributes.borderType !== 'none' ? attributes.borderType : undefined,
         borderWidth: attributes.borderWidth ? `${attributes.borderWidth}px` : undefined,
         borderColor: attributes.borderColor || undefined,
-        width: attributes.buttonWidth === 'full' ? '100%' : undefined,
-        gap: attributes.iconGap || undefined,
+        width: attributes.buttonWidth || undefined,
+
     };
 
     const iconStyle = {
@@ -95,8 +95,7 @@ export default function Edit({ attributes, setAttributes }) {
                         value={attributes.buttonStyle}
                         onChange={(value) => setAttributes({ buttonStyle: value })}
                         options={[
-                            { label: __('Default', 'boldpost'), value: 'default', src: layout1 },
-                            { label: __('Style 1', 'boldpost'), value: '1', src: layout1 },
+                            { label: __('Default', 'boldpost'), value: 'default', src: layout1 }
                         ]}
                     />
                 </PanelBody>
@@ -125,17 +124,17 @@ export default function Edit({ attributes, setAttributes }) {
                         __nextHasNoMarginBottom={true}
                     />
                     <Divider />
-                    <SelectControl
-                        label={__('Button Width', 'boldpost')}
-                        value={attributes.buttonWidth}
-                        onChange={(value) => setAttributes({ buttonWidth: value })}
-                        options={[
-                            { label: __('Auto', 'boldpost'), value: 'auto' },
-                            { label: __('Full Width', 'boldpost'), value: 'full' },
-                        ]}
-                        __next40pxDefaultSize={true}
-                        __nextHasNoMarginBottom={true}
-                    />
+                    <ResponsiveWrapper>
+                        {(device) => (
+                            <UnitControl
+                                label={__('Button Width', 'boldpost')}
+                                value={attributes[getAttrKey('buttonWidth', device)]}
+                                onChange={(value) => setAttributes({ [getAttrKey('buttonWidth', device)]: value })}
+                                __next40pxDefaultSize={true}
+                            />
+                        )}
+                    </ResponsiveWrapper>
+
                 </PanelBody>
 
                 <PanelBody title={__('Icon', 'boldpost')} initialOpen={false}>
@@ -161,6 +160,17 @@ export default function Edit({ attributes, setAttributes }) {
                                 options={[
                                     { label: __('Left', 'boldpost'), value: 'left' },
                                     { label: __('Right', 'boldpost'), value: 'right' },
+                                ]}
+                                __next40pxDefaultSize={true}
+                                __nextHasNoMarginBottom={true}
+                            />
+                            <SelectControl
+                                label={__('Icon Hover Animation', 'boldpost')}
+                                value={attributes.iconHoverAnimation}
+                                onChange={(value) => setAttributes({ iconHoverAnimation: value })}
+                                options={[
+                                    { label: __('None', 'boldpost'), value: 'none' },
+                                    { label: __('Slide', 'boldpost'), value: 'slide' },
                                 ]}
                                 __next40pxDefaultSize={true}
                                 __nextHasNoMarginBottom={true}
@@ -334,8 +344,8 @@ export default function Edit({ attributes, setAttributes }) {
                 </style>
             </div>
 
-            <div className="boldpo-button" style={{ textAlign: attributes.textAlign || undefined }}>
-                <span className={`boldpo-button-link icon-${attributes.iconPosition}`} style={buttonStyle}>
+            <div className={`boldpo-button`} style={{ textAlign: attributes.textAlign || undefined }}>
+                <span className={`boldpo-button-link icon-${attributes.iconPosition} icon-animation-${attributes.iconHoverAnimation}`} style={buttonStyle}>
                     {attributes.showIcon && attributes.iconType !== 'none' && attributes.iconPosition === 'left' && (
                         <i className={`boldpo-button-icon ${attributes.iconType}`} style={iconStyle}></i>
                     )}

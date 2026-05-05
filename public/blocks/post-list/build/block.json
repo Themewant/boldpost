@@ -185,6 +185,18 @@
         "letterSpacing": ""
       }
     },
+    "metaTypography": {
+      "type": "object",
+      "default": {
+        "fontFamily": "",
+        "fontSize": "",
+        "fontWeight": "",
+        "fontStyle": "",
+        "textTransform": "",
+        "lineHeight": "",
+        "letterSpacing": ""
+      }
+    },
     "readMoreBorderRadius": {
       "type": "object"
     },
@@ -528,6 +540,12 @@
       "type": "object"
     },
     "itemExcerptMarginMobile": {
+      "type": "object"
+    },
+    "contentPaddingTablet": {
+      "type": "object"
+    },
+    "contentPaddingMobile": {
       "type": "object"
     },
     "contentTextAlign": {

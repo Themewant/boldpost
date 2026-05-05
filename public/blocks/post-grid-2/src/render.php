@@ -8,9 +8,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Attributes are available as $attributes array
 // Map camelCase attributes to match the logic (or use direct access)
 
-
-
-
 $style = isset($attributes['gridStyle']) ? $attributes['gridStyle'] : 'default';
 $per_page = isset($attributes['perPage']) ? $attributes['perPage'] : '';
 $order = isset($attributes['order']) ? $attributes['order'] : 'ASC';
@@ -36,7 +33,7 @@ if ( ! isset( $paged ) ) {
 
 $paged = max( 1, (int) $paged );
 
-if( $style == 4 && empty($per_page)) {
+if( $style == '4' || $style == '5' && empty($per_page)) {
     $per_page = 5;
 }else{
     $per_page = 3;
@@ -45,7 +42,7 @@ if( $style == 4 && empty($per_page)) {
 // Styles attributes
 $show_meta = !empty($attributes['showMeta']) ? true : false;
 $allowed_metas = isset($attributes['allowedMetas']) ? $attributes['allowedMetas'] : [];
-$meta_position = isset($attributes['metaPosition']) ? $attributes['metaPosition'] : 'below_title';
+$meta_position = isset($attributes['metaPosition']) ? $attributes['metaPosition'] : '';
 $author_prefix = isset($attributes['authorPrefix']) ? $attributes['authorPrefix'] : 'by';
 $title_left_tag = isset($attributes['titleLeftTag']) ? $attributes['titleLeftTag'] : 'h3';
 $title_right_tag = isset($attributes['titleRightTag']) ? $attributes['titleRightTag'] : 'h3';
@@ -64,6 +61,17 @@ $meta_style = isset($attributes['metaStyle']) ? $attributes['metaStyle'] : 'defa
 
 $cat_style = 'default';
 
+if(empty($meta_position)) {
+    if($style == '5') {
+        $meta_position = 'below_content';
+    }else{
+        $meta_position = 'up_title';
+    }
+}
+if($style == '5') {
+    $cat_style = '3';
+}
+
 // styles
 $responsive_data = [
     'desktop' => [],
@@ -79,7 +87,7 @@ $item_class = '';
 if($style == '2' || $style == '3') {
    $wrap_one_col_class = 'boldpo-col-lg-4 boldpo-col-md-4 boldpo-col-sm-12 boldpo-col-12';
    $wrap_two_col_class = 'boldpo-col-lg-8 boldpo-col-md-8 boldpo-col-sm-12 boldpo-col-12';
-}else if($style == '4') {
+}else if($style == '4' || $style == '5') {
     $wrap_one_col_class = 'boldpo-col-lg-6 boldpo-col-md-6 boldpo-col-sm-12 boldpo-col-12';
     $wrap_two_col_class = 'boldpo-col-lg-6 boldpo-col-md-6 boldpo-col-sm-12 boldpo-col-12';
 }
@@ -293,6 +301,15 @@ if(!empty($meta_margin['right'])) $metas_styles['margin-right'] = BOLDPO_Helper:
 if(!empty($meta_margin['bottom'])) $metas_styles['margin-bottom'] = BOLDPO_Helper::ensure_unit($meta_margin['bottom']);
 if(!empty($meta_margin['left'])) $metas_styles['margin-left'] = BOLDPO_Helper::ensure_unit($meta_margin['left']);
 
+$meta_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+BOLDPO_Helper::add_responsive_vars($attributes, $meta_responsive, 'metaTypography', '', [
+    'fontSize'=>'font-size',
+    'fontWeight'=>'font-weight',
+    'lineHeight'=>'line-height',
+    'textTransform'=>'text-transform',
+    'letterSpacing'=>'letter-spacing'
+], true);
+
 $meta_hover = [];
 if(!empty($attributes['metaColorHover'])) $meta_hover['color'] = $attributes['metaColorHover'];
 
@@ -354,11 +371,14 @@ $selector     = '.boldpo-post-grid-2-block-wrap.' . $unique_id;
 $full_responsive_css = ""; 
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-item .boldpo-grid-item-inner', $item_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-item .boldpo-blog-title', $title_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-item .boldpo-post-metas', $meta_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-title', $title_left_typo_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-right-wrap .boldpo-grid-item .boldpo-blog-title', $title_right_typo_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-item .boldpo-blog-excerpt', $excerpt_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-item .boldpo-blog-content', $content_padding_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-img', $thumbnail_left_height_responsive);   
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-img img', $thumbnail_left_height_responsive);   
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-right-wrap .boldpo-grid-item .boldpo-blog-img', $thumbnail_right_height_responsive);   
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-right-wrap .boldpo-grid-item .boldpo-blog-img img', $thumbnail_right_height_responsive);   
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-item .boldpo-read-more .boldpo-read-more-link', $button_text_align_responsive);   
 
@@ -467,7 +487,7 @@ if ( $query->have_posts() ) :
             while ( $query->have_posts() ) : $query->the_post();
                 $i++;
 
-                if($i > 1 && $style == '4') {
+                if($i > 1 && ($style == '4' || $style == '5')) {
                     $item_class = ' boldpo-col-lg-6 boldpo-col-md-6 boldpo-col-sm-12 boldpo-col-12';
                 }
 
@@ -486,7 +506,7 @@ if ( $query->have_posts() ) :
 
                 
             
-                if ( ($style == 'default' || $style == '1' || $style == '4') && file_exists( $style_file ) ) {
+                if ( ($style == 'default' || $style == '1' || $style == '4' || $style == '5') && file_exists( $style_file ) ) {
 
                     if ($i == 1) {
                         // LEFT BIG POST

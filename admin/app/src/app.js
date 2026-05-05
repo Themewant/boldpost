@@ -23,6 +23,11 @@ const items = [
         key: 'templates',
         label: 'Templates',
         icon: <PicRightOutlined />
+    },
+    {
+        key: 'settings',
+        label: 'Settings',
+        icon: <SettingOutlined />
     }
 ]
 
@@ -80,6 +85,7 @@ export default function BoldPostApp() {
 
                             {current === 'blocks' && <Blocks />}
                             {current === 'templates' && <Templates />}
+                            {current === 'settings' && <Settings />}
 
                         </div>
                     </Content>

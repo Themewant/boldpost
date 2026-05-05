@@ -120,7 +120,7 @@
   padding-left: 10px;
 }
 .boldpo-post-grid-block-wrap .boldpo-post-grid .boldpo-grid-item .boldpo-read-more {
-  display: inline-block;
+  display: block;
   margin-top: 10px;
   text-decoration: none;
 }

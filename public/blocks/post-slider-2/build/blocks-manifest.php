@@ -389,6 +389,18 @@ return array(
 			'metaMargin' => array(
 				'type' => 'object'
 			),
+			'metaTypography' => array(
+				'type' => 'object',
+				'default' => array(
+					'fontFamily' => '',
+					'fontSize' => '',
+					'fontWeight' => '',
+					'fontStyle' => '',
+					'textTransform' => '',
+					'lineHeight' => '',
+					'letterSpacing' => ''
+				)
+			),
 			'metaStyle' => array(
 				'type' => 'string',
 				'default' => 'default'

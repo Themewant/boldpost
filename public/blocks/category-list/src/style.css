@@ -25,11 +25,14 @@
 }
 .boldpo-category-list-block-wrap .boldpo-category-list .boldpo-category-item .boldpo-category-link .boldpo-category-content .boldpo-category-image {
   flex-shrink: 0;
+  position: relative;
 }
 .boldpo-category-list-block-wrap .boldpo-category-list .boldpo-category-item .boldpo-category-link .boldpo-category-content .boldpo-category-image img {
   display: block;
   max-width: 100%;
+  width: 100%;
   height: auto;
+  object-fit: cover;
 }
 .boldpo-category-list-block-wrap .boldpo-category-list .boldpo-category-item .boldpo-category-link .boldpo-category-content .boldpo-category-title {
   display: flex;

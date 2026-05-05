@@ -61,6 +61,18 @@
       "type": "string",
       "default": ""
     },
+    "thumbnailOneWidth": {
+      "type": "string",
+      "default": ""
+    },
+    "thumbnailOneWidthTablet": {
+      "type": "string",
+      "default": ""
+    },
+    "thumbnailOneWidthMobile": {
+      "type": "string",
+      "default": ""
+    },
     "thumbnailTwoHeight": {
       "type": "string",
       "default": ""
@@ -70,6 +82,18 @@
       "default": ""
     },
     "thumbnailTwoHeightMobile": {
+      "type": "string",
+      "default": ""
+    },
+    "thumbnailTwoWidth": {
+      "type": "string",
+      "default": ""
+    },
+    "thumbnailTwoWidthTablet": {
+      "type": "string",
+      "default": ""
+    },
+    "thumbnailTwoWidthMobile": {
       "type": "string",
       "default": ""
     },
@@ -334,6 +358,18 @@
     },
     "metaMargin": {
       "type": "object"
+    },
+    "metaTypography": {
+      "type": "object",
+      "default": {
+        "fontFamily": "",
+        "fontSize": "",
+        "fontWeight": "",
+        "fontStyle": "",
+        "textTransform": "",
+        "lineHeight": "",
+        "letterSpacing": ""
+      }
     },
     "metaStyle": {
       "type": "string",

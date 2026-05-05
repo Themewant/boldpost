@@ -365,6 +365,18 @@
 		"metaMargin": {
 			"type": "object"
 		},
+		"metaTypography": {
+			"type": "object",
+			"default": {
+				"fontFamily": "",
+				"fontSize": "",
+				"fontWeight": "",
+				"fontStyle": "",
+				"textTransform": "",
+				"lineHeight": "",
+				"letterSpacing": ""
+			}
+		},
 		"metaStyle": {
 			"type": "string",
 			"default": "default"

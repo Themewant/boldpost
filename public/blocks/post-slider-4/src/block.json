@@ -396,6 +396,18 @@
 		"metaMargin": {
 			"type": "object"
 		},
+		"metaTypography": {
+			"type": "object",
+			"default": {
+				"fontFamily": "",
+				"fontSize": "",
+				"fontWeight": "",
+				"fontStyle": "",
+				"textTransform": "",
+				"lineHeight": "",
+				"letterSpacing": ""
+			}
+		},
 		"metaStyle": {
 			"type": "string",
 			"default": "default"
@@ -456,6 +468,10 @@
 			"type": "boolean",
 			"default": true
 		},
+		"showVideo": {
+			"type": "boolean",
+			"default": false
+		},
 		"videoAutoplay": {
 			"type": "boolean",
 			"default": false
@@ -478,7 +494,7 @@
 		},
 		"spaceBetween": {
 			"type": "string",
-			"default": "15"
+			"default": "5"
 		},
 		"effect": {
 			"type": "string",
@@ -618,11 +634,27 @@
 				"left": ""
 			}
 		},
-		"categoryColor": { "type": "string", "default": "" },
-		"categoryColorHover": { "type": "string", "default": "" },
-		"categoryBackgroundColor": { "type": "string", "default": "" },
-		"categoryBackgroundColorHover": { "type": "string", "default": "" },
-		"categoryPadding": { "type": "object" },
-		"categoryMargin": { "type": "object" }
+		"categoryColor": {
+			"type": "string",
+			"default": ""
+		},
+		"categoryColorHover": {
+			"type": "string",
+			"default": ""
+		},
+		"categoryBackgroundColor": {
+			"type": "string",
+			"default": ""
+		},
+		"categoryBackgroundColorHover": {
+			"type": "string",
+			"default": ""
+		},
+		"categoryPadding": {
+			"type": "object"
+		},
+		"categoryMargin": {
+			"type": "object"
+		}
 	}
 }

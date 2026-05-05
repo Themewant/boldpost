@@ -54,6 +54,10 @@
         }
       ]
     },
+    "layoutStyle": {
+      "type": "string",
+      "default": "1"
+    },
     "iconSize": {
       "type": "number",
       "default": 20
@@ -66,7 +70,7 @@
     },
     "gap": {
       "type": "number",
-      "default": 10
+      "default": 5
     },
     "gapTablet": {
       "type": "number"
@@ -87,28 +91,22 @@
       "default": ""
     },
     "iconBgColor": {
-      "type": "string",
-      "default": ""
+      "type": "string"
     },
     "iconBgColorHover": {
-      "type": "string",
-      "default": ""
+      "type": "string"
     },
     "iconBorderColor": {
-      "type": "string",
-      "default": "#83838340"
+      "type": "string"
     },
     "iconBorderColorHover": {
-      "type": "string",
-      "default": ""
+      "type": "string"
     },
     "iconBorderWidth": {
-      "type": "number",
-      "default": 1
+      "type": "number"
     },
     "iconBorderRadius": {
-      "type": "string",
-      "default": "100%"
+      "type": "string"
     },
     "iconPadding": {
       "type": "object"

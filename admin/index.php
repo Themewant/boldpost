@@ -72,6 +72,8 @@ class BOLDPO_Admin {
             'templateCount' => $total_templates,
             'templateLimit' => $is_pro_active ? -1 : 3,
             'proUrl' => 'https://themewant.com/downloads/boldpost-pro',
+            'colors' => BOLDPO_API::get_saved_colors(),
+            'colorDefaults' => BOLDPO_API::get_color_defaults(),
         ) );
     }
 

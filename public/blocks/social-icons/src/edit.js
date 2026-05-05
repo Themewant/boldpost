@@ -18,8 +18,11 @@ import TypographyControls from '../../custom-components/TypographyControls';
 import ResponsiveWrapper from '../../custom-components/ResponsiveWrapper';
 import IconPicker from '../../custom-components/IconPicker';
 import RangeControlWithUnit from '../../custom-components/RangeControlWithUnit';
-
+import ImageRadioControl from '../../custom-components/ImageRadioControl';
 import './editor.scss';
+import style1 from './assets/img/style-1.png';
+import style2 from './assets/img/style-2.png';
+
 
 export default function Edit({ attributes, setAttributes }) {
     const {
@@ -131,6 +134,18 @@ export default function Edit({ attributes, setAttributes }) {
             </BlockControls>
 
             <InspectorControls>
+                <PanelBody title={__('Layout', 'boldpost')} initialOpen={false}>
+                    <ImageRadioControl
+                        value={attributes.layoutStyle}
+                        onChange={(value) => setAttributes({ layoutStyle: value })}
+                        options={[
+                            { label: __('Style 1', 'boldpost'), value: '1', src: style1 },
+                            { label: __('Style 2', 'boldpost'), value: '2', src: style2 }
+                        ]}
+                        __next40pxDefaultSize={true}
+                        __nextHasNoMarginBottom={true}
+                    />
+                </PanelBody>
                 <PanelBody title={__('Social Icons', 'boldpost')} initialOpen={true}>
                     {items.map((item, index) => (
                         <div key={index} className="boldpo-social-icon-item-control">

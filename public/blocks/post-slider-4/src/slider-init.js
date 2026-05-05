@@ -29,11 +29,12 @@
                 const spaceBetween = wrap.dataset.spaceBetween;
                 const effect = wrap.dataset.effect;
                 const speed = wrap.dataset.speed;
+                const slidesPerView = wrap.dataset.slidesPerView;
 
                 if (thumbsEl && imagesEl) {
                     const sliderThumbs = new Swiper(thumbsEl, {
                         direction: "vertical",
-                        slidesPerView: 4,
+                        slidesPerView: slidesPerView,
                         spaceBetween: spaceBetween,
                         speed: speed,
                         freeMode: true,
@@ -41,8 +42,8 @@
                         watchOverflow: true,
                         slideToClickedSlide: true, // This is explicitly needed to make clicking thumbs change the main slide correctly
                         navigation: {
-                            nextEl: wrap.querySelector(".slider__next"),
-                            prevEl: wrap.querySelector(".slider__prev")
+                            nextEl: wrap.querySelector(".swiper-button-next"),
+                            prevEl: wrap.querySelector(".swiper-button-prev")
                         },
                         breakpoints: {
                             0: {
@@ -65,8 +66,8 @@
                         parallax: true,
                         fadeEffect: { crossFade: true },
                         navigation: {
-                            nextEl: wrap.querySelector(".slider__next"),
-                            prevEl: wrap.querySelector(".slider__prev")
+                            nextEl: wrap.querySelector(".swiper-button-next"),
+                            prevEl: wrap.querySelector(".swiper-button-prev")
                         },
                         pagination: {
                             el: wrap.querySelector(".swiper-pagination"),

@@ -51,6 +51,8 @@ import list3 from './assets/img/style-3.png';
 import list4 from './assets/img/style-4.png';
 import list5 from './assets/img/style-5.png';
 import list6 from './assets/img/style-6.png';
+import list7 from './assets/img/style-7.png';
+import list8 from './assets/img/style-8.png';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -242,6 +244,8 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('Style 3', 'boldpost'), value: '3', src: list4 },
 							{ label: __('Style 4', 'boldpost'), value: '4', src: list5 },
 							{ label: __('Style 5', 'boldpost'), value: '5', src: list6 },
+							{ label: __('Style 6', 'boldpost'), value: '6', src: list7 },
+							{ label: __('Style 7', 'boldpost'), value: '7', src: list8 }
 						]}
 					/>
 				</PanelBody>
@@ -816,6 +820,12 @@ export default function Edit({ attributes, setAttributes }) {
 						values={attributes.metaMargin}
 						onChange={(value) => setAttributes({ metaMargin: value })}
 					/>
+					<TypographyControls
+						label={__('Typography', 'boldpost')}
+						attributes={attributes}
+						setAttributes={setAttributes}
+						attributeKey="metaTypography"
+					/>
 				</PanelBody>
 
 				{
@@ -933,19 +943,23 @@ export default function Edit({ attributes, setAttributes }) {
 						}}
 					</TabPanel>
 
-					<ResponsiveWrapper label={__('Button Width (%)', 'boldpost')}>
-						{(device) => (
-							<RangeControlWithUnit
-								attributes={attributes}
-								setAttributes={setAttributes}
-								attributeKey={getAttrKey('paginationBtnWidth', device)}
-								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
-								min={0}
-								max={500}
-								step={1}
-							/>
-						)}
-					</ResponsiveWrapper>
+
+					{attributes.paginationType == 'load_more' && (
+						<ResponsiveWrapper label={__('Button Width (%)', 'boldpost')}>
+							{(device) => (
+								<RangeControlWithUnit
+									attributes={attributes}
+									setAttributes={setAttributes}
+									attributeKey={getAttrKey('paginationBtnWidth', device)}
+									units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+									min={0}
+									max={500}
+									step={1}
+								/>
+							)}
+						</ResponsiveWrapper>
+					)}
+
 
 					<BorderControl
 						label={__('Border', 'boldpost')}

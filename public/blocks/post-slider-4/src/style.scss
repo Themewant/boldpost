@@ -53,6 +53,8 @@
 			}
 
 			a {
+				text-decoration: none;
+
 				&:hover {
 					color: var(--boldpo-preset-color-primary);
 				}
@@ -63,6 +65,7 @@
 			position: relative;
 			transition: var(--boldpo-preset-hover-transition);
 			box-sizing: border-box;
+			height: 100%;
 
 			.boldpo-list-item-inner {
 				align-items: center;
@@ -70,7 +73,7 @@
 				overflow: hidden;
 				box-sizing: border-box;
 				height: 100%;
-				background: rgba(255, 255, 255, 0.1);
+
 				padding: 10px;
 			}
 
@@ -298,10 +301,6 @@
 			}
 		}
 
-		.swiper-pagination-bullets {
-			position: inherit !important;
-		}
-
 		.swiper-pagination-bullet {
 			&.swiper-pagination-bullet-active {
 				background-color: #000;
@@ -319,6 +318,10 @@
 
 				max-width: 74%;
 
+				@media screen and (max-width: 1024px) {
+					max-width: 100% !important;
+				}
+
 				.swiper-container {
 					width: 100%;
 					height: 100%;
@@ -334,8 +337,16 @@
 				margin-left: 16px;
 				order: 2;
 
+				@media screen and (max-width: 1024px) {
+					display: none !important;
+				}
+
 				.slider__thumbs {
 					height: 430px;
+
+					.slider__image {
+						height: 100%;
+					}
 
 					.swiper-container {
 						width: 100%;
@@ -362,33 +373,161 @@
 			}
 		}
 
-		.nav-btn {
-			cursor: pointer;
-			text-align: center;
-			font-size: 0.875rem;
-			height: 32px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			-webkit-user-select: none;
-			-moz-user-select: none;
-			user-select: none;
-			background: var(--boldpo-preset-color-primary);
-			color: #fff;
-			border-radius: 0;
-			z-index: 9;
 
-			&:focus {
-				outline: none;
+
+		.swiper-button-next {
+			margin-top: 20px;
+		}
+
+		&.style-default,
+		&.style-1 {
+			.boldpo-grid-item {
+				.boldpo-list-item-inner {
+					background: rgba(255, 255, 255, 0.1);
+				}
 			}
 
-			&:hover {
-				opacity: 0.9;
+			.nav-btn {
+				cursor: pointer;
+				text-align: center;
+				font-size: 0.875rem;
+				height: 32px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				user-select: none;
+				background: var(--boldpo-preset-color-primary);
+				color: #fff;
+				border-radius: 0;
+				z-index: 9;
+				position: static;
+				width: 100%;
+
+				&.swiper-button-prev {
+					margin-top: 0;
+				}
+
+				svg {
+					display: none;
+				}
+
+				&:focus {
+					outline: none;
+				}
+
+				&:hover {
+					opacity: 0.9;
+				}
 			}
 		}
 
-		.slider__next {
-			margin-top: 20px;
+		&.style-2 {
+			.slider__images {
+				max-width: 100%;
+
+				.boldpo-blog-img img {
+					height: 530px;
+				}
+
+				.boldpo-blog-content {
+					width: var(--wp--style--global--content-size);
+					left: 50%;
+					transform: translateX(-50%);
+					padding-right: 200px;
+
+					@media screen and (max-width: 1024px) {
+						max-width: 100%;
+						transform: unset;
+						left: auto;
+						padding-right: 30px;
+						margin-left: 0;
+					}
+				}
+
+				.boldpo-post-categories {
+					margin: 0 !important;
+				}
+
+				.boldpo-post-slider-btn-wrapper {
+					display: flex;
+					align-items: center;
+					left: 50%;
+					transform: translateX(-50%);
+					width: var(--wp--style--global--content-size);
+					position: absolute;
+					z-index: 2;
+
+					@media screen and (max-width: 1024px) {
+						transform: unset;
+						left: 30px;
+					}
+				}
+
+				.nav-btn {
+					cursor: pointer;
+					text-align: center;
+					font-size: 18px;
+					height: 48px;
+					width: 48px;
+					line-height: 51px;
+					-webkit-user-select: none;
+					-moz-user-select: none;
+					user-select: none;
+					background: rgba(255, 255, 255, 0.07);
+					color: #fff;
+					border-radius: 100%;
+					z-index: 9;
+					font-weight: 700;
+
+					position: static;
+
+					svg {
+						height: 20px;
+						width: 20px;
+					}
+
+					&.swiper-button-next {
+						margin: 0 0 -145px 8px;
+					}
+
+					&.swiper-button-prev {
+						margin: 0px 0 -145px 0;
+					}
+
+					&:hover {
+						background-color: var(--boldpo-preset-color-primary);
+					}
+
+				}
+			}
+
+			.slider__col {
+				right: 15%;
+				position: absolute;
+				z-index: 2;
+				display: flex;
+				flex-direction: column;
+				margin-left: 16px;
+				max-width: 26%;
+				order: 2;
+				align-items: center;
+				justify-content: center;
+				height: 100%;
+				top: -8%;
+
+				.slider__thumbs {
+					height: 330px;
+				}
+
+				.boldpo-post-metas {
+
+					.bldpost-meta {
+						color: var(--boldpo-preset-color-white);
+					}
+				}
+			}
 		}
 	}
 }

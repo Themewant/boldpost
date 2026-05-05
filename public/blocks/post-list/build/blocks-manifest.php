@@ -190,6 +190,18 @@ return array(
 					'letterSpacing' => ''
 				)
 			),
+			'metaTypography' => array(
+				'type' => 'object',
+				'default' => array(
+					'fontFamily' => '',
+					'fontSize' => '',
+					'fontWeight' => '',
+					'fontStyle' => '',
+					'textTransform' => '',
+					'lineHeight' => '',
+					'letterSpacing' => ''
+				)
+			),
 			'readMoreBorderRadius' => array(
 				'type' => 'object'
 			),
@@ -535,6 +547,12 @@ return array(
 				'type' => 'object'
 			),
 			'itemExcerptMarginMobile' => array(
+				'type' => 'object'
+			),
+			'contentPaddingTablet' => array(
+				'type' => 'object'
+			),
+			'contentPaddingMobile' => array(
 				'type' => 'object'
 			),
 			'contentTextAlign' => array(
