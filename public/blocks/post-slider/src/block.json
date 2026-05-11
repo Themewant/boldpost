@@ -396,6 +396,14 @@
 			"type": "string",
 			"default": ""
 		},
+		"metaLinkColor": {
+			"type": "string",
+			"default": ""
+		},
+		"metaLinkColorHover": {
+			"type": "string",
+			"default": ""
+		},
 		"metaIconColor": {
 			"type": "string",
 			"default": ""
@@ -595,6 +603,18 @@
 		},
 		"dotsBorderRadius": {
 			"type": "object"
+		},
+		"showViewAllBtn": {
+			"type": "boolean",
+			"default": false
+		},
+		"viewAllUrl": {
+			"type": "string",
+			"default": "#"
+		},
+		"viewAllText": {
+			"type": "string",
+			"default": "View All"
 		},
 		"contentTextAlign": {
 			"type": "string",

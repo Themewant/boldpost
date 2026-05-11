@@ -399,6 +399,10 @@
       "type": "boolean",
       "default": true
     },
+    "showVideo": {
+      "type": "boolean",
+      "default": false
+    },
     "videoAutoplay": {
       "type": "boolean",
       "default": false
@@ -409,7 +413,7 @@
     },
     "videoHeight": {
       "type": "string",
-      "default": "720px"
+      "default": "85px"
     },
     "videoWidth": {
       "type": "string",
@@ -433,6 +437,30 @@
     "paginationType": {
       "type": "string",
       "default": "numeric"
+    },
+    "paginationBtnWidth": {
+      "type": "string",
+      "default": ""
+    },
+    "paginationBtnWidthTablet": {
+      "type": "string",
+      "default": ""
+    },
+    "paginationBtnWidthMobile": {
+      "type": "string",
+      "default": ""
+    },
+    "paginationBtnBorder": {
+      "type": "object",
+      "default": {
+        "width": 0,
+        "color": "",
+        "style": "solid"
+      }
+    },
+    "paginationBtnBorderRadius": {
+      "type": "object",
+      "default": {}
     },
     "paginationColor": {
       "type": "string",

@@ -13,6 +13,7 @@
 }
 .boldpo-heading-block-wrap .boldpo-heading .boldpo-heading-title {
   margin: 0;
+  font-size: inherit;
 }
 .boldpo-heading-block-wrap .boldpo-heading .boldpo-heading-description {
   margin: 10px 0 0 0;
@@ -62,7 +63,7 @@
   width: 100%;
 }
 .boldpo-heading-block-wrap .boldpo-heading.style-3 .boldpo-heading-title-wrap .boldpo-heading-right-icon {
-  font-size: var(--wp--preset--font-size--x-large);
+  font-size: inherit;
 }
 @keyframes uc-flash {
   0% {

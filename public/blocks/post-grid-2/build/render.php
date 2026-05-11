@@ -35,7 +35,9 @@ $paged = max( 1, (int) $paged );
 
 if( $style == '4' || $style == '5' && empty($per_page)) {
     $per_page = 5;
-}else{
+} elseif ( $style == '6' ) {
+    $per_page = 7;
+} else {
     $per_page = 3;
 }
 
@@ -65,7 +67,7 @@ if(empty($meta_position)) {
     if($style == '5') {
         $meta_position = 'below_content';
     }else{
-        $meta_position = 'up_title';
+        $meta_position = 'below_title';
     }
 }
 if($style == '5') {
@@ -81,6 +83,7 @@ $responsive_data = [
 
 $wrap_one_col_class = 'boldpo-col-lg-8 boldpo-col-md-8 boldpo-col-sm-12 boldpo-col-12';
 $wrap_two_col_class = 'boldpo-col-lg-4 boldpo-col-md-4 boldpo-col-sm-12 boldpo-col-12';
+$wrap_middle_col_class = '';
 $item_class = '';
 
 // Columns
@@ -90,6 +93,11 @@ if($style == '2' || $style == '3') {
 }else if($style == '4' || $style == '5') {
     $wrap_one_col_class = 'boldpo-col-lg-6 boldpo-col-md-6 boldpo-col-sm-12 boldpo-col-12';
     $wrap_two_col_class = 'boldpo-col-lg-6 boldpo-col-md-6 boldpo-col-sm-12 boldpo-col-12';
+}else if($style == '6') {
+    // 3 small left | 1 big middle | 3 small right; full-width on tablet/mobile
+    $wrap_one_col_class    = 'boldpo-col-lg-3 boldpo-col-md-12 boldpo-col-sm-12 boldpo-col-12'; // left
+    $wrap_two_col_class    = 'boldpo-col-lg-3 boldpo-col-md-12 boldpo-col-sm-12 boldpo-col-12'; // right
+    $wrap_middle_col_class = 'boldpo-col-lg-6 boldpo-col-md-12 boldpo-col-sm-12 boldpo-col-12'; // middle (big)
 }
 
 
@@ -350,6 +358,26 @@ if ( ! empty( $attributes['paginationBackgroundColorHover'] ) ) {
     $pag_hover['border-color'] = $attributes['paginationBackgroundColorHover'];
 }
 
+
+// Pagination Button Width
+$pagination_btn_width_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+BOLDPO_Helper::add_responsive_vars($attributes, $pagination_btn_width_responsive, 'paginationBtnWidth', 'width', [], false);
+
+// Pagination Button Border
+if ( ! empty( $attributes['paginationBtnBorder'] ) ) {
+    foreach ( BOLDPO_Helper::border_to_css_props( $attributes['paginationBtnBorder'] ) as $prop => $val ) {
+        $pag_styles[$prop] = $val;
+    }
+}
+
+// Pagination Button Border Radius
+$pagination_btn_border_radius = $attributes['paginationBtnBorderRadius'] ?? [];
+if ( ! empty( $pagination_btn_border_radius['top'] ) ) $pag_styles['border-top-left-radius'] = BOLDPO_Helper::ensure_unit( $pagination_btn_border_radius['top'] );
+if ( ! empty( $pagination_btn_border_radius['right'] ) ) $pag_styles['border-top-right-radius'] = BOLDPO_Helper::ensure_unit( $pagination_btn_border_radius['right'] );
+if ( ! empty( $pagination_btn_border_radius['bottom'] ) ) $pag_styles['border-bottom-left-radius'] = BOLDPO_Helper::ensure_unit( $pagination_btn_border_radius['bottom'] );
+if ( ! empty( $pagination_btn_border_radius['left'] ) ) $pag_styles['border-bottom-right-radius'] = BOLDPO_Helper::ensure_unit( $pagination_btn_border_radius['left'] );
+
+
 $thumbnail_left_height_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
 BOLDPO_Helper::add_responsive_vars($attributes, $thumbnail_left_height_responsive, 'thumbnailLeftHeight', 'height', [], false);
 
@@ -372,16 +400,34 @@ $full_responsive_css = "";
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-item .boldpo-grid-item-inner', $item_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-item .boldpo-blog-title', $title_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-item .boldpo-post-metas', $meta_responsive);
-$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-title', $title_left_typo_responsive);
-$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-right-wrap .boldpo-grid-item .boldpo-blog-title', $title_right_typo_responsive);
+if ( $style == '6' ) {
+    // For style 6: big post lives in the middle wrap (gets "left" typography),
+    // and the small posts live in left + right wraps (get "right" typography).
+    $left_typo_selector  = $selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-middle-wrap .boldpo-grid-item .boldpo-blog-title';
+    $right_typo_selector = $selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-title, ' . $selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-right-wrap .boldpo-grid-item .boldpo-blog-title';
+    $left_thumb_selector  = $selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-middle-wrap .boldpo-grid-item .boldpo-blog-img';
+    $left_thumb_img_selector  = $selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-middle-wrap .boldpo-grid-item .boldpo-blog-img img';
+    $right_thumb_selector = $selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-img, ' . $selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-right-wrap .boldpo-grid-item .boldpo-blog-img';
+    $right_thumb_img_selector = $selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-img img, ' . $selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-right-wrap .boldpo-grid-item .boldpo-blog-img img';
+} else {
+    $left_typo_selector  = $selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-title';
+    $right_typo_selector = $selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-right-wrap .boldpo-grid-item .boldpo-blog-title';
+    $left_thumb_selector  = $selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-img';
+    $left_thumb_img_selector  = $selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-img img';
+    $right_thumb_selector = $selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-right-wrap .boldpo-grid-item .boldpo-blog-img';
+    $right_thumb_img_selector = $selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-right-wrap .boldpo-grid-item .boldpo-blog-img img';
+}
+
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($left_typo_selector, $title_left_typo_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($right_typo_selector, $title_right_typo_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-item .boldpo-blog-excerpt', $excerpt_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-item .boldpo-blog-content', $content_padding_responsive);
-$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-img', $thumbnail_left_height_responsive);   
-$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-img img', $thumbnail_left_height_responsive);   
-$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-right-wrap .boldpo-grid-item .boldpo-blog-img', $thumbnail_right_height_responsive);   
-$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-col-right-wrap .boldpo-grid-item .boldpo-blog-img img', $thumbnail_right_height_responsive);   
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($left_thumb_selector, $thumbnail_left_height_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($left_thumb_img_selector, $thumbnail_left_height_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($right_thumb_selector, $thumbnail_right_height_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($right_thumb_img_selector, $thumbnail_right_height_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-item .boldpo-read-more .boldpo-read-more-link', $button_text_align_responsive);   
-
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpost-load-more-btn', $pagination_btn_width_responsive);
 
 wp_enqueue_style( $style_handle );
 BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css, [
@@ -396,10 +442,11 @@ BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css,
     '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-post-metas'         => BOLDPO_Helper::get_inline_styles($metas_styles),
     '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-post-metas a'         => BOLDPO_Helper::get_inline_styles($meta_styles),
     '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-post-metas a:hover'   => BOLDPO_Helper::get_inline_styles($meta_hover),
-    '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-post-metas i'       => BOLDPO_Helper::get_inline_styles($meta_icon_styles),
-    '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-post-metas i:hover' => BOLDPO_Helper::get_inline_styles($meta_icon_hover),
-    '.boldpo-pagination a, .boldpo-pagination span' => BOLDPO_Helper::get_inline_styles($pag_styles),
-    '.boldpo-pagination a:hover, .boldpo-pagination span.current' => BOLDPO_Helper::get_inline_styles($pag_hover),
+    '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-post-metas .bldpost-meta'       => BOLDPO_Helper::get_inline_styles($meta_icon_styles),
+    '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-post-metas .bldpost-meta:hover' => BOLDPO_Helper::get_inline_styles($meta_icon_hover),
+    '.boldpo-pagination .page-numbers' => BOLDPO_Helper::get_inline_styles($pag_styles),
+    '.boldpo-pagination .page-numbers.current' => BOLDPO_Helper::get_inline_styles($pag_hover),
+    '.boldpo-pagination a:hover' => BOLDPO_Helper::get_inline_styles($pag_hover),
     '.boldpo-post-grid-2 .boldpo-grid-item .boldpo-blog-img'   => BOLDPO_Helper::get_inline_styles($thumbnail_border_radius_styles),
     '.boldpo-post-categories .bldpost-meta' => BOLDPO_Helper::get_inline_styles($cat_container_styles),
     '.boldpo-post-categories .bldpost-meta:hover' => BOLDPO_Helper::get_inline_styles($cat_container_hover),
@@ -528,6 +575,64 @@ if ( $query->have_posts() ) :
                         include $style_file;
                     }
 
+                } elseif ( ($style == '6') && file_exists( $style_file ) ) {
+
+                    // Layout: 3 small left | 1 big middle | 3 small right.
+                    // Loop order is 1..7 but visually we render left → middle → right,
+                    // so the big post (i=1) is buffered and emitted between the columns.
+
+                    if ($i == 1) {
+                        $title_tag = $title_left_tag;
+
+                        ob_start();
+                        include $style_file;
+                        $style_6_middle_html = ob_get_clean();
+
+                        if ($query->post_count > 1) {
+                            // Open LEFT column for posts 2..4
+                            $title_tag = $title_right_tag;
+                            echo '<div class="boldpo-grid-col-left-wrap ' . esc_attr($wrap_one_col_class) . '">';
+                            echo '<div class="boldpo-grid-row boldpo-row ' . esc_attr($row_gap_class) . ' ' . esc_attr($gap_class) . '">';
+                        } else {
+                            // Only one post — drop it straight into the middle wrap
+                            echo '<div class="boldpo-grid-col-middle-wrap ' . esc_attr($wrap_middle_col_class) . '">';
+                            echo $style_6_middle_html;
+                            echo '</div>';
+                        }
+
+                    } elseif ($i >= 2 && $i <= 4) {
+                        // LEFT small posts
+                        $title_tag = $title_right_tag;
+                        include $style_file;
+
+                        // If post_count stops before reaching the middle column (≤4 total),
+                        // close LEFT and emit the buffered MIDDLE on the last iteration.
+                        if ($i == $query->post_count) {
+                            echo '</div></div>';
+                            echo '<div class="boldpo-grid-col-middle-wrap ' . esc_attr($wrap_middle_col_class) . '">';
+                            echo $style_6_middle_html;
+                            echo '</div>';
+                        }
+
+                    } elseif ($i == 5) {
+                        // Close LEFT, emit MIDDLE big, then open RIGHT and render this post
+                        echo '</div></div>';
+
+                        echo '<div class="boldpo-grid-col-middle-wrap ' . esc_attr($wrap_middle_col_class) . '">';
+                        echo $style_6_middle_html;
+                        echo '</div>';
+
+                        $title_tag = $title_right_tag;
+                        echo '<div class="boldpo-grid-col-right-wrap ' . esc_attr($wrap_two_col_class) . '">';
+                        echo '<div class="boldpo-grid-row boldpo-row ' . esc_attr($row_gap_class) . ' ' . esc_attr($gap_class) . '">';
+                        include $style_file;
+
+                    } else {
+                        // RIGHT small posts (i=6,7)
+                        $title_tag = $title_right_tag;
+                        include $style_file;
+                    }
+
                 } elseif ( ($style == '2' || $style == '3') && file_exists( $style_file ) ) {
 
                     if ($i == 1 && $query->post_count > 1) {
@@ -560,10 +665,18 @@ if ( $query->have_posts() ) :
 
 
             endwhile;
-            if ($query->post_count > 1) {
+            if ($style == '6' || $style == '4' || $style == '5') {
+                // Style 6: only close the inner right-row when the right column
+                // was actually opened (i.e. there are 5+ posts). For ≤4 posts,
+                // the left/middle wraps are already closed inline.
+                if ($query->post_count >= 5) {
+                    echo '</div>';
+                }
+            } elseif ($query->post_count > 1) {
                 // Close inner boldpo-row then the right-wrap
-                echo '</div>';
+                //echo '</div>';
             }
+            echo '</div>';
             ?>
             <?php include BOLDPO_PL_PATH . 'public/template-parts/pagination/pagination.php'; ?>
         </div>

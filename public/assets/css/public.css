@@ -476,6 +476,18 @@
   --boldpo-preset-hover-transition: 0.4s ease;
 }
 
+.boldpo-text-left {
+  justify-content: flex-start;
+}
+
+.boldpo-text-center {
+  justify-content: center;
+}
+
+.boldpo-text-right {
+  justify-content: flex-end;
+}
+
 .boldpo-block a:focus {
   outline: none;
 }
@@ -693,4 +705,18 @@
   background-position: 0% 100%;
   background-image: linear-gradient(to right, currentColor 100%, transparent 100%);
   width: fit-content;
+}
+.boldpo-post-grid .nav-btn,
+.boldpo-post-grid-2 .nav-btn,
+.boldpo-post-grid-3 .nav-btn,
+.boldpo-post-grid-4 .nav-btn,
+.boldpo-post-list .nav-btn,
+.boldpo-post-list-2 .nav-btn,
+.boldpo-post-list-3 .nav-btn,
+.boldpo-post-list-4 .nav-btn,
+.boldpo-post-slider .nav-btn,
+.boldpo-post-slider-2 .nav-btn,
+.boldpo-post-slider-3 .nav-btn,
+.boldpo-post-slider-4 .nav-btn {
+  transition: var(--boldpo-preset-hover-transition);
 }/*# sourceMappingURL=public.css.map */

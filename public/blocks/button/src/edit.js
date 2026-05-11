@@ -1,4 +1,5 @@
 import { __ } from '@wordpress/i18n';
+import { useEffect } from '@wordpress/element';
 import { useBlockProps, InspectorControls, RichText, BlockControls, AlignmentControl } from '@wordpress/block-editor';
 import {
     PanelBody,
@@ -16,6 +17,7 @@ import ColorPopover from '../../custom-components/ColorPopover';
 import ResponsiveWrapper from '../../custom-components/ResponsiveWrapper';
 import IconPicker from '../../custom-components/IconPicker';
 import ImageRadioControl from '../../custom-components/ImageRadioControl';
+import BorderControl from '../../custom-components/BorderControl';
 
 import './editor.scss';
 
@@ -47,7 +49,51 @@ const buildBoxStyles = (box, prop) => {
     };
 };
 
+const buildBorderStyles = (border) => {
+    if (!border) return {};
+    const w = border.width;
+    const widthStyles = (w && typeof w === 'object')
+        ? {
+            borderTopWidth: w.top || undefined,
+            borderRightWidth: w.right || undefined,
+            borderBottomWidth: w.bottom || undefined,
+            borderLeftWidth: w.left || undefined,
+        }
+        : { borderWidth: w || undefined };
+    return {
+        ...widthStyles,
+        borderColor: border.color || undefined,
+        borderStyle: border.style || undefined,
+    };
+};
+
+const buildBorderCss = (border) => {
+    if (!border || typeof border !== 'object') return '';
+    const parts = [];
+    const w = border.width;
+    if (w && typeof w === 'object') {
+        if (w.top) parts.push(`border-top-width: ${w.top} !important`);
+        if (w.right) parts.push(`border-right-width: ${w.right} !important`);
+        if (w.bottom) parts.push(`border-bottom-width: ${w.bottom} !important`);
+        if (w.left) parts.push(`border-left-width: ${w.left} !important`);
+    } else if (w) {
+        parts.push(`border-width: ${w} !important`);
+    }
+    if (border.style) parts.push(`border-style: ${border.style} !important`);
+    if (border.color) parts.push(`border-color: ${border.color} !important`);
+    return parts.join('; ');
+};
+
 export default function Edit({ attributes, setAttributes }) {
+
+    useEffect(() => {
+        if (!attributes.blockId) {
+            setAttributes({ blockId: 'boldpo-' + Math.random().toString(36).slice(2, 7) });
+        }
+    }, []);
+
+    const blockId = attributes.blockId || '';
+    const scope = blockId ? `.${blockId}` : '.boldpo-button-block-wrap';
 
     const getAttrKey = (base, device) => {
         if (device === 'desktop') return base;
@@ -62,9 +108,7 @@ export default function Edit({ attributes, setAttributes }) {
         borderRadius: attributes.borderRadius
             ? `${attributes.borderRadius.top || '0px'} ${attributes.borderRadius.right || '0px'} ${attributes.borderRadius.bottom || '0px'} ${attributes.borderRadius.left || '0px'}`
             : undefined,
-        borderStyle: attributes.borderType !== 'none' ? attributes.borderType : undefined,
-        borderWidth: attributes.borderWidth ? `${attributes.borderWidth}px` : undefined,
-        borderColor: attributes.borderColor || undefined,
+        ...buildBorderStyles(attributes.border),
         width: attributes.buttonWidth || undefined,
 
     };
@@ -77,10 +121,10 @@ export default function Edit({ attributes, setAttributes }) {
     const hoverBgColor = attributes.buttonBackgroundHover || '';
     const hoverTextColor = attributes.textColorHover || '';
     const hoverIconColor = attributes.iconColorHover || '';
-    const hoverBorderColor = attributes.borderColorHover || '';
+    const hoverBorder = attributes.borderHover || '';
 
     return (
-        <div {...useBlockProps({ className: 'boldpo-block boldpo-button-block-wrap' })}>
+        <div {...useBlockProps({ className: `boldpo-block boldpo-button-block-wrap ${blockId}` })}>
 
             <BlockControls>
                 <AlignmentControl
@@ -213,20 +257,16 @@ export default function Edit({ attributes, setAttributes }) {
                                             setAttributes({ [isHover ? 'textColorHover' : 'textColor']: hex });
                                         }}
                                     />
-                                    {attributes.borderType !== 'none' && (
-                                        <>
-                                            <Divider />
-                                            <ColorPopover
-                                                label={isHover ? __('Border Color (Hover)', 'boldpost') : __('Border Color', 'boldpost')}
-                                                color={isHover ? attributes.borderColorHover : attributes.borderColor}
-                                                defaultColor={''}
-                                                onChange={(value) => {
-                                                    const hex = (value && typeof value === 'object') ? value.hex : value;
-                                                    setAttributes({ [isHover ? 'borderColorHover' : 'borderColor']: hex });
-                                                }}
-                                            />
-                                        </>
-                                    )}
+
+
+                                    <Divider />
+                                    <BorderControl
+                                        label={isHover ? __('Border (Hover)', 'boldpost') : __('Border', 'boldpost')}
+                                        value={isHover ? attributes.borderHover : attributes.border}
+                                        onChange={(value) => setAttributes({ [isHover ? 'borderHover' : 'border']: value })}
+                                    />
+
+
                                 </div>
                             );
                         }}
@@ -246,33 +286,6 @@ export default function Edit({ attributes, setAttributes }) {
                         values={attributes.borderRadius}
                         onChange={(value) => setAttributes({ borderRadius: value })}
                     />
-                    <Divider />
-                    <SelectControl
-                        label={__('Border Style', 'boldpost')}
-                        value={attributes.borderType}
-                        onChange={(value) => setAttributes({ borderType: value })}
-                        options={[
-                            { label: __('None', 'boldpost'), value: 'none' },
-                            { label: __('Solid', 'boldpost'), value: 'solid' },
-                            { label: __('Dashed', 'boldpost'), value: 'dashed' },
-                            { label: __('Dotted', 'boldpost'), value: 'dotted' },
-                        ]}
-                        __next40pxDefaultSize={true}
-                        __nextHasNoMarginBottom={true}
-                    />
-                    {attributes.borderType !== 'none' && (
-                        <>
-                            <Divider />
-                            <NumberControl
-                                label={__('Border Width (px)', 'boldpost')}
-                                value={attributes.borderWidth}
-                                onChange={(value) => setAttributes({ borderWidth: parseInt(value) || 0 })}
-                                min={0}
-                                __next40pxDefaultSize={true}
-                                __nextHasNoMarginBottom={true}
-                            />
-                        </>
-                    )}
                     <Divider />
                     <ResponsiveWrapper label={__('Typography', 'boldpost')}>
                         {(device) => (
@@ -336,10 +349,10 @@ export default function Edit({ attributes, setAttributes }) {
             <div className="boldpo-button-hover-styles">
                 <style>
                     {`
-                        ${hoverBgColor ? `.boldpo-button-block-wrap .boldpo-button-link:hover { background-color: ${hoverBgColor} !important; }` : ''}
-                        ${hoverTextColor ? `.boldpo-button-block-wrap .boldpo-button-link:hover .boldpo-button-text { color: ${hoverTextColor} !important; }` : ''}
-                        ${hoverIconColor ? `.boldpo-button-block-wrap .boldpo-button-link:hover .boldpo-button-icon { color: ${hoverIconColor} !important; }` : ''}
-                        ${hoverBorderColor ? `.boldpo-button-block-wrap .boldpo-button-link:hover { border-color: ${hoverBorderColor} !important; }` : ''}
+                        ${hoverBgColor ? `${scope} .boldpo-button-link:hover { background-color: ${hoverBgColor} !important; }` : ''}
+                        ${hoverTextColor ? `${scope} .boldpo-button-link:hover .boldpo-button-text { color: ${hoverTextColor} !important; }` : ''}
+                        ${hoverIconColor ? `${scope} .boldpo-button-link:hover .boldpo-button-icon { color: ${hoverIconColor} !important; }` : ''}
+                        ${buildBorderCss(hoverBorder) ? `${scope} .boldpo-button-link:hover { ${buildBorderCss(hoverBorder)}; }` : ''}
                     `}
                 </style>
             </div>

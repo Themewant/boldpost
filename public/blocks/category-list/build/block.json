@@ -30,8 +30,7 @@
       "default": "default"
     },
     "columns": {
-      "type": "string",
-      "default": "1"
+      "type": "string"
     },
     "columnsTablet": {
       "type": "string",
@@ -136,40 +135,40 @@
       "default": "1"
     },
     "itemTitleMargin": {
-      "type": "object",
-      "default": {
-        "top": "0px",
-        "right": "0px",
-        "bottom": "10px",
-        "left": "0px"
-      }
+      "type": "object"
     },
     "itemTitleMarginTablet": {
-      "type": "object",
-      "default": {
-        "top": "0px",
-        "right": "0px",
-        "bottom": "10px",
-        "left": "0px"
-      }
+      "type": "object"
     },
     "itemTitleMarginMobile": {
+      "type": "object"
+    },
+    "itemDescriptionMargin": {
       "type": "object",
       "default": {
-        "top": "0px",
+        "top": "10px",
         "right": "0px",
-        "bottom": "10px",
+        "bottom": "0px",
         "left": "0px"
       }
     },
-    "itemDescriptionMargin": {
-      "type": "object"
-    },
     "itemDescriptionMarginTablet": {
-      "type": "object"
+      "type": "object",
+      "default": {
+        "top": "10px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      }
     },
     "itemDescriptionMarginMobile": {
-      "type": "object"
+      "type": "object",
+      "default": {
+        "top": "10px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      }
     },
     "itemTitleTypography": {
       "type": "object",
@@ -357,6 +356,115 @@
     "detailsBtnBackgroundColorHover": {
       "type": "string",
       "default": ""
+    },
+    "detailsBtnBackgroundGradient": {
+      "type": "string",
+      "default": ""
+    },
+    "detailsBtnBackgroundGradientHover": {
+      "type": "string",
+      "default": ""
+    },
+    "detailsBtnPadding": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      }
+    },
+    "detailsBtnPaddingTablet": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      }
+    },
+    "detailsBtnPaddingMobile": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      }
+    },
+    "detailsBtnMargin": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      }
+    },
+    "detailsBtnMarginTablet": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      }
+    },
+    "detailsBtnMarginMobile": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      }
+    },
+    "detailsBtnBorderRadius": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      }
+    },
+    "detailsBtnBorderRadiusTablet": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      }
+    },
+    "detailsBtnBorderRadiusMobile": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      }
+    },
+    "detailsBtnBorder": {
+      "type": "object",
+      "default": {
+        "width": 0,
+        "color": "",
+        "style": "solid"
+      }
+    },
+    "detailsBtnBorderHover": {
+      "type": "object",
+      "default": {
+        "width": 0,
+        "color": "",
+        "style": "solid"
+      }
+    },
+    "contentAlign": {
+      "type": "string",
+      "default": "left"
     }
   }
 }

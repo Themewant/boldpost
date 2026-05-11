@@ -45,7 +45,6 @@ import IconPicker from '../../custom-components/IconPicker';
  */
 import './editor.scss';
 import layout1 from './assets/img/layout-1.png';
-import layout2 from './assets/img/layout-2.png';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -232,35 +231,10 @@ export default function Edit({ attributes, setAttributes }) {
 						value={attributes.gridStyle}
 						onChange={(value) => setAttributes({ gridStyle: value })}
 						options={[
-							{ label: __('Default', 'boldpost'), value: 'default', src: layout1 },
-							{ label: __('Style 1', 'boldpost'), value: '1', src: layout2, isPro: true },
+							{ label: __('Default', 'boldpost'), value: 'default', src: layout1 }
 						]}
 					/>
 				</PanelBody>
-
-				{ /* content panel group */}
-				<PanelBody title={__('Content', 'boldpost')} initialOpen={false}>
-
-					<ResponsiveWrapper label={__('Columns', 'boldpost')}>
-						{(device) => (
-							<SelectControl
-								value={attributes[getAttrKey('columns', device)]}
-								onChange={(value) => setAttributes({ [getAttrKey('columns', device)]: value })}
-								options={[
-									{ label: __('1 Column', 'boldpost'), value: '1' },
-									{ label: __('2 Column', 'boldpost'), value: '2' },
-									{ label: __('3 Column', 'boldpost'), value: '3' },
-									{ label: __('4 Column', 'boldpost'), value: '4' },
-									{ label: __('6 Column', 'boldpost'), value: '6' },
-								]}
-								__next40pxDefaultSize={true}
-								__nextHasNoMarginBottom={true}
-							/>
-						)}
-					</ResponsiveWrapper>
-
-				</PanelBody>
-
 				<PanelBody title={__('Thumbnail', 'boldpost')} initialOpen={false}>
 					<SelectControl
 						label={__('Size', 'boldpost')}
@@ -400,6 +374,7 @@ export default function Edit({ attributes, setAttributes }) {
 									{ label: __('Date', 'boldpost'), value: 'date' },
 									{ label: __('Category', 'boldpost'), value: 'category' },
 									{ label: __('Tag', 'boldpost'), value: 'tag' },
+									{ label: __('Comments Count', 'boldpost'), value: 'comments_count' },
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
@@ -419,6 +394,7 @@ export default function Edit({ attributes, setAttributes }) {
 								value={attributes.metaPosition}
 								onChange={(value) => setAttributes({ metaPosition: value })}
 								options={[
+									{ label: __('Default', 'boldpost'), value: '' },
 									{ label: __('Up Title', 'boldpost'), value: 'up_title' },
 									{ label: __('Below Title', 'boldpost'), value: 'below_title' },
 									{ label: __('Below Content', 'boldpost'), value: 'below_content' },
@@ -434,6 +410,7 @@ export default function Edit({ attributes, setAttributes }) {
 									{ label: __('Default', 'boldpost'), value: 'default' },
 									{ label: __('Style 1', 'boldpost'), value: '1' },
 									{ label: __('Style 2', 'boldpost'), value: '2' },
+									{ label: __('Style 3', 'boldpost'), value: '3' },
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
@@ -930,6 +907,33 @@ export default function Edit({ attributes, setAttributes }) {
 							);
 						}}
 					</TabPanel>
+
+					{attributes.paginationType == 'load_more' && (
+						<ResponsiveWrapper label={__('Button Width (%)', 'boldpost')}>
+							{(device) => (
+								<RangeControlWithUnit
+									attributes={attributes}
+									setAttributes={setAttributes}
+									attributeKey={getAttrKey('paginationBtnWidth', device)}
+									units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+									min={0}
+									max={500}
+									step={1}
+								/>
+							)}
+						</ResponsiveWrapper>
+					)}
+
+					<BorderControl
+						label={__('Border', 'boldpost')}
+						value={attributes.paginationBtnBorder}
+						onChange={(value) => setAttributes({ paginationBtnBorder: value })}
+					/>
+					<BoxControl
+						label={__('Border Radius', 'boldpost')}
+						values={attributes.paginationBtnBorderRadius}
+						onChange={(value) => setAttributes({ paginationBtnBorderRadius: value })}
+					/>
 
 				</PanelBody>
 

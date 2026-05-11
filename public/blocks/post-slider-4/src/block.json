@@ -366,7 +366,8 @@
 			"type": "array",
 			"default": [
 				"author",
-				"date"
+				"date",
+				"category"
 			]
 		},
 		"authorPrefix": {
@@ -543,6 +544,9 @@
 		"navColorHover": {
 			"type": "string",
 			"default": ""
+		},
+		"navBorder": {
+			"type": "object"
 		},
 		"navBorderRadius": {
 			"type": "object"

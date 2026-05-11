@@ -401,6 +401,14 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
+			'metaLinkColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'metaLinkColorHover' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'metaIconColor' => array(
 				'type' => 'string',
 				'default' => ''
@@ -600,6 +608,18 @@ return array(
 			),
 			'dotsBorderRadius' => array(
 				'type' => 'object'
+			),
+			'showViewAllBtn' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'viewAllUrl' => array(
+				'type' => 'string',
+				'default' => '#'
+			),
+			'viewAllText' => array(
+				'type' => 'string',
+				'default' => 'View All'
 			),
 			'contentTextAlign' => array(
 				'type' => 'string',

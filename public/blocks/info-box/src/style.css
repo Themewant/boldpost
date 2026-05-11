@@ -1,6 +1,7 @@
 .boldpo-info-box-block-wrap {
   box-sizing: border-box;
   width: 100%;
+  overflow: hidden;
 }
 .boldpo-info-box-block-wrap .boldpo-info-box-list {
   display: flex;

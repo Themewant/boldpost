@@ -216,7 +216,7 @@ if ( $query->have_posts() ) :
                         }
                         $trimmed_title = wp_trim_words( get_the_title(), $title_trim, '...' );
                     
-                        $style_file = BOLDPO_PL_PATH . 'public/template-parts/blog-ticker/style-' . $style . '.php';
+                        $style_file = BOLDPO_PL_PATH . 'public/template-parts/post-ticker/style-' . $style . '.php';
 
                         if ( file_exists( $style_file ) ) {
                             ?>

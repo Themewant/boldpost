@@ -50,6 +50,7 @@ import layout3 from './assets/img/layout-3.png';
 import layout4 from './assets/img/layout-4.png';
 import layout5 from './assets/img/layout-5.png';
 import layout6 from './assets/img/layout-6.png';
+import layout7 from './assets/img/layout-7.png';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -242,31 +243,9 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('Style 3', 'boldpost'), value: '3', src: layout4, isPro: true },
 							{ label: __('Style 4', 'boldpost'), value: '4', src: layout5, isPro: true },
 							{ label: __('Style 5', 'boldpost'), value: '5', src: layout6, isPro: true },
+							{ label: __('Style 6', 'boldpost'), value: '6', src: layout7, isPro: true }
 						]}
 					/>
-				</PanelBody>
-
-				{ /* content panel group */}
-				<PanelBody title={__('Content', 'boldpost')} initialOpen={false}>
-
-					<ResponsiveWrapper label={__('Columns', 'boldpost')}>
-						{(device) => (
-							<SelectControl
-								value={attributes[getAttrKey('columns', device)]}
-								onChange={(value) => setAttributes({ [getAttrKey('columns', device)]: value })}
-								options={[
-									{ label: __('1 Column', 'boldpost'), value: '1' },
-									{ label: __('2 Column', 'boldpost'), value: '2' },
-									{ label: __('3 Column', 'boldpost'), value: '3' },
-									{ label: __('4 Column', 'boldpost'), value: '4' },
-									{ label: __('6 Column', 'boldpost'), value: '6' },
-								]}
-								__next40pxDefaultSize={true}
-								__nextHasNoMarginBottom={true}
-							/>
-						)}
-					</ResponsiveWrapper>
-
 				</PanelBody>
 
 				<PanelBody title={__('Thumbnail', 'boldpost')} initialOpen={false}>
@@ -393,6 +372,7 @@ export default function Edit({ attributes, setAttributes }) {
 									{ label: __('Date', 'boldpost'), value: 'date' },
 									{ label: __('Category', 'boldpost'), value: 'category' },
 									{ label: __('Tag', 'boldpost'), value: 'tag' },
+									{ label: __('Comments Count', 'boldpost'), value: 'comments_count' },
 								]}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
@@ -935,55 +915,56 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(value) => setAttributes({ thumbnailBorderRadius: value })}
 					/>
 				</PanelBody>
-
-				<PanelBody title={__('Category', 'boldpost')} initialOpen={false}>
-					<TabPanel
-						className="eshb-tab-panel"
-						activeClass="is-active"
-						tabs={[
-							{ name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
-							{ name: 'hover', title: __('Hover', 'boldpost'), className: 'eshb-tab-hover' },
-						]}
-					>
-						{(tab) => {
-							const isHover = tab.name === 'hover';
-							return (
-								<div style={{ marginTop: '15px' }}>
-									<ColorPopover
-										label={__('Color', 'boldpost')}
-										color={isHover ? attributes.categoryColorHover : attributes.categoryColor}
-										defaultColor={''}
-										onChange={(value) => {
-											const hex = (value && typeof value === 'object') ? value.hex : value;
-											setAttributes({ [isHover ? 'categoryColorHover' : 'categoryColor']: hex });
-										}}
-									/>
-									<ColorPopover
-										label={__('Background Color', 'boldpost')}
-										color={isHover ? attributes.categoryBackgroundColorHover : attributes.categoryBackgroundColor}
-										defaultColor={''}
-										onChange={(value) => {
-											const hex = (value && typeof value === 'object') ? value.hex : value;
-											setAttributes({ [isHover ? 'categoryBackgroundColorHover' : 'categoryBackgroundColor']: hex });
-										}}
-									/>
-								</div>
-							);
-						}}
-					</TabPanel>
-					<Divider />
-					<BoxControl
-						label={__('Padding', 'boldpost')}
-						values={attributes.categoryPadding}
-						onChange={(value) => setAttributes({ categoryPadding: value })}
-					/>
-					<Divider />
-					<BoxControl
-						label={__('Margin', 'boldpost')}
-						values={attributes.categoryMargin}
-						onChange={(value) => setAttributes({ categoryMargin: value })}
-					/>
-				</PanelBody>
+				{['default', '3', '4', '5'].includes(attributes.gridStyle) && (
+					<PanelBody title={__('Category', 'boldpost')} initialOpen={false}>
+						<TabPanel
+							className="eshb-tab-panel"
+							activeClass="is-active"
+							tabs={[
+								{ name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
+								{ name: 'hover', title: __('Hover', 'boldpost'), className: 'eshb-tab-hover' },
+							]}
+						>
+							{(tab) => {
+								const isHover = tab.name === 'hover';
+								return (
+									<div style={{ marginTop: '15px' }}>
+										<ColorPopover
+											label={__('Color', 'boldpost')}
+											color={isHover ? attributes.categoryColorHover : attributes.categoryColor}
+											defaultColor={''}
+											onChange={(value) => {
+												const hex = (value && typeof value === 'object') ? value.hex : value;
+												setAttributes({ [isHover ? 'categoryColorHover' : 'categoryColor']: hex });
+											}}
+										/>
+										<ColorPopover
+											label={__('Background Color', 'boldpost')}
+											color={isHover ? attributes.categoryBackgroundColorHover : attributes.categoryBackgroundColor}
+											defaultColor={''}
+											onChange={(value) => {
+												const hex = (value && typeof value === 'object') ? value.hex : value;
+												setAttributes({ [isHover ? 'categoryBackgroundColorHover' : 'categoryBackgroundColor']: hex });
+											}}
+										/>
+									</div>
+								);
+							}}
+						</TabPanel>
+						<Divider />
+						<BoxControl
+							label={__('Padding', 'boldpost')}
+							values={attributes.categoryPadding}
+							onChange={(value) => setAttributes({ categoryPadding: value })}
+						/>
+						<Divider />
+						<BoxControl
+							label={__('Margin', 'boldpost')}
+							values={attributes.categoryMargin}
+							onChange={(value) => setAttributes({ categoryMargin: value })}
+						/>
+					</PanelBody>
+				)}
 
 			</InspectorControls>
 

@@ -15,7 +15,6 @@ $icon_type      = isset($attributes['iconType']) ? $attributes['iconType'] : 'ch
 $icon_hover_animation  = isset($attributes['iconHoverAnimation']) ? $attributes['iconHoverAnimation'] : 'none';
 $button_width   = isset($attributes['buttonWidth']) ? $attributes['buttonWidth'] : 'auto';
 $text_align     = isset($attributes['textAlign']) ? $attributes['textAlign'] : '';
-$border_type    = isset($attributes['borderType']) ? $attributes['borderType'] : 'none';
 
 // Button responsive styles
 $button_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
@@ -55,13 +54,9 @@ if ( ! empty( $b_radius['bottom'] ) ) $button_responsive['desktop']['border-bott
 if ( ! empty( $b_radius['left'] ) )   $button_responsive['desktop']['border-bottom-left-radius']  = BOLDPO_Helper::ensure_unit( $b_radius['left'] );
 
 // Border
-if ( $border_type !== 'none' ) {
-    $button_responsive['desktop']['border-style'] = $border_type;
-    if ( ! empty( $attributes['borderWidth'] ) ) {
-        $button_responsive['desktop']['border-width'] = intval( $attributes['borderWidth'] ) . 'px';
-    }
-    if ( ! empty( $attributes['borderColor'] ) ) {
-        $button_responsive['desktop']['border-color'] = $attributes['borderColor'];
+if ( ! empty( $attributes['border'] ) ) {
+    foreach ( BOLDPO_Helper::border_to_css_props( $attributes['border'] ) as $prop => $val ) {
+        $button_responsive['desktop'][$prop] = $val;
     }
 }
 
@@ -102,8 +97,12 @@ if ( ! empty( $attributes['buttonBackgroundHover'] ) ) {
 if ( ! empty( $attributes['textColorHover'] ) ) {
     $button_hover['color'] = $attributes['textColorHover'] . ' !important';
 }
-if ( $border_type !== 'none' && ! empty( $attributes['borderColorHover'] ) ) {
-    $button_hover['border-color'] = $attributes['borderColorHover'] . ' !important';
+
+// Hover border
+if ( ! empty( $attributes['borderHover'] ) ) {
+    foreach ( BOLDPO_Helper::border_to_css_props( $attributes['borderHover'] ) as $prop => $val ) {
+        $button_hover[ $prop ] = $val . ' !important';
+    }
 }
 
 $icon_hover = [];

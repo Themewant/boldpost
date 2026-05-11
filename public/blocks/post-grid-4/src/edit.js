@@ -147,15 +147,15 @@ export default function Edit({ attributes, setAttributes }) {
 			<InspectorControls>
 				{/* {query panel group} */}
 				<PanelBody title={__('Query', 'boldpost')} initialOpen={false}>
-					{attributes.gridStyle === 'default' && (
-						<NumberControl
-							label={__('Per Page', 'boldpost')}
-							value={attributes.perPage}
-							onChange={(value) => setAttributes({ perPage: value })}
-							help={__('Number of items to display.', 'boldpost')}
-							__next40pxDefaultSize={true}
-						/>
-					)}
+
+					<NumberControl
+						label={__('Per Page', 'boldpost')}
+						value={attributes.perPage}
+						onChange={(value) => setAttributes({ perPage: value })}
+						help={__('Number of items to display.', 'boldpost')}
+						__next40pxDefaultSize={true}
+					/>
+
 					<SelectControl
 						label={__('Includes', 'boldpost')}
 						value={attributes.posts}
@@ -267,46 +267,55 @@ export default function Edit({ attributes, setAttributes }) {
 
 				<PanelBody title={__('Video', 'boldpost')} initialOpen={false}>
 					<ToggleControl
-						label={__('Autoplay', 'boldpost')}
-						checked={attributes.videoAutoplay}
-						onChange={(value) => setAttributes({ videoAutoplay: value })}
+						label={__('Show Video', 'boldpost')}
+						checked={attributes.showVideo}
+						onChange={(value) => setAttributes({ showVideo: value })}
 					/>
-					<ToggleControl
-						label={__('Mute', 'boldpost')}
-						checked={attributes.videoMute}
-						onChange={(value) => setAttributes({ videoMute: value })}
-					/>
-					<ResponsiveWrapper label={__('Video Height', 'boldpost')}>
-						{(device) => (
-							<RangeControlWithUnit
-								attributes={attributes}
-								setAttributes={setAttributes}
-								attributeKey={getAttrKey('videoHeight', device)}
-								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
-								min={0}
-								max={1080}
-								step={1}
+					{attributes.showVideo && (
+						<>
+							<ToggleControl
+								label={__('Autoplay', 'boldpost')}
+								checked={attributes.videoAutoplay}
+								onChange={(value) => setAttributes({ videoAutoplay: value })}
 							/>
-						)}
-					</ResponsiveWrapper>
-					<ResponsiveWrapper label={__('Video Width', 'boldpost')}>
-						{(device) => (
-							<RangeControlWithUnit
-								attributes={attributes}
-								setAttributes={setAttributes}
-								attributeKey={getAttrKey('videoWidth', device)}
-								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
-								min={0}
-								max={1080}
-								step={1}
+							<ToggleControl
+								label={__('Mute', 'boldpost')}
+								checked={attributes.videoMute}
+								onChange={(value) => setAttributes({ videoMute: value })}
 							/>
-						)}
-					</ResponsiveWrapper>
-					<ToggleControl
-						label={__('Show Controls', 'boldpost')}
-						checked={attributes.videoControls}
-						onChange={(value) => setAttributes({ videoControls: value })}
-					/>
+							<ResponsiveWrapper label={__('Video Height', 'boldpost')}>
+								{(device) => (
+									<RangeControlWithUnit
+										attributes={attributes}
+										setAttributes={setAttributes}
+										attributeKey={getAttrKey('videoHeight', device)}
+										units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+										min={0}
+										max={1080}
+										step={1}
+									/>
+								)}
+							</ResponsiveWrapper>
+							<ResponsiveWrapper label={__('Video Width', 'boldpost')}>
+								{(device) => (
+									<RangeControlWithUnit
+										attributes={attributes}
+										setAttributes={setAttributes}
+										attributeKey={getAttrKey('videoWidth', device)}
+										units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+										min={0}
+										max={1080}
+										step={1}
+									/>
+								)}
+							</ResponsiveWrapper>
+							<ToggleControl
+								label={__('Show Controls', 'boldpost')}
+								checked={attributes.videoControls}
+								onChange={(value) => setAttributes({ videoControls: value })}
+							/>
+						</>
+					)}
 				</PanelBody>
 
 				<PanelBody title={__('Thumbnail', 'boldpost')} initialOpen={false}>
@@ -460,6 +469,7 @@ export default function Edit({ attributes, setAttributes }) {
 								value={attributes.metaPosition}
 								onChange={(value) => setAttributes({ metaPosition: value })}
 								options={[
+									{ label: __('Default', 'boldpost'), value: '' },
 									{ label: __('Up Title', 'boldpost'), value: 'up_title' },
 									{ label: __('Below Title', 'boldpost'), value: 'below_title' },
 									{ label: __('Below Content', 'boldpost'), value: 'below_content' },
@@ -972,6 +982,33 @@ export default function Edit({ attributes, setAttributes }) {
 							);
 						}}
 					</TabPanel>
+
+					{attributes.paginationType == 'load_more' && (
+						<ResponsiveWrapper label={__('Button Width (%)', 'boldpost')}>
+							{(device) => (
+								<RangeControlWithUnit
+									attributes={attributes}
+									setAttributes={setAttributes}
+									attributeKey={getAttrKey('paginationBtnWidth', device)}
+									units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+									min={0}
+									max={500}
+									step={1}
+								/>
+							)}
+						</ResponsiveWrapper>
+					)}
+
+					<BorderControl
+						label={__('Border', 'boldpost')}
+						value={attributes.paginationBtnBorder}
+						onChange={(value) => setAttributes({ paginationBtnBorder: value })}
+					/>
+					<BoxControl
+						label={__('Border Radius', 'boldpost')}
+						values={attributes.paginationBtnBorderRadius}
+						onChange={(value) => setAttributes({ paginationBtnBorderRadius: value })}
+					/>
 
 				</PanelBody>
 

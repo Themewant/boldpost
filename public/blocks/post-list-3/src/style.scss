@@ -283,7 +283,8 @@
 		&.style-default,
 		&.style-3,
 		&.style-4,
-		&.style-5 {
+		&.style-5,
+		&.style-6 {
 			.boldpo-list-col-one-wrap {
 				.boldpo-blog-img {
 					position: relative;
@@ -439,6 +440,28 @@
 					padding-right: 20px;
 				}
 			}
+		}
+
+		&.style-6 {
+			flex-direction: row-reverse;
+
+			.boldpo-list-item-inner {
+				flex-direction: row-reverse;
+			}
+
+			.boldpo-list-col-one-wrap {
+				.boldpo-list-item {
+					.boldpo-list-item-inner {
+						padding: 0 !important;
+
+					}
+
+					.boldpo-blog-img {
+						height: 445px;
+					}
+				}
+			}
+
 		}
 	}
 

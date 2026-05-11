@@ -17,6 +17,20 @@ $responsive_data = [
     'mobile'  => []
 ];
 
+// Title Wrap
+$title_wrap_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+BOLDPO_Helper::add_responsive_vars($attributes, $title_wrap_responsive, 'titleMargin', '', ['top'=>'margin-top','right'=>'margin-right','bottom'=>'margin-bottom','left'=>'margin-left'], true);
+BOLDPO_Helper::add_responsive_vars($attributes, $title_wrap_responsive, 'titlePadding', '', ['top'=>'padding-top','right'=>'padding-right','bottom'=>'padding-bottom','left'=>'padding-left'], true);
+$text_align = $attributes['textAlign'] ?? '';
+if ( ! empty( $text_align ) ) {
+    $title_wrap_responsive['desktop']['text-align'] = $text_align;
+    $title_wrap_responsive['desktop']['justify-content'] = $text_align;
+}
+
+if ( ! empty( $attributes['titleColor'] ) ) {
+    $title_wrap_responsive['desktop']['color'] = $attributes['titleColor'];
+}
+
 // Title
 $title_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
 BOLDPO_Helper::add_responsive_vars($attributes, $title_responsive, 'titleMargin', '', ['top'=>'margin-top','right'=>'margin-right','bottom'=>'margin-bottom','left'=>'margin-left'], true);
@@ -28,15 +42,13 @@ BOLDPO_Helper::add_responsive_vars($attributes, $title_responsive, 'titleTypogra
     'letterSpacing'=>'letter-spacing'
 ], true);
 
-if ( ! empty( $attributes['titleColor'] ) ) {
-    $title_responsive['desktop']['color'] = $attributes['titleColor'];
-}
 
-$text_align = $attributes['textAlign'] ?? '';
-if ( ! empty( $text_align ) ) {
-    $title_responsive['desktop']['text-align'] = $text_align;
-    $title_responsive['desktop']['justify-content'] = $text_align;
-}
+
+// $text_align = $attributes['textAlign'] ?? '';
+// if ( ! empty( $text_align ) ) {
+//     $title_responsive['desktop']['text-align'] = $text_align;
+//     $title_responsive['desktop']['justify-content'] = $text_align;
+// }
 
 // Title padding (non-responsive)
 $t_padding = $attributes['titlePadding'] ?? [];
@@ -131,7 +143,8 @@ if ( $style === '2' || $style === '6' ) {
     }
 
 $full_responsive_css  = BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style, $responsive_data);
-$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-title-wrap', $title_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-title-wrap', $title_wrap_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-title', $title_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-description', $description_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-border-line', $border_line_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-dot', $dot_responsive);

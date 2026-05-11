@@ -446,6 +446,30 @@
       "type": "boolean",
       "default": true
     },
+    "paginationBtnWidth": {
+      "type": "string",
+      "default": ""
+    },
+    "paginationBtnWidthTablet": {
+      "type": "string",
+      "default": ""
+    },
+    "paginationBtnWidthMobile": {
+      "type": "string",
+      "default": ""
+    },
+    "paginationBtnBorder": {
+      "type": "object",
+      "default": {
+        "width": 0,
+        "color": "",
+        "style": "solid"
+      }
+    },
+    "paginationBtnBorderRadius": {
+      "type": "object",
+      "default": {}
+    },
     "paginationColor": {
       "type": "string",
       "default": "var(--boldpo-preset-color-contrast-2)"

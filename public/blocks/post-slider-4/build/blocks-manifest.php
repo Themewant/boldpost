@@ -371,7 +371,8 @@ return array(
 				'type' => 'array',
 				'default' => array(
 					'author',
-					'date'
+					'date',
+					'category'
 				)
 			),
 			'authorPrefix' => array(
@@ -548,6 +549,9 @@ return array(
 			'navColorHover' => array(
 				'type' => 'string',
 				'default' => ''
+			),
+			'navBorder' => array(
+				'type' => 'object'
 			),
 			'navBorderRadius' => array(
 				'type' => 'object'

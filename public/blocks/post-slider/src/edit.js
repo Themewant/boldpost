@@ -299,77 +299,57 @@ export default function Edit({ attributes, setAttributes }) {
 						]}
 					/>
 				</PanelBody>
-
-				{ /* content panel group */}
-				<PanelBody title={__('Content', 'boldpost')} initialOpen={false}>
-
-					<ResponsiveWrapper label={__('Columns', 'boldpost')}>
-						{(device) => (
-							<SelectControl
-								value={attributes[getAttrKey('columns', device)]}
-								onChange={(value) => setAttributes({ [getAttrKey('columns', device)]: value })}
-								options={[
-									{ label: __('1 Column', 'boldpost'), value: '1' },
-									{ label: __('2 Column', 'boldpost'), value: '2' },
-									{ label: __('3 Column', 'boldpost'), value: '3' },
-									{ label: __('4 Column', 'boldpost'), value: '4' },
-									{ label: __('6 Column', 'boldpost'), value: '6' },
-								]}
-								__next40pxDefaultSize={true}
-								__nextHasNoMarginBottom={true}
-							/>
-						)}
-					</ResponsiveWrapper>
-
-				</PanelBody>
-
 				<PanelBody title={__('Video', 'boldpost')} initialOpen={false}>
 					<ToggleControl
 						label={__('Show Video', 'boldpost')}
 						checked={attributes.showVideo}
 						onChange={(value) => setAttributes({ showVideo: value })}
 					/>
-					<ToggleControl
-						label={__('Autoplay', 'boldpost')}
-						checked={attributes.videoAutoplay}
-						onChange={(value) => setAttributes({ videoAutoplay: value })}
-					/>
-					<ToggleControl
-						label={__('Mute', 'boldpost')}
-						checked={attributes.videoMute}
-						onChange={(value) => setAttributes({ videoMute: value })}
-					/>
-					<ResponsiveWrapper label={__('Video Height', 'boldpost')}>
-						{(device) => (
-							<RangeControlWithUnit
-								attributes={attributes}
-								setAttributes={setAttributes}
-								attributeKey={getAttrKey('videoHeight', device)}
-								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
-								min={0}
-								max={1080}
-								step={1}
+					{attributes.showVideo && (
+						<>
+							<ToggleControl
+								label={__('Autoplay', 'boldpost')}
+								checked={attributes.videoAutoplay}
+								onChange={(value) => setAttributes({ videoAutoplay: value })}
 							/>
-						)}
-					</ResponsiveWrapper>
-					<ResponsiveWrapper label={__('Video Width', 'boldpost')}>
-						{(device) => (
-							<RangeControlWithUnit
-								attributes={attributes}
-								setAttributes={setAttributes}
-								attributeKey={getAttrKey('videoWidth', device)}
-								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
-								min={0}
-								max={1080}
-								step={1}
+							<ToggleControl
+								label={__('Mute', 'boldpost')}
+								checked={attributes.videoMute}
+								onChange={(value) => setAttributes({ videoMute: value })}
 							/>
-						)}
-					</ResponsiveWrapper>
-					<ToggleControl
-						label={__('Show Controls', 'boldpost')}
-						checked={attributes.videoControls}
-						onChange={(value) => setAttributes({ videoControls: value })}
-					/>
+							<ResponsiveWrapper label={__('Video Height', 'boldpost')}>
+								{(device) => (
+									<RangeControlWithUnit
+										attributes={attributes}
+										setAttributes={setAttributes}
+										attributeKey={getAttrKey('videoHeight', device)}
+										units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+										min={0}
+										max={1080}
+										step={1}
+									/>
+								)}
+							</ResponsiveWrapper>
+							<ResponsiveWrapper label={__('Video Width', 'boldpost')}>
+								{(device) => (
+									<RangeControlWithUnit
+										attributes={attributes}
+										setAttributes={setAttributes}
+										attributeKey={getAttrKey('videoWidth', device)}
+										units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+										min={0}
+										max={1080}
+										step={1}
+									/>
+								)}
+							</ResponsiveWrapper>
+							<ToggleControl
+								label={__('Show Controls', 'boldpost')}
+								checked={attributes.videoControls}
+								onChange={(value) => setAttributes({ videoControls: value })}
+							/>
+						</>
+					)}
 				</PanelBody>
 
 				<PanelBody title={__('Thumbnail', 'boldpost')} initialOpen={false}>
@@ -579,6 +559,35 @@ export default function Edit({ attributes, setAttributes }) {
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
+					{(attributes.navPosition != 'bottom-middle' && attributes.navPosition != 'top-middle') && (
+						<>
+							<ToggleControl
+								label={__('Show View All', 'boldpost')}
+								checked={attributes.showViewAllBtn}
+								onChange={(value) => setAttributes({ showViewAllBtn: value })}
+								__nextHasNoMarginBottom={true}
+							/>
+							{attributes.showViewAllBtn && (
+								<>
+									<TextControl
+										label={__('Text', 'boldpost')}
+										value={attributes.viewAllText}
+										onChange={(value) => setAttributes({ viewAllText: value })}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
+									/>
+									<TextControl
+										label={__('URL', 'boldpost')}
+										value={attributes.viewAllUrl}
+										onChange={(value) => setAttributes({ viewAllUrl: value })}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
+									/>
+								</>
+							)}
+						</>
+					)}
+
 				</PanelBody>
 
 				<PanelBody title={__('Dots', 'boldpost')} initialOpen={false}>
@@ -1000,6 +1009,30 @@ export default function Edit({ attributes, setAttributes }) {
 						}
 						}
 					</TabPanel>
+					<Heading>{__('Links', 'boldpost')}</Heading>
+					<TabPanel
+						className="eshb-tab-panel"
+						activeClass="is-active"
+						tabs={[
+							{ name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
+							{ name: 'hover', title: __('Hover', 'boldpost'), className: 'eshb-tab-hover' },
+						]}
+					>
+						{(tab) => {
+							const isHover = tab.name === 'hover';
+							return (
+								<div style={{ marginTop: '15px' }}>
+									<ColorPopover
+										label={__('Color', 'boldpost')}
+										color={isHover ? attributes.metaLinkColorHover : attributes.metaLinkColor}
+										defaultColor={isHover ? '' : ''}
+										onChange={(value) => setAttributes({ [isHover ? 'metaLinkColorHover' : 'metaLinkColor']: value })}
+									/>
+								</div>
+							)
+						}
+						}
+					</TabPanel>
 					<Heading>{__('Icon', 'boldpost')}</Heading>
 					<TabPanel
 						className="eshb-tab-panel"
@@ -1178,7 +1211,7 @@ export default function Edit({ attributes, setAttributes }) {
 											<ColorPopover
 												label={__('Color', 'boldpost')}
 												color={isHover ? attributes.navColorHover : attributes.navColor}
-												defaultColor={isHover ? 'var(--boldpo-preset-color-white)' : 'var(--boldpo-preset-color-contrast-2)'}
+												defaultColor={isHover ? 'var(--boldpo-preset-color-white)' : 'var(--boldpo-preset-color-contrast-1)'}
 												onChange={(value) => setAttributes({ [isHover ? 'navColorHover' : 'navColor']: value })}
 											/>
 											<ColorPopover
@@ -1228,56 +1261,56 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(value) => setAttributes({ thumbnailBorderRadius: value })}
 					/>
 				</PanelBody>
-
-				<PanelBody title={__('Category', 'boldpost')} initialOpen={false}>
-					<TabPanel
-						className="eshb-tab-panel"
-						activeClass="is-active"
-						tabs={[
-							{ name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
-							{ name: 'hover', title: __('Hover', 'boldpost'), className: 'eshb-tab-hover' },
-						]}
-					>
-						{(tab) => {
-							const isHover = tab.name === 'hover';
-							return (
-								<div style={{ marginTop: '15px' }}>
-									<ColorPopover
-										label={__('Color', 'boldpost')}
-										color={isHover ? attributes.categoryColorHover : attributes.categoryColor}
-										defaultColor={''}
-										onChange={(value) => {
-											const hex = (value && typeof value === 'object') ? value.hex : value;
-											setAttributes({ [isHover ? 'categoryColorHover' : 'categoryColor']: hex });
-										}}
-									/>
-									<ColorPopover
-										label={__('Background Color', 'boldpost')}
-										color={isHover ? attributes.categoryBackgroundColorHover : attributes.categoryBackgroundColor}
-										defaultColor={''}
-										onChange={(value) => {
-											const hex = (value && typeof value === 'object') ? value.hex : value;
-											setAttributes({ [isHover ? 'categoryBackgroundColorHover' : 'categoryBackgroundColor']: hex });
-										}}
-									/>
-								</div>
-							);
-						}}
-					</TabPanel>
-					<Divider />
-					<BoxControl
-						label={__('Padding', 'boldpost')}
-						values={attributes.categoryPadding}
-						onChange={(value) => setAttributes({ categoryPadding: value })}
-					/>
-					<Divider />
-					<BoxControl
-						label={__('Margin', 'boldpost')}
-						values={attributes.categoryMargin}
-						onChange={(value) => setAttributes({ categoryMargin: value })}
-					/>
-				</PanelBody>
-
+				{['5'].includes(attributes.sliderStyle) && (
+					<PanelBody title={__('Category', 'boldpost')} initialOpen={false}>
+						<TabPanel
+							className="eshb-tab-panel"
+							activeClass="is-active"
+							tabs={[
+								{ name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
+								{ name: 'hover', title: __('Hover', 'boldpost'), className: 'eshb-tab-hover' },
+							]}
+						>
+							{(tab) => {
+								const isHover = tab.name === 'hover';
+								return (
+									<div style={{ marginTop: '15px' }}>
+										<ColorPopover
+											label={__('Color', 'boldpost')}
+											color={isHover ? attributes.categoryColorHover : attributes.categoryColor}
+											defaultColor={''}
+											onChange={(value) => {
+												const hex = (value && typeof value === 'object') ? value.hex : value;
+												setAttributes({ [isHover ? 'categoryColorHover' : 'categoryColor']: hex });
+											}}
+										/>
+										<ColorPopover
+											label={__('Background Color', 'boldpost')}
+											color={isHover ? attributes.categoryBackgroundColorHover : attributes.categoryBackgroundColor}
+											defaultColor={''}
+											onChange={(value) => {
+												const hex = (value && typeof value === 'object') ? value.hex : value;
+												setAttributes({ [isHover ? 'categoryBackgroundColorHover' : 'categoryBackgroundColor']: hex });
+											}}
+										/>
+									</div>
+								);
+							}}
+						</TabPanel>
+						<Divider />
+						<BoxControl
+							label={__('Padding', 'boldpost')}
+							values={attributes.categoryPadding}
+							onChange={(value) => setAttributes({ categoryPadding: value })}
+						/>
+						<Divider />
+						<BoxControl
+							label={__('Margin', 'boldpost')}
+							values={attributes.categoryMargin}
+							onChange={(value) => setAttributes({ categoryMargin: value })}
+						/>
+					</PanelBody>
+				)}
 			</InspectorControls>
 
 

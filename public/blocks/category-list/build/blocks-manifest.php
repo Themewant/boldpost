@@ -35,8 +35,7 @@ return array(
 				'default' => 'default'
 			),
 			'columns' => array(
-				'type' => 'string',
-				'default' => '1'
+				'type' => 'string'
 			),
 			'columnsTablet' => array(
 				'type' => 'string',
@@ -141,40 +140,40 @@ return array(
 				'default' => '1'
 			),
 			'itemTitleMargin' => array(
-				'type' => 'object',
-				'default' => array(
-					'top' => '0px',
-					'right' => '0px',
-					'bottom' => '10px',
-					'left' => '0px'
-				)
+				'type' => 'object'
 			),
 			'itemTitleMarginTablet' => array(
-				'type' => 'object',
-				'default' => array(
-					'top' => '0px',
-					'right' => '0px',
-					'bottom' => '10px',
-					'left' => '0px'
-				)
+				'type' => 'object'
 			),
 			'itemTitleMarginMobile' => array(
+				'type' => 'object'
+			),
+			'itemDescriptionMargin' => array(
 				'type' => 'object',
 				'default' => array(
-					'top' => '0px',
+					'top' => '10px',
 					'right' => '0px',
-					'bottom' => '10px',
+					'bottom' => '0px',
 					'left' => '0px'
 				)
 			),
-			'itemDescriptionMargin' => array(
-				'type' => 'object'
-			),
 			'itemDescriptionMarginTablet' => array(
-				'type' => 'object'
+				'type' => 'object',
+				'default' => array(
+					'top' => '10px',
+					'right' => '0px',
+					'bottom' => '0px',
+					'left' => '0px'
+				)
 			),
 			'itemDescriptionMarginMobile' => array(
-				'type' => 'object'
+				'type' => 'object',
+				'default' => array(
+					'top' => '10px',
+					'right' => '0px',
+					'bottom' => '0px',
+					'left' => '0px'
+				)
 			),
 			'itemTitleTypography' => array(
 				'type' => 'object',
@@ -362,6 +361,115 @@ return array(
 			'detailsBtnBackgroundColorHover' => array(
 				'type' => 'string',
 				'default' => ''
+			),
+			'detailsBtnBackgroundGradient' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'detailsBtnBackgroundGradientHover' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'detailsBtnPadding' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '',
+					'right' => '',
+					'bottom' => '',
+					'left' => ''
+				)
+			),
+			'detailsBtnPaddingTablet' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '',
+					'right' => '',
+					'bottom' => '',
+					'left' => ''
+				)
+			),
+			'detailsBtnPaddingMobile' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '',
+					'right' => '',
+					'bottom' => '',
+					'left' => ''
+				)
+			),
+			'detailsBtnMargin' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '',
+					'right' => '',
+					'bottom' => '',
+					'left' => ''
+				)
+			),
+			'detailsBtnMarginTablet' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '',
+					'right' => '',
+					'bottom' => '',
+					'left' => ''
+				)
+			),
+			'detailsBtnMarginMobile' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '',
+					'right' => '',
+					'bottom' => '',
+					'left' => ''
+				)
+			),
+			'detailsBtnBorderRadius' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '',
+					'right' => '',
+					'bottom' => '',
+					'left' => ''
+				)
+			),
+			'detailsBtnBorderRadiusTablet' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '',
+					'right' => '',
+					'bottom' => '',
+					'left' => ''
+				)
+			),
+			'detailsBtnBorderRadiusMobile' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '',
+					'right' => '',
+					'bottom' => '',
+					'left' => ''
+				)
+			),
+			'detailsBtnBorder' => array(
+				'type' => 'object',
+				'default' => array(
+					'width' => 0,
+					'color' => '',
+					'style' => 'solid'
+				)
+			),
+			'detailsBtnBorderHover' => array(
+				'type' => 'object',
+				'default' => array(
+					'width' => 0,
+					'color' => '',
+					'style' => 'solid'
+				)
+			),
+			'contentAlign' => array(
+				'type' => 'string',
+				'default' => 'left'
 			)
 		)
 	)

@@ -320,6 +320,11 @@ if(!empty($navPadding['right'])) $navButtonStyles['padding-right'] = BOLDPO_Help
 if(!empty($navPadding['bottom'])) $navButtonStyles['padding-bottom'] = BOLDPO_Helper::ensure_unit($navPadding['bottom']);
 if(!empty($navPadding['left'])) $navButtonStyles['padding-left'] = BOLDPO_Helper::ensure_unit($navPadding['left']);
 
+$navBorder = $attributes['navBorder'] ?? [];
+if (!empty($navBorder['width']) || !empty($navBorder['color']) || !empty($navBorder['style'])) {
+	$navButtonStyles = array_merge($navButtonStyles, BOLDPO_Helper::border_to_css_props($navBorder));
+}
+
 $navButtonBorderRadius = $attributes['navBorderRadius'] ?? [];
 if(!empty($navButtonBorderRadius['top'])) $navButtonStyles['border-top-left-radius'] = BOLDPO_Helper::ensure_unit($navButtonBorderRadius['top']);
 if(!empty($navButtonBorderRadius['right'])) $navButtonStyles['border-top-right-radius'] = BOLDPO_Helper::ensure_unit($navButtonBorderRadius['right']);
@@ -601,7 +606,8 @@ if ( $query->have_posts() ) :
                                 <div class="swiper-button-next nav-btn"><?php echo esc_html__( 'Next', 'boldpost' ); ?></div>
                                 <?php
                             } 
-                        ?>         
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>

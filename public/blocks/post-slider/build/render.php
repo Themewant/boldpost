@@ -34,6 +34,9 @@ $is_featured = !empty($attributes['isFeatured']) ? true : false;
 $ignore_stikcy_posts = !empty($attributes['ignoreStikcyPosts']) ? 1 : 0;
 $show_dots = !empty($attributes['showDots']) ? true : false;
 $show_nav = !empty($attributes['showNav']) ? true : false;
+$show_view_all_btn = !empty($attributes['showViewAllBtn']) ? true : false;
+$view_all_text = isset($attributes['viewAllText']) ? $attributes['viewAllText'] : '';
+$view_all_url = isset($attributes['viewAllUrl']) ? $attributes['viewAllUrl'] : '';
 $nav_position = isset($attributes['navPosition']) ? $attributes['navPosition'] : 'middle';
 
 // Styles attributes
@@ -283,6 +286,12 @@ if(!empty($attributes['metaIconColor'])) $meta_icon_styles['color'] = $attribute
 $meta_icon_hover = [];
 if(!empty($attributes['metaIconColorHover'])) $meta_icon_hover['color'] = $attributes['metaIconColorHover'];
 
+$meta_link_styles = [];
+if(!empty($attributes['metaLinkColor'])) $meta_link_styles['color'] = $attributes['metaLinkColor'];
+
+$meta_link_hover = [];
+if(!empty($attributes['metaLinkColorHover'])) $meta_link_hover['color'] = $attributes['metaLinkColorHover'];
+
 // Category Badge Styles
 $cat_container_styles = [];
 if(!empty($attributes['categoryBackgroundColor'])) $cat_container_styles['background-color'] = $attributes['categoryBackgroundColor'];
@@ -391,6 +400,8 @@ BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css,
     '.boldpo-post-slider .boldpo-grid-item .boldpo-post-metas .bldpost-meta:hover' => BOLDPO_Helper::get_inline_styles($meta_hover),
     '.boldpo-post-slider .boldpo-grid-item .boldpo-post-metas .bldpost-meta i' => BOLDPO_Helper::get_inline_styles($meta_icon_styles),
     '.boldpo-post-slider .boldpo-grid-item .boldpo-post-metas .bldpost-meta i:hover' => BOLDPO_Helper::get_inline_styles($meta_icon_hover),
+    '.boldpo-post-slider .boldpo-grid-item .boldpo-post-metas .bldpost-meta a' => BOLDPO_Helper::get_inline_styles($meta_link_styles),
+    '.boldpo-post-slider .boldpo-grid-item .boldpo-post-metas .bldpost-meta a:hover' => BOLDPO_Helper::get_inline_styles($meta_link_hover),
     '.boldpo-post-slider .nav-btn'         => BOLDPO_Helper::get_inline_styles($navButtonStyles),
     '.boldpo-post-slider .nav-btn:hover'   => BOLDPO_Helper::get_inline_styles($navButtonHoverStyles),
     '.boldpo-post-slider .nav-btn .swiper-navigation-icon'   => BOLDPO_Helper::get_inline_styles($navBtnIconStyles),
@@ -484,6 +495,20 @@ if ( $query->have_posts() ) :
             ) )); ?>>
        
         <div class="boldpo-post-slider swiper boldpo-post-slider-<?php echo esc_attr($unique); ?> style-<?php echo esc_attr($style); ?> nav-position-<?php echo esc_attr($nav_position); ?> <?php echo esc_attr($show_dots == true) ? 'boldpo-post-slider-has-dots' : ''; ?>">
+            <?php if( $show_nav  == true && in_array($nav_position, ['top-middle', 'top-left', 'top-right'])) : ?>
+                <div class="boldpo-post-slider-btn-wrapper boldpo-post-slider-btn-wrapper-<?php echo esc_attr($unique); ?>">
+                    <?php if( $show_view_all_btn == true ) { ?>
+                        <a href="<?php echo esc_url($view_all_url); ?>" class="boldpo-post-slider-view-all-btn"><?php echo esc_html($view_all_text); ?></a>
+                    <?php } ?>
+                    <!-- If we need navigation buttons -->
+                    <?php if($show_nav) { ?>
+                        <div class="boldpo-post-slider-btns">
+                            <div class="nav-btn swiper-button-prev"></div>
+                            <div class="nav-btn swiper-button-next"></div>
+                        </div>
+                    <?php } ?>
+                </div>
+            <?php endif; ?>
             <div class="swiper-wrapper swiper-wrapper-<?php echo esc_attr($unique); ?>">
                 <?php
                     while ( $query->have_posts() ) : $query->the_post();
@@ -515,24 +540,31 @@ if ( $query->have_posts() ) :
                     endwhile;
                 ?>
             </div>
-            <?php if( !empty($show_dots == true || $show_nav  == true) ) : ?>
+            <?php if( $show_nav  == true && in_array($nav_position, ['middle', 'bottom-middle', 'bottom-left', 'bottom-right'])) : ?>
                 <div class="boldpo-post-slider-btn-wrapper boldpo-post-slider-btn-wrapper-<?php echo esc_attr($unique); ?>">
-                    <?php 
-                    if($show_dots) {
-                        ?>
-                        <div class="swiper-pagination"></div>
-                        <?php
-                    }
-                    ?>
+                    <?php if( $show_view_all_btn == true) { ?>
+                        <a href="<?php echo esc_url($view_all_url); ?>" class="boldpo-post-slider-view-all-btn"><?php echo esc_html($view_all_text); ?></a>
+                    <?php } ?>
                     <!-- If we need navigation buttons -->
                     <?php if($show_nav) { ?>
-                        <div class="nav-btn swiper-button-prev"></div>
-                        <div class="nav-btn swiper-button-next"></div>
+                        <div class="boldpo-post-slider-btns">
+                            <div class="nav-btn swiper-button-prev"></div>
+                            <div class="nav-btn swiper-button-next"></div>
+                        </div>
                     <?php } ?>
-                    <!-- If we need scrollbar -->
-                    <div class="swiper-scrollbar"></div>
                 </div>
             <?php endif; ?>
+
+            <?php 
+                if($show_dots) {
+                    ?>
+                    <div class="swiper-pagination"></div>
+                    <!-- If we need scrollbar -->
+                    <div class="swiper-scrollbar"></div>    
+                    <?php
+                }
+            ?>
+            
         </div>
         
     </div>

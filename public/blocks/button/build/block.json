@@ -25,6 +25,10 @@
   "viewScript": "file:./view.js",
   "render": "file:./render.php",
   "attributes": {
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
     "buttonStyle": {
       "type": "string",
       "default": "default"
@@ -173,29 +177,28 @@
       "type": "string",
       "default": ""
     },
-    "buttonWidth": {
-      "type": "string",
-      "default": "auto"
+    "border": {
+      "type": "object",
+      "default": {
+        "width": 0,
+        "color": "",
+        "style": "solid"
+      }
     },
-    "borderType": {
-      "type": "string",
-      "default": "none"
-    },
-    "borderWidth": {
-      "type": "number",
-      "default": 0
-    },
-    "borderColor": {
-      "type": "string",
-      "default": ""
-    },
-    "borderColorHover": {
-      "type": "string",
-      "default": ""
+    "borderHover": {
+      "type": "object",
+      "default": {
+        "width": 0,
+        "color": "",
+        "style": "solid"
+      }
     },
     "iconHoverAnimation": {
       "type": "string",
       "default": "none"
+    },
+    "buttonWidth": {
+      "type": "string"
     }
   }
 }

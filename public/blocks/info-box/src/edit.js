@@ -196,7 +196,7 @@ export default function Edit({ attributes, setAttributes }) {
                     </Button>
                 </PanelBody>
 
-                <PanelBody title={__('Layout', 'boldpost')} initialOpen={false}>
+                <PanelBody title={__('Content', 'boldpost')} initialOpen={false}>
                     <ResponsiveWrapper label={__('Columns', 'boldpost')}>
                         {(device) => (
                             <SelectControl

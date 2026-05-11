@@ -354,7 +354,8 @@
 			"type": "array",
 			"default": [
 				"author",
-				"date"
+				"date",
+				"category"
 			]
 		},
 		"authorPrefix": {
@@ -455,6 +456,10 @@
 		"thumbAnim": {
 			"type": "boolean",
 			"default": true
+		},
+		"showVideo": {
+			"type": "boolean",
+			"default": false
 		},
 		"videoAutoplay": {
 			"type": "boolean",
@@ -582,8 +587,7 @@
 			"type": "object"
 		},
 		"contentTextAlign": {
-			"type": "string",
-			"default": "left"
+			"type": "string"
 		},
 		"contentTextAlignTablet": {
 			"type": "string",
@@ -638,11 +642,27 @@
 				"left": ""
 			}
 		},
-		"categoryColor": { "type": "string", "default": "" },
-		"categoryColorHover": { "type": "string", "default": "" },
-		"categoryBackgroundColor": { "type": "string", "default": "" },
-		"categoryBackgroundColorHover": { "type": "string", "default": "" },
-		"categoryPadding": { "type": "object" },
-		"categoryMargin": { "type": "object" }
+		"categoryColor": {
+			"type": "string",
+			"default": ""
+		},
+		"categoryColorHover": {
+			"type": "string",
+			"default": ""
+		},
+		"categoryBackgroundColor": {
+			"type": "string",
+			"default": ""
+		},
+		"categoryBackgroundColorHover": {
+			"type": "string",
+			"default": ""
+		},
+		"categoryPadding": {
+			"type": "object"
+		},
+		"categoryMargin": {
+			"type": "object"
+		}
 	}
 }

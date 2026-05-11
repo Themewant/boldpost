@@ -32,6 +32,7 @@ import TypographyControls from '../../custom-components/TypographyControls';
 import ColorPopover from '../../custom-components/ColorPopover';
 import ImageRadioControl from '../../custom-components/ImageRadioControl';
 import ResponsiveWrapper from '../../custom-components/ResponsiveWrapper';
+import BorderControl from '../../custom-components/BorderControl';
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -162,9 +163,9 @@ export default function Edit({ attributes, setAttributes }) {
                         value={attributes.listStyle}
                         onChange={(value) => setAttributes({ listStyle: value })}
                         options={[
-                            { label: __('Style 1', 'boldpost'), value: 'default', src: style1 },
-                            { label: __('Style 2', 'boldpost'), value: '1', src: style2 },
-                            { label: __('Style 3', 'boldpost'), value: '2', src: style3, isPro: true },
+                            { label: __('Default', 'boldpost'), value: 'default', src: style1 },
+                            { label: __('Style 1', 'boldpost'), value: '1', src: style2, isPro: true },
+                            { label: __('Style 2', 'boldpost'), value: '2', src: style3, isPro: true },
                         ]}
                         __next40pxDefaultSize={true}
                         __nextHasNoMarginBottom={true}
@@ -178,6 +179,7 @@ export default function Edit({ attributes, setAttributes }) {
                                 value={attributes[getAttrKey('columns', device)]}
                                 onChange={(value) => setAttributes({ [getAttrKey('columns', device)]: value })}
                                 options={[
+                                    { label: __('Default', 'boldpost'), value: '' },
                                     { label: __('1 Column', 'boldpost'), value: '1' },
                                     { label: __('2 Column', 'boldpost'), value: '2' },
                                     { label: __('3 Column', 'boldpost'), value: '3' },
@@ -316,6 +318,24 @@ export default function Edit({ attributes, setAttributes }) {
                         values={attributes.itemBorderRadius}
                         onChange={(nextValues) => setAttributes({ itemBorderRadius: nextValues })}
                     />
+                    <Divider />
+
+                    {['1', '2'].includes(attributes.listStyle) && (
+                        <SelectControl
+                            label={__('Content Align', 'boldpost')}
+                            value={attributes.contentAlign}
+                            onChange={(value) => setAttributes({ contentAlign: value })}
+                            options={[
+                                { label: __('Default', 'boldpost'), value: '' },
+                                { label: __('Left', 'boldpost'), value: 'left' },
+                                { label: __('Center', 'boldpost'), value: 'center' },
+                                { label: __('Right', 'boldpost'), value: 'right' },
+                            ]}
+                            __next40pxDefaultSize={true}
+                            __nextHasNoMarginBottom={true}
+                        />
+                    )}
+
                 </PanelBody>
 
                 <PanelBody title={__('Title', 'boldpost')} initialOpen={false}>
@@ -519,18 +539,11 @@ export default function Edit({ attributes, setAttributes }) {
                                         onChange={(value) => setAttributes({ detailsBtnBorderRadius: value })}
                                     />
                                     <Divider />
-                                    <ResponsiveWrapper label={__('Border', 'boldpost')}>
-                                        {(device) => (
-                                            <BoxControl
-                                                label={isHover ? __('Border (Hover)', 'boldpost') : __('Border', 'boldpost')}
-                                                values={attributes[`detailsBtnBorder${device === '' ? '' : capitalizeFirstLetter(device)}`]}
-                                                onChange={(value) => {
-                                                    const key = `detailsBtnBorder${device === '' ? '' : capitalizeFirstLetter(device)}`;
-                                                    setAttributes({ [key]: value });
-                                                }}
-                                            />
-                                        )}
-                                    </ResponsiveWrapper>
+                                    <BorderControl
+                                        label={isHover ? __('Border (Hover)', 'boldpost') : __('Border', 'boldpost')}
+                                        value={isHover ? attributes.detailsBtnBorderHover : attributes.detailsBtnBorder}
+                                        onChange={(value) => setAttributes({ [isHover ? 'detailsBtnBorderHover' : 'detailsBtnBorder']: value })}
+                                    />
 
                                 </div>
                             );

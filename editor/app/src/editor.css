@@ -1,0 +1,20 @@
+.boldpo-social-icon-item-header,
+.boldpo-info-box-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.eshb-border-control button.components-button.is-secondary {
+    border: none !important;
+    box-shadow: none;
+
+    &:hover {
+        border: none !important;
+        box-shadow: none;
+    }
+}
+
+.boldpo-info-box-image-control {
+    margin-bottom: 10px;
+}

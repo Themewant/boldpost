@@ -241,7 +241,8 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('Style 2', 'boldpost'), value: '2', src: list3, isPro: true },
 							{ label: __('Style 3', 'boldpost'), value: '3', src: list3 },
 							{ label: __('Style 4', 'boldpost'), value: '4', src: list4, isPro: true },
-							{ label: __('Style 5', 'boldpost'), value: '5', src: list5, isPro: true }
+							{ label: __('Style 5', 'boldpost'), value: '5', src: list5, isPro: true },
+							{ label: __('Style 6', 'boldpost'), value: '6', src: list5, isPro: true }
 						]}
 					/>
 				</PanelBody>
@@ -938,6 +939,33 @@ export default function Edit({ attributes, setAttributes }) {
 						}}
 					</TabPanel>
 
+					{attributes.paginationType == 'load_more' && (
+						<ResponsiveWrapper label={__('Button Width (%)', 'boldpost')}>
+							{(device) => (
+								<RangeControlWithUnit
+									attributes={attributes}
+									setAttributes={setAttributes}
+									attributeKey={getAttrKey('paginationBtnWidth', device)}
+									units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+									min={0}
+									max={500}
+									step={1}
+								/>
+							)}
+						</ResponsiveWrapper>
+					)}
+
+					<BorderControl
+						label={__('Border', 'boldpost')}
+						value={attributes.paginationBtnBorder}
+						onChange={(value) => setAttributes({ paginationBtnBorder: value })}
+					/>
+					<BoxControl
+						label={__('Border Radius', 'boldpost')}
+						values={attributes.paginationBtnBorderRadius}
+						onChange={(value) => setAttributes({ paginationBtnBorderRadius: value })}
+					/>
+
 				</PanelBody>
 
 				<PanelBody title={__('Thumbnail', 'boldpost')} initialOpen={false}>
@@ -945,55 +973,6 @@ export default function Edit({ attributes, setAttributes }) {
 						label={__('Border Radius', 'boldpost')}
 						values={attributes.thumbnailBorderRadius}
 						onChange={(value) => setAttributes({ thumbnailBorderRadius: value })}
-					/>
-				</PanelBody>
-
-				<PanelBody title={__('Category', 'boldpost')} initialOpen={false}>
-					<TabPanel
-						className="eshb-tab-panel"
-						activeClass="is-active"
-						tabs={[
-							{ name: 'normal', title: __('Normal', 'boldpost'), className: 'eshb-tab-normal' },
-							{ name: 'hover', title: __('Hover', 'boldpost'), className: 'eshb-tab-hover' },
-						]}
-					>
-						{(tab) => {
-							const isHover = tab.name === 'hover';
-							return (
-								<div style={{ marginTop: '15px' }}>
-									<ColorPopover
-										label={__('Color', 'boldpost')}
-										color={isHover ? attributes.categoryColorHover : attributes.categoryColor}
-										defaultColor={''}
-										onChange={(value) => {
-											const hex = (value && typeof value === 'object') ? value.hex : value;
-											setAttributes({ [isHover ? 'categoryColorHover' : 'categoryColor']: hex });
-										}}
-									/>
-									<ColorPopover
-										label={__('Background Color', 'boldpost')}
-										color={isHover ? attributes.categoryBackgroundColorHover : attributes.categoryBackgroundColor}
-										defaultColor={''}
-										onChange={(value) => {
-											const hex = (value && typeof value === 'object') ? value.hex : value;
-											setAttributes({ [isHover ? 'categoryBackgroundColorHover' : 'categoryBackgroundColor']: hex });
-										}}
-									/>
-								</div>
-							);
-						}}
-					</TabPanel>
-					<Divider />
-					<BoxControl
-						label={__('Padding', 'boldpost')}
-						values={attributes.categoryPadding}
-						onChange={(value) => setAttributes({ categoryPadding: value })}
-					/>
-					<Divider />
-					<BoxControl
-						label={__('Margin', 'boldpost')}
-						values={attributes.categoryMargin}
-						onChange={(value) => setAttributes({ categoryMargin: value })}
 					/>
 				</PanelBody>
 

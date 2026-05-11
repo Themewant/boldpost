@@ -34,6 +34,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
             // Strip 'category' from meta row (post-cat.php handles it above)
             $_saved_metas = $attributes['allowedMetas'];
             $attributes['allowedMetas'] = array_values( array_diff( $attributes['allowedMetas'], ['category'] ) );
+
+            if($i > 1) {
+                $attributes['allowedMetas'] = array_values( array_diff( $attributes['allowedMetas'], ['author'] ) );
+            }
             ?>
             <?php if ( $show_meta && 'up_title' === $meta_position ) include BOLDPO_PL_PATH . 'public/template-parts/post-meta/post-meta.php'; ?>
             

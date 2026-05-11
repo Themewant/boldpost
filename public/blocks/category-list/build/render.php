@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $per_page = isset($attributes['perPage']) ? $attributes['perPage'] : 9;
 $order = isset($attributes['order']) ? $attributes['order'] : 'ASC';
 $orderby = isset($attributes['orderby']) ? $attributes['orderby'] : 'name';
-$columns = isset($attributes['columns']) ? $attributes['columns'] : 3;
+$columns = isset($attributes['columns']) ? $attributes['columns'] : '';
 $style = isset($attributes['listStyle']) ? $attributes['listStyle'] : '1';
 $hide_empty = !empty($attributes['hideEmpty']) ? true : false;
 $show_count = !empty($attributes['showCount']) ? true : false;
@@ -17,7 +17,7 @@ $show_empty_count = !empty($attributes['showEmptyCount']) ? true : false;
 $show_description = !empty($attributes['showDescription']) ? true : false;
 $title_tag = isset($attributes['titleTag']) ? $attributes['titleTag'] : 'h3';
 $thumbnail_size = isset($attributes['thumbnailSize']) ? $attributes['thumbnailSize'] : 'medium';
-$details_btn_text = isset($attributes['detailsBtnText']) ? $attributes['detailsBtnText'] : 'Details';
+$details_btn_text = isset($attributes['detailsBtnLabel']) ? $attributes['detailsBtnLabel'] : 'Details';
 
 // styles
 $responsive_data = [
@@ -27,15 +27,36 @@ $responsive_data = [
 ];
 
 // Columns
-$c_desktop = isset($attributes['columns']) ? (int)$attributes['columns'] : 3;
+if (in_array($style, ['1', '2'])) {
+    $default_column = 6;
+} else {
+    $default_column = 1;
+}
+$c_desktop = isset($attributes['columns']) ? (int)$attributes['columns'] : $default_column;
 $c_tablet  = isset($attributes['columnsTablet']) ? (int)$attributes['columnsTablet'] : $c_desktop;
 $c_mobile  = isset($attributes['columnsMobile']) ? (int)$attributes['columnsMobile'] : 1;
 
-$bs_col_lg = (int)(12 / $c_desktop);
-$bs_col_md = (int)(12 / $c_tablet);
-$bs_col_xs = (int)(12 / $c_mobile);
+// Use calc()-based widths so any column count 1–12 lays out correctly.
+// Bootstrap's 12-col grid only divides cleanly for 1, 2, 3, 4, 6, 12.
+$col_class = 'boldpo-category-col';
 
-$col_class = "boldpo-col-lg-{$bs_col_lg} boldpo-col-md-{$bs_col_md} boldpo-col-{$bs_col_xs}";
+$column_responsive = [
+    'desktop' => [
+        'flex'      => '0 0 auto',
+        'width'     => 'calc(100% / ' . max(1, $c_desktop) . ')',
+        'max-width' => 'calc(100% / ' . max(1, $c_desktop) . ')',
+    ],
+    'tablet' => [
+        'flex'      => '0 0 auto',
+        'width'     => 'calc(100% / ' . max(1, $c_tablet) . ')',
+        'max-width' => 'calc(100% / ' . max(1, $c_tablet) . ')',
+    ],
+    'mobile' => [
+        'flex'      => '0 0 auto',
+        'width'     => 'calc(100% / ' . max(1, $c_mobile) . ')',
+        'max-width' => 'calc(100% / ' . max(1, $c_mobile) . ')',
+    ],
+];
 
 // Gaps
 $g_desktop = isset($attributes['itemGap']) ? $attributes['itemGap'] : '';
@@ -94,6 +115,14 @@ if(!empty($attributes['itemBackgroundColorHover'])) {
 }
 if(!empty($attributes['itemBackgroundGradientHover'])) {
     $item_hover['background'] = $attributes['itemBackgroundGradientHover'] . ' !important';
+}
+
+// content align
+$content_align_class = '';
+
+
+if ( ! empty( $attributes['contentAlign'] ) ) {
+    $content_align_class = 'boldpo-text-' . $attributes['contentAlign'];
 }
 
 // Title
@@ -185,11 +214,10 @@ if ( ! empty( $attributes['detailsBtnBackgroundColor'] ) ) {
 if ( ! empty( $attributes['detailsBtnBackgroundGradient'] ) ) {
     $details_btn_responsive['desktop']['background'] = $attributes['detailsBtnBackgroundGradient'];
 }
-if ( ! empty( $attributes['detailsBtnBorderColor'] ) ) {
-    $details_btn_responsive['desktop']['border-color'] = $attributes['detailsBtnBorderColor'];
-}
-if ( ! empty( $attributes['detailsBtnBorderWidth'] ) ) {
-    $details_btn_responsive['desktop']['border-width'] = $attributes['detailsBtnBorderWidth'];
+if ( ! empty( $attributes['detailsBtnBorder'] ) ) {
+    foreach ( BOLDPO_Helper::border_to_css_props( $attributes['detailsBtnBorder'] ) as $prop => $val ) {
+        $details_btn_responsive['desktop'][$prop] = $val;
+    }
 }
 
 // Details Button Hover
@@ -203,11 +231,10 @@ if(!empty($attributes['detailsBtnBackgroundGradientHover'])) {
 if(!empty($attributes['detailsBtnColorHover'])) {
     $details_btn_hover['color'] = $attributes['detailsBtnColorHover'] . ' !important';
 }
-if(!empty($attributes['detailsBtnBorderColorHover'])) {
-    $details_btn_hover['border-color'] = $attributes['detailsBtnBorderColorHover'] . ' !important';
-}
-if(!empty($attributes['detailsBtnBorderWidthHover'])) {
-    $details_btn_hover['border-width'] = $attributes['detailsBtnBorderWidthHover'] . ' !important';
+if ( ! empty( $attributes['detailsBtnBorderHover'] ) ) {
+    foreach ( BOLDPO_Helper::border_to_css_props( $attributes['detailsBtnBorderHover'] ) as $prop => $val ) {
+        $details_btn_hover[$prop] = $val . ' !important';
+    }
 }
 
 $style_handle = 'boldpo-category-list-style';
@@ -215,17 +242,19 @@ $unique_id    = 'boldpo-' . wp_rand( 100, 99999 );
 $selector     = '.boldpo-category-list-block-wrap.' . $unique_id;
 
 $full_responsive_css = BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-category-list', $responsive_data);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-category-list > .boldpo-category-col', $column_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-category-list.style-' . $style . ' .boldpo-category-item', $item_responsive);
-$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-category-list.style-' . $style . ' .boldpo-category-item .boldpo-category-title', $title_responsive);
-$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-category-list.style-' . $style . ' .boldpo-category-item .boldpo-category-description', $description_responsive);
-$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-category-list.style-' . $style . ' .boldpo-category-item .boldpo-category-details-btn', $details_btn_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-category-list.style-' . $style . ' .boldpo-category-item .boldpo-category-content .boldpo-category-content-text .boldpo-category-title', $title_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-category-list.style-' . $style . ' .boldpo-category-item .boldpo-category-content .boldpo-category-content-text .boldpo-category-description', $description_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-category-list.style-' . $style . ' .boldpo-category-item .boldpo-category-content .boldpo-category-content-text .boldpo-category-details-btn', $details_btn_responsive);
 
 
 wp_enqueue_style( $style_handle );
 BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css, [
     '.boldpo-category-list.style-' . $style . ' .boldpo-category-item .boldpo-category-item:hover'  => BOLDPO_Helper::get_inline_styles($item_hover),
-    '.boldpo-category-list.style-' . $style . ' .boldpo-category-item .boldpo-category-count'       => BOLDPO_Helper::get_inline_styles($count_styles),
-    '.boldpo-category-list.style-' . $style . ' .boldpo-category-item .boldpo-category-image'   => BOLDPO_Helper::get_inline_styles($thumbnail_styles),
+    '.boldpo-category-list.style-' . $style . ' .boldpo-category-item .boldpo-category-content .boldpo-category-count' => BOLDPO_Helper::get_inline_styles($count_styles),
+    '.boldpo-category-list.style-' . $style . ' .boldpo-category-item .boldpo-category-content .boldpo-category-content-text .boldpo-category-image' => BOLDPO_Helper::get_inline_styles($thumbnail_styles),
+    '.boldpo-category-list.style-' . $style . ' .boldpo-category-item .boldpo-category-content .boldpo-category-content-text .boldpo-category-details-btn:hover' => BOLDPO_Helper::get_inline_styles($details_btn_hover),
 ] );
 
 // Build query arguments
@@ -266,6 +295,8 @@ if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) :
                 }
                 $category_image_id = get_term_meta( $category->term_id, 'category_image', true );
                 $category_image = wp_get_attachment_image_url( $category_image_id, $thumbnail_size );
+                $placeholderImage = BOLDPO_PL_URL . 'public/assets/img/placeholder.png';
+                $category_image = $category_image ? $category_image : $placeholderImage;
                 $category_color = get_term_meta( $category->term_id, 'category_color', true );
                 $category_gradient = 'linear-gradient(to top, '.$category_color.', rgba(255, 255, 255, 0))';
                 $style_file = $template_pl_path . 'public/template-parts/category-list/style-' . $style . '.php';

@@ -359,7 +359,8 @@ return array(
 				'type' => 'array',
 				'default' => array(
 					'author',
-					'date'
+					'date',
+					'category'
 				)
 			),
 			'authorPrefix' => array(
@@ -460,6 +461,10 @@ return array(
 			'thumbAnim' => array(
 				'type' => 'boolean',
 				'default' => true
+			),
+			'showVideo' => array(
+				'type' => 'boolean',
+				'default' => false
 			),
 			'videoAutoplay' => array(
 				'type' => 'boolean',
@@ -587,8 +592,7 @@ return array(
 				'type' => 'object'
 			),
 			'contentTextAlign' => array(
-				'type' => 'string',
-				'default' => 'left'
+				'type' => 'string'
 			),
 			'contentTextAlignTablet' => array(
 				'type' => 'string',

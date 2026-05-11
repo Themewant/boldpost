@@ -454,6 +454,30 @@
 			"type": "boolean",
 			"default": false
 		},
+		"paginationBtnWidth": {
+			"type": "string",
+			"default": ""
+		},
+		"paginationBtnWidthTablet": {
+			"type": "string",
+			"default": ""
+		},
+		"paginationBtnWidthMobile": {
+			"type": "string",
+			"default": ""
+		},
+		"paginationBtnBorder": {
+			"type": "object",
+			"default": {
+				"width": 0,
+				"color": "",
+				"style": "solid"
+			}
+		},
+		"paginationBtnBorderRadius": {
+			"type": "object",
+			"default": {}
+		},
 		"paginationColor": {
 			"type": "string",
 			"default": "var(--boldpo-preset-color-contrast-2)"
@@ -633,11 +657,27 @@
 				"left": ""
 			}
 		},
-		"categoryColor": { "type": "string", "default": "" },
-		"categoryColorHover": { "type": "string", "default": "" },
-		"categoryBackgroundColor": { "type": "string", "default": "" },
-		"categoryBackgroundColorHover": { "type": "string", "default": "" },
-		"categoryPadding": { "type": "object" },
-		"categoryMargin": { "type": "object" }
+		"categoryColor": {
+			"type": "string",
+			"default": ""
+		},
+		"categoryColorHover": {
+			"type": "string",
+			"default": ""
+		},
+		"categoryBackgroundColor": {
+			"type": "string",
+			"default": ""
+		},
+		"categoryBackgroundColorHover": {
+			"type": "string",
+			"default": ""
+		},
+		"categoryPadding": {
+			"type": "object"
+		},
+		"categoryMargin": {
+			"type": "object"
+		}
 	}
 }

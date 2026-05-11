@@ -87,13 +87,16 @@ export default function Edit({ attributes, setAttributes }) {
         return `${base}${device.charAt(0).toUpperCase() + device.slice(1)}`;
     };
 
-    const titleStyle = {
-        color: attributes.titleColor || undefined,
-        ...buildTypographyStyles(attributes.titleTypography),
-        ...buildBoxStyles(attributes.titleMargin, 'margin'),
-        ...buildBoxStyles(attributes.titlePadding, 'padding'),
+    const titleWrapStyle = {
         justifyContent: attributes.textAlign,
         textAlign: attributes.textAlign,
+        ...buildBoxStyles(attributes.titleMargin, 'margin'),
+        ...buildBoxStyles(attributes.titlePadding, 'padding')
+    }
+
+    const titleStyle = {
+        color: attributes.titleColor || undefined,
+        ...buildTypographyStyles(attributes.titleTypography)
     };
 
     const titleHoverStyle = {
@@ -364,15 +367,6 @@ export default function Edit({ attributes, setAttributes }) {
                                         );
                                     }}
                                 </TabPanel>
-                                <Divider />
-                                <NumberControl
-                                    label={__('Dot Size (px)', 'boldpost')}
-                                    value={attributes.dotSize}
-                                    onChange={(value) => setAttributes({ dotSize: parseInt(value) || 0 })}
-                                    min={0}
-                                    __next40pxDefaultSize={true}
-                                    __nextHasNoMarginBottom={true}
-                                />
                             </>
                         )}
                     </PanelBody>
@@ -422,14 +416,14 @@ export default function Edit({ attributes, setAttributes }) {
             <div className="boldpo-heading-hover-styles">
                 <style>
                     {`
-                        ${titleHoverStyle.color ? `.boldpo-heading.style-${attributes.layoutStyle} .boldpo-heading-title-wrap:hover { color: ${titleHoverStyle.color} !important; }` : ''}
+                        ${titleHoverStyle.color ? `.boldpo-heading.style-${attributes.layoutStyle} .boldpo-heading-title:hover { color: ${titleHoverStyle.color} !important; }` : ''}
                         ${descriptionHoverStyle.color ? `.boldpo-heading.style-${attributes.layoutStyle} .boldpo-heading-description:hover { color: ${descriptionHoverStyle.color} !important; }` : ''}
                     `}
                 </style>
             </div>
 
             <div className={`boldpo-heading style-${attributes.layoutStyle}`} style={{ textAlign: attributes.textAlign || undefined }}>
-                <div className="boldpo-heading-title-wrap" style={titleStyle}>
+                <div className="boldpo-heading-title-wrap" style={titleWrapStyle}>
                     {(attributes.layoutStyle === '2' || attributes.layoutStyle === '5' || attributes.layoutStyle === '6') && (
                         <span className="boldpo-heading-dot" style={dotStyle}></span>
                     )}
@@ -442,6 +436,7 @@ export default function Edit({ attributes, setAttributes }) {
                         value={attributes.title}
                         onChange={(value) => setAttributes({ title: value })}
                         placeholder={__('Add a title…', 'boldpost')}
+                        style={titleStyle}
                     />
                     {attributes.layoutStyle === '2' && (
                         <span className="boldpo-heading-border-line" style={borderLineStyle}></span>

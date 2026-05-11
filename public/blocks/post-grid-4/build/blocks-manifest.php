@@ -87,6 +87,10 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
+			'showVideo' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
 			'videoAutoplay' => array(
 				'type' => 'boolean',
 				'default' => false
@@ -109,7 +113,7 @@ return array(
 			),
 			'perPage' => array(
 				'type' => 'string',
-				'default' => '4'
+				'default' => '6'
 			),
 			'order' => array(
 				'type' => 'string',
@@ -449,6 +453,32 @@ return array(
 			'pagination' => array(
 				'type' => 'boolean',
 				'default' => false
+			),
+			'paginationBtnWidth' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'paginationBtnWidthTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'paginationBtnWidthMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'paginationBtnBorder' => array(
+				'type' => 'object',
+				'default' => array(
+					'width' => 0,
+					'color' => '',
+					'style' => 'solid'
+				)
+			),
+			'paginationBtnBorderRadius' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
 			),
 			'paginationColor' => array(
 				'type' => 'string',

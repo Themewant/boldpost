@@ -242,7 +242,7 @@
   outline: none;
 }
 .boldpo-post-slider-2-block-wrap .boldpo-post-slider-2 .nav-btn:hover {
-  background-color: #000;
+  background-color: var(--boldpo-preset-color-primary);
 }
 .boldpo-post-slider-2-block-wrap .boldpo-post-slider-2 .nav-btn:hover svg path {
   fill: currentColor;

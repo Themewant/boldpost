@@ -59,7 +59,8 @@
             gap: 10px;
 
             .boldpo-social-icon-item {
-                border-radius: 50%;
+                border: 1px solid var(--boldpo-preset-color-border);
+                border-radius: 100%;
 
                 &:hover {
                     animation-name: boldpo-social-icon-float, boldpo-social-icon-bob;

@@ -404,6 +404,10 @@ return array(
 				'type' => 'boolean',
 				'default' => true
 			),
+			'showVideo' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
 			'videoAutoplay' => array(
 				'type' => 'boolean',
 				'default' => false
@@ -414,7 +418,7 @@ return array(
 			),
 			'videoHeight' => array(
 				'type' => 'string',
-				'default' => '720px'
+				'default' => '85px'
 			),
 			'videoWidth' => array(
 				'type' => 'string',
@@ -438,6 +442,32 @@ return array(
 			'paginationType' => array(
 				'type' => 'string',
 				'default' => 'numeric'
+			),
+			'paginationBtnWidth' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'paginationBtnWidthTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'paginationBtnWidthMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'paginationBtnBorder' => array(
+				'type' => 'object',
+				'default' => array(
+					'width' => 0,
+					'color' => '',
+					'style' => 'solid'
+				)
+			),
+			'paginationBtnBorderRadius' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
 			),
 			'paginationColor' => array(
 				'type' => 'string',

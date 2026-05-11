@@ -1,3 +1,4 @@
+import './editor.css';
 import { createElement } from '@wordpress/element';
 import { SVG, Path, Rect } from '@wordpress/primitives';
 import { registerBlockCategory } from './components/registerBlocklCategory';
@@ -22,18 +23,6 @@ const catIcon = () => {
 }
 registerBlockCategory('boldpost', 'BoldPost', catIcon);
 
-
-// prevent all link click when editor mode
-// document.addEventListener('click', (e) => {
-//     // Check if the clicked element is a link or inside a link
-//     const link = e.target.closest('a');
-
-//     // remove href attr
-//     link.removeAttribute('href');
-
-// }, true);
-// Prevent all link clicks inside .boldpo-block when in editor mode
-// We handle both the main document and any iframes used by the Gutenberg editor.
 const disableBlockLinks = () => {
     const selector = '.boldpo-block a';
 

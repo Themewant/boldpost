@@ -35,7 +35,7 @@ $paged = max( 1, (int) $paged );
 // Styles attributes
 $show_meta = !empty($attributes['showMeta']) ? true : false;
 $allowed_metas = isset($attributes['allowedMetas']) ? $attributes['allowedMetas'] : [];
-$meta_position = isset($attributes['metaPosition']) ? $attributes['metaPosition'] : 'below_title';
+$meta_position = isset($attributes['metaPosition']) && !empty($attributes['metaPosition']) ? $attributes['metaPosition'] : 'below_title';
 $author_prefix = isset($attributes['authorPrefix']) ? $attributes['authorPrefix'] : 'by';
 $title_left_tag = isset($attributes['titleLeftTag']) ? $attributes['titleLeftTag'] : 'h3';
 $title_right_tag = isset($attributes['titleRightTag']) ? $attributes['titleRightTag'] : 'h3';
@@ -343,6 +343,25 @@ if ( ! empty( $attributes['paginationBackgroundColorHover'] ) ) {
     $pag_hover['border-color'] = $attributes['paginationBackgroundColorHover'];
 }
 
+// Pagination Button Width
+$pagination_btn_width_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+BOLDPO_Helper::add_responsive_vars($attributes, $pagination_btn_width_responsive, 'paginationBtnWidth', 'width', [], false);
+
+// Pagination Button Border
+if ( ! empty( $attributes['paginationBtnBorder'] ) ) {
+    foreach ( BOLDPO_Helper::border_to_css_props( $attributes['paginationBtnBorder'] ) as $prop => $val ) {
+        $pag_styles[$prop] = $val;
+    }
+}
+
+// Pagination Button Border Radius
+$pagination_btn_border_radius = $attributes['paginationBtnBorderRadius'] ?? [];
+if ( ! empty( $pagination_btn_border_radius['top'] ) ) $pag_styles['border-top-left-radius'] = BOLDPO_Helper::ensure_unit( $pagination_btn_border_radius['top'] );
+if ( ! empty( $pagination_btn_border_radius['right'] ) ) $pag_styles['border-top-right-radius'] = BOLDPO_Helper::ensure_unit( $pagination_btn_border_radius['right'] );
+if ( ! empty( $pagination_btn_border_radius['bottom'] ) ) $pag_styles['border-bottom-left-radius'] = BOLDPO_Helper::ensure_unit( $pagination_btn_border_radius['bottom'] );
+if ( ! empty( $pagination_btn_border_radius['left'] ) ) $pag_styles['border-bottom-right-radius'] = BOLDPO_Helper::ensure_unit( $pagination_btn_border_radius['left'] );
+
+
 $thumbnail_left_height_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
 BOLDPO_Helper::add_responsive_vars($attributes, $thumbnail_left_height_responsive, 'thumbnailLeftHeight', 'height', [], false);
 
@@ -365,9 +384,6 @@ $unique_id    = $attributes['blockId'];
 $selector     = '.boldpo-post-grid-3-block-wrap.' . $unique_id;
 
 $full_responsive_css = "";
-if ( $style == 'default' || $style == '1' ) {
-    $full_responsive_css .= $selector . ' .boldpo-post-grid-3.style-' . $style . ' { flex-wrap: nowrap; }';
-}
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-3.style-' . $style . ' .boldpo-grid-item .boldpo-grid-item-inner', $item_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-3.style-' . $style . ' .boldpo-grid-item .boldpo-blog-title', $title_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-3.style-' . $style . ' .boldpo-grid-item .boldpo-post-metas', $meta_responsive);
@@ -381,7 +397,7 @@ $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .bo
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-3.style-' . $style . ' .boldpo-grid-col-middle-wrap .boldpo-grid-item .boldpo-blog-title', $title_right_typo_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-3.style-' . $style . ' .boldpo-grid-col-middle-wrap .boldpo-grid-item .boldpo-blog-img img', $thumbnail_middle_height_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-3.style-' . $style . ' .boldpo-grid-item .boldpo-read-more .boldpo-read-more-link', $button_text_align_responsive);   
-
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpost-load-more-btn', $pagination_btn_width_responsive);
 
 wp_enqueue_style( $style_handle );
 BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css, [
@@ -398,8 +414,11 @@ BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css,
     '.boldpo-post-grid-3 .boldpo-grid-item .boldpo-post-metas a:hover'   => BOLDPO_Helper::get_inline_styles($meta_hover),
     '.boldpo-post-grid-3 .boldpo-grid-item .boldpo-post-metas i'       => BOLDPO_Helper::get_inline_styles($meta_icon_styles),
     '.boldpo-post-grid-3 .boldpo-grid-item .boldpo-post-metas i:hover' => BOLDPO_Helper::get_inline_styles($meta_icon_hover),
-    '.boldpo-pagination a, .boldpo-pagination span' => BOLDPO_Helper::get_inline_styles($pag_styles),
-    '.boldpo-pagination a:hover, .boldpo-pagination span.current' => BOLDPO_Helper::get_inline_styles($pag_hover),
+    '.boldpo-pagination .page-numbers' => BOLDPO_Helper::get_inline_styles($pag_styles),
+    '.boldpo-pagination .page-numbers.current' => BOLDPO_Helper::get_inline_styles($pag_hover),
+    '.boldpo-pagination a:hover' => BOLDPO_Helper::get_inline_styles($pag_hover),
+    '.boldpost-load-more-btn' => BOLDPO_Helper::get_inline_styles($pag_styles),
+    '.boldpost-load-more-btn:hover' => BOLDPO_Helper::get_inline_styles($pag_hover),
     '.boldpo-post-grid-3 .boldpo-grid-item .boldpo-blog-img'   => BOLDPO_Helper::get_inline_styles($thumbnail_border_radius_styles),
     '.boldpo-post-categories .bldpost-meta' => BOLDPO_Helper::get_inline_styles($cat_container_styles),
     '.boldpo-post-categories .bldpost-meta:hover' => BOLDPO_Helper::get_inline_styles($cat_container_hover),
@@ -572,6 +591,7 @@ if ( $query->have_posts() ) :
 
             endwhile;
             ?>
+            </div>
             <?php include BOLDPO_PL_PATH . 'public/template-parts/pagination/pagination.php'; ?>
         </div>
         </div>

@@ -14,6 +14,7 @@
 
         .boldpo-heading-title {
             margin: 0;
+            font-size: inherit;
         }
 
         .boldpo-heading-description {
@@ -84,7 +85,7 @@
                 width: 100%;
 
                 .boldpo-heading-right-icon {
-                    font-size: var(--wp--preset--font-size--x-large);
+                    font-size: inherit;
                 }
             }
         }

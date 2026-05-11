@@ -30,6 +30,10 @@ return array(
 		'viewScript' => 'file:./view.js',
 		'render' => 'file:./render.php',
 		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'buttonStyle' => array(
 				'type' => 'string',
 				'default' => 'default'
@@ -178,29 +182,28 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
-			'buttonWidth' => array(
-				'type' => 'string',
-				'default' => 'auto'
+			'border' => array(
+				'type' => 'object',
+				'default' => array(
+					'width' => 0,
+					'color' => '',
+					'style' => 'solid'
+				)
 			),
-			'borderType' => array(
-				'type' => 'string',
-				'default' => 'none'
-			),
-			'borderWidth' => array(
-				'type' => 'number',
-				'default' => 0
-			),
-			'borderColor' => array(
-				'type' => 'string',
-				'default' => ''
-			),
-			'borderColorHover' => array(
-				'type' => 'string',
-				'default' => ''
+			'borderHover' => array(
+				'type' => 'object',
+				'default' => array(
+					'width' => 0,
+					'color' => '',
+					'style' => 'solid'
+				)
 			),
 			'iconHoverAnimation' => array(
 				'type' => 'string',
 				'default' => 'none'
+			),
+			'buttonWidth' => array(
+				'type' => 'string'
 			)
 		)
 	)

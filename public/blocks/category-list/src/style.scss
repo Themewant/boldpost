@@ -39,10 +39,8 @@
                     }
 
                     .boldpo-category-title {
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
                         transition: color var(--boldpo-preset-hover-transition);
+                        margin-top: 0;
                         margin-bottom: 0;
                     }
 
@@ -63,11 +61,18 @@
         &.style-default {
             .boldpo-category-item {
                 background-color: var(--boldpo-preset-color-tertiary);
+                padding: 10px;
 
                 .boldpo-category-content {
                     .boldpo-category-count {
                         background-color: var(--boldpo-preset-color-contrast-1);
                         color: #fff;
+                    }
+
+                    .boldpo-category-title {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
                     }
                 }
             }
@@ -103,6 +108,7 @@
 
             .boldpo-category-item {
                 overflow: hidden;
+                min-height: 200px;
 
                 .boldpo-category-content {
                     flex-direction: column;

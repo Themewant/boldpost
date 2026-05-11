@@ -1,5 +1,4 @@
 .boldpo-post-grid-2-block-wrap {
-	overflow: hidden;
 
 	// Ensure gutter padding doesn't overflow the column widths
 	.boldpo-grid-col-left-wrap,
@@ -12,7 +11,6 @@
 
 		box-sizing: border-box;
 		margin-bottom: 0px; // Reset any previous margins
-		overflow: hidden;
 
 		.boldpo-grid-item-inner {
 			box-sizing: border-box;
@@ -258,9 +256,57 @@
 		}
 
 		&.style-5 {
-			.boldpo-blog-content {
-				position: static;
-				padding: 20px 30px 30px 0px;
+			.boldpo-grid-item {
+				.boldpo-blog-content {
+					position: static;
+					padding: 20px 30px 30px 0px;
+
+					.boldpo-blog-title {
+						color: var(--boldpo-preset-color-contrast-1);
+					}
+
+					.boldpo-post-categories,
+					.boldpo-post-metas,
+					.boldpo-blog-excerpt,
+					.boldpo-read-more a {
+						color: var(--boldpo-preset-color-contrast-1);
+					}
+				}
+
+			}
+		}
+
+		&.style-6 {
+			.boldpo-grid-col-middle-wrap {
+				.boldpo-grid-item {
+					height: 100%;
+
+					.boldpo-blog-title {
+						font-size: 2rem;
+					}
+
+					.boldpo-blog-img {
+						height: 556px;
+
+						img {
+							height: 100%;
+							object-fit: cover;
+						}
+					}
+				}
+			}
+
+			.boldpo-grid-col-left-wrap,
+			.boldpo-grid-col-right-wrap {
+				.boldpo-grid-item {
+					.boldpo-blog-title {
+						font-size: 1.25rem;
+					}
+
+					.boldpo-blog-img {
+						height: 180px;
+					}
+				}
 			}
 		}
 	}

@@ -51,7 +51,8 @@
   gap: 10px;
 }
 .boldpo-social-icons-block-wrap .boldpo-social-icons.style-2 .boldpo-social-icon-item {
-  border-radius: 50%;
+  border: 1px solid var(--boldpo-preset-color-border);
+  border-radius: 100%;
 }
 .boldpo-social-icons-block-wrap .boldpo-social-icons.style-2 .boldpo-social-icon-item:hover {
   animation-name: boldpo-social-icon-float, boldpo-social-icon-bob;

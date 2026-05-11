@@ -420,6 +420,32 @@ return array(
 				'type' => 'boolean',
 				'default' => true
 			),
+			'paginationBtnWidth' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'paginationBtnWidthTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'paginationBtnWidthMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'paginationBtnBorder' => array(
+				'type' => 'object',
+				'default' => array(
+					'width' => 0,
+					'color' => '',
+					'style' => 'solid'
+				)
+			),
+			'paginationBtnBorderRadius' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
+			),
 			'pagination' => array(
 				'type' => 'boolean',
 				'default' => true

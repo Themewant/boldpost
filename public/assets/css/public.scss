@@ -11,6 +11,18 @@
     --boldpo-preset-hover-transition: 0.4s ease;
 }
 
+.boldpo-text-left {
+    justify-content: flex-start;
+}
+
+.boldpo-text-center {
+    justify-content: center;
+}
+
+.boldpo-text-right {
+    justify-content: flex-end;
+}
+
 .boldpo-block a {
     &:focus {
         outline: none;
@@ -261,5 +273,9 @@
                 width: fit-content;
             }
         }
+    }
+
+    .nav-btn {
+        transition: var(--boldpo-preset-hover-transition);
     }
 }

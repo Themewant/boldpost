@@ -4,12 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 <div class="boldpo-grid-item <?php echo esc_attr( $item_class ); ?>">
     <div class="boldpo-grid-item-inner">
         <div class="boldpo-blog-img <?php echo esc_attr( $thumb_anim ); ?> <?php echo esc_attr( $anim_style ); ?>">
-            <?php if ( $show_meta ) include BOLDPO_PL_PATH . 'public/template-parts/post-meta/post-cat.php'; ?>
-            <?php
-            // Strip 'category' from meta row (post-cat.php handles it above)
-            $_saved_metas = $attributes['allowedMetas'];
-            $attributes['allowedMetas'] = array_values( array_diff( $attributes['allowedMetas'], ['category'] ) );
-            ?>
+           
             <?php if( $show_meta && in_array('date', $allowed_metas) && $show_date_on_top === 'yes' ): ?>
                 <div class="boldpo-blog-date-top">
                     <h4><?php echo esc_html( get_the_time('d') ); ?></h4>
@@ -32,6 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                 </a>
         </div>
         <div class="boldpo-blog-content">
+         
             <?php if ( $show_meta && 'up_title' === $meta_position ) include BOLDPO_PL_PATH . 'public/template-parts/post-meta/post-meta.php'; ?>
             
             <<?php echo esc_attr( $title_tag ); ?> class="boldpo-blog-title">
@@ -57,6 +53,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                 </div>
             <?php endif; ?>
         </div>
-        <?php $attributes['allowedMetas'] = $_saved_metas; // Restore for next post iteration ?>
+        
     </div>
 </div>
