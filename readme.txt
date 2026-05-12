@@ -76,7 +76,7 @@ Built with performance in mind, BoldPost uses efficient queries and minimal Java
 
 If you like The Our Plugin, then consider checking out other WordPress Plugins:
 
-[Easy Hotel Booking](https://wordpress.org/plugins/easy-hotel/) Powerful Hotel Booking Pluing
+[Easy Hotel Booking](https://wordpress.org/plugins/boldpost/) Powerful Hotel Booking Pluing
 [RT Mega Menu](https://wordpress.org/plugins/rt-mega-menu/) Advanced WordPress Mega Menu Builder for Elementor & Gutenberg
 [Easy Currency](https://wordpress.org/plugins/easy-currency/) Easy Currency Converter plugin for WooCommerce.
 [Easy Elements](https://wordpress.org/plugins/easy-elements/) Easy Elements for Elementor

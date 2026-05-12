@@ -44,12 +44,12 @@ import IconPicker from '../../custom-components/IconPicker';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
-import grid1 from './assets/img/grid-1.png';
-import grid2 from './assets/img/grid-2.png';
-import grid3 from './assets/img/grid-3.png';
-import grid4 from './assets/img/grid-4.png';
-import grid5 from './assets/img/grid-5.png';
-import grid6 from './assets/img/grid-6.png';
+import layout1 from './assets/img/layout-1.png';
+import layout2 from './assets/img/layout-2.png';
+import layout3 from './assets/img/layout-3.png';
+import layout4 from './assets/img/layout-4.png';
+import layout5 from './assets/img/layout-5.png';
+import layout6 from './assets/img/layout-6.png';
 
 
 /**
@@ -290,12 +290,12 @@ export default function Edit({ attributes, setAttributes }) {
 						value={attributes.sliderStyle}
 						onChange={(value) => setAttributes({ sliderStyle: value })}
 						options={[
-							{ label: __('Default', 'boldpost'), value: 'default', src: grid1 },
-							{ label: __('Style 1', 'boldpost'), value: '1', src: grid2 },
-							{ label: __('Style 2', 'boldpost'), value: '2', src: grid3 },
-							{ label: __('Style 3', 'boldpost'), value: '3', src: grid4 },
-							{ label: __('Style 4', 'boldpost'), value: '4', src: grid5 },
-							{ label: __('Style 5', 'boldpost'), value: '5', src: grid6 },
+							{ label: __('Default', 'boldpost'), value: 'default', src: layout1 },
+							{ label: __('Style 1', 'boldpost'), value: '1', src: layout2 },
+							{ label: __('Style 2', 'boldpost'), value: '2', src: layout3, isPro: true },
+							{ label: __('Style 3', 'boldpost'), value: '3', src: layout4, isPro: true },
+							{ label: __('Style 4', 'boldpost'), value: '4', src: layout5, isPro: true },
+							{ label: __('Style 5', 'boldpost'), value: '5', src: layout6, isPro: true },
 						]}
 					/>
 				</PanelBody>

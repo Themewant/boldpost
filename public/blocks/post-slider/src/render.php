@@ -558,9 +558,7 @@ if ( $query->have_posts() ) :
             <?php 
                 if($show_dots) {
                     ?>
-                    <div class="swiper-pagination"></div>
-                    <!-- If we need scrollbar -->
-                    <div class="swiper-scrollbar"></div>    
+                    <div class="swiper-pagination"></div>  
                     <?php
                 }
             ?>

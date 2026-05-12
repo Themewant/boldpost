@@ -67,6 +67,7 @@ class BOLDPO_Post_Types {
             return '';
         }
 
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Applying WP core filter to render shortcodes/blocks in template content.
         return '<div class="boldpo-template-content">' . apply_filters( 'the_content', $post->post_content ) . '</div>';
     }
 }

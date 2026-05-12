@@ -216,7 +216,7 @@ class BOLDPO_Helper {
 		if ( $content === null ) {
 			$content = get_the_content();
 		}
-		$word_count    = str_word_count( strip_tags( $content ) );
+		$word_count    = str_word_count( wp_strip_all_tags( $content ) );
 		$total_seconds = (int) round( ( $word_count / $wpm ) * 60 );
 		$minutes       = (int) floor( $total_seconds / 60 );
 		$seconds       = $total_seconds % 60;

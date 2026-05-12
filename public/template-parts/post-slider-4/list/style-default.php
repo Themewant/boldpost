@@ -18,7 +18,7 @@
                         // Simple size for now
                         the_post_thumbnail( $thumbnail_size );
                     } else {
-                        echo '<img src="' . esc_url( plugins_url( 'public/assets/img/placeholder.png', dirname(dirname(dirname(__DIR__))) ) ) . '" alt="Placeholder">';
+                        echo '<img src="' . BOLDPO_PL_URL . 'public/assets/img/placeholder.png" alt="Placeholder">';
                     }
                 ?>
                 </a>
@@ -29,7 +29,7 @@
             
             <?php if ( ! empty($embed_video) ) { ?>
                 <div class="boldpo-video-wrapper">
-                    <?php echo $embed_video; ?>
+                    <?php echo $embed_video; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Trusted markup from BOLDPO_Helper::boldpost_get_video_embed(), built from esc_attr/esc_url and wp_oembed_get. ?>
                     <span class="play-icon"></span>
                 </div>
             <?php } ?>

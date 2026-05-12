@@ -38,12 +38,12 @@ import ResponsiveWrapper from '../../custom-components/ResponsiveWrapper';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
-import style1 from './assets/img/style-1.png';
-import style2 from './assets/img/style-2.png';
-import style3 from './assets/img/style-3.png';
-import style4 from './assets/img/style-4.png';
-import style5 from './assets/img/style-5.png';
-import style6 from './assets/img/style-6.png';
+import layout1 from './assets/img/layout-1.png';
+import layout2 from './assets/img/layout-2.png';
+import layout3 from './assets/img/layout-3.png';
+import layout4 from './assets/img/layout-4.png';
+import layout5 from './assets/img/layout-5.png';
+import layout6 from './assets/img/layout-6.png';
 /**
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
@@ -142,12 +142,12 @@ export default function Edit({ attributes, setAttributes }) {
                         value={attributes.layoutStyle}
                         onChange={(value) => setAttributes({ layoutStyle: value })}
                         options={[
-                            { label: __('Style 1', 'boldpost'), value: '1', src: style1 },
-                            { label: __('Style 2', 'boldpost'), value: '2', src: style2 },
-                            { label: __('Style 3', 'boldpost'), value: '3', src: style3 },
-                            { label: __('Style 4', 'boldpost'), value: '4', src: style4 },
-                            { label: __('Style 5', 'boldpost'), value: '5', src: style5 },
-                            { label: __('Style 6', 'boldpost'), value: '6', src: style6 },
+                            { label: __('Style 1', 'boldpost'), value: '1', src: layout1 },
+                            { label: __('Style 2', 'boldpost'), value: '2', src: layout2 },
+                            { label: __('Style 3', 'boldpost'), value: '3', src: layout3 },
+                            { label: __('Style 4', 'boldpost'), value: '4', src: layout4 },
+                            { label: __('Style 5', 'boldpost'), value: '5', src: layout5 },
+                            { label: __('Style 6', 'boldpost'), value: '6', src: layout6 },
                         ]}
                         __next40pxDefaultSize={true}
                         __nextHasNoMarginBottom={true}

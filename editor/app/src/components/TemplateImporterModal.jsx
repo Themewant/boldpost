@@ -26,11 +26,12 @@ const BLOCK_TYPE_OPTIONS = [
     { label: 'Heading', value: 'boldpost/heading' },
     { label: 'Social Icons', value: 'boldpost/social-icons' },
     { label: 'Button', value: 'boldpost/button' },
+    { label: 'Info Box', value: 'boldpost/info-box' },
 ];
 
 const PER_PAGE = 12;
-const API_BASE = ( typeof boldpoEditor !== 'undefined' && boldpoEditor.api_url ) || '/wp-json/boldpost/v1';
-const IS_EXTERNAL_API = API_BASE.startsWith('http') && ! API_BASE.startsWith( window.location.origin );
+const API_BASE = (typeof boldpoEditor !== 'undefined' && boldpoEditor.api_url) || '/wp-json/boldpost/v1';
+const IS_EXTERNAL_API = API_BASE.startsWith('http') && !API_BASE.startsWith(window.location.origin);
 const isLicenseActive = typeof boldpostProData !== 'undefined' && boldpostProData.is_license_active === '1';
 
 /**
@@ -38,9 +39,9 @@ const isLicenseActive = typeof boldpostProData !== 'undefined' && boldpostProDat
  * to avoid wp-api-fetch adding the local nonce header.
  */
 async function templateApiFetch({ url, method = 'GET' }) {
-    if ( IS_EXTERNAL_API ) {
-        const res = await fetch( url, { method, headers: { 'Content-Type': 'application/json' } } );
-        if ( ! res.ok ) throw new Error( `HTTP ${ res.status }` );
+    if (IS_EXTERNAL_API) {
+        const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' } });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
     }
     return apiFetch({ url, method });
@@ -49,12 +50,12 @@ async function templateApiFetch({ url, method = 'GET' }) {
 /**
  * Build full API URL from filter params.
  */
-function buildApiUrl( params ) {
-    let url = `${ API_BASE }/posts?per_page=${ PER_PAGE }&page=${ params.page || 1 }`;
-    if ( params.block_type )     url += `&filter[block_type]=${ encodeURIComponent( params.block_type ) }`;
-    if ( params.template_type )  url += `&filter[template_type]=${ encodeURIComponent( params.template_type ) }`;
-    if ( params.tier )           url += `&filter[tier]=${ encodeURIComponent( params.tier ) }`;
-    if ( params.search )         url += `&filter[search]=${ encodeURIComponent( params.search ) }`;
+function buildApiUrl(params) {
+    let url = `${API_BASE}/posts?per_page=${PER_PAGE}&page=${params.page || 1}`;
+    if (params.block_type) url += `&filter[block_type]=${encodeURIComponent(params.block_type)}`;
+    if (params.template_type) url += `&filter[template_type]=${encodeURIComponent(params.template_type)}`;
+    if (params.tier) url += `&filter[tier]=${encodeURIComponent(params.tier)}`;
+    if (params.search) url += `&filter[search]=${encodeURIComponent(params.search)}`;
     return url;
 }
 
@@ -62,64 +63,64 @@ function buildApiUrl( params ) {
  * Fetch with cache: check memory cache first, then API, then store.
  * Prevents duplicate in-flight requests for the same key.
  */
-async function cachedFetch( params ) {
-    const key = buildCacheKey( params );
+async function cachedFetch(params) {
+    const key = buildCacheKey(params);
 
     // 1. Cache hit
-    const cached = getFromCache( key );
-    if ( cached ) return cached;
+    const cached = getFromCache(key);
+    if (cached) return cached;
 
     // 2. Already in-flight — reuse the same promise
-    const inflight = getInflight( key );
-    if ( inflight ) return inflight;
+    const inflight = getInflight(key);
+    if (inflight) return inflight;
 
     // 3. Fresh fetch
-    const promise = templateApiFetch({ url: buildApiUrl( params ) }).then( response => {
-        removeInflight( key );
-        if ( response.success ) {
-            setInCache( key, response );
+    const promise = templateApiFetch({ url: buildApiUrl(params) }).then(response => {
+        removeInflight(key);
+        if (response.success) {
+            setInCache(key, response);
         }
         return response;
-    }).catch( err => {
-        removeInflight( key );
+    }).catch(err => {
+        removeInflight(key);
         throw err;
     });
 
-    setInflight( key, promise );
+    setInflight(key, promise);
     return promise;
 }
 
 /**
  * Silently prefetch the next page into cache.
  */
-function prefetchNext( params, hasMore ) {
-    if ( ! hasMore ) return;
-    const nextParams = { ...params, page: ( params.page || 1 ) + 1 };
-    const key = buildCacheKey( nextParams );
-    if ( getFromCache( key ) ) return; // already cached
-    if ( getInflight( key ) ) return;  // already fetching
-    cachedFetch( nextParams ).catch( () => {} ); // fire & forget
+function prefetchNext(params, hasMore) {
+    if (!hasMore) return;
+    const nextParams = { ...params, page: (params.page || 1) + 1 };
+    const key = buildCacheKey(nextParams);
+    if (getFromCache(key)) return; // already cached
+    if (getInflight(key)) return;  // already fetching
+    cachedFetch(nextParams).catch(() => { }); // fire & forget
 }
 
 export default function TemplateImporterModal({ isOpen, onClose, onImport, blockType }) {
-    const [ templates, setTemplates ] = useState( [] );
-    const [ loading, setLoading ] = useState( true );
-    const [ loadingMore, setLoadingMore ] = useState( false );
-    const [ syncing, setSyncing ] = useState( false );
-    const [ error, setError ] = useState( null );
-    const [ importing, setImporting ] = useState( null );
-    const [ page, setPage ] = useState( 1 );
-    const [ hasMore, setHasMore ] = useState( false );
-    const [ filterBlockType, setFilterBlockType ] = useState( blockType || '' );
-    const [ filterTier, setFilterTier ] = useState( '' );
-    const [ filterTemplateType, setFilterTemplateType ] = useState( '' );
-    const [ search, setSearch ] = useState( '' );
-    const searchTimer = useRef( null );
-    const scrollRef = useRef( null );
-    const sentinelRef = useRef( null );
+    const [templates, setTemplates] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [loadingMore, setLoadingMore] = useState(false);
+    const [syncing, setSyncing] = useState(false);
+    const [error, setError] = useState(null);
+    const [importing, setImporting] = useState(null);
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(false);
+    const [filterBlockType, setFilterBlockType] = useState(blockType || '');
+    const [filterTier, setFilterTier] = useState('');
+    const [filterTemplateType, setFilterTemplateType] = useState('');
+    const [search, setSearch] = useState('');
+    const searchTimer = useRef(null);
+    const scrollRef = useRef(null);
+    const sentinelRef = useRef(null);
 
     // Current filter params (used to build cache keys)
-    const getFilterParams = ( pageNum ) => ({
+    const getFilterParams = (pageNum) => ({
         page: pageNum,
         per_page: PER_PAGE,
         block_type: filterBlockType,
@@ -130,101 +131,101 @@ export default function TemplateImporterModal({ isOpen, onClose, onImport, block
 
     // Reset and fetch on filter changes
     useEffect(() => {
-        if ( ! isOpen ) return;
+        if (!isOpen) return;
         resetAndFetch();
-    }, [ isOpen, filterBlockType, filterTier, filterTemplateType ]);
+    }, [isOpen, filterBlockType, filterTier, filterTemplateType]);
 
     // Debounced search
     useEffect(() => {
-        if ( ! isOpen ) return;
-        if ( searchTimer.current ) clearTimeout( searchTimer.current );
+        if (!isOpen) return;
+        if (searchTimer.current) clearTimeout(searchTimer.current);
         searchTimer.current = setTimeout(() => {
             resetAndFetch();
-        }, 400 );
-        return () => clearTimeout( searchTimer.current );
-    }, [ search ]);
+        }, 400);
+        return () => clearTimeout(searchTimer.current);
+    }, [search]);
 
     // Infinite scroll observer
     useEffect(() => {
-        if ( ! sentinelRef.current ) return;
+        if (!sentinelRef.current) return;
 
         const observer = new IntersectionObserver(
-            ( entries ) => {
-                if ( entries[0].isIntersecting && hasMore && ! loadingMore && ! loading ) {
+            (entries) => {
+                if (entries[0].isIntersecting && hasMore && !loadingMore && !loading) {
                     loadNextPage();
                 }
             },
             { root: scrollRef.current, threshold: 0.1 }
         );
 
-        observer.observe( sentinelRef.current );
+        observer.observe(sentinelRef.current);
         return () => observer.disconnect();
-    }, [ hasMore, loadingMore, loading, templates ]);
+    }, [hasMore, loadingMore, loading, templates]);
 
     const resetAndFetch = () => {
-        setTemplates( [] );
-        setPage( 1 );
-        setHasMore( false );
-        fetchTemplates( 1, true );
+        setTemplates([]);
+        setPage(1);
+        setHasMore(false);
+        fetchTemplates(1, true);
     };
 
     const loadNextPage = () => {
         const nextPage = page + 1;
-        setPage( nextPage );
-        fetchTemplates( nextPage, false );
+        setPage(nextPage);
+        fetchTemplates(nextPage, false);
     };
 
-    const fetchTemplates = async ( pageNum, isReset ) => {
-        if ( isReset ) {
-            setLoading( true );
+    const fetchTemplates = async (pageNum, isReset) => {
+        if (isReset) {
+            setLoading(true);
         } else {
-            setLoadingMore( true );
+            setLoadingMore(true);
         }
-        setError( null );
+        setError(null);
 
         try {
-            const params = getFilterParams( pageNum );
-            const response = await cachedFetch( params );
+            const params = getFilterParams(pageNum);
+            const response = await cachedFetch(params);
 
-            if ( response.success ) {
+            if (response.success) {
                 const newData = response.data || [];
                 const pagination = response.pagination || {};
                 const pageHasMore = pagination.has_more || false;
 
-                if ( isReset ) {
-                    setTemplates( newData );
+                if (isReset) {
+                    setTemplates(newData);
                 } else {
                     // Deduplicate by id
-                    setTemplates( prev => {
-                        const existingIds = new Set( prev.map( t => t.id ) );
-                        const unique = newData.filter( t => ! existingIds.has( t.id ) );
-                        return [ ...prev, ...unique ];
+                    setTemplates(prev => {
+                        const existingIds = new Set(prev.map(t => t.id));
+                        const unique = newData.filter(t => !existingIds.has(t.id));
+                        return [...prev, ...unique];
                     });
                 }
 
-                setHasMore( pageHasMore );
+                setHasMore(pageHasMore);
 
                 // Prefetch next page
-                prefetchNext( params, pageHasMore );
+                prefetchNext(params, pageHasMore);
             } else {
-                setError( 'Failed to load templates.' );
+                setError('Failed to load templates.');
             }
-        } catch ( err ) {
-            setError( err.message || 'Failed to load templates.' );
+        } catch (err) {
+            setError(err.message || 'Failed to load templates.');
         } finally {
-            setLoading( false );
-            setLoadingMore( false );
+            setLoading(false);
+            setLoadingMore(false);
         }
     };
 
-    const handleImport = ( template ) => {
-        if ( template.is_pro && ! isLicenseActive ) return;
-        setImporting( template.id );
-        onImport( template.raw_content );
+    const handleImport = (template) => {
+        if (template.is_pro && !isLicenseActive) return;
+        setImporting(template.id);
+        onImport(template.raw_content);
     };
 
     const handleSynchronize = async () => {
-        setSyncing( true );
+        setSyncing(true);
 
         // Clear frontend cache
         clearCache();
@@ -232,43 +233,43 @@ export default function TemplateImporterModal({ isOpen, onClose, onImport, block
         // Clear backend transient cache
         try {
             await templateApiFetch({
-                url: `${ API_BASE }/cache/clear`,
+                url: `${API_BASE}/cache/clear`,
                 method: 'POST',
             });
-        } catch ( e ) {
+        } catch (e) {
             // Non-critical — frontend cache is already cleared
         }
 
         // Re-fetch current view
-        setTemplates( [] );
-        setPage( 1 );
-        setHasMore( false );
-        await fetchTemplates( 1, true );
-        setSyncing( false );
+        setTemplates([]);
+        setPage(1);
+        setHasMore(false);
+        await fetchTemplates(1, true);
+        setSyncing(false);
     };
 
-    if ( ! isOpen ) return null;
+    if (!isOpen) return null;
 
     return (
         <Modal
             title="Premade Designs"
-            onRequestClose={ onClose }
-            isFullScreen={ true }
+            onRequestClose={onClose}
+            isFullScreen={true}
             className="boldpo-template-importer-modal"
         >
-            <div className="boldpo-template-importer" ref={ scrollRef }>
+            <div className="boldpo-template-importer" ref={scrollRef}>
 
                 <div className="boldpo-template-importer__toolbar">
                     <SelectControl
-                        value={ filterBlockType }
-                        options={ BLOCK_TYPE_OPTIONS }
-                        onChange={ setFilterBlockType }
+                        value={filterBlockType}
+                        options={BLOCK_TYPE_OPTIONS}
+                        onChange={setFilterBlockType}
                         className="boldpo-template-importer__filter"
                         __nextHasNoMarginBottom
                     />
                     <SearchControl
-                        value={ search }
-                        onChange={ setSearch }
+                        value={search}
+                        onChange={setSearch}
                         placeholder="Search designs..."
                         className="boldpo-template-importer__search"
                         __nextHasNoMarginBottom
@@ -276,30 +277,30 @@ export default function TemplateImporterModal({ isOpen, onClose, onImport, block
                     <div className="boldpo-template-importer__type-filter">
                         <ButtonGroup>
                             <Button
-                                variant={ filterTemplateType === '' ? 'primary' : 'secondary' }
-                                onClick={ () => setFilterTemplateType('') }
-                                className={ 'boldpo-tier-btn' + ( filterTemplateType === '' ? ' is-active' : '' ) }
+                                variant={filterTemplateType === '' ? 'primary' : 'secondary'}
+                                onClick={() => setFilterTemplateType('')}
+                                className={'boldpo-tier-btn' + (filterTemplateType === '' ? ' is-active' : '')}
                             >
                                 All
                             </Button>
                             <Button
-                                variant={ filterTemplateType === 'starter_page' ? 'primary' : 'secondary' }
-                                onClick={ () => setFilterTemplateType('starter_page') }
-                                className={ 'boldpo-tier-btn' + ( filterTemplateType === 'starter_page' ? ' is-active' : '' ) }
+                                variant={filterTemplateType === 'starter_page' ? 'primary' : 'secondary'}
+                                onClick={() => setFilterTemplateType('starter_page')}
+                                className={'boldpo-tier-btn' + (filterTemplateType === 'starter_page' ? ' is-active' : '')}
                             >
                                 Starter Page
                             </Button>
                             <Button
-                                variant={ filterTemplateType === 'starter_section' ? 'primary' : 'secondary' }
-                                onClick={ () => setFilterTemplateType('starter_section') }
-                                className={ 'boldpo-tier-btn' + ( filterTemplateType === 'starter_section' ? ' is-active' : '' ) }
+                                variant={filterTemplateType === 'starter_section' ? 'primary' : 'secondary'}
+                                onClick={() => setFilterTemplateType('starter_section')}
+                                className={'boldpo-tier-btn' + (filterTemplateType === 'starter_section' ? ' is-active' : '')}
                             >
                                 Starter Section
                             </Button>
                             <Button
-                                variant={ filterTemplateType === 'starter_block' ? 'primary' : 'secondary' }
-                                onClick={ () => setFilterTemplateType('starter_block') }
-                                className={ 'boldpo-tier-btn' + ( filterTemplateType === 'starter_block' ? ' is-active' : '' ) }
+                                variant={filterTemplateType === 'starter_block' ? 'primary' : 'secondary'}
+                                onClick={() => setFilterTemplateType('starter_block')}
+                                className={'boldpo-tier-btn' + (filterTemplateType === 'starter_block' ? ' is-active' : '')}
                             >
                                 Starter Block
                             </Button>
@@ -308,23 +309,23 @@ export default function TemplateImporterModal({ isOpen, onClose, onImport, block
                     <div className="boldpo-template-importer__tier-filter">
                         <ButtonGroup>
                             <Button
-                                variant={ filterTier === '' ? 'primary' : 'secondary' }
-                                onClick={ () => setFilterTier('') }
-                                className={ 'boldpo-tier-btn' + ( filterTier === '' ? ' is-active' : '' ) }
+                                variant={filterTier === '' ? 'primary' : 'secondary'}
+                                onClick={() => setFilterTier('')}
+                                className={'boldpo-tier-btn' + (filterTier === '' ? ' is-active' : '')}
                             >
                                 All
                             </Button>
                             <Button
-                                variant={ filterTier === 'free' ? 'primary' : 'secondary' }
-                                onClick={ () => setFilterTier('free') }
-                                className={ 'boldpo-tier-btn' + ( filterTier === 'free' ? ' is-active' : '' ) }
+                                variant={filterTier === 'free' ? 'primary' : 'secondary'}
+                                onClick={() => setFilterTier('free')}
+                                className={'boldpo-tier-btn' + (filterTier === 'free' ? ' is-active' : '')}
                             >
                                 Free
                             </Button>
                             <Button
-                                variant={ filterTier === 'pro' ? 'primary' : 'secondary' }
-                                onClick={ () => setFilterTier('pro') }
-                                className={ 'boldpo-tier-btn' + ( filterTier === 'pro' ? ' is-active' : '' ) }
+                                variant={filterTier === 'pro' ? 'primary' : 'secondary'}
+                                onClick={() => setFilterTier('pro')}
+                                className={'boldpo-tier-btn' + (filterTier === 'pro' ? ' is-active' : '')}
                             >
                                 Pro
                             </Button>
@@ -332,86 +333,86 @@ export default function TemplateImporterModal({ isOpen, onClose, onImport, block
                     </div>
                     <Button
                         variant="tertiary"
-                        onClick={ handleSynchronize }
-                        isBusy={ syncing }
-                        disabled={ syncing }
+                        onClick={handleSynchronize}
+                        isBusy={syncing}
+                        disabled={syncing}
                         className="boldpo-template-importer__sync-btn"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <polyline points="23 4 23 10 17 10"/>
-                            <polyline points="1 20 1 14 7 14"/>
-                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                            <polyline points="23 4 23 10 17 10" />
+                            <polyline points="1 20 1 14 7 14" />
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
                         </svg>
                         Synchronize
                     </Button>
                 </div>
 
-                { error && (
-                    <Notice status="error" isDismissible={ false }>
-                        { error }
+                {error && (
+                    <Notice status="error" isDismissible={false}>
+                        {error}
                     </Notice>
                 )}
 
-                { loading && (
+                {loading && (
                     <div className="boldpo-template-importer__loading">
                         <Spinner />
                         <p>Loading designs...</p>
                     </div>
                 )}
 
-                { ! loading && templates.length === 0 && ! error && (
+                {!loading && templates.length === 0 && !error && (
                     <div className="boldpo-template-importer__empty">
                         <p>No premade designs found
-                            { filterBlockType && <> for <strong>{ filterBlockType }</strong></> }.
+                            {filterBlockType && <> for <strong>{filterBlockType}</strong></>}.
                         </p>
                     </div>
                 )}
 
-                { ! loading && templates.length > 0 && (
+                {!loading && templates.length > 0 && (
                     <>
                         <div className="boldpo-template-importer__masonry">
-                            { templates.map(( template ) => {
+                            {templates.map((template) => {
                                 const isPro = template.is_pro;
-                                const isLocked = isPro && ! isLicenseActive;
+                                const isLocked = isPro && !isLicenseActive;
 
                                 return (
                                     <div
-                                        key={ template.id }
-                                        className={ 'boldpo-template-importer__item' + ( isLocked ? ' is-locked' : '' ) }
+                                        key={template.id}
+                                        className={'boldpo-template-importer__item' + (isLocked ? ' is-locked' : '')}
                                     >
                                         <div className="boldpo-template-importer__preview">
-                                            { template.featured_image ? (
+                                            {template.featured_image ? (
                                                 <img
-                                                    src={ template.featured_image }
-                                                    alt={ template.title }
+                                                    src={template.featured_image}
+                                                    alt={template.title}
                                                 />
                                             ) : (
                                                 <div className="boldpo-template-importer__preview-placeholder">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                                                        <circle cx="8.5" cy="8.5" r="1.5"/>
-                                                        <polyline points="21 15 16 10 5 21"/>
+                                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                                        <circle cx="8.5" cy="8.5" r="1.5" />
+                                                        <polyline points="21 15 16 10 5 21" />
                                                     </svg>
-                                                    <span>{ template.title }</span>
+                                                    <span>{template.title}</span>
                                                 </div>
                                             )}
-                                            <span className={ 'boldpo-template-importer__badge' + ( isPro ? ' is-pro' : ' is-free' ) }>
-                                                { isPro ? 'Pro' : 'Free' }
+                                            <span className={'boldpo-template-importer__badge' + (isPro ? ' is-pro' : ' is-free')}>
+                                                {isPro ? 'Pro' : 'Free'}
                                             </span>
-                                            { isLocked && (
+                                            {isLocked && (
                                                 <div className="boldpo-template-importer__lock-overlay">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                                                     </svg>
                                                 </div>
                                             )}
                                         </div>
                                         <div className="boldpo-template-importer__info">
                                             <h4 className="boldpo-template-importer__title">
-                                                { template.title }
+                                                {template.title}
                                             </h4>
-                                            { isLocked ? (
+                                            {isLocked ? (
                                                 <Button
                                                     variant="secondary"
                                                     className="boldpo-template-importer__import-btn is-locked-btn"
@@ -422,9 +423,9 @@ export default function TemplateImporterModal({ isOpen, onClose, onImport, block
                                             ) : (
                                                 <Button
                                                     variant="primary"
-                                                    onClick={ () => handleImport( template ) }
-                                                    isBusy={ importing === template.id }
-                                                    disabled={ importing !== null }
+                                                    onClick={() => handleImport(template)}
+                                                    isBusy={importing === template.id}
+                                                    disabled={importing !== null}
                                                     className="boldpo-template-importer__import-btn"
                                                 >
                                                     Import Now
@@ -436,8 +437,8 @@ export default function TemplateImporterModal({ isOpen, onClose, onImport, block
                             })}
                         </div>
 
-                        <div ref={ sentinelRef } className="boldpo-template-importer__sentinel">
-                            { loadingMore && (
+                        <div ref={sentinelRef} className="boldpo-template-importer__sentinel">
+                            {loadingMore && (
                                 <div className="boldpo-template-importer__loading-more">
                                     <Spinner />
                                     <span>Loading more...</span>

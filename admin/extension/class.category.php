@@ -50,9 +50,9 @@ class BOLDPO_Category {
                     }
 
                     mediaUploader = wp.media.frames.file_frame = wp.media({
-                        title: '<?php esc_html_e( "Choose Image", "dnews" ); ?>',
+                        title: '<?php esc_html_e( "Choose Image", "boldpost" ); ?>',
                         button: {
-                            text: '<?php esc_html_e( "Choose Image", "dnews" ); ?>'
+                            text: '<?php esc_html_e( "Choose Image", "boldpost" ); ?>'
                         },
                         multiple: false
                     });
@@ -93,7 +93,7 @@ class BOLDPO_Category {
         ?>
         <tr class="form-field">
             <th scope="row" valign="top">
-                <label for="category_image"><?php esc_html_e( 'Image', 'dnews' ); ?></label>
+                <label for="category_image"><?php esc_html_e( 'Image', 'boldpost' ); ?></label>
             </th>
             <td>
                 <div id="category_image_preview">
@@ -102,14 +102,14 @@ class BOLDPO_Category {
                     <?php endif; ?>
                 </div>
                 <input type="hidden" id="category_image" name="category_image" value="<?php echo esc_attr( $category_image_id ); ?>" />
-                <button type="button" class="button category_image_button"><?php esc_html_e( 'Upload Image', 'dnews' ); ?></button>
-                <button type="button" class="button category_image_remove_button"><?php esc_html_e( 'Remove Image', 'dnews' ); ?></button>
+                <button type="button" class="button category_image_button"><?php esc_html_e( 'Upload Image', 'boldpost' ); ?></button>
+                <button type="button" class="button category_image_remove_button"><?php esc_html_e( 'Remove Image', 'boldpost' ); ?></button>
             </td>
         </tr>
 
         <tr class="form-field">
             <th scope="row" valign="top">
-                <label for="category_color"><?php esc_html_e( 'Color', 'dnews' ); ?></label>
+                <label for="category_color"><?php esc_html_e( 'Color', 'boldpost' ); ?></label>
             </th>
             <td>
                 <input type="text" id="category_color" name="category_color" class="category-color-picker" value="<?php echo esc_attr( $category_color ); ?>" />
@@ -119,11 +119,20 @@ class BOLDPO_Category {
     }
 
     function save_category_image_color( $term_id ) {
+        if ( ! current_user_can( 'manage_categories' ) ) {
+            return;
+        }
+
+        $nonce = isset( $_POST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ) : '';
+        if ( ! wp_verify_nonce( $nonce, 'update-tag_' . $term_id ) && ! wp_verify_nonce( $nonce, 'add-tag' ) ) {
+            return;
+        }
+
         if ( isset( $_POST['category_image'] ) ) {
-            update_term_meta( $term_id, 'category_image', sanitize_text_field( $_POST['category_image'] ) );
+            update_term_meta( $term_id, 'category_image', sanitize_text_field( wp_unslash( $_POST['category_image'] ) ) );
         }
         if ( isset( $_POST['category_color'] ) ) {
-            update_term_meta( $term_id, 'category_color', sanitize_hex_color( $_POST['category_color'] ) );
+            update_term_meta( $term_id, 'category_color', sanitize_hex_color( wp_unslash( $_POST['category_color'] ) ) );
         }
     }
 }

@@ -1,5 +1,6 @@
-<?php 
+<?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Local template variables.
 ?>
 <div class="boldpo-grid-item <?php echo esc_attr( $item_class ); ?>">
     <div class="boldpo-grid-item-inner">
@@ -17,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                         // Simple size for now
                         the_post_thumbnail( $thumbnail_size );
                     } else {
-                        echo '<img src="' . esc_url( plugins_url( 'public/assets/img/placeholder.png', dirname(dirname(dirname(__DIR__))) ) ) . '" alt="Placeholder">';
+                        echo '<img src="' . BOLDPO_PL_URL . 'public/assets/img/placeholder.png" alt="Placeholder">';
                     }
                 ?>
                 </a>
@@ -27,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
            
             <?php if ( ! empty($embed_video) ) { ?>
                 <div class="boldpo-video-wrapper">
-                    <?php echo $embed_video; ?>
+                    <?php echo $embed_video; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Trusted markup from BOLDPO_Helper::boldpost_get_video_embed(), built from esc_attr/esc_url and wp_oembed_get. ?>
                     <span class="play-icon"></span>
                 </div>
             <?php } ?>
@@ -57,7 +58,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
             <?php endif; ?>
             
             <?php if ( $show_meta && 'below_content' === $meta_position ) include BOLDPO_PL_PATH . 'public/template-parts/post-meta/post-meta.php'; ?>
-            <?php $attributes['allowedMetas'] = $_saved_metas; // Restore for next post iteration ?>
+            <?php $attributes['allowedMetas'] = $_saved_metas; ?>
             <?php if ( $show_read_more === 'yes' && ! empty( $read_more_text ) ) : ?>
                 <div class="boldpo-read-more">
                     <a href="<?php the_permalink(); ?>" class="boldpo-read-more-link">

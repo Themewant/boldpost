@@ -597,7 +597,7 @@
   color: currentColor;
 }
 .boldpo-post-categories.boldpo-post-categories-style-3 .bldpost-meta a:hover {
-  color: var(--boldpo-preset-color-tertiary) !important;
+  color: var(--boldpo-preset-color-primary) !important;
 }
 .boldpo-post-categories.boldpo-post-categories-style-3 .bldpost-meta .boldpo-cat-dot {
   display: none;

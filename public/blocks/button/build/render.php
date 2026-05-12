@@ -150,7 +150,7 @@ if ( ! empty( $text ) ) :
 ?>
     <div <?php echo wp_kses_post( $block_wrap_attr ); ?>>
         <div class="boldpo-button">
-            <a href="<?php echo esc_url( $url ); ?>" class="boldpo-button-link icon-<?php echo esc_attr( $icon_position ); ?> icon-animation-<?php echo esc_attr( $icon_hover_animation ); ?>"<?php echo $link_attrs; ?>>
+            <a href="<?php echo esc_url( $url ); ?>" class="boldpo-button-link icon-<?php echo esc_attr( $icon_position ); ?> icon-animation-<?php echo esc_attr( $icon_hover_animation ); ?>"<?php echo $link_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $link_attrs is built from esc_attr/esc_url pieces above. ?>>
                 <?php if ( $show_icon && $icon_position === 'left' ) : ?>
                     <i class="boldpo-button-icon <?php echo esc_attr( $icon_type ); ?>"></i>
                 <?php endif; ?>

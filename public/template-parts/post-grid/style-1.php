@@ -1,5 +1,6 @@
-<?php 
+<?php
 	if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+	// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Local template variables.
 ?>
 <div class="boldpo-grid-item <?php echo esc_attr( $item_class ); ?>">
     <div class="boldpo-grid-item-inner">
@@ -11,7 +12,7 @@
                     // Simple size for now
                     the_post_thumbnail( $thumbnail_size );
                 } else {
-                    echo '<img src="' . esc_url( plugins_url( 'public/assets/img/placeholder.png', dirname(dirname(dirname(__DIR__))) ) ) . '" alt="Placeholder">';
+                    echo '<img src="' . BOLDPO_PL_URL . 'public/assets/img/placeholder.png" alt="Placeholder">';
                 }
             ?>
             <?php if ( '1' == $style ) { ?>
@@ -59,6 +60,6 @@
                 <span><?php echo esc_html( get_the_time('M') ); ?></span>
             </div>
         <?php endif; ?>
-        <?php $attributes['allowedMetas'] = $_saved_metas; // Restore for next post iteration ?>
+        <?php $attributes['allowedMetas'] = $_saved_metas; ?>
     </div>
 </div>

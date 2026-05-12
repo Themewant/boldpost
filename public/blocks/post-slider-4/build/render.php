@@ -543,7 +543,7 @@ if ( $query->have_posts() ) :
 
                                         <?php
                                     endwhile;
-                                wp_reset_query();
+                                wp_reset_postdata();
                                 ?>              
                             </div>
                             
@@ -595,7 +595,7 @@ if ( $query->have_posts() ) :
                                             </div>
                                         <?php
                                         endwhile;
-                                        wp_reset_query();
+                                        wp_reset_postdata();
                                     ?>                          
                                 </div>
                             </div>

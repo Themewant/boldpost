@@ -20,8 +20,8 @@ import IconPicker from '../../custom-components/IconPicker';
 import RangeControlWithUnit from '../../custom-components/RangeControlWithUnit';
 import ImageRadioControl from '../../custom-components/ImageRadioControl';
 import './editor.scss';
-import style1 from './assets/img/style-1.png';
-import style2 from './assets/img/style-2.png';
+import layout1 from './assets/img/layout-1.png';
+import layout2 from './assets/img/layout-2.png';
 
 
 export default function Edit({ attributes, setAttributes }) {
@@ -139,8 +139,8 @@ export default function Edit({ attributes, setAttributes }) {
                         value={attributes.layoutStyle}
                         onChange={(value) => setAttributes({ layoutStyle: value })}
                         options={[
-                            { label: __('Style 1', 'boldpost'), value: '1', src: style1 },
-                            { label: __('Style 2', 'boldpost'), value: '2', src: style2 }
+                            { label: __('Style 1', 'boldpost'), value: '1', src: layout1 },
+                            { label: __('Style 2', 'boldpost'), value: '2', src: layout2 }
                         ]}
                         __next40pxDefaultSize={true}
                         __nextHasNoMarginBottom={true}

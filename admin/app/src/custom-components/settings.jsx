@@ -104,7 +104,7 @@ export default function Settings() {
 
             <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
                 {COLOR_FIELDS.map((field) => (
-                    <Col xs={24} sm={12} md={6} key={field.key}>
+                    <Col xs={24} sm={12} md={4} key={field.key}>
                         <div className="boldpo-color-field" style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 12px', background: '#f7f8fb', borderRadius: 8 }}>
                             <ColorPicker
                                 value={colors[field.key]}

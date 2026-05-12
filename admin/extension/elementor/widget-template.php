@@ -163,8 +163,10 @@ class BOLDPO_Elementor_Template_Widget extends \Elementor\Widget_Base {
         $blocks = parse_blocks( $post->post_content );
         $this->collect_block_style_urls( $blocks, $css_urls );
 
-        // Print link tags
+        // Print link tags — this is a custom HTML preview emitter, not the standard front-end render path,
+        // so wp_enqueue_style() cannot be used here.
         foreach ( $css_urls as $url ) {
+            // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet -- Inline preview emitter; wp_enqueue_style() is not applicable here.
             echo '<link rel="stylesheet" href="' . esc_url( $url ) . '" />' . "\n";
         }
 
@@ -172,11 +174,13 @@ class BOLDPO_Elementor_Template_Widget extends \Elementor\Widget_Base {
         if ( function_exists( 'wp_get_global_stylesheet' ) ) {
             $global_css = wp_get_global_stylesheet();
             if ( ! empty( $global_css ) ) {
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS content stripped of tags via wp_strip_all_tags; HTML-escaping is not appropriate inside a <style> block.
                 echo '<style id="boldpo-global-styles">' . wp_strip_all_tags( $global_css ) . '</style>' . "\n";
             }
         }
 
         // Swiper JS
+        // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript -- Inline preview emitter; wp_enqueue_script() is not applicable here.
         echo '<script src="' . esc_url( BOLDPO_PL_URL . 'assets/lib/swiper/swiper-bundle.min.js' ) . '"></script>' . "\n";
     }
 
@@ -189,6 +193,7 @@ class BOLDPO_Elementor_Template_Widget extends \Elementor\Widget_Base {
         $inline = $styles->get_data( 'block-style-variation-styles', 'after' );
         if ( ! empty( $inline ) ) {
             $css = is_array( $inline ) ? implode( "\n", $inline ) : $inline;
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS content stripped of tags via wp_strip_all_tags; HTML-escaping is not appropriate inside a <style> block.
             echo '<style id="boldpo-block-style-variation-styles">' . wp_strip_all_tags( $css ) . '</style>' . "\n";
         }
     }

@@ -1,5 +1,6 @@
-<?php 
+<?php
 	if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+	// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Local template variables.
 ?>
 <div class="boldpo-list-item <?php echo esc_attr($item_class); ?>">
     <div class="boldpo-list-item-inner">
@@ -17,7 +18,7 @@
                     // Simple size for now
                     the_post_thumbnail( $thumbnail_size );
                 } else {
-                    echo '<img src="' . esc_url( plugins_url( 'public/assets/img/placeholder.png', dirname(dirname(dirname(__DIR__))) ) ) . '" alt="Placeholder">';
+                    echo '<img src="' . BOLDPO_PL_URL . 'public/assets/img/placeholder.png" alt="Placeholder">';
                 }
             ?>
              <?php if ( $i == 1 ) { ?>
@@ -51,7 +52,7 @@
             <?php endif; ?>
             
             <?php if ( $show_meta && 'below_content' === $meta_position ) include BOLDPO_PL_PATH . 'public/template-parts/post-meta/post-meta.php'; ?>
-            <?php $attributes['allowedMetas'] = $_saved_metas; // Restore for next post iteration ?>
+            <?php $attributes['allowedMetas'] = $_saved_metas; ?>
             <?php if ( $show_read_more === 'yes' && ! empty( $read_more_text ) ) : ?>
             <div class="boldpo-read-more">
                 <a href="<?php the_permalink(); ?>" class="boldpo-read-more-link">

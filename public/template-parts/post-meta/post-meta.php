@@ -1,5 +1,7 @@
-<?php 
+<?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Vars below are local to this included template, not true globals.
 
 $boldpo_allowed_metas = isset($attributes['allowedMetas']) ? $attributes['allowedMetas'] : [];
 $boldpo_meta_html = '';
@@ -82,6 +84,7 @@ if ( in_array( 'comments_count', $boldpo_allowed_metas ) ) {
     $boldpo_meta_html .= get_comments_number();
     $boldpo_meta_html .= '</span>';
 }
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 ?>
 <div class="boldpo-post-metas boldpo-post-metas-style-<?php echo esc_attr( $meta_style ); ?> boldpo-post-meta-position-<?php echo esc_attr( $meta_position ); ?>">
     <?php 

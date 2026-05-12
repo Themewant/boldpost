@@ -12,7 +12,7 @@ export default function BlockItem(
     }
 ) {
     return (
-        <Col className="gutter-row" span={6}>
+        <Col className="gutter-row" xs={24} sm={12} md={12} lg={6}>
             <div className="boldpo-block-item">
                 <div className="meta">
                     <div className='icon'>

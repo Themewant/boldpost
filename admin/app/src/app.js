@@ -6,12 +6,15 @@ import Dashboard from './custom-components/dashboard';
 import Blocks from './custom-components/blocks';
 import Templates from './custom-components/templates';
 import Settings from './custom-components/settings';
-import { DashboardOutlined, SettingOutlined, BlockOutlined, PicRightOutlined } from '@ant-design/icons';
+import License from './custom-components/license';
+import { DashboardOutlined, SettingOutlined, BlockOutlined, PicRightOutlined, KeyOutlined } from '@ant-design/icons';
 import { icons } from 'antd/es/image/PreviewGroup';
 
 
 const { Header, Content, Footer } = Layout;
 
+
+const isProInstalled = typeof boldpo !== 'undefined' && !!boldpo.isProInstalled;
 
 const items = [
     {
@@ -28,7 +31,12 @@ const items = [
         key: 'settings',
         label: 'Settings',
         icon: <SettingOutlined />
-    }
+    },
+    ...(isProInstalled ? [{
+        key: 'license',
+        label: 'License',
+        icon: <KeyOutlined />
+    }] : [])
 ]
 
 const ThemeData = {
@@ -86,6 +94,7 @@ export default function BoldPostApp() {
                             {current === 'blocks' && <Blocks />}
                             {current === 'templates' && <Templates />}
                             {current === 'settings' && <Settings />}
+                            {current === 'license' && isProInstalled && <License />}
 
                         </div>
                     </Content>

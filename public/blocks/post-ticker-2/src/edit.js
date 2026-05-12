@@ -31,11 +31,7 @@ import TypographyControls from '../../custom-components/TypographyControls';
 import ColorPopover from '../../custom-components/ColorPopover';
 import ImageRadioControl from '../../custom-components/ImageRadioControl';
 import ResponsiveWrapper from '../../custom-components/ResponsiveWrapper';
-import RangeControlWithUnit from '../../custom-components/RangeControlWithUnit';
 import TextAlignControl from '../../custom-components/TextAlignControl';
-import BoxShadowControl from '../../custom-components/BoxShadowControls';
-import BorderControl from '../../custom-components/BorderControl';
-import IconPicker from '../../custom-components/IconPicker';
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -43,7 +39,7 @@ import IconPicker from '../../custom-components/IconPicker';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
-import grid1 from './assets/img/grid-1.png';
+import layout1 from './assets/img/layout-1.png';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -82,33 +78,6 @@ export default function Edit({ attributes, setAttributes }) {
 	}));
 
 	categoriesOptions.unshift({ label: __('All Categories', 'boldpost'), value: 'all' });
-
-	const imageSizeOptions = useSelect((select) => {
-		const blockEditorStore = select('core/block-editor');
-		const editorStore = select('core'); // Testing 'core' store as well
-
-		const blockEditorSettings = blockEditorStore && typeof blockEditorStore.getSettings === 'function' ? blockEditorStore.getSettings() : null;
-		const coreSettings = editorStore && typeof editorStore.getSettings === 'function' ? editorStore.getSettings() : null;
-
-		const sizes = blockEditorSettings?.imageSizes || coreSettings?.imageSizes;
-
-		let options = [];
-
-		if (sizes && Array.isArray(sizes)) {
-			options = sizes.map((size) => ({
-				label: size.name,
-				value: size.slug,
-			}));
-		} else {
-			options = [
-				{ label: __('Large', 'boldpost'), value: 'large' },
-				{ label: __('Medium', 'boldpost'), value: 'medium' },
-				{ label: __('Thumbnail', 'boldpost'), value: 'thumbnail' },
-			];
-		}
-
-		return options;
-	}, []);
 
 	const posts = useSelect(
 		(select) =>
@@ -250,7 +219,7 @@ export default function Edit({ attributes, setAttributes }) {
 						value={attributes.sliderStyle}
 						onChange={(value) => setAttributes({ sliderStyle: value })}
 						options={[
-							{ label: __('Default', 'boldpost'), value: 'default', src: grid1 },
+							{ label: __('Default', 'boldpost'), value: 'default', src: layout1 },
 						]}
 					/>
 				</PanelBody>

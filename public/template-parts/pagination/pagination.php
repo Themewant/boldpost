@@ -1,8 +1,9 @@
-<?php 
+<?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 ?>
 <div class="boldpost-pagination-container">
     <?php
+    // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- $pagination_html is local to this included template, not a true global.
     if($pagination == true && $query->max_num_pages > 1) {
         $pagination_html = '';
         
@@ -21,7 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
             }
         }
 
-        echo apply_filters('boldpost_pagination_html', $pagination_html, $query, $attributes, $paged, $page_key);
-    } 
+        echo wp_kses_post( apply_filters( 'boldpost_pagination_html', $pagination_html, $query, $attributes, $paged, $page_key ) );
+    }
+    // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
     ?>
 </div>

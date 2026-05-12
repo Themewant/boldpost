@@ -44,8 +44,8 @@ import IconPicker from '../../custom-components/IconPicker';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
-import grid1 from './assets/img/grid-1.png';
-import grid2 from './assets/img/grid-2.png';
+import layout1 from './assets/img/layout-1.png';
+import layout2 from './assets/img/layout-2.png';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -234,8 +234,8 @@ export default function Edit({ attributes, setAttributes }) {
 						value={attributes.gridStyle}
 						onChange={(value) => setAttributes({ gridStyle: value })}
 						options={[
-							{ label: __('Default', 'boldpost'), value: 'default', src: grid1 },
-							{ label: __('Style 1', 'boldpost'), value: '1', src: grid2 }
+							{ label: __('Default', 'boldpost'), value: 'default', src: layout1 },
+							{ label: __('Style 1', 'boldpost'), value: '1', src: layout2 }
 						]}
 					/>
 				</PanelBody>

@@ -18,7 +18,7 @@ class BOLDPO_Main {
         // Initialize the plugin
         add_action( 'admin_init', array( $this, 'register_settings' ) );
         add_action( 'admin_menu', array( $this, 'add_menu' ) );
-        //add_action( 'admin_menu', array( $this, 'submenus' ) );
+        add_filter( 'plugin_action_links_' . BOLDPO_PLUGIN_BASE, array( $this, 'plugin_action_links' ), 10, 4 );
         $this->includes();
     }
 
@@ -54,17 +54,6 @@ class BOLDPO_Main {
         );
     }
 
-    public function submenus() {
-        add_submenu_page(
-            'boldpost',
-            'Blocks',
-            'Blocks',
-            'manage_options',
-            'boldpost',
-            array( $this, 'render_blocks_page' )
-        );
-    }
-
     public function render_menu_page() {
         echo '<div class="boldpo-options-wrap">';
         echo '<div id="boldpo-dashboard"></div>';
@@ -93,6 +82,16 @@ class BOLDPO_Main {
     public static function deactivate() {
         delete_option( 'boldpo_version' );
     }
-}
 
-BOLDPO_Main::instance();
+    public function plugin_action_links( $plugin_actions, $plugin_file, $plugin_data, $context ) {
+
+		$new_actions = array();
+		/* translators: 1: Settings Text */
+		$new_actions['boldpost_plugin_actions_setting'] = sprintf( __( '<a href="%s" target="_self">Settings</a>', 'boldpost' ), esc_url( admin_url( 'admin.php?page=boldpost' ) ) );
+		
+		/* translators: 1: Upgrade to pro text. */
+		$new_actions['boldpost_plugin_actions_upgrade'] = sprintf( __( '<a href="%s" style="color: #39b54a; font-weight: bold;"  target="_blank">Upgrade to Pro</a>', 'boldpost' ), esc_url( 'https://themewant.com/downloads/boldpost-pro/' ) );
+		return array_merge( $new_actions, $plugin_actions );
+
+	}
+}

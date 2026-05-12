@@ -52,10 +52,10 @@ class BOLDPO_Admin {
 
         
         $blocks = BOLDPO_Blocks::instance()->get_blocks();
-        $is_pro_active = false;
-        if ( class_exists( 'BOLDPO_Pro' ) ) {
-            $is_pro_active = (bool) BOLDPO_Pro::instance()->is_license_active();
-        }
+        $is_pro_installed = class_exists( 'BOLDPO_LICENSE' );
+        $is_pro_active = $is_pro_installed
+            ? (bool) BOLDPO_LICENSE::instance()->is_license_active()
+            : false;
 
         $template_count = wp_count_posts( 'boldpo-template' );
         $total_templates = isset( $template_count->publish ) ? (int) $template_count->publish : 0;
@@ -69,11 +69,16 @@ class BOLDPO_Admin {
             'boldpoUrl' => BOLDPO_PL_URL,
             'boldpoPath' => BOLDPO_PL_PATH,
             'isProActive' => $is_pro_active,
+            'isProInstalled' => $is_pro_installed,
             'templateCount' => $total_templates,
             'templateLimit' => $is_pro_active ? -1 : 3,
             'proUrl' => 'https://themewant.com/downloads/boldpost-pro',
             'colors' => BOLDPO_API::get_saved_colors(),
             'colorDefaults' => BOLDPO_API::get_color_defaults(),
+            'license' => array(
+                'key'    => (string) get_option( 'boldpo_license_key', '' ),
+                'status' => (string) get_option( 'boldpo_license_status', '' ),
+            ),
         ) );
     }
 

@@ -2,6 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Local template variables.
 $target_attr = $item_new_tab ? ' target="_blank" rel="noopener noreferrer"' : '';
 
 $image_src = ! empty( $item_image_url )

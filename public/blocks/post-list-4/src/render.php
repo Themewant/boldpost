@@ -25,7 +25,7 @@ if ( ! isset( $paged ) ) {
     if ( is_archive() ) {
         $paged = max( 1, get_query_var('paged') );
     } else {
-        $paged = isset( $_GET[ $page_key ] ) ? max( 1, (int) $_GET[ $page_key ] ) : 1;
+        $paged = isset( $_GET[ $page_key ] ) ? max( 1, (int) $_GET[ $page_key ] ) : 1; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Public pagination param; cast to int sanitizes the value.
     }
 }
 

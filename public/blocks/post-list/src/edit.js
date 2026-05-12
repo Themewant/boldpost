@@ -45,14 +45,14 @@ import IconPicker from '../../custom-components/IconPicker';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
-import list1 from './assets/img/style-1.png';
-import list2 from './assets/img/style-2.png';
-import list3 from './assets/img/style-3.png';
-import list4 from './assets/img/style-4.png';
-import list5 from './assets/img/style-5.png';
-import list6 from './assets/img/style-6.png';
-import list7 from './assets/img/style-7.png';
-import list8 from './assets/img/style-8.png';
+import layout1 from './assets/img/layout-1.png';
+import layout2 from './assets/img/layout-2.png';
+import layout3 from './assets/img/layout-3.png';
+import layout4 from './assets/img/layout-4.png';
+import layout5 from './assets/img/layout-5.png';
+import layout6 from './assets/img/layout-6.png';
+import layout7 from './assets/img/layout-7.png';
+import layout8 from './assets/img/layout-8.png';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -238,14 +238,14 @@ export default function Edit({ attributes, setAttributes }) {
 						value={attributes.listStyle}
 						onChange={(value) => setAttributes({ listStyle: value })}
 						options={[
-							{ label: __('Default', 'boldpost'), value: 'default', src: list1 },
-							{ label: __('Style 1', 'boldpost'), value: '1', src: list2 },
-							{ label: __('Style 2', 'boldpost'), value: '2', src: list3, isPro: true },
-							{ label: __('Style 3', 'boldpost'), value: '3', src: list4, isPro: true },
-							{ label: __('Style 4', 'boldpost'), value: '4', src: list5, isPro: true },
-							{ label: __('Style 5', 'boldpost'), value: '5', src: list6, isPro: true },
-							{ label: __('Style 6', 'boldpost'), value: '6', src: list7, isPro: true },
-							{ label: __('Style 7', 'boldpost'), value: '7', src: list3, isPro: true }
+							{ label: __('Default', 'boldpost'), value: 'default', src: layout1 },
+							{ label: __('Style 1', 'boldpost'), value: '1', src: layout2 },
+							{ label: __('Style 2', 'boldpost'), value: '2', src: layout3, isPro: true },
+							{ label: __('Style 3', 'boldpost'), value: '3', src: layout4, isPro: true },
+							{ label: __('Style 4', 'boldpost'), value: '4', src: layout5, isPro: true },
+							{ label: __('Style 5', 'boldpost'), value: '5', src: layout6, isPro: true },
+							{ label: __('Style 6', 'boldpost'), value: '6', src: layout7, isPro: true },
+							{ label: __('Style 7', 'boldpost'), value: '7', src: layout8, isPro: true }
 						]}
 					/>
 				</PanelBody>

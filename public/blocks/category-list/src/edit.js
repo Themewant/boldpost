@@ -40,9 +40,9 @@ import BorderControl from '../../custom-components/BorderControl';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
-import style1 from './assets/img/style-1.png';
-import style2 from './assets/img/style-2.png';
-import style3 from './assets/img/style-3.png';
+import layout1 from './assets/img/layout-1.png';
+import layout2 from './assets/img/layout-2.png';
+import layout3 from './assets/img/layout-3.png';
 /**
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
@@ -163,9 +163,9 @@ export default function Edit({ attributes, setAttributes }) {
                         value={attributes.listStyle}
                         onChange={(value) => setAttributes({ listStyle: value })}
                         options={[
-                            { label: __('Default', 'boldpost'), value: 'default', src: style1 },
-                            { label: __('Style 1', 'boldpost'), value: '1', src: style2, isPro: true },
-                            { label: __('Style 2', 'boldpost'), value: '2', src: style3, isPro: true },
+                            { label: __('Default', 'boldpost'), value: 'default', src: layout1 },
+                            { label: __('Style 1', 'boldpost'), value: '1', src: layout2, isPro: true },
+                            { label: __('Style 2', 'boldpost'), value: '2', src: layout3, isPro: true },
                         ]}
                         __next40pxDefaultSize={true}
                         __nextHasNoMarginBottom={true}

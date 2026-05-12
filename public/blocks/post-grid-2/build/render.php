@@ -27,7 +27,7 @@ if ( ! isset( $paged ) ) {
     if ( is_archive() ) {
         $paged = max( 1, get_query_var('paged') );
     } else {
-        $paged = isset( $_GET[ $page_key ] ) ? max( 1, (int) $_GET[ $page_key ] ) : 1;
+        $paged = isset( $_GET[ $page_key ] ) ? max( 1, (int) $_GET[ $page_key ] ) : 1; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Public pagination param; cast to int sanitizes the value.
     }
 }
 
@@ -596,7 +596,7 @@ if ( $query->have_posts() ) :
                         } else {
                             // Only one post — drop it straight into the middle wrap
                             echo '<div class="boldpo-grid-col-middle-wrap ' . esc_attr($wrap_middle_col_class) . '">';
-                            echo $style_6_middle_html;
+                            echo $style_6_middle_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Captured output from an included template that already escapes its parts.
                             echo '</div>';
                         }
 
@@ -610,7 +610,7 @@ if ( $query->have_posts() ) :
                         if ($i == $query->post_count) {
                             echo '</div></div>';
                             echo '<div class="boldpo-grid-col-middle-wrap ' . esc_attr($wrap_middle_col_class) . '">';
-                            echo $style_6_middle_html;
+                            echo $style_6_middle_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Captured output from an included template that already escapes its parts.
                             echo '</div>';
                         }
 
@@ -619,7 +619,7 @@ if ( $query->have_posts() ) :
                         echo '</div></div>';
 
                         echo '<div class="boldpo-grid-col-middle-wrap ' . esc_attr($wrap_middle_col_class) . '">';
-                        echo $style_6_middle_html;
+                        echo $style_6_middle_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Captured output from an included template that already escapes its parts.
                         echo '</div>';
 
                         $title_tag = $title_right_tag;
