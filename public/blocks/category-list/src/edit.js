@@ -52,7 +52,7 @@ import layout3 from './assets/img/layout-3.png';
  * @return {Element} Element to render.
  */
 import { useState, useEffect } from '@wordpress/element';
-import ServerSideRender from '@wordpress/server-side-render';
+import { ServerSideRender } from '@wordpress/server-side-render';
 import metadata from './block.json';
 
 export default function Edit({ attributes, setAttributes }) {

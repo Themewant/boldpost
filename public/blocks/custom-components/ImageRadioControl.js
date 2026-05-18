@@ -15,7 +15,6 @@ const ImageRadioControl = ({
 
     return (
         <>
-            {console.log('isLicenseActive', isLicenseActive)}
             <BaseControl label={label} help={help} className="eshb-image-radio-control" __nextHasNoMarginBottom={true}>
                 <div style={{
                     display: 'grid',
@@ -56,7 +55,7 @@ const ImageRadioControl = ({
                                         borderRadius: '2px'
                                     }}
                                 />
-                                {option.isPro && (
+                                {!isLicenseActive && option.isPro && (
                                     <span style={{
                                         position: 'absolute',
                                         top: '4px',

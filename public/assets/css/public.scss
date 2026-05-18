@@ -5,8 +5,8 @@
     --boldpo-preset-color-secondary: #5096ff;
     --boldpo-preset-color-tertiary: #f3f3f3;
     --boldpo-preset-color-white: var(--wp--preset--color--white, #ffffff);
-    --boldpo-preset-color-contrast-1: var(--wp--preset--color--contrast, #1e1e1e);
-    --boldpo-preset-color-contrast-2: #11111194;
+    --boldpo-preset-color-contrast-1: var(--wp--preset--color--contrast, #0e0e0e);
+    --boldpo-preset-color-contrast-2: #0e0e0e;
     --boldpo-preset-color-border: #8383831f;
     --boldpo-preset-hover-transition: 0.4s ease;
 }
@@ -23,9 +23,22 @@
     justify-content: flex-end;
 }
 
-.boldpo-block a {
-    &:focus {
-        outline: none;
+.boldpo-block {
+    color: var(--boldpo-preset-color-contrast-2);
+
+    a {
+        &:focus {
+            outline: none;
+        }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: var(--boldpo-preset-color-contrast-1);
     }
 }
 
@@ -47,6 +60,7 @@
 
         a {
             overflow: visible !important;
+            color: currentColor;
         }
     }
 
@@ -70,7 +84,7 @@
 
 .boldpo-post-categories {
     margin: 0;
-    gap: 0;
+    gap: 5px;
     display: flex;
 
     .boldpo-cat-dot {
@@ -278,4 +292,9 @@
     .nav-btn {
         transition: var(--boldpo-preset-hover-transition);
     }
+
+}
+
+.boldpo-video-wrapper video {
+    background-color: #000;
 }

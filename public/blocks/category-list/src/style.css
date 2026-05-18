@@ -54,7 +54,7 @@
 }
 .boldpo-category-list-block-wrap .boldpo-category-list.style-default .boldpo-category-item .boldpo-category-content .boldpo-category-count {
   background-color: var(--boldpo-preset-color-contrast-1);
-  color: #fff;
+  color: var(--boldpo-preset-color-white);
 }
 .boldpo-category-list-block-wrap .boldpo-category-list.style-default .boldpo-category-item .boldpo-category-content .boldpo-category-title {
   display: flex;
@@ -71,7 +71,7 @@
 }
 .boldpo-category-list-block-wrap .boldpo-category-list.style-1 .boldpo-category-item .boldpo-category-content .boldpo-category-count {
   background-color: var(--boldpo-preset-color-contrast-1);
-  color: #fff;
+  color: var(--boldpo-preset-color-white);
 }
 .boldpo-category-list-block-wrap .boldpo-category-list.style-1 .boldpo-category-item .boldpo-category-content .boldpo-category-content-text {
   margin-top: 18px;
@@ -101,7 +101,7 @@
 }
 .boldpo-category-list-block-wrap .boldpo-category-list.style-2 .boldpo-category-item .boldpo-category-content .boldpo-category-count {
   background-color: var(--boldpo-preset-color-contrast-1);
-  color: #fff;
+  color: var(--boldpo-preset-color-white);
   position: absolute;
   top: 20px;
   right: 20px;
@@ -121,6 +121,7 @@
 }
 .boldpo-category-list-block-wrap .boldpo-category-list.style-2 .boldpo-category-item .boldpo-category-content .boldpo-category-content-text .boldpo-category-title {
   font-weight: 900;
+  color: var(--boldpo-preset-color-white);
 }
 .boldpo-category-list-block-wrap .boldpo-category-list.style-2 .boldpo-category-item .boldpo-category-content .boldpo-category-content-text .boldpo-category-details-btn {
   border: 1px solid rgba(255, 255, 255, 0.2196078431);
@@ -129,7 +130,7 @@
   display: inline-block;
   line-height: 1.3;
   font-size: 0.875rem;
-  color: #fff;
+  color: var(--boldpo-preset-color-white);
   font-weight: 700;
   width: 100%;
   transition: all var(--boldpo-preset-hover-transition);
@@ -139,5 +140,5 @@
 .boldpo-category-list-block-wrap .boldpo-category-list.style-2 .boldpo-category-item .boldpo-category-content .boldpo-category-content-text .boldpo-category-details-btn:hover {
   border-color: var(--boldpo-preset-color-contrast-1);
   background-color: var(--boldpo-preset-color-contrast-1);
-  color: #fff;
+  color: var(--boldpo-preset-color-white);
 }/*# sourceMappingURL=style.css.map */

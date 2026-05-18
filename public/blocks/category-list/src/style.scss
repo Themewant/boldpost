@@ -66,7 +66,7 @@
                 .boldpo-category-content {
                     .boldpo-category-count {
                         background-color: var(--boldpo-preset-color-contrast-1);
-                        color: #fff;
+                        color: var(--boldpo-preset-color-white);
                     }
 
                     .boldpo-category-title {
@@ -93,7 +93,7 @@
 
                     .boldpo-category-count {
                         background-color: var(--boldpo-preset-color-contrast-1);
-                        color: #fff;
+                        color: var(--boldpo-preset-color-white);
                     }
 
                     .boldpo-category-content-text {
@@ -131,7 +131,7 @@
 
                     .boldpo-category-count {
                         background-color: var(--boldpo-preset-color-contrast-1);
-                        color: #fff;
+                        color: var(--boldpo-preset-color-white);
                         position: absolute;
                         top: 20px;
                         right: 20px;
@@ -153,6 +153,7 @@
 
                         .boldpo-category-title {
                             font-weight: 900;
+                            color: var(--boldpo-preset-color-white);
                         }
 
                         .boldpo-category-details-btn {
@@ -162,7 +163,7 @@
                             display: inline-block;
                             line-height: 1.3;
                             font-size: 0.875rem;
-                            color: #fff;
+                            color: var(--boldpo-preset-color-white);
                             font-weight: 700;
                             width: 100%;
                             transition: all var(--boldpo-preset-hover-transition);
@@ -172,7 +173,7 @@
                             &:hover {
                                 border-color: var(--boldpo-preset-color-contrast-1);
                                 background-color: var(--boldpo-preset-color-contrast-1);
-                                color: #fff;
+                                color: var(--boldpo-preset-color-white);
                             }
                         }
                     }

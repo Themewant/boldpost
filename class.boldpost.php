@@ -19,6 +19,8 @@ class BOLDPO_Main {
         add_action( 'admin_init', array( $this, 'register_settings' ) );
         add_action( 'admin_menu', array( $this, 'add_menu' ) );
         add_filter( 'plugin_action_links_' . BOLDPO_PLUGIN_BASE, array( $this, 'plugin_action_links' ), 10, 4 );
+        add_filter( 'upload_mimes', array( $this, 'allow_svg_upload' ) );
+
         $this->includes();
     }
 
@@ -94,4 +96,11 @@ class BOLDPO_Main {
 		return array_merge( $new_actions, $plugin_actions );
 
 	}
+    // Allow SVG upload
+    public function allow_svg_upload( $mimes ) {
+        $mimes['svg']  = 'image/svg+xml';
+        $mimes['svgz'] = 'image/svg+xml';
+
+        return $mimes;
+    }
 }

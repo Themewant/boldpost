@@ -132,7 +132,6 @@
 
 			.boldpo-blog-title {
 				font-weight: bold;
-				color: currentColor;
 				margin-bottom: 5px;
 				margin-top: 0;
 
@@ -245,9 +244,9 @@
 
 		.boldpo-list-item-divider {
 			margin: 0;
-			border-color: var(--boldpo-preset-color-border);
-			border-style: solid;
-			border-width: 1px 0 0 0;
+			background-color: var(--boldpo-preset-color-border);
+			height: 1px;
+			border: none;
 		}
 
 		&.style-default {

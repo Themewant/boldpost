@@ -84,11 +84,17 @@ if ( in_array( 'comments_count', $boldpo_allowed_metas ) ) {
     $boldpo_meta_html .= get_comments_number();
     $boldpo_meta_html .= '</span>';
 }
+
+// Allowed meta types may still produce no output for this post (e.g. tag/category have no terms,
+// or only 'date' is allowed but showDateOnTop is on). Skip the wrapper so we don't ship empty markup.
+if ( '' === trim( $boldpo_meta_html ) ) {
+    return;
+}
 // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 ?>
 <div class="boldpo-post-metas boldpo-post-metas-style-<?php echo esc_attr( $meta_style ); ?> boldpo-post-meta-position-<?php echo esc_attr( $meta_position ); ?>">
-    <?php 
+    <?php
     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML is escaped during generation
-    echo wp_kses_post( $boldpo_meta_html ); 
+    echo wp_kses_post( $boldpo_meta_html );
     ?>
 </div>

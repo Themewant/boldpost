@@ -573,6 +573,9 @@ if ( $query->have_posts() ) :
 
                     } else {
                         include $style_file;
+                        if($style == 'default' || $style == '1') {
+                            echo '</div>';
+                        }
                     }
 
                 } elseif ( ($style == '6') && file_exists( $style_file ) ) {
@@ -655,7 +658,7 @@ if ( $query->have_posts() ) :
 
                         echo '<div class="boldpo-grid-col-right-wrap ' . esc_attr($wrap_two_col_class) . '">';
                         include $style_file;
-                        echo '</div>';
+                        //echo '</div>';
 
                     } else {
                         include $style_file;
@@ -665,18 +668,14 @@ if ( $query->have_posts() ) :
 
 
             endwhile;
-            if ($style == '6' || $style == '4' || $style == '5') {
+            if ($style == '6' || $style == '4' || $style == '5' ) {
                 // Style 6: only close the inner right-row when the right column
                 // was actually opened (i.e. there are 5+ posts). For ≤4 posts,
                 // the left/middle wraps are already closed inline.
                 if ($query->post_count >= 5) {
                     echo '</div>';
                 }
-            } elseif ($query->post_count > 1) {
-                // Close inner boldpo-row then the right-wrap
-                //echo '</div>';
             }
-            echo '</div>';
             ?>
             <?php include BOLDPO_PL_PATH . 'public/template-parts/pagination/pagination.php'; ?>
         </div>

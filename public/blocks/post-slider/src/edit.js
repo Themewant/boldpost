@@ -61,7 +61,7 @@ import layout6 from './assets/img/layout-6.png';
  * @return {Element} Element to render.
  */
 import { useState, useEffect, useRef } from '@wordpress/element';
-import ServerSideRender from '@wordpress/server-side-render';
+import { ServerSideRender } from '@wordpress/server-side-render';
 import metadata from './block.json';
 
 export default function Edit({ attributes, setAttributes }) {
@@ -135,7 +135,7 @@ export default function Edit({ attributes, setAttributes }) {
 
 
 	let excludesOptions = [...postsOptions];
-	let includesOptions = [...postsOptions];
+	let includesOptions = postsOptions.filter(opt => !(Array.isArray(attributes.excludes) ? attributes.excludes : []).includes(opt.value));
 
 	// add no excludes
 	excludesOptions.unshift({ label: __('No Excludes', 'boldpost'), value: 'no-excludes' });

@@ -63,10 +63,16 @@ import layout8 from './assets/img/layout-8.png';
  * @return {Element} Element to render.
  */
 import { useState, useEffect } from '@wordpress/element';
-import ServerSideRender from '@wordpress/server-side-render';
+import { ServerSideRender } from '@wordpress/server-side-render';
 import metadata from './block.json';
 
+
+
 export default function Edit({ attributes, setAttributes }) {
+
+	const FREE_PAGINATION_VALUES = ['numeric'];
+	const PRO_UPGRADE_URL = 'https://themewant.com/downloads/boldpost-pro/';
+	const isLicenseActive = typeof boldpostProData !== 'undefined' && boldpostProData.is_license_active === '1';
 
 	useEffect(() => {
 		const id = 'boldpo-' + Math.random().toString(36).substr(2, 5);
@@ -140,13 +146,27 @@ export default function Edit({ attributes, setAttributes }) {
 
 
 	let excludesOptions = [...postsOptions];
-	let includesOptions = [...postsOptions];
+	let includesOptions = postsOptions.filter(opt => !(Array.isArray(attributes.excludes) ? attributes.excludes : []).includes(opt.value));
 
 	// add no excludes
 	excludesOptions.unshift({ label: __('No Excludes', 'boldpost'), value: 'no-excludes' });
 
 	// add all
 	includesOptions.unshift({ label: __('All', 'boldpost'), value: 'all' });
+
+	const paginationOptions = applyFilters(
+		'boldpost.post-list.pagination_options',
+		[
+			{ label: __('Numeric', 'boldpost'), value: 'numeric' },
+			{ label: __('Numeric Ajax (Pro)', 'boldpost'), value: 'numeric_ajax' },
+			{ label: __('Load More (Pro)', 'boldpost'), value: 'load_more' },
+			{ label: __('Infinite Scroll (Pro)', 'boldpost'), value: 'infinite_scroll' }
+		],
+		{
+			attributes,
+			setAttributes,
+		}
+	);
 
 	return (
 		<div {...useBlockProps()}>
@@ -485,7 +505,20 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(value) => setAttributes({ pagination: value })}
 						__nextHasNoMarginBottom={true}
 					/>
-					{applyFilters('boldpost.post-list.pagination_settings', null, { attributes, setAttributes })}
+					<SelectControl
+						label={__('Pagination Type', 'boldpost')}
+						value={attributes.paginationType}
+						onChange={(value) => {
+							if (!isLicenseActive && !FREE_PAGINATION_VALUES.includes(value)) {
+								window.open(PRO_UPGRADE_URL, '_blank', 'noopener,noreferrer');
+								return;
+							}
+							setAttributes({ paginationType: value });
+						}}
+						options={paginationOptions}
+						__next40pxDefaultSize={true}
+						__nextHasNoMarginBottom={true}
+					/>
 				</PanelBody>
 
 			</InspectorControls>

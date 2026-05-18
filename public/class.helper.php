@@ -171,14 +171,36 @@ class BOLDPO_Helper {
 				return $embed_video;
 			}
 
-			// In the block editor, iframes (YouTube/Vimeo) fail with player errors (e.g. YouTube Error 153)
-			// because they run inside a sandboxed iframe. Show a thumbnail instead.
+			// In the block editor (ServerSideRender via REST), wp_oembed_get's output omits the
+			// allow="autoplay" attribute, so the editor's iframe permission policy blocks autoplay.
+			// Build the embed iframe directly for YouTube/Vimeo so we can force the params we need.
 			if ( is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+				// Browsers block unmuted autoplay; force mute when autoplay is on.
+				$effective_mute = $autoplay ? 1 : (int) $mute;
+
 				if ( preg_match( '/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $video_url, $m ) ) {
-					$thumb = 'https://img.youtube.com/vi/' . $m[1] . '/hqdefault.jpg';
-					return '<img src="' . esc_url( $thumb ) . '" alt="' . esc_attr__( 'Video thumbnail', 'boldpost' ) . '" style="width:' . esc_attr( $width ) . ';height:' . esc_attr( $height ) . ';object-fit:cover;">';
+					$src = add_query_arg( array(
+						'autoplay'    => (int) $autoplay,
+						'mute'        => $effective_mute,
+						'controls'    => (int) $controls,
+						'rel'         => 0,
+						'playsinline' => 1,
+					), 'https://www.youtube.com/embed/' . $m[1] );
+
+					return '<iframe width="' . esc_attr( $width ) . '" height="' . esc_attr( $height ) . '" src="' . esc_url( $src ) . '" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
 				}
-				// Non-YouTube providers: skip the embed in editor to avoid player errors.
+
+				if ( preg_match( '/vimeo\.com\/(?:video\/)?(\d+)/', $video_url, $m ) ) {
+					$src = add_query_arg( array(
+						'autoplay' => (int) $autoplay,
+						'muted'    => $effective_mute,
+						'controls' => (int) $controls,
+					), 'https://player.vimeo.com/video/' . $m[1] );
+
+					return '<iframe width="' . esc_attr( $width ) . '" height="' . esc_attr( $height ) . '" src="' . esc_url( $src ) . '" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+				}
+
+				// Unknown provider: skip the embed in the editor.
 				return '';
 			}
 

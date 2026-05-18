@@ -44,11 +44,9 @@ BOLDPO_Helper::add_responsive_vars($attributes, $title_responsive, 'titleTypogra
 
 
 
-// $text_align = $attributes['textAlign'] ?? '';
-// if ( ! empty( $text_align ) ) {
-//     $title_responsive['desktop']['text-align'] = $text_align;
-//     $title_responsive['desktop']['justify-content'] = $text_align;
-// }
+if ( ! empty( $attributes['titleColor'] ) ) {
+    $title_responsive['desktop']['color'] = $attributes['titleColor'];
+}
 
 // Title padding (non-responsive)
 $t_padding = $attributes['titlePadding'] ?? [];
