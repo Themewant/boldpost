@@ -12,9 +12,9 @@ Display posts beautifully with customizable grids, lists, sliders & category dis
 
 == Description ==
 
-[BoldPost](https://boldpost.themewant.com/) is a modern Gutenberg post grid and layout plugin that helps you display blog posts in beautiful grids, lists, sliders, and category showcases. Perfect for blogs, news, magazine, and content-rich WordPress websites.
+[BoldPost](https://themewant.com/plugins/boldpost/) is a modern Gutenberg post grid and layout plugin that helps you display blog posts in beautiful grids, lists, sliders, and category showcases. Perfect for blogs, news, magazine, and content-rich WordPress websites.
 
-👉 [Plugin Demo](https://boldpost.themewant.com/)
+👉 [Plugin Demo](https://themewant.com/plugins/boldpost/)
 👉 [Documentation](https://documentation.themewant.com/docs/boldpost/)
 
 https://www.youtube.com/watch?v=1FM8cl7MEA8
@@ -146,14 +146,14 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 == Changelog ==
 
-= 1.0.6
+= 1.0.6 =
 * Made compatible with Pro version
 
-= 1.0.5
+= 1.0.5 =
 * Add Video Tutorial
 * Added Screenshots
 
-= 1.0.4
+= 1.0.4 =
 * Fixed CSS
 * Added Custom Bootstrap Support
 

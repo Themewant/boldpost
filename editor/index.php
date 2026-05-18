@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 class BOLDPO_Block_Editor {
-    
+    private $api_site_url = 'https://boldpost.themewant.com/wp-json/boldpost/v1';
     public static function instance() {
         static $instance = null;
         if ( null === $instance ) {
@@ -47,7 +47,7 @@ class BOLDPO_Block_Editor {
             'boldpoEditor',
             [
                 'plugin_url' => BOLDPO_PL_URL,
-                'api_url'    => 'https://themewant.com/greenaura/wp-json/boldpost/v1',
+                'api_url'    => $this->api_site_url,
                 'nonce'      => wp_create_nonce( 'wp_rest' ),
             ]
         );
