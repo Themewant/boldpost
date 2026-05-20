@@ -36,6 +36,9 @@
   margin-bottom: 0;
   margin-top: 15px;
 }
+.boldpo-post-slider-4-block-wrap .boldpo-post-slider-4 .boldpo-grid-item .boldpo-blog-title a {
+  color: currentColor;
+}
 .boldpo-post-slider-4-block-wrap .boldpo-post-slider-4 .boldpo-grid-item .boldpo-blog-title,
 .boldpo-post-slider-4-block-wrap .boldpo-post-slider-4 .boldpo-grid-item .boldpo-post-metas,
 .boldpo-post-slider-4-block-wrap .boldpo-post-slider-4 .boldpo-grid-item .boldpo-post-categories,
@@ -318,6 +321,9 @@
 }
 .boldpo-post-slider-4-block-wrap .boldpo-post-slider-4 .swiper-button-next {
   margin-top: 20px;
+}
+.boldpo-post-slider-4-block-wrap .boldpo-post-slider-4 .nav-btn::after {
+  display: none !important;
 }
 .boldpo-post-slider-4-block-wrap .boldpo-post-slider-4.style-default .boldpo-list-item, .boldpo-post-slider-4-block-wrap .boldpo-post-slider-4.style-1 .boldpo-list-item {
   background: #272727;

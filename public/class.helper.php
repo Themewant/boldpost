@@ -86,9 +86,16 @@ class BOLDPO_Helper {
 			if ( is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS values are sanitized via wp_strip_all_tags() during generation
 				echo '<style>' . $css . '</style>';
+			} elseif ( did_action( 'wp_head' ) ) {
+				// Classic (non-block) themes render blocks inside the_content() AFTER wp_head()
+				// has already printed. wp_add_inline_style() would queue the CSS to a handle
+				// that's already been output, so it never reaches the page. Print inline instead.
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS values are sanitized via wp_strip_all_tags() during generation
+				echo '<style id="' . esc_attr( $handle ) . '-inline">' . $css . '</style>';
 			} else {
 				wp_add_inline_style( $handle, $css );
 			}
+
 		}
 	}
 

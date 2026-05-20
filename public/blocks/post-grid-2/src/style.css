@@ -183,6 +183,17 @@
     font-size: 24px;
   }
 }
+.boldpo-post-grid-2-block-wrap .boldpo-post-grid-2.style-4 .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-title {
+  font-size: 2rem;
+}
+@media (max-width: 768px) {
+  .boldpo-post-grid-2-block-wrap .boldpo-post-grid-2.style-4 .boldpo-grid-col-left-wrap .boldpo-grid-item .boldpo-blog-title {
+    font-size: 24px;
+  }
+}
+.boldpo-post-grid-2-block-wrap .boldpo-post-grid-2.style-4 .boldpo-grid-col-right-wrap .boldpo-grid-item .boldpo-blog-title {
+  font-size: 1.25rem;
+}
 .boldpo-post-grid-2-block-wrap .boldpo-post-grid-2.style-5 .boldpo-grid-item .boldpo-blog-content {
   position: static;
   padding: 20px 30px 30px 0px;

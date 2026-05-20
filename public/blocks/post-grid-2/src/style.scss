@@ -255,6 +255,28 @@
 			}
 		}
 
+		&.style-4 {
+			.boldpo-grid-col-left-wrap {
+				.boldpo-grid-item {
+					.boldpo-blog-title {
+						font-size: 2rem;
+
+						@media (max-width: 768px) {
+							font-size: 24px;
+						}
+					}
+				}
+			}
+
+			.boldpo-grid-col-right-wrap {
+				.boldpo-grid-item {
+					.boldpo-blog-title {
+						font-size: 1.25rem;
+					}
+				}
+			}
+		}
+
 		&.style-5 {
 			.boldpo-grid-item {
 				.boldpo-blog-content {

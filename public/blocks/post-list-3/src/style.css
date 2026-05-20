@@ -129,6 +129,7 @@
   transform: translateY(15px) scale(1.1);
 }
 .boldpo-post-list-3-block-wrap .boldpo-post-list-3 .boldpo-list-item .boldpo-blog-title {
+  font-size: 1.025rem;
   font-weight: bold;
   margin: 0;
 }

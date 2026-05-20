@@ -119,11 +119,7 @@
 .boldpo-post-list-4-block-wrap .boldpo-post-list-4 .boldpo-list-item .boldpo-blog-title {
   font-weight: bold;
   margin: 0;
-}
-@media screen and (max-width: 767px) {
-  .boldpo-post-list-4-block-wrap .boldpo-post-list-4 .boldpo-list-item .boldpo-blog-title {
-    font-size: 1em;
-  }
+  font-size: 17px;
 }
 .boldpo-post-list-4-block-wrap .boldpo-post-list-4 .boldpo-list-item .boldpo-blog-title a {
   color: currentColor;
