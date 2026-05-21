@@ -23,7 +23,7 @@
 				margin: 0;
 				position: relative;
 				text-transform: capitalize;
-
+				color: var(--boldpo-preset-color-contrast-1);
 				&::before {
 					content: "";
 					position: absolute;

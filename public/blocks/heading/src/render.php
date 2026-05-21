@@ -33,7 +33,6 @@ if ( ! empty( $attributes['titleColor'] ) ) {
 
 // Title
 $title_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
-BOLDPO_Helper::add_responsive_vars($attributes, $title_responsive, 'titleMargin', '', ['top'=>'margin-top','right'=>'margin-right','bottom'=>'margin-bottom','left'=>'margin-left'], true);
 BOLDPO_Helper::add_responsive_vars($attributes, $title_responsive, 'titleTypography', '', [
     'fontSize'=>'font-size', 
     'fontWeight'=>'font-weight', 
@@ -143,6 +142,7 @@ if ( $style === '2' || $style === '6' ) {
 $full_responsive_css  = BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style, $responsive_data);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-title-wrap', $title_wrap_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-title', $title_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-title-wrap .boldpo-heading-right-icon', $title_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-description', $description_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-border-line', $border_line_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-heading.style-' . $style . ' .boldpo-heading-dot', $dot_responsive);

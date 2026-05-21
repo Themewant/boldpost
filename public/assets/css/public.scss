@@ -273,6 +273,7 @@
     }
 
     .boldpo-blog-title {
+        line-height: 1.2;
         a {
             background-size: 0% 1px;
             background-position: 0% 100%;
@@ -291,6 +292,9 @@
 
     .nav-btn {
         transition: var(--boldpo-preset-hover-transition);
+    }
+    .swiper-button-next:after, .swiper-button-prev:after {
+        font-size: 16px;
     }
 
 }

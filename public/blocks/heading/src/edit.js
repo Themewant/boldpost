@@ -31,6 +31,7 @@ import TypographyControls from '../../custom-components/TypographyControls';
 import ColorPopover from '../../custom-components/ColorPopover';
 import ImageRadioControl from '../../custom-components/ImageRadioControl';
 import ResponsiveWrapper from '../../custom-components/ResponsiveWrapper';
+import SpacingControl from '../../custom-components/SpacingControl';
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -219,9 +220,11 @@ export default function Edit({ attributes, setAttributes }) {
                     <Divider />
                     <ResponsiveWrapper label={__('Margin', 'boldpost')}>
                         {(device) => (
-                            <BoxControl
+                            <SpacingControl
                                 values={attributes[getAttrKey('titleMargin', device)]}
                                 onChange={(value) => setAttributes({ [getAttrKey('titleMargin', device)]: value })}
+                                min={-500}
+                                max={500}
                             />
                         )}
                     </ResponsiveWrapper>

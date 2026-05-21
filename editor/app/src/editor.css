@@ -18,3 +18,19 @@
 .boldpo-info-box-image-control {
     margin-bottom: 10px;
 }
+.block-editor-block-inspector__tabs {
+    background: #d8c7f02e;
+}
+.components-toggle-group-control {
+    border: 1px solid #ededed;
+    min-height: 35px;
+}
+.components-toggle-group-control-option-base svg {
+    width: 16px;
+}
+.components-input-control__container {
+    border-radius: 5px !important;
+}
+.block-editor-block-inspector__tabs button[data-active-item="true"] {
+    background: #e9c7ff;
+}

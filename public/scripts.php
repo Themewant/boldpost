@@ -29,6 +29,14 @@ function boldpo_enqueue_block_scripts() {
 		}
 	}
 
+	// Global layout — drives the Row block's boxed max-width fallback. The SCSS in
+	// layout-row reads `var(--boldpo-layout-row-max-width, 1200px)`, so setting it
+	// here on :root applies plugin-wide unless an individual Row overrides it.
+	$layout = BOLDPO_API::get_saved_layout();
+	if ( ! empty( $layout['container_width'] ) ) {
+		$declarations .= '--boldpo-layout-row-max-width:' . esc_attr( $layout['container_width'] ) . ';';
+	}
+
 	if ( $declarations !== '' ) {
 		wp_add_inline_style( 'boldpo-public-style', ':root{' . $declarations . '}' );
 	}

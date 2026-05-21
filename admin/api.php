@@ -91,6 +91,24 @@ class BOLDPO_API {
                 },
             ),
         ) );
+
+        // Layout endpoints — global container width, etc.
+        register_rest_route( 'boldpo/v1', '/layout', array(
+            array(
+                'methods'  => 'GET',
+                'callback' => array( $this, 'get_layout' ),
+                'permission_callback' => function () {
+                    return current_user_can('manage_options');
+                },
+            ),
+            array(
+                'methods'  => 'POST',
+                'callback' => array( $this, 'save_layout' ),
+                'permission_callback' => function () {
+                    return current_user_can('manage_options');
+                },
+            ),
+        ) );
     }
 
     public static function get_color_defaults() {
@@ -159,6 +177,71 @@ class BOLDPO_API {
         return rest_ensure_response( array(
             'status' => 'success',
             'colors' => $clean,
+        ) );
+    }
+
+    public static function get_layout_defaults() {
+        return array(
+            'container_width' => '1200px',
+        );
+    }
+
+    public static function get_saved_layout() {
+        $defaults = self::get_layout_defaults();
+        $saved    = get_option( 'boldpo_layout', array() );
+        if ( ! is_array( $saved ) ) {
+            $saved = array();
+        }
+        return array_merge( $defaults, $saved );
+    }
+
+    private function sanitize_css_length( $value ) {
+        $value = is_string( $value ) ? trim( $value ) : (string) $value;
+        if ( $value === '' ) {
+            return '';
+        }
+        // Bare number → treat as px.
+        if ( is_numeric( $value ) ) {
+            $n = (float) $value;
+            return $n > 0 ? $n . 'px' : '';
+        }
+        // Length with allowed CSS unit (px, %, rem, em, vw, vh, ch).
+        if ( preg_match( '/^([0-9]*\.?[0-9]+)(px|%|rem|em|vw|vh|ch)$/i', $value, $m ) ) {
+            $n = (float) $m[1];
+            return $n > 0 ? $n . strtolower( $m[2] ) : '';
+        }
+        return '';
+    }
+
+    public function get_layout() {
+        return rest_ensure_response( array(
+            'layout'   => self::get_saved_layout(),
+            'defaults' => self::get_layout_defaults(),
+        ) );
+    }
+
+    public function save_layout( $request ) {
+        $input    = $request->get_param( 'layout' );
+        $defaults = self::get_layout_defaults();
+
+        if ( ! is_array( $input ) ) {
+            return new WP_Error( 'invalid_payload', 'Layout payload must be an object.', array( 'status' => 400 ) );
+        }
+
+        $clean = array();
+        // container_width
+        if ( isset( $input['container_width'] ) ) {
+            $sanitized = $this->sanitize_css_length( $input['container_width'] );
+            $clean['container_width'] = $sanitized !== '' ? $sanitized : $defaults['container_width'];
+        } else {
+            $clean['container_width'] = $defaults['container_width'];
+        }
+
+        update_option( 'boldpo_layout', $clean );
+
+        return rest_ensure_response( array(
+            'status' => 'success',
+            'layout' => $clean,
         ) );
     }
 

@@ -683,6 +683,20 @@
 .boldpo-post-slider-4 .boldpo-blog-content {
   box-sizing: border-box;
 }
+.boldpo-post-grid .boldpo-blog-title,
+.boldpo-post-grid-2 .boldpo-blog-title,
+.boldpo-post-grid-3 .boldpo-blog-title,
+.boldpo-post-grid-4 .boldpo-blog-title,
+.boldpo-post-list .boldpo-blog-title,
+.boldpo-post-list-2 .boldpo-blog-title,
+.boldpo-post-list-3 .boldpo-blog-title,
+.boldpo-post-list-4 .boldpo-blog-title,
+.boldpo-post-slider .boldpo-blog-title,
+.boldpo-post-slider-2 .boldpo-blog-title,
+.boldpo-post-slider-3 .boldpo-blog-title,
+.boldpo-post-slider-4 .boldpo-blog-title {
+  line-height: 1.2;
+}
 .boldpo-post-grid .boldpo-blog-title a,
 .boldpo-post-grid-2 .boldpo-blog-title a,
 .boldpo-post-grid-3 .boldpo-blog-title a,
@@ -731,6 +745,31 @@
 .boldpo-post-slider-3 .nav-btn,
 .boldpo-post-slider-4 .nav-btn {
   transition: var(--boldpo-preset-hover-transition);
+}
+.boldpo-post-grid .swiper-button-next:after, .boldpo-post-grid .swiper-button-prev:after,
+.boldpo-post-grid-2 .swiper-button-next:after,
+.boldpo-post-grid-2 .swiper-button-prev:after,
+.boldpo-post-grid-3 .swiper-button-next:after,
+.boldpo-post-grid-3 .swiper-button-prev:after,
+.boldpo-post-grid-4 .swiper-button-next:after,
+.boldpo-post-grid-4 .swiper-button-prev:after,
+.boldpo-post-list .swiper-button-next:after,
+.boldpo-post-list .swiper-button-prev:after,
+.boldpo-post-list-2 .swiper-button-next:after,
+.boldpo-post-list-2 .swiper-button-prev:after,
+.boldpo-post-list-3 .swiper-button-next:after,
+.boldpo-post-list-3 .swiper-button-prev:after,
+.boldpo-post-list-4 .swiper-button-next:after,
+.boldpo-post-list-4 .swiper-button-prev:after,
+.boldpo-post-slider .swiper-button-next:after,
+.boldpo-post-slider .swiper-button-prev:after,
+.boldpo-post-slider-2 .swiper-button-next:after,
+.boldpo-post-slider-2 .swiper-button-prev:after,
+.boldpo-post-slider-3 .swiper-button-next:after,
+.boldpo-post-slider-3 .swiper-button-prev:after,
+.boldpo-post-slider-4 .swiper-button-next:after,
+.boldpo-post-slider-4 .swiper-button-prev:after {
+  font-size: 16px;
 }
 
 .boldpo-video-wrapper video {

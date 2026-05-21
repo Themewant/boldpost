@@ -99,6 +99,7 @@
   margin-top: 10px;
   margin-bottom: 5px;
   font-size: 1.2em;
+  color: var(--boldpo-preset-color-contrast-1);
 }
 .boldpo-post-slider-block-wrap .boldpo-post-slider .boldpo-grid-item .boldpo-blog-title a {
   color: currentColor;

@@ -75,6 +75,8 @@ class BOLDPO_Admin {
             'proUrl' => 'https://themewant.com/downloads/boldpost-pro',
             'colors' => BOLDPO_API::get_saved_colors(),
             'colorDefaults' => BOLDPO_API::get_color_defaults(),
+            'layout' => BOLDPO_API::get_saved_layout(),
+            'layoutDefaults' => BOLDPO_API::get_layout_defaults(),
             'license' => array(
                 'key'    => (string) get_option( 'boldpo_license_key', '' ),
                 'status' => (string) get_option( 'boldpo_license_status', '' ),

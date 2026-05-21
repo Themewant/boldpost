@@ -130,6 +130,7 @@
 			.boldpo-blog-title {
 				font-weight: bold;
 				margin: 0;
+				color: var(--boldpo-preset-color-contrast-1);
 				@media screen and (max-width: 767px) {
 					font-size: 1em;
 				}

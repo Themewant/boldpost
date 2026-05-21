@@ -574,7 +574,7 @@ if ( $query->have_posts() ) :
                     } else {
                         include $style_file;
                         if($style == 'default' || $style == '1') {
-                            echo '</div>';
+                           echo '</div>';
                         }
                     }
 
@@ -668,7 +668,7 @@ if ( $query->have_posts() ) :
 
 
             endwhile;
-            if ($style == '6' || $style == '4' || $style == '5' ) {
+            if ($style == 'default' || $style == '1' || $style == '6' || $style == '4' || $style == '5' ) {
                 // Style 6: only close the inner right-row when the right column
                 // was actually opened (i.e. there are 5+ posts). For ≤4 posts,
                 // the left/middle wraps are already closed inline.

@@ -120,6 +120,7 @@
   font-weight: bold;
   margin: 0;
   font-size: 17px;
+  color: var(--boldpo-preset-color-contrast-1);
 }
 .boldpo-post-list-4-block-wrap .boldpo-post-list-4 .boldpo-list-item .boldpo-blog-title a {
   color: currentColor;

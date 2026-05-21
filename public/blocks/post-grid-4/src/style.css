@@ -88,6 +88,7 @@
 .boldpo-post-grid-4-block-wrap .boldpo-post-grid-4 .boldpo-grid-item .boldpo-blog-title {
   font-weight: bold;
   margin: 10px 0 5px;
+  color: var(--boldpo-preset-color-contrast-1);
 }
 .boldpo-post-grid-4-block-wrap .boldpo-post-grid-4 .boldpo-grid-item .boldpo-blog-title a {
   color: currentColor;

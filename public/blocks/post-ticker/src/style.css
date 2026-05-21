@@ -19,6 +19,7 @@
   margin: 0;
   position: relative;
   text-transform: capitalize;
+  color: var(--boldpo-preset-color-contrast-1);
 }
 .boldpo-post-ticker-block-wrap .boldpo-post-ticker .boldpo-grid-item .boldpo-blog-title::before {
   content: "";

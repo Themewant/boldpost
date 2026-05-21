@@ -114,6 +114,7 @@
 .boldpo-post-list-2-block-wrap .boldpo-post-list-2 .boldpo-list-item .boldpo-blog-title {
   font-weight: bold;
   margin: 0;
+  color: var(--boldpo-preset-color-contrast-1);
 }
 @media screen and (max-width: 767px) {
   .boldpo-post-list-2-block-wrap .boldpo-post-list-2 .boldpo-list-item .boldpo-blog-title {

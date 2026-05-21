@@ -85,6 +85,7 @@
   font-weight: bold;
   margin: 10px 0 5px;
   font-size: 1.2em;
+  color: var(--boldpo-preset-color-contrast-1);
 }
 .boldpo-post-grid-block-wrap .boldpo-post-grid .boldpo-grid-item .boldpo-blog-title a {
   color: currentColor;
