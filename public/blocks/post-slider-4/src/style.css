@@ -290,7 +290,7 @@
 }
 @media screen and (max-width: 1024px) {
   .boldpo-post-slider-4-block-wrap .boldpo-post-slider-4 .slider__flex .slider__col {
-    display: none !important;
+    margin-top: 20px;
   }
 }
 .boldpo-post-slider-4-block-wrap .boldpo-post-slider-4 .slider__flex .slider__col .slider__thumbs {

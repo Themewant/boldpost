@@ -43,11 +43,35 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         customClass,
     } = attributes;
 
+    // Detect a duplicated blockId by walking blocks in document order: if any
+    // earlier column already owns this blockId, we're the copy and must regenerate.
+    // Duplicating a row copies its inner columns, so columns hit the same collision
+    // as rows — the duplicated column would otherwise share its parent's CSS class.
+    const hasDuplicateBlockId = useSelect(
+        (select) => {
+            if (!blockId) return false;
+            const { getClientIdsWithDescendants, getBlockName, getBlockAttributes } =
+                select(blockEditorStore);
+            const ids = getClientIdsWithDescendants();
+            for (const id of ids) {
+                if (id === clientId) return false;
+                if (
+                    getBlockName(id) === 'boldpost/column' &&
+                    getBlockAttributes(id)?.blockId === blockId
+                ) {
+                    return true;
+                }
+            }
+            return false;
+        },
+        [clientId, blockId]
+    );
+
     useEffect(() => {
-        if (!blockId) {
+        if (!blockId || hasDuplicateBlockId) {
             setAttributes({ blockId: 'boldpo-col-' + Math.random().toString(36).slice(2, 8) });
         }
-    }, [blockId, setAttributes]);
+    }, [blockId, hasDuplicateBlockId, setAttributes]);
 
     const { parentClientId, siblings, indexInParent, isEmpty } = useSelect(
         (select) => {

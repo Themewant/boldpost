@@ -76,11 +76,35 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         stretchColumns,
     } = attributes;
 
+    // Detect a duplicated blockId by walking blocks in document order: if any
+    // earlier block of the same type already owns this blockId, we're the copy
+    // and must regenerate. Without this, duplicates share a CSS class and per-row
+    // spacing/styles bleed between the two rows in editor and frontend.
+    const hasDuplicateBlockId = useSelect(
+        (select) => {
+            if (!blockId) return false;
+            const { getClientIdsWithDescendants, getBlockName, getBlockAttributes } =
+                select(blockEditorStore);
+            const ids = getClientIdsWithDescendants();
+            for (const id of ids) {
+                if (id === clientId) return false;
+                if (
+                    getBlockName(id) === 'boldpost/layout-row' &&
+                    getBlockAttributes(id)?.blockId === blockId
+                ) {
+                    return true;
+                }
+            }
+            return false;
+        },
+        [clientId, blockId]
+    );
+
     useEffect(() => {
-        if (!blockId) {
+        if (!blockId || hasDuplicateBlockId) {
             setAttributes({ blockId: 'boldpo-layout-row-' + Math.random().toString(36).slice(2, 8) });
         }
-    }, [blockId, setAttributes]);
+    }, [blockId, hasDuplicateBlockId, setAttributes]);
 
     const { innerBlocks, hasChildren } = useSelect(
         (select) => {
