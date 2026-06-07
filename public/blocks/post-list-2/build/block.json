@@ -471,6 +471,24 @@
       "type": "object",
       "default": {}
     },
+    "paginationBtnPadding": {
+      "type": "object"
+    },
+    "paginationBtnPaddingTablet": {
+      "type": "object"
+    },
+    "paginationBtnPaddingMobile": {
+      "type": "object"
+    },
+    "paginationWrapMargin": {
+      "type": "object"
+    },
+    "paginationWrapMarginTablet": {
+      "type": "object"
+    },
+    "paginationWrapMarginMobile": {
+      "type": "object"
+    },
     "paginationColor": {
       "type": "string",
       "default": "var(--boldpo-preset-color-contrast-2)"

@@ -617,7 +617,7 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('6.3', 'boldpost'), value: '6.3' }
 						]}
 						onChange={(value) => setAttributes({ slidesPerView: value })}
-						help={__('Choose which effect this booking form is for', 'boldpost')}
+						help={__('Choose column for desktop view', 'boldpost')}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
@@ -634,7 +634,7 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('4.3', 'boldpost'), value: '4.3' }
 						]}
 						onChange={(value) => setAttributes({ slidesPerViewTablet: value })}
-						help={__('Choose which effect this booking form is for', 'boldpost')}
+						help={__('Choose column for tablet view', 'boldpost')}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
@@ -651,7 +651,7 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('4.3', 'boldpost'), value: '4.3' }
 						]}
 						onChange={(value) => setAttributes({ slidesPerViewMobile: value })}
-						help={__('Choose which effect this booking form is for', 'boldpost')}
+						help={__('Choose column for mobile view', 'boldpost')}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
@@ -668,7 +668,7 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('4.3', 'boldpost'), value: '4.3' }
 						]}
 						onChange={(value) => setAttributes({ slidesPerViewMobileSmall: value })}
-						help={__('Choose which effect this booking form is for', 'boldpost')}
+						help={__('Choose column for small mobile view', 'boldpost')}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
@@ -685,7 +685,7 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('4.3', 'boldpost'), value: '4.3' }
 						]}
 						onChange={(value) => setAttributes({ slidesToScroll: value })}
-						help={__('Choose which effect this booking form is for', 'boldpost')}
+						help={__('Choose for how much items will slide by scroll', 'boldpost')}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
@@ -715,7 +715,7 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('Creative', 'boldpost'), value: 'creative' }
 						]}
 						onChange={(value) => setAttributes({ effect: value })}
-						help={__('Choose which effect this booking form is for', 'boldpost')}
+						help={__('Choose which effect this slider', 'boldpost')}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
@@ -1184,6 +1184,16 @@ export default function Edit({ attributes, setAttributes }) {
 							</TabPanel>
 
 							<Divider />
+							<RangeControlWithUnit
+								label={__('Size', 'boldpost')}
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('dotsSize', '')}
+								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+								min={0}
+								max={500}
+								step={1}
+							/>
 							<BoxControl
 								label={__('Border Radius', 'boldpost')}
 								values={attributes.dotsBorderRadius}
@@ -1226,6 +1236,17 @@ export default function Edit({ attributes, setAttributes }) {
 							</TabPanel>
 							<Divider />
 							<RangeControlWithUnit
+								label={__('Nav Size', 'boldpost')}
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('navSize', '')}
+								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+								min={0}
+								max={500}
+								step={1}
+							/>
+							<RangeControlWithUnit
+								label={__('Nav Icon Size', 'boldpost')}
 								attributes={attributes}
 								setAttributes={setAttributes}
 								attributeKey={getAttrKey('navIconSize', '')}

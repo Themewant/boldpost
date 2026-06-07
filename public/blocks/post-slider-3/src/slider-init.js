@@ -1,6 +1,6 @@
 (function (window) {
 
-    window.initBoldpoSlider = function (scope) {
+    window.initBoldpoSliderThree = function (scope) {
 
         const wraps = (scope || document).querySelectorAll(
             '.boldpo-post-slider-3-block-wrap'
@@ -105,7 +105,7 @@
 
     // Frontend initial load
     document.addEventListener('DOMContentLoaded', function () {
-        window.initBoldpoSlider(document);
+        window.initBoldpoSliderThree(document);
     });
 
 })(window);

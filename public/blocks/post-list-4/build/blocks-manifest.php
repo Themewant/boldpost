@@ -469,6 +469,24 @@ return array(
 					
 				)
 			),
+			'paginationBtnPadding' => array(
+				'type' => 'object'
+			),
+			'paginationBtnPaddingTablet' => array(
+				'type' => 'object'
+			),
+			'paginationBtnPaddingMobile' => array(
+				'type' => 'object'
+			),
+			'paginationWrapMargin' => array(
+				'type' => 'object'
+			),
+			'paginationWrapMarginTablet' => array(
+				'type' => 'object'
+			),
+			'paginationWrapMarginMobile' => array(
+				'type' => 'object'
+			),
 			'paginationColor' => array(
 				'type' => 'string',
 				'default' => 'var(--boldpo-preset-color-contrast-2)'

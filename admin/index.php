@@ -72,7 +72,7 @@ class BOLDPO_Admin {
             'isProInstalled' => $is_pro_installed,
             'templateCount' => $total_templates,
             'templateLimit' => $is_pro_active ? -1 : 3,
-            'proUrl' => 'https://themewant.com/downloads/boldpost-pro',
+            'proUrl' => 'https://themewant.com/plugins/boldpost/pricing',
             'colors' => BOLDPO_API::get_saved_colors(),
             'colorDefaults' => BOLDPO_API::get_color_defaults(),
             'layout' => BOLDPO_API::get_saved_layout(),

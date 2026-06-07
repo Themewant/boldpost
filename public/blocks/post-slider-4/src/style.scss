@@ -15,6 +15,7 @@
 				display: flex;
 				flex-direction: column;
 				justify-content: flex-end;
+				width: 100%;
 			}
 
 			.boldpo-overlay-all {
@@ -309,8 +310,12 @@
 
 		.swiper-pagination-bullet {
 			&.swiper-pagination-bullet-active {
-				background-color: #000;
+				background-color: var(--boldpo-preset-color-primary);
 			}
+		}
+
+		.swiper-pagination-bullet {
+			background-color: var(--boldpo-preset-color-white);
 		}
 
 		.slider__flex {
@@ -385,14 +390,15 @@
 			margin-top: 20px;
 		}
 
-		.nav-btn {
-			&::after {
-				display: none !important;
-			}
-		}
+		
 
 		&.style-default,
 		&.style-1 {
+			.nav-btn {
+				&::after {
+					display: none !important;
+				}
+			}
 			.boldpo-list-item {
 				background: #272727;
 			}
@@ -412,7 +418,7 @@
 				color: #fff;
 				border-radius: 0;
 				box-sizing: border-box;
-				z-index: 9;
+				z-index: 1;
 				position: static;
 				width: 100%;
 				font-weight: 500;
@@ -436,7 +442,7 @@
 		}
 
 		&.style-2 {
-			.slider__images {
+				.slider__images {
 				max-width: 100%;
 
 				.boldpo-blog-img img {

@@ -127,9 +127,10 @@ if ( ! empty( $attributes['itemOverlayBackgroundGradient'] ) ) {
 }
 
 // Content
-$content_padding_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
-BOLDPO_Helper::add_responsive_vars($attributes, $content_padding_responsive, 'contentPadding', '', ['top'=>'padding-top','right'=>'padding-right','bottom'=>'padding-bottom','left'=>'padding-left'], true);
-BOLDPO_Helper::add_responsive_vars($attributes, $content_padding_responsive, 'contentTextAlign', 'text-align', [], false);
+$content_style_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+BOLDPO_Helper::add_responsive_vars($attributes, $content_style_responsive, 'contentPadding', '', ['top'=>'padding-top','right'=>'padding-right','bottom'=>'padding-bottom','left'=>'padding-left'], true);
+BOLDPO_Helper::add_responsive_vars($attributes, $content_style_responsive, 'contentTextAlign', 'text-align', [], false);
+BOLDPO_Helper::add_responsive_vars($attributes, $content_style_responsive, 'contentTextAlign', 'justify-content', [], false);
 
 // Title
 $title_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
@@ -260,6 +261,9 @@ if(!empty($meta_margin['bottom'])) $metas_styles['margin-bottom'] = BOLDPO_Helpe
 if(!empty($meta_margin['left'])) $metas_styles['margin-left'] = BOLDPO_Helper::ensure_unit($meta_margin['left']);
 
 $meta_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+BOLDPO_Helper::add_responsive_vars($attributes, $meta_responsive, 'contentTextAlign', 'text-align', [], false);
+BOLDPO_Helper::add_responsive_vars($attributes, $meta_responsive, 'contentTextAlign', 'justify-content', [], false);
+
 BOLDPO_Helper::add_responsive_vars($attributes, $meta_responsive, 'metaTypography', '', [
     'fontSize'=>'font-size',
     'fontWeight'=>'font-weight',
@@ -313,6 +317,7 @@ foreach ( $thumbnail_width_responsive as $device => $styles ) {
 $navButtonStyles = [];
 if(!empty($attributes['navBgColor'])) $navButtonStyles['background-color'] = $attributes['navBgColor'];
 if(!empty($attributes['navColor'])) $navButtonStyles['color'] = $attributes['navColor'];
+if(!empty($attributes['navSize'])) $navButtonStyles['--swiper-navigation-size'] = $attributes['navSize'];
 
 $navPadding = $attributes['navPadding'] ?? [];
 if(!empty($navPadding['top'])) $navButtonStyles['padding-top'] = BOLDPO_Helper::ensure_unit($navPadding['top']);
@@ -344,6 +349,9 @@ if(!empty($attributes['navIconSize'])) $navBtnIconStyles['width'] = BOLDPO_Helpe
 $dotStyles = [];
 if(!empty($attributes['dotsColor'])) $dotStyles['color'] = $attributes['dotsColor'];
 if(!empty($attributes['dotsBgColor'])) $dotStyles['background-color'] = $attributes['dotsBgColor'];
+if(!empty($attributes['dotsSize'])) $dotStyles['height'] = $attributes['dotsSize'];
+if(!empty($attributes['dotsSize'])) $dotStyles['width'] = $attributes['dotsSize'];
+
 $dotBorderRadius = $attributes['dotsBorderRadius'] ?? [];
 if(!empty($dotBorderRadius['top'])) $dotStyles['border-top-left-radius'] = BOLDPO_Helper::ensure_unit($dotBorderRadius['top']);
 if(!empty($dotBorderRadius['right'])) $dotStyles['border-top-right-radius'] = BOLDPO_Helper::ensure_unit($dotBorderRadius['right']);
@@ -370,11 +378,11 @@ $selector     = '.boldpo-post-slider-4-block-wrap.' . $unique_id;
 $full_responsive_css = BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style, $responsive_data);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-list-item', $item_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-list-item .boldpo-blog-title', $title_responsive);
-$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-list-item .boldpo-post-metas', $meta_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-grid-item .boldpo-post-metas', $meta_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-grid-item .boldpo-blog-title', $title_left_typo_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-list-item .boldpo-blog-title', $title_right_typo_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-list-item .boldpo-blog-excerpt', $excerpt_responsive);
-$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-list-item .boldpo-blog-content', $content_padding_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-grid-item .boldpo-blog-content', $content_style_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-list-item .boldpo-blog-img img', $thumbnail_height_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-list-item .boldpo-blog-img', $thumbnail_width_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-list-item .boldpo-blog-content', $content_width_responsive);
@@ -492,11 +500,7 @@ if ( $query->have_posts() ) :
                                     ?>
                                         <div class="boldpo-post-slider-btn-wrapper boldpo-post-slider-btn-wrapper-<?php echo esc_attr($unique); ?>">
                                             <?php 
-                                            if($show_dots) {
-                                                ?>
-                                                <div class="swiper-pagination"></div>
-                                                <?php
-                                            }
+                                           
                                             ?>
                                             <!-- If we need navigation buttons -->
                                             <?php if($show_nav) { ?>
@@ -547,13 +551,15 @@ if ( $query->have_posts() ) :
                                 ?>              
                             </div>
                             
-                            
-                            <div class="swiper-pagination rt-gallery-slider-pagination"></div>                    
+                            <?php 
+                            if($show_dots){ ?>
+                                <div class="swiper-pagination rt-gallery-slider-pagination"></div>                 
+                            <?php } ?>   
                         </div>
                     </div>   
                     <div class="slider__col">
                         <?php
-                            if($style !== '2'){
+                            if($show_nav && $style !== '2'){
                                 ?>
                                 <div class="swiper-button-prev nav-btn"> <?php echo esc_html__( 'Previous', 'boldpost' ); ?> </div>
                                 <?php 
@@ -601,7 +607,7 @@ if ( $query->have_posts() ) :
                             </div>
                         </div>
                         <?php
-                            if($style !== '2'){
+                            if($show_nav && $style !== '2'){
                                 ?>
                                 <div class="swiper-button-next nav-btn"><?php echo esc_html__( 'Next', 'boldpost' ); ?></div>
                                 <?php

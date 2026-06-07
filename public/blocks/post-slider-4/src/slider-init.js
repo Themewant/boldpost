@@ -72,8 +72,6 @@
                         pagination: {
                             el: wrap.querySelector(".swiper-pagination"),
                             clickable: true,
-                            type: 'bullets',
-                            dynamicBullets: false,
                         },
                         grabCursor: true,
                         thumbs: {

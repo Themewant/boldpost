@@ -70,7 +70,7 @@ domReady(() => {
 
 	document.addEventListener('boldpoInitSliders', () => {
 		if (typeof window.initBoldpoSlider === 'function') {
-			window.initBoldpoSlider(document);
+			window.initBoldpoSliderThree(document);
 		}
 	});
 });

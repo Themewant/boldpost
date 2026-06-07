@@ -213,8 +213,8 @@
   border-radius: 50%;
   transition: var(--boldpo-preset-hover-transition);
   top: 50%;
-  height: 34px;
-  width: 34px;
+  height: var(--swiper-navigation-size);
+  width: var(--swiper-navigation-size);
   color: var(--boldpo-preset-color-contrast-2);
 }
 .boldpo-post-slider-3-block-wrap .boldpo-post-slider-3 .nav-btn svg {

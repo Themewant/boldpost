@@ -526,7 +526,7 @@ return array(
 			),
 			'speed' => array(
 				'type' => 'string',
-				'default' => '2000'
+				'default' => '1000'
 			),
 			'loop' => array(
 				'type' => 'boolean',
@@ -571,6 +571,10 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
+			'navSize' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'navPadding' => array(
 				'type' => 'object'
 			),
@@ -589,6 +593,10 @@ return array(
 			'showDots' => array(
 				'type' => 'boolean',
 				'default' => false
+			),
+			'dotsSize' => array(
+				'type' => 'string',
+				'default' => ''
 			),
 			'dotsBgColor' => array(
 				'type' => 'string',

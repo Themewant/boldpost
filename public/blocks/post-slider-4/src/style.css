@@ -13,6 +13,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  width: 100%;
 }
 .boldpo-post-slider-4-block-wrap .boldpo-post-slider-4 .boldpo-grid-item .boldpo-overlay-all {
   position: absolute;
@@ -260,7 +261,10 @@
   }
 }
 .boldpo-post-slider-4-block-wrap .boldpo-post-slider-4 .swiper-pagination-bullet.swiper-pagination-bullet-active {
-  background-color: #000;
+  background-color: var(--boldpo-preset-color-primary);
+}
+.boldpo-post-slider-4-block-wrap .boldpo-post-slider-4 .swiper-pagination-bullet {
+  background-color: var(--boldpo-preset-color-white);
 }
 .boldpo-post-slider-4-block-wrap .boldpo-post-slider-4 .slider__flex {
   display: flex;
@@ -323,7 +327,7 @@
 .boldpo-post-slider-4-block-wrap .boldpo-post-slider-4 .swiper-button-next {
   margin-top: 20px;
 }
-.boldpo-post-slider-4-block-wrap .boldpo-post-slider-4 .nav-btn::after {
+.boldpo-post-slider-4-block-wrap .boldpo-post-slider-4.style-default .nav-btn::after, .boldpo-post-slider-4-block-wrap .boldpo-post-slider-4.style-1 .nav-btn::after {
   display: none !important;
 }
 .boldpo-post-slider-4-block-wrap .boldpo-post-slider-4.style-default .boldpo-list-item, .boldpo-post-slider-4-block-wrap .boldpo-post-slider-4.style-1 .boldpo-list-item {
@@ -344,7 +348,7 @@
   color: #fff;
   border-radius: 0;
   box-sizing: border-box;
-  z-index: 9;
+  z-index: 1;
   position: static;
   width: 100%;
   font-weight: 500;

@@ -21,8 +21,6 @@ export default function Blocks() {
             nonce: boldpo.nonce
         };
 
-        console.log('Sending data:', data);
-
         fetch(boldpo.rest_url + 'update-block-status', {
             method: 'POST',
             headers: {
@@ -33,7 +31,6 @@ export default function Blocks() {
         })
             .then(response => response.json())
             .then(data => {
-                console.log('Response:', data);
                 // API returns { status: 'success', saved_status: '...' }
                 if (data.status === 'success') {
                     // Update global variable to keep in sync if needed (optional but good for consistency if mixed usage)

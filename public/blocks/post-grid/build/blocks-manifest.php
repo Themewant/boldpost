@@ -446,6 +446,24 @@ return array(
 					
 				)
 			),
+			'paginationBtnPadding' => array(
+				'type' => 'object'
+			),
+			'paginationBtnPaddingTablet' => array(
+				'type' => 'object'
+			),
+			'paginationBtnPaddingMobile' => array(
+				'type' => 'object'
+			),
+			'paginationWrapMargin' => array(
+				'type' => 'object'
+			),
+			'paginationWrapMarginTablet' => array(
+				'type' => 'object'
+			),
+			'paginationWrapMarginMobile' => array(
+				'type' => 'object'
+			),
 			'pagination' => array(
 				'type' => 'boolean',
 				'default' => true

@@ -543,6 +543,10 @@
     "navBorderRadius": {
       "type": "object"
     },
+    "navSize": {
+      "type": "string",
+      "default": ""
+    },
     "navIconSize": {
       "type": "string",
       "default": ""
@@ -553,6 +557,10 @@
     "showDots": {
       "type": "boolean",
       "default": false
+    },
+    "dotsSize": {
+      "type": "string",
+      "default": ""
     },
     "dotsBgColor": {
       "type": "string",

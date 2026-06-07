@@ -548,6 +548,10 @@ return array(
 			'navBorderRadius' => array(
 				'type' => 'object'
 			),
+			'navSize' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'navIconSize' => array(
 				'type' => 'string',
 				'default' => ''
@@ -558,6 +562,10 @@ return array(
 			'showDots' => array(
 				'type' => 'boolean',
 				'default' => false
+			),
+			'dotsSize' => array(
+				'type' => 'string',
+				'default' => ''
 			),
 			'dotsBgColor' => array(
 				'type' => 'string',

@@ -63,7 +63,7 @@ import metadata from './block.json';
 export default function Edit({ attributes, setAttributes }) {
 
 	const FREE_PAGINATION_VALUES = ['numeric'];
-	const PRO_UPGRADE_URL = 'https://themewant.com/downloads/boldpost-pro/';
+	const PRO_UPGRADE_URL = 'https://themewant.com/plugins/boldpost/pricing/';
 	const isLicenseActive = typeof boldpostProData !== 'undefined' && boldpostProData.is_license_active === '1';
 
 	const paginationOptions = applyFilters(
@@ -993,6 +993,24 @@ export default function Edit({ attributes, setAttributes }) {
 						values={attributes.paginationBtnBorderRadius}
 						onChange={(value) => setAttributes({ paginationBtnBorderRadius: value })}
 					/>
+					<Divider />
+					<ResponsiveWrapper label={__('Padding', 'boldpost')}>
+						{(device) => (
+							<BoxControl
+								values={attributes[getAttrKey('paginationBtnPadding', device)]}
+								onChange={(value) => setAttributes({ [getAttrKey('paginationBtnPadding', device)]: value })}
+							/>
+						)}
+					</ResponsiveWrapper>
+					<Divider />
+					<ResponsiveWrapper label={__('Margin', 'boldpost')}>
+						{(device) => (
+							<BoxControl
+								values={attributes[getAttrKey('paginationWrapMargin', device)]}
+								onChange={(value) => setAttributes({ [getAttrKey('paginationWrapMargin', device)]: value })}
+							/>
+						)}
+					</ResponsiveWrapper>
 
 				</PanelBody>
 

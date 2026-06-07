@@ -293,6 +293,7 @@ BOLDPO_Helper::add_responsive_vars($attributes, $thumbnail_height_responsive, 't
 $navButtonStyles = [];
 if(!empty($attributes['navBgColor'])) $navButtonStyles['background-color'] = $attributes['navBgColor'];
 if(!empty($attributes['navColor'])) $navButtonStyles['color'] = $attributes['navColor'];
+if(!empty($attributes['navSize'])) $navButtonStyles['--swiper-navigation-size'] = $attributes['navSize'];
 
 $navPadding = $attributes['navPadding'] ?? [];
 if(!empty($navPadding['top'])) $navButtonStyles['padding-top'] = BOLDPO_Helper::ensure_unit($navPadding['top']);
@@ -319,6 +320,9 @@ if(!empty($attributes['navIconSize'])) $navBtnIconStyles['width'] = BOLDPO_Helpe
 $dotStyles = [];
 if(!empty($attributes['dotsColor'])) $dotStyles['color'] = $attributes['dotsColor'];
 if(!empty($attributes['dotsBgColor'])) $dotStyles['background-color'] = $attributes['dotsBgColor'];
+if(!empty($attributes['dotsSize'])) $dotStyles['height'] = $attributes['dotsSize'];
+if(!empty($attributes['dotsSize'])) $dotStyles['width'] = $attributes['dotsSize'];
+
 $dotBorderRadius = $attributes['dotsBorderRadius'] ?? [];
 if(!empty($dotBorderRadius['top'])) $dotStyles['border-top-left-radius'] = BOLDPO_Helper::ensure_unit($dotBorderRadius['top']);
 if(!empty($dotBorderRadius['right'])) $dotStyles['border-top-right-radius'] = BOLDPO_Helper::ensure_unit($dotBorderRadius['right']);

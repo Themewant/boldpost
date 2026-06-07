@@ -92,7 +92,7 @@ class BOLDPO_Main {
 		$new_actions['boldpost_plugin_actions_setting'] = sprintf( __( '<a href="%s" target="_self">Settings</a>', 'boldpost' ), esc_url( admin_url( 'admin.php?page=boldpost' ) ) );
 		
 		/* translators: 1: Upgrade to pro text. */
-		$new_actions['boldpost_plugin_actions_upgrade'] = sprintf( __( '<a href="%s" style="color: #39b54a; font-weight: bold;"  target="_blank">Upgrade to Pro</a>', 'boldpost' ), esc_url( 'https://themewant.com/downloads/boldpost-pro/' ) );
+		$new_actions['boldpost_plugin_actions_upgrade'] = sprintf( __( '<a href="%s" style="color: #39b54a; font-weight: bold;"  target="_blank">Upgrade to Pro</a>', 'boldpost' ), esc_url( 'https://themewant.com/plugins/boldpost/pricing/' ) );
 		return array_merge( $new_actions, $plugin_actions );
 
 	}

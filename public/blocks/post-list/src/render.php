@@ -357,6 +357,14 @@ if ( ! empty( $pagination_btn_border_radius['right'] ) ) $pag_styles['border-top
 if ( ! empty( $pagination_btn_border_radius['bottom'] ) ) $pag_styles['border-bottom-left-radius'] = BOLDPO_Helper::ensure_unit( $pagination_btn_border_radius['bottom'] );
 if ( ! empty( $pagination_btn_border_radius['left'] ) ) $pag_styles['border-bottom-right-radius'] = BOLDPO_Helper::ensure_unit( $pagination_btn_border_radius['left'] );
 
+// Pagination Button Padding
+$pagination_btn_padding_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+BOLDPO_Helper::add_responsive_vars($attributes, $pagination_btn_padding_responsive, 'paginationBtnPadding', '', ['top'=>'padding-top','right'=>'padding-right','bottom'=>'padding-bottom','left'=>'padding-left'], true);
+
+// Pagination Wrap Margin
+$pagination_wrap_margin_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+BOLDPO_Helper::add_responsive_vars($attributes, $pagination_wrap_margin_responsive, 'paginationWrapMargin', '', ['top'=>'margin-top','right'=>'margin-right','bottom'=>'margin-bottom','left'=>'margin-left'], true);
+
 
 $thumbnail_height_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
 BOLDPO_Helper::add_responsive_vars($attributes, $thumbnail_height_responsive, 'thumbnailHeight', 'height', [], false);
@@ -411,6 +419,9 @@ $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .bo
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list.style-' . $style . ' .boldpo-list-item .boldpo-item-serial', $item_serial_typography_responsive);
 
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpost-load-more-btn', $pagination_btn_width_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-pagination .page-numbers', $pagination_btn_padding_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpost-load-more-btn', $pagination_btn_padding_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpost-pagination-container', $pagination_wrap_margin_responsive);
 
 
 wp_enqueue_style( $style_handle );

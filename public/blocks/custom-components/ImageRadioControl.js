@@ -10,7 +10,7 @@ const ImageRadioControl = ({
 }) => {
 
     const isLicenseActive = typeof boldpostProData !== 'undefined' && boldpostProData.is_license_active === '1';
-    const proVersionUrl = 'https://themewant.com/downloads/boldpost-pro'; // goto pro url if license not active when onclick pro option
+    const proVersionUrl = 'https://themewant.com/plugins/boldpost/pricing'; // goto pro url if license not active when onclick pro option
 
 
     return (

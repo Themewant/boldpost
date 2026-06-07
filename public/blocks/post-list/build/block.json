@@ -444,6 +444,24 @@
       "type": "object",
       "default": {}
     },
+    "paginationBtnPadding": {
+      "type": "object"
+    },
+    "paginationBtnPaddingTablet": {
+      "type": "object"
+    },
+    "paginationBtnPaddingMobile": {
+      "type": "object"
+    },
+    "paginationWrapMargin": {
+      "type": "object"
+    },
+    "paginationWrapMarginTablet": {
+      "type": "object"
+    },
+    "paginationWrapMarginMobile": {
+      "type": "object"
+    },
     "columnsTablet": {
       "type": "string",
       "default": "1"

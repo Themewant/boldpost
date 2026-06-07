@@ -377,6 +377,14 @@ if ( ! empty( $pagination_btn_border_radius['right'] ) ) $pag_styles['border-top
 if ( ! empty( $pagination_btn_border_radius['bottom'] ) ) $pag_styles['border-bottom-left-radius'] = BOLDPO_Helper::ensure_unit( $pagination_btn_border_radius['bottom'] );
 if ( ! empty( $pagination_btn_border_radius['left'] ) ) $pag_styles['border-bottom-right-radius'] = BOLDPO_Helper::ensure_unit( $pagination_btn_border_radius['left'] );
 
+// Pagination Button Padding
+$pagination_btn_padding_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+BOLDPO_Helper::add_responsive_vars($attributes, $pagination_btn_padding_responsive, 'paginationBtnPadding', '', ['top'=>'padding-top','right'=>'padding-right','bottom'=>'padding-bottom','left'=>'padding-left'], true);
+
+// Pagination Wrap Margin
+$pagination_wrap_margin_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+BOLDPO_Helper::add_responsive_vars($attributes, $pagination_wrap_margin_responsive, 'paginationWrapMargin', '', ['top'=>'margin-top','right'=>'margin-right','bottom'=>'margin-bottom','left'=>'margin-left'], true);
+
 
 $thumbnail_left_height_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
 BOLDPO_Helper::add_responsive_vars($attributes, $thumbnail_left_height_responsive, 'thumbnailLeftHeight', 'height', [], false);
@@ -428,6 +436,9 @@ $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($right_thumb_sele
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($right_thumb_img_selector, $thumbnail_right_height_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-2.style-' . $style . ' .boldpo-grid-item .boldpo-read-more .boldpo-read-more-link', $button_text_align_responsive);   
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpost-load-more-btn', $pagination_btn_width_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-pagination .page-numbers', $pagination_btn_padding_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpost-load-more-btn', $pagination_btn_padding_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpost-pagination-container', $pagination_wrap_margin_responsive);
 
 wp_enqueue_style( $style_handle );
 BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css, [
@@ -573,10 +584,11 @@ if ( $query->have_posts() ) :
 
                     } else {
                         include $style_file;
-                        if($style == 'default' || $style == '1') {
-                           echo '</div>';
-                        }
+
+                         
                     }
+
+                    
 
                 } elseif ( ($style == '6') && file_exists( $style_file ) ) {
 
@@ -675,6 +687,9 @@ if ( $query->have_posts() ) :
                 if ($query->post_count >= 5) {
                     echo '</div>';
                 }
+            }
+            if ($style == 'default' || $style == '1' ) {
+                 echo '</div>';
             }
             ?>
             <?php include BOLDPO_PL_PATH . 'public/template-parts/pagination/pagination.php'; ?>

@@ -521,7 +521,7 @@
 		},
 		"speed": {
 			"type": "string",
-			"default": "2000"
+			"default": "1000"
 		},
 		"loop": {
 			"type": "boolean",
@@ -566,6 +566,10 @@
 			"type": "string",
 			"default": ""
 		},
+		"navSize": {
+			"type": "string",
+			"default": ""
+		},
 		"navPadding": {
 			"type": "object"
 		},
@@ -584,6 +588,10 @@
 		"showDots": {
 			"type": "boolean",
 			"default": false
+		},
+		"dotsSize" : {
+			"type": "string",
+			"default": ""
 		},
 		"dotsBgColor": {
 			"type": "string",

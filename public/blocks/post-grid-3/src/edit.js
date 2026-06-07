@@ -962,6 +962,24 @@ export default function Edit({ attributes, setAttributes }) {
 						values={attributes.paginationBtnBorderRadius}
 						onChange={(value) => setAttributes({ paginationBtnBorderRadius: value })}
 					/>
+					<Divider />
+					<ResponsiveWrapper label={__('Padding', 'boldpost')}>
+						{(device) => (
+							<BoxControl
+								values={attributes[getAttrKey('paginationBtnPadding', device)]}
+								onChange={(value) => setAttributes({ [getAttrKey('paginationBtnPadding', device)]: value })}
+							/>
+						)}
+					</ResponsiveWrapper>
+					<Divider />
+					<ResponsiveWrapper label={__('Margin', 'boldpost')}>
+						{(device) => (
+							<BoxControl
+								values={attributes[getAttrKey('paginationWrapMargin', device)]}
+								onChange={(value) => setAttributes({ [getAttrKey('paginationWrapMargin', device)]: value })}
+							/>
+						)}
+					</ResponsiveWrapper>
 
 				</PanelBody>
 

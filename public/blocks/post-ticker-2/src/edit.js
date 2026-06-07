@@ -275,7 +275,7 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('6.3', 'boldpost'), value: '6.3' }
 						]}
 						onChange={(value) => setAttributes({ slidesPerView: value })}
-						help={__('Choose which effect this booking form is for', 'boldpost')}
+						help={__('Choose which effect this sldier is for', 'boldpost')}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
@@ -292,7 +292,7 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('4.3', 'boldpost'), value: '4.3' }
 						]}
 						onChange={(value) => setAttributes({ slidesPerViewTablet: value })}
-						help={__('Choose which effect this booking form is for', 'boldpost')}
+						help={__('Choose which effect this sldier is for', 'boldpost')}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
@@ -309,7 +309,7 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('4.3', 'boldpost'), value: '4.3' }
 						]}
 						onChange={(value) => setAttributes({ slidesPerViewMobile: value })}
-						help={__('Choose which effect this booking form is for', 'boldpost')}
+						help={__('Choose which effect this sldier is for', 'boldpost')}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
@@ -326,7 +326,7 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('4.3', 'boldpost'), value: '4.3' }
 						]}
 						onChange={(value) => setAttributes({ slidesPerViewMobileSmall: value })}
-						help={__('Choose which effect this booking form is for', 'boldpost')}
+						help={__('Choose which effect this sldier is for', 'boldpost')}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
@@ -343,7 +343,7 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('4.3', 'boldpost'), value: '4.3' }
 						]}
 						onChange={(value) => setAttributes({ slidesToScroll: value })}
-						help={__('Choose which effect this booking form is for', 'boldpost')}
+						help={__('Choose which effect this sldier is for', 'boldpost')}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
@@ -373,7 +373,7 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('Creative', 'boldpost'), value: 'creative' }
 						]}
 						onChange={(value) => setAttributes({ effect: value })}
-						help={__('Choose which effect this booking form is for', 'boldpost')}
+						help={__('Choose which effect this sldier is for', 'boldpost')}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>

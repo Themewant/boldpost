@@ -550,7 +550,7 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: __('Creative', 'boldpost'), value: 'creative' }
 						]}
 						onChange={(value) => setAttributes({ effect: value })}
-						help={__('Choose which effect this booking form is for', 'boldpost')}
+						help={__('Choose which effect this sldier is for', 'boldpost')}
 						__next40pxDefaultSize={true}
 						__nextHasNoMarginBottom={true}
 					/>
@@ -986,6 +986,26 @@ export default function Edit({ attributes, setAttributes }) {
 							</TabPanel>
 
 							<Divider />
+							<RangeControlWithUnit
+								label={__('Nav Size', 'boldpost')}
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('navSize', '')}
+								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+								min={0}
+								max={500}
+								step={1}
+							/>
+							<RangeControlWithUnit
+								label={__('Nav Icon Size', 'boldpost')}
+								attributes={attributes}
+								setAttributes={setAttributes}
+								attributeKey={getAttrKey('navIconSize', '')}
+								units={['px', '%', 'em', 'rem', 'vw', 'vh']}
+								min={0}
+								max={500}
+								step={1}
+							/>
 							<BoxControl
 								label={__('Border Radius', 'boldpost')}
 								values={attributes.dotsBorderRadius}
