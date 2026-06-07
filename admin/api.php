@@ -311,8 +311,8 @@ class BOLDPO_API {
     public function create_template( $request ) {
         // Check template limit for free version
         $is_pro = false;
-        if ( class_exists( 'BOLDPO_Pro' ) ) {
-            $is_pro = (bool) BOLDPO_Pro::instance()->is_license_active();
+        if ( class_exists( 'BOLDPO_LICENSE' ) ) {
+            $is_pro = (bool) BOLDPO_LICENSE::instance()->is_license_active();
         }
 
         if ( ! $is_pro ) {
