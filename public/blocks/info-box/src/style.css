@@ -23,7 +23,8 @@
 .boldpo-info-box-block-wrap .boldpo-info-box-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   display: block;
 }
 .boldpo-info-box-block-wrap .boldpo-info-box-content {

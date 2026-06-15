@@ -21,7 +21,8 @@
 .boldpo-heading-block-wrap .boldpo-heading.style-2 .boldpo-heading-title-wrap, .boldpo-heading-block-wrap .boldpo-heading.style-5 .boldpo-heading-title-wrap, .boldpo-heading-block-wrap .boldpo-heading.style-6 .boldpo-heading-title-wrap {
   position: relative;
   width: 100%;
-  column-gap: 10px;
+  -moz-column-gap: 10px;
+       column-gap: 10px;
 }
 .boldpo-heading-block-wrap .boldpo-heading.style-2 .boldpo-heading-title, .boldpo-heading-block-wrap .boldpo-heading.style-5 .boldpo-heading-title, .boldpo-heading-block-wrap .boldpo-heading.style-6 .boldpo-heading-title {
   white-space: nowrap !important;
@@ -45,7 +46,8 @@
 .boldpo-heading-block-wrap .boldpo-heading.style-4 .boldpo-heading-title-wrap {
   display: flex;
   align-items: center;
-  column-gap: 15px;
+  -moz-column-gap: 15px;
+       column-gap: 15px;
   width: 100%;
 }
 .boldpo-heading-block-wrap .boldpo-heading.style-4 .boldpo-heading-title {

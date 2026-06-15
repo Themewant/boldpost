@@ -296,9 +296,9 @@ if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) :
                 $category_image_id = get_term_meta( $category->term_id, 'category_image', true );
                 $category_image = wp_get_attachment_image_url( $category_image_id, $thumbnail_size );
                 $placeholderImage = BOLDPO_PL_URL . 'public/assets/img/placeholder.png';
-                $category_image = $category_image ? $category_image : $placeholderImage;
+                $category_image = $category_image ? $category_image : '';
                 $category_color = get_term_meta( $category->term_id, 'category_color', true );
-                $category_gradient = 'linear-gradient(to top, '.$category_color.', rgba(255, 255, 255, 0))';
+                $category_gradient = $category_color ? 'linear-gradient(to top, '.$category_color.', rgba(255, 255, 255, 0))' : '';
                 $style_file = $template_pl_path . 'public/template-parts/category-list/style-' . $style . '.php';
                 if ( file_exists( $style_file ) ) {
                     include $style_file;

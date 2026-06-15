@@ -526,11 +526,7 @@ if ( $query->have_posts() ) :
         } ?>>
             <?php
             $i = 0;
-            if ($paged > 1 && $query->post_count > 0) {
-                echo '<div class="boldpo-list-col-two-wrap">';
-                echo '<div class="boldpo-list-row boldpo-row ' . esc_attr($row_gap_class) . ' ' . esc_attr($gap_class) . '" data-paged="' . esc_attr($paged) . '">';
-            }
-            
+
             while ( $query->have_posts() ) : $query->the_post();
                 $i++;
                 $item_class = '';
@@ -548,7 +544,7 @@ if ( $query->have_posts() ) :
                 $style_file = $template_pl_path . 'public/template-parts/post-list-2/style-' . $style . '.php';
 
                 if ( file_exists( $style_file ) ) {
-                    if($i == 1 && $paged == 1) {
+                    if($i == 1) {
                         $title_tag = $title_one_tag;
                         $thumbnail_size = $thumbnail_one_size;
                         $item_class = $item_class . $col_class_1;
@@ -571,7 +567,7 @@ if ( $query->have_posts() ) :
                 }
             endwhile;
 
-            if ( ($paged == 1 && $query->post_count > 1) || ($paged > 1 && $query->post_count > 0) ) {
+            if ( $query->post_count > 1 ) {
                 echo '</div></div>';
             }
             ?>

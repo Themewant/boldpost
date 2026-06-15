@@ -45,7 +45,8 @@
   max-width: 100%;
   height: auto;
   display: block;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   transition: transform var(--boldpo-preset-hover-transition);
 }
 .boldpo-post-list-4-block-wrap .boldpo-post-list-4 .boldpo-list-item i {
@@ -100,7 +101,8 @@
 }
 .boldpo-post-list-4-block-wrap .boldpo-post-list-4 .boldpo-list-item .boldpo-blog-img img {
   display: block;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   width: 70px;
   height: 85px;
 }
@@ -223,7 +225,8 @@
 }
 .boldpo-post-list-4-block-wrap .boldpo-post-list-4.style-1 .boldpo-list-item .boldpo-blog-img img {
   height: 400px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   width: 100%;
 }
 .boldpo-post-list-4-block-wrap .boldpo-post-list-4.style-1 .boldpo-list-item .boldpo-blog-title,

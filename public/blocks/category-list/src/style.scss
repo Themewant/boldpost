@@ -109,6 +109,7 @@
             .boldpo-category-item {
                 overflow: hidden;
                 min-height: 200px;
+                background-color: #0077b5;
 
                 .boldpo-category-content {
                     flex-direction: column;
@@ -125,7 +126,7 @@
                         width: 100%;
 
                         img {
-                            height: 198px;
+                            height: 200px;
                         }
                     }
 

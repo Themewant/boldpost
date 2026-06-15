@@ -14,7 +14,8 @@
 .wp-block-boldpost-info-box .boldpo-info-box-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   display: block;
 }
 .wp-block-boldpost-info-box .boldpo-info-box-image .boldpo-info-box-image-placeholder {
@@ -62,5 +63,6 @@
 .boldpo-info-box-item-control .boldpo-info-box-image-control .boldpo-info-box-image-preview img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }/*# sourceMappingURL=editor.css.map */

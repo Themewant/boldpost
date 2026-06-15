@@ -42,7 +42,8 @@
   max-width: 100%;
   height: auto;
   display: block;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   transition: transform var(--boldpo-preset-hover-transition);
 }
 .boldpo-post-list-2-block-wrap .boldpo-post-list-2 .boldpo-list-item i {
@@ -96,7 +97,8 @@
 }
 .boldpo-post-list-2-block-wrap .boldpo-post-list-2 .boldpo-list-item .boldpo-blog-img img {
   display: block;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   width: 100%;
 }
 .boldpo-post-list-2-block-wrap .boldpo-post-list-2 .boldpo-list-item .boldpo-blog-img.boldpo-animate {
