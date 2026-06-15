@@ -1,4 +1,4 @@
-=== BoldPost – Gutenberg Post Grid & Layout Blocks ===
+=== BoldPost – Post Grid & Layout Blocks ===
 Contributors: themewant
 Tags: post grid, post list, post slider, gutenberg blocks, category list
 Requires at least: 6.0
