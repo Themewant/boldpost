@@ -42,6 +42,7 @@ https://www.youtube.com/watch?v=1FM8cl7MEA8
 * Set custom post limits and offsets
 * Show only featured posts
 
+
 **🖼️ Rich Visual Options**
 * Thumbnail size control
 * Overlay effects and animations
