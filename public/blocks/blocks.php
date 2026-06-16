@@ -23,17 +23,17 @@ function boldpo_enqueue_block_styles() {
 	// enqueue bootstrap grid
 	wp_enqueue_style( 'boldpo-bootstrap-grid', BOLDPO_PL_URL . 'assets/lib/bootstrap/bootstrap-grid.min.css', array(), BOLDPO_VERSION, 'all' );
 
-    // register plugin style if not registered	
+    // register plugin style if not registered
 	if (!wp_style_is('boldpo-public-style', 'registered')) {
-		wp_register_style( 
-			'boldpo-public-style', 
-			BOLDPO_PL_URL . 'public/assets/css/public.css', 
-			array(), 
-			BOLDPO_VERSION 
+		wp_register_style(
+			'boldpo-public-style',
+			BOLDPO_PL_URL . 'public/assets/css/public.css',
+			array(),
+			BOLDPO_VERSION
 		);
 	}
 
-    
+
 }
 
 $boldpo_blocks_instance = BOLDPO_Blocks::instance();

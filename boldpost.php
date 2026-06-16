@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: BoldPost
- * Description: BoldPost Plugin, post display plugin for gutenberg page builder.
+ * Plugin Name: BoldPost – Post Grid & Layout Blocks
+ * Description: BoldPost Plugin, post display plugin for the block editor.
  * Plugin URI:  https://themewant.com/downloads/boldpost/
  * Author:      Themewant
  * Author URI:  http://themewant.com/

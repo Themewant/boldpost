@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                         // Simple size for now
                         the_post_thumbnail( $thumbnail_size );
                     } else {
-                        echo '<img src="' . BOLDPO_PL_URL . 'public/assets/img/placeholder.png" alt="Placeholder">';
+                        echo '<img src="' . esc_url( BOLDPO_PL_URL . 'public/assets/img/placeholder.png' ) . '" alt="Placeholder">';
                     }
                 ?>
                 </a>

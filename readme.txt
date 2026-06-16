@@ -1,4 +1,4 @@
-=== BoldPost – Gutenberg Post Grid & Layout Blocks ===
+=== BoldPost – Post Grid & Layout Blocks ===
 Contributors: themewant
 Tags: post grid, post list, post slider, gutenberg blocks, category list
 Requires at least: 6.0
@@ -41,6 +41,7 @@ https://www.youtube.com/watch?v=1FM8cl7MEA8
 * Order by date, title, or custom fields
 * Set custom post limits and offsets
 * Show only featured posts
+
 
 **🖼️ Rich Visual Options**
 * Thumbnail size control
