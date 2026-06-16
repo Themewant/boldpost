@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: BoldPost – Post Grid & Layout Blocks
+ * Plugin Name: BoldPost 
  * Description: BoldPost Plugin, post display plugin for the block editor.
  * Plugin URI:  https://themewant.com/downloads/boldpost/
  * Author:      Themewant
