@@ -14,26 +14,24 @@ Display posts beautifully with customizable grids, lists, sliders & category dis
 
 [BoldPost](https://themewant.com/plugins/boldpost/) is a modern Gutenberg post grid and layout plugin that helps you display blog posts in beautiful grids, lists, sliders, and category showcases. Perfect for blogs, news, magazine, and content-rich WordPress websites.
 
-👉 [Plugin Demo](https://themewant.com/plugins/boldpost/)
-👉 [Documentation](https://documentation.themewant.com/docs/boldpost/)
+👉 [Plugin Demo](https://themewant.com/plugins/boldpost/) 👑 [Get Pro](https://themewant.com/plugins/boldpost/pricing/) 📃 [Documentation](https://documentation.themewant.com/docs/boldpost/)
 
 https://www.youtube.com/watch?v=1FM8cl7MEA8
 
 = Key Features =
 
-**🎨 Multiple Display Styles**
-* **Post Grid** - Display posts in responsive grid layouts with customizable columns
-* **Post List** - Show posts in elegant list format with featured images
-* **Post Slider** - Create beautiful post carousels with Swiper integration
-* **Category List** - Showcase your categories with post counts and descriptions
+**🎨 Why Choose BoldPost**
+* Launch professional blogging websites quickly with ready-made starter templates.
+* Build interactive pages effortlessly using a collection of 20+ powerful Gutenberg blocks.
+* Save design time with customizable layout patterns and prebuilt sections.
+* Display content intelligently using flexible query options based on tags, categories, taxonomies, authors, or custom rules.
+* Improve user experience with advanced filtering, instant search, and smooth Ajax-powered pagination.
+* Maintain consistent branding through centralized global style controls for colors and layouts.
+* Enhance blogging functionality with features modern styled blog grid or list.
+* Works smoothly alongside leading page builders including Elementor and similar platforms.
+* Fully responsive and translation-ready to ensure a seamless experience across devices and languages.
+* Optimized for speed and performance to deliver faster loading times and better usability.
 
-**⚡ Powerful Customization**
-* Fully responsive design that looks great on all devices
-* Extensive styling options for colors, typography, spacing, and more
-* Multiple pre-designed templates for each block type
-* Custom meta display options (author, date, categories, tags)
-* Featured post support to highlight important content
-* Flexible excerpt and read more button controls
 
 **🎯 Advanced Query Options**
 * Filter posts by categories
@@ -73,11 +71,40 @@ BoldPost integrates seamlessly with the WordPress block editor, providing you wi
 
 Built with performance in mind, BoldPost uses efficient queries and minimal JavaScript to ensure your site stays fast. The plugin only loads assets when needed and follows WordPress best practices for optimal performance.
 
+
+**😲 Launch Your Website in Minutes**
+Creating a professional website with BoldPost is quick and simple:
+
+1. Choose a starter template
+2. Customize the design and content
+3. Publish your website and go live
+Check out the [Starter Templates!](https://themewant.com/plugins/boldpost/starter-sites)  
+
+✅ News Websites
+✅ Magazine Websites
+✅ Travel Blog Websites
+✅ Personal Blog Websites
+✅ Food Blog Websites
+✅ Sports News Websites
+✅ Tech News Websites
+✅ Gaming News Websites
+✅ And More!
+
+
+**📦 Gutenberg Blocks **
+✔ **Advanced Post Grid:** Display articles beautifully with multiple responsive grid variations and flexible styling options. [View Demo](https://themewant.com/plugins/boldpost/grid-layout-1/)
+✔ **Dynamic Post List:** Organize and showcase content in clean, reader-friendly list layouts. [View Demo](https://themewant.com/plugins/boldpost/list-layout-1/)
+✔ **Interactive Slider & Carousel:** Feature important posts using smooth sliders and engaging carousel displays. [View Demo](https://themewant.com/plugins/boldpost/slider-layout-1/)
+✔ **Flexible Row & Column Builder:** Create custom page structures and responsive content sections effortlessly.
+✔ **Live News Ticker:** Highlight breaking news, trending stories, or recent updates with animated ticker support.
+✔ **Custom Button Group:** Add stylish call-to-action buttons to improve navigation and user interaction.
+
+
 **🔥 WHAT’S NEXT**
 
 If you like The Our Plugin, then consider checking out other WordPress Plugins:
 
-[Easy Hotel Booking](https://wordpress.org/plugins/boldpost/) Powerful Hotel Booking Pluing
+[Easy Hotel Booking](https://wordpress.org/plugins/boldpost/) Powerful Hotel Booking Plugin
 [RT Mega Menu](https://wordpress.org/plugins/rt-mega-menu/) Advanced WordPress Mega Menu Builder for Elementor & Gutenberg
 [Easy Currency](https://wordpress.org/plugins/easy-currency/) Easy Currency Converter plugin for WooCommerce.
 [Easy Elements](https://wordpress.org/plugins/easy-elements/) Easy Elements for Elementor
@@ -126,14 +153,6 @@ Currently, BoldPost is designed to work with standard WordPress posts. Custom po
 4. Category List with post counts
 5. Block settings panel showing customization options
 6. Featured post meta box in post editor
-
-== Roadmap ==
-
-• Custom Post Type support  
-• AJAX category filtering  
-• More layout templates  
-• Masonry grid layout  
-• Pagination & Load More  
 
 ## Privacy Policy 
 
