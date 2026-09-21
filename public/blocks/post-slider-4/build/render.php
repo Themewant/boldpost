@@ -158,6 +158,19 @@ if(!empty($attributes['itemTitleColorHover'])) {
     $title_hover['color'] = $attributes['itemTitleColorHover'];
 }
 
+// Left (main slide) title colour. Optional override on top of the shared Title
+// colour above — left empty, the left title keeps using itemTitleColor exactly
+// as before, so existing posts are unaffected.
+$title_left_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+if ( ! empty( $attributes['titleLeftColor'] ) ) {
+    $title_left_responsive['desktop']['color'] = $attributes['titleLeftColor'];
+}
+
+$title_left_hover = [];
+if ( ! empty( $attributes['titleLeftColorHover'] ) ) {
+    $title_left_hover['color'] = $attributes['titleLeftColorHover'];
+}
+
 // Excerpt
 $excerpt_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
 BOLDPO_Helper::add_responsive_vars($attributes, $excerpt_responsive, 'itemExcerptPadding', '', ['top'=>'padding-top','right'=>'padding-right','bottom'=>'padding-bottom','left'=>'padding-left'], true);
@@ -308,7 +321,6 @@ foreach ( $thumbnail_width_responsive as $device => $styles ) {
 $navButtonStyles = [];
 if(!empty($attributes['navBgColor'])) $navButtonStyles['background-color'] = $attributes['navBgColor'];
 if(!empty($attributes['navColor'])) $navButtonStyles['color'] = $attributes['navColor'];
-if(!empty($attributes['navSize'])) $navButtonStyles['--swiper-navigation-size'] = $attributes['navSize'];
 
 $navPadding = $attributes['navPadding'] ?? [];
 if(!empty($navPadding['top'])) $navButtonStyles['padding-top'] = BOLDPO_Helper::ensure_unit($navPadding['top']);
@@ -332,9 +344,33 @@ $navButtonHoverStyles = [];
 if(!empty($attributes['navBgColorHover'])) $navButtonHoverStyles['background-color'] = $attributes['navBgColorHover'];
 if(!empty($attributes['navColorHover'])) $navButtonHoverStyles['color'] = $attributes['navColorHover'];
 
-$navBtnIconStyles = [];
-if(!empty($attributes['navIconSize'])) $navBtnIconStyles['height'] = BOLDPO_Helper::ensure_unit($attributes['navIconSize']);
-if(!empty($attributes['navIconSize'])) $navBtnIconStyles['width'] = BOLDPO_Helper::ensure_unit($attributes['navIconSize']);
+// Navigation size (per-device). Desktop kept identical; Tablet/Mobile added.
+$nav_size_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+if(!empty($attributes['navSize']))       $nav_size_responsive['desktop']['--swiper-navigation-size'] = $attributes['navSize'];
+if(!empty($attributes['navSizeTablet'])) $nav_size_responsive['tablet']['--swiper-navigation-size']  = $attributes['navSizeTablet'];
+if(!empty($attributes['navSizeMobile'])) $nav_size_responsive['mobile']['--swiper-navigation-size']  = $attributes['navSizeMobile'];
+
+// Navigation icon size (per-device). Desktop kept identical; Tablet/Mobile added.
+$nav_icon_size_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+if(!empty($attributes['navIconSize'])) {
+    $nav_icon_size_responsive['desktop']['height'] = BOLDPO_Helper::ensure_unit($attributes['navIconSize']);
+    $nav_icon_size_responsive['desktop']['width']  = BOLDPO_Helper::ensure_unit($attributes['navIconSize']);
+}
+if(!empty($attributes['navIconSizeTablet'])) {
+    $nav_icon_size_responsive['tablet']['height'] = BOLDPO_Helper::ensure_unit($attributes['navIconSizeTablet']);
+    $nav_icon_size_responsive['tablet']['width']  = BOLDPO_Helper::ensure_unit($attributes['navIconSizeTablet']);
+}
+if(!empty($attributes['navIconSizeMobile'])) {
+    $nav_icon_size_responsive['mobile']['height'] = BOLDPO_Helper::ensure_unit($attributes['navIconSizeMobile']);
+    $nav_icon_size_responsive['mobile']['width']  = BOLDPO_Helper::ensure_unit($attributes['navIconSizeMobile']);
+}
+
+// Video size (per-device). Desktop stays via the embed's HTML width/height attributes; only Tablet/Mobile CSS overrides added.
+$video_size_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+if(!empty($attributes['videoHeightTablet'])) $video_size_responsive['tablet']['height'] = BOLDPO_Helper::ensure_unit($attributes['videoHeightTablet']);
+if(!empty($attributes['videoWidthTablet']))  $video_size_responsive['tablet']['width']  = BOLDPO_Helper::ensure_unit($attributes['videoWidthTablet']);
+if(!empty($attributes['videoHeightMobile'])) $video_size_responsive['mobile']['height'] = BOLDPO_Helper::ensure_unit($attributes['videoHeightMobile']);
+if(!empty($attributes['videoWidthMobile']))  $video_size_responsive['mobile']['width']  = BOLDPO_Helper::ensure_unit($attributes['videoWidthMobile']);
 
 
 $dotStyles = [];
@@ -372,6 +408,10 @@ $slider_title_sel = $selector . ' .boldpo-post-slider-4.style-' . $style . ' .bo
                   . $selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-list-item .boldpo-blog-title';
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($slider_title_sel, $title_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($slider_title_sel, $title_typo_responsive);
+// Left title override — same specificity as the shared rule above but printed
+// after it, so it wins only when the option is actually set.
+$title_left_sel = $selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-grid-item .boldpo-blog-title';
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($title_left_sel, $title_left_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-post-metas', $meta_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-list-item .boldpo-blog-excerpt', $excerpt_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-grid-item .boldpo-blog-content', $content_style_responsive);
@@ -380,12 +420,23 @@ $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .bo
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-list-item .boldpo-blog-content', $content_width_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-list-item .boldpo-read-more .boldpo-read-more-link', $button_text_align_responsive);
 
+// Navigation size / icon size (Desktop + Tablet + Mobile) — same selectors/properties as the previous desktop output.
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4 .nav-btn', $nav_size_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-4 .nav-btn .swiper-navigation-icon', $nav_icon_size_responsive);
+
+// Video size (Tablet/Mobile only) — main (grid) slide video/iframe; desktop remains the embed's HTML attributes.
+$video_size_sel = $selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-grid-item .boldpo-video-wrapper video, '
+                . $selector . ' .boldpo-post-slider-4.style-' . $style . ' .boldpo-grid-item .boldpo-video-wrapper iframe';
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($video_size_sel, $video_size_responsive);
+
 wp_enqueue_style( $style_handle );
 BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css, [
     '.boldpo-post-slider-4 .boldpo-list-item'    => BOLDPO_Helper::get_inline_styles($item_desktop),
     '.boldpo-post-slider-4 .boldpo-list-item:hover'    => BOLDPO_Helper::get_inline_styles($item_hover),
     '.boldpo-post-slider-4 .boldpo-list-item .boldpo-overlay-all'        => BOLDPO_Helper::get_inline_styles($overlay_styles),
     '.boldpo-post-slider-4 .boldpo-grid-item .boldpo-blog-title a:hover, .boldpo-post-slider-4 .boldpo-list-item .boldpo-blog-title a:hover' => BOLDPO_Helper::get_inline_styles($title_hover),
+    // Printed after the shared hover rule above, so the left override wins when set.
+    '.boldpo-post-slider-4 .boldpo-grid-item .boldpo-blog-title a:hover' => BOLDPO_Helper::get_inline_styles($title_left_hover),
     '.boldpo-post-slider-4 .boldpo-list-item .boldpo-blog-excerpt a:hover'=> BOLDPO_Helper::get_inline_styles($excerpt_hover),
     '.boldpo-post-slider-4 .boldpo-list-item .boldpo-read-more .boldpo-read-more-link'     => BOLDPO_Helper::get_inline_styles($button_styles),
     '.boldpo-post-slider-4 .boldpo-list-item .boldpo-read-more .boldpo-read-more-link:hover'=> BOLDPO_Helper::get_inline_styles($button_hover),
@@ -399,7 +450,6 @@ BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css,
     '.boldpo-post-slider-4 .boldpo-post-metas i:hover'         => BOLDPO_Helper::get_inline_styles($meta_icon_hover),
     '.boldpo-post-slider-4 .nav-btn'         => BOLDPO_Helper::get_inline_styles($navButtonStyles),
     '.boldpo-post-slider-4 .nav-btn:hover'   => BOLDPO_Helper::get_inline_styles($navButtonHoverStyles),
-    '.boldpo-post-slider-4 .nav-btn .swiper-navigation-icon'   => BOLDPO_Helper::get_inline_styles($navBtnIconStyles),
     '.boldpo-post-slider-4 .swiper-pagination-bullet'         => BOLDPO_Helper::get_inline_styles($dotStyles),
     '.boldpo-post-slider-4 .swiper-pagination-bullet.swiper-pagination-bullet-active'   => BOLDPO_Helper::get_inline_styles($dotHoverStyles),
     '.boldpo-post-slider-4 .boldpo-list-item .boldpo-blog-img'   => BOLDPO_Helper::get_inline_styles($thumbnail_border_radius_styles),

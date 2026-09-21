@@ -15,14 +15,12 @@ return array(
 		),
 		'supports' => array(
 			'html' => false,
-			'spacing' => array(
-				'padding' => true,
-				'margin' => true
-			),
-			'color' => array(
-				'background' => true,
-				'text' => false,
-				'gradients' => true
+			'align' => array(
+				'left',
+				'center',
+				'right',
+				'wide',
+				'full'
 			)
 		),
 		'textdomain' => 'boldpost',
@@ -328,12 +326,32 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
+			'titleLeftColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'titleLeftColorHover' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'itemExcerptColor' => array(
 				'type' => 'string',
 				'default' => ''
 			),
 			'contentPadding' => array(
 				'type' => 'object'
+			),
+			'contentPaddingTablet' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
+			),
+			'contentPaddingMobile' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
 			),
 			'readMoreBackgroundColor' => array(
 				'type' => 'string',
@@ -490,9 +508,25 @@ return array(
 				'type' => 'string',
 				'default' => '500px'
 			),
+			'videoHeightTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'videoHeightMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'videoWidth' => array(
 				'type' => 'string',
 				'default' => '100%'
+			),
+			'videoWidthTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'videoWidthMobile' => array(
+				'type' => 'string',
+				'default' => ''
 			),
 			'videoControls' => array(
 				'type' => 'boolean',
@@ -560,7 +594,23 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
+			'navSizeTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'navSizeMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'navIconSize' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'navIconSizeTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'navIconSizeMobile' => array(
 				'type' => 'string',
 				'default' => ''
 			),
@@ -672,6 +722,18 @@ return array(
 			),
 			'categoryMargin' => array(
 				'type' => 'object'
+			),
+			'hideDesktop' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'hideTablet' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'hideMobile' => array(
+				'type' => 'boolean',
+				'default' => false
 			)
 		)
 	)

@@ -10,15 +10,13 @@
   "example": {},
   "supports": {
     "html": false,
-    "spacing": {
-      "padding": true,
-      "margin": true
-    },
-    "color": {
-      "background": true,
-      "text": false,
-      "gradients": true
-    }
+    "align": [
+      "left",
+      "center",
+      "right",
+      "wide",
+      "full"
+    ]
   },
   "textdomain": "boldpost",
   "editorScript": "file:./index.js",
@@ -330,6 +328,14 @@
     "contentPadding": {
       "type": "object"
     },
+    "contentPaddingTablet": {
+      "type": "object",
+      "default": {}
+    },
+    "contentPaddingMobile": {
+      "type": "object",
+      "default": {}
+    },
     "readMoreBackgroundColor": {
       "type": "string",
       "default": ""
@@ -547,7 +553,23 @@
       "type": "string",
       "default": ""
     },
+    "navSizeTablet": {
+      "type": "string",
+      "default": ""
+    },
+    "navSizeMobile": {
+      "type": "string",
+      "default": ""
+    },
     "navIconSize": {
+      "type": "string",
+      "default": ""
+    },
+    "navIconSizeTablet": {
+      "type": "string",
+      "default": ""
+    },
+    "navIconSizeMobile": {
       "type": "string",
       "default": ""
     },
@@ -559,6 +581,14 @@
       "default": false
     },
     "dotsSize": {
+      "type": "string",
+      "default": ""
+    },
+    "dotsSizeTablet": {
+      "type": "string",
+      "default": ""
+    },
+    "dotsSizeMobile": {
       "type": "string",
       "default": ""
     },
@@ -659,6 +689,18 @@
     },
     "categoryMargin": {
       "type": "object"
+    },
+    "hideDesktop": {
+      "type": "boolean",
+      "default": false
+    },
+    "hideTablet": {
+      "type": "boolean",
+      "default": false
+    },
+    "hideMobile": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

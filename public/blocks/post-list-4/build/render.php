@@ -399,6 +399,13 @@ foreach ( $thumbnail_width_responsive as $device => $styles ) {
 $video_styles = [];
 if(!empty($video_height)) $video_styles['height'] = BOLDPO_Helper::ensure_unit($video_height);
 
+// Video responsive (Tablet/Mobile) — desktop stays handled by $video_styles above.
+$video_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+if(!empty($attributes['videoHeightTablet'])) $video_responsive['tablet']['height'] = BOLDPO_Helper::ensure_unit($attributes['videoHeightTablet']);
+if(!empty($attributes['videoHeightMobile'])) $video_responsive['mobile']['height'] = BOLDPO_Helper::ensure_unit($attributes['videoHeightMobile']);
+if(!empty($attributes['videoWidthTablet'])) $video_responsive['tablet']['width'] = BOLDPO_Helper::ensure_unit($attributes['videoWidthTablet']);
+if(!empty($attributes['videoWidthMobile'])) $video_responsive['mobile']['width'] = BOLDPO_Helper::ensure_unit($attributes['videoWidthMobile']);
+
 // Thumbnail Border Radius
 $thumbnail_border_radius_styles = [];
 $t_border_radius = $attributes['thumbnailBorderRadius'] ?? [];
@@ -425,6 +432,7 @@ $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .bo
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-pagination .page-numbers', $pagination_btn_padding_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpost-load-more-btn', $pagination_btn_padding_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpost-pagination-container', $pagination_wrap_margin_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-list-4 .boldpo-list-item .boldpo-video-wrapper iframe', $video_responsive);
 
 wp_enqueue_style( $style_handle );
 BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css, [

@@ -338,6 +338,32 @@ $dotHoverStyles = [];
 if(!empty($attributes['dotsColorHover'])) $dotHoverStyles['color'] = $attributes['dotsColorHover'];
 if(!empty($attributes['dotsBgColorHover'])) $dotHoverStyles['background-color'] = $attributes['dotsBgColorHover'];
 
+// Responsive (Tablet/Mobile) for nav size, nav icon size and dots size.
+// Desktop stays in the sub_styles above; only tablet/mobile emitted here, when set.
+$nav_size_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+if(!empty($attributes['navSizeTablet'])) $nav_size_responsive['tablet']['--swiper-navigation-size'] = $attributes['navSizeTablet'];
+if(!empty($attributes['navSizeMobile'])) $nav_size_responsive['mobile']['--swiper-navigation-size'] = $attributes['navSizeMobile'];
+
+$nav_icon_size_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+if(!empty($attributes['navIconSizeTablet'])) {
+    $nav_icon_size_responsive['tablet']['height'] = BOLDPO_Helper::ensure_unit($attributes['navIconSizeTablet']);
+    $nav_icon_size_responsive['tablet']['width']  = BOLDPO_Helper::ensure_unit($attributes['navIconSizeTablet']);
+}
+if(!empty($attributes['navIconSizeMobile'])) {
+    $nav_icon_size_responsive['mobile']['height'] = BOLDPO_Helper::ensure_unit($attributes['navIconSizeMobile']);
+    $nav_icon_size_responsive['mobile']['width']  = BOLDPO_Helper::ensure_unit($attributes['navIconSizeMobile']);
+}
+
+$dots_size_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+if(!empty($attributes['dotsSizeTablet'])) {
+    $dots_size_responsive['tablet']['height'] = $attributes['dotsSizeTablet'];
+    $dots_size_responsive['tablet']['width']  = $attributes['dotsSizeTablet'];
+}
+if(!empty($attributes['dotsSizeMobile'])) {
+    $dots_size_responsive['mobile']['height'] = $attributes['dotsSizeMobile'];
+    $dots_size_responsive['mobile']['width']  = $attributes['dotsSizeMobile'];
+}
+
 
 // Thumbnail Border Radius
 $thumbnail_border_radius_styles = [];
@@ -361,6 +387,9 @@ $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .bo
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-3.style-' . $style . ' .boldpo-list-item .boldpo-blog-img', $thumbnail_width_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-3.style-' . $style . ' .boldpo-list-item .boldpo-blog-content', $content_width_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-3.style-' . $style . ' .boldpo-list-item .boldpo-read-more .boldpo-read-more-link', $button_text_align_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-3 .nav-btn', $nav_size_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-3 .nav-btn .swiper-navigation-icon', $nav_icon_size_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider-3 .swiper-pagination-bullet', $dots_size_responsive);
 
 wp_enqueue_style( $style_handle );
 BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css, [

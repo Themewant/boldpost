@@ -351,6 +351,14 @@ $pag_styles = [];
 if ( ! empty( $attributes['paginationColor'] ) ) $pag_styles['color'] = $attributes['paginationColor'];
 if ( ! empty( $attributes['paginationBackgroundColor'] ) ) $pag_styles['background-color'] = $attributes['paginationBackgroundColor'];
 
+$pag_typo = $attributes['paginationTypography'] ?? [];
+if ( ! empty( $pag_typo['fontFamily'] ) ) $pag_styles['font-family'] = $pag_typo['fontFamily'];
+if ( ! empty( $pag_typo['fontSize'] ) ) $pag_styles['font-size'] = $pag_typo['fontSize'];
+if ( ! empty( $pag_typo['fontWeight'] ) ) $pag_styles['font-weight'] = $pag_typo['fontWeight'];
+if ( ! empty( $pag_typo['lineHeight'] ) ) $pag_styles['line-height'] = $pag_typo['lineHeight'];
+if ( ! empty( $pag_typo['textTransform'] ) ) $pag_styles['text-transform'] = $pag_typo['textTransform'];
+if ( ! empty( $pag_typo['letterSpacing'] ) ) $pag_styles['letter-spacing'] = $pag_typo['letterSpacing'];
+
 $pag_hover = [];
 if ( ! empty( $attributes['paginationColorHover'] ) ) $pag_hover['color'] = $attributes['paginationColorHover'];
 if ( ! empty( $attributes['paginationBackgroundColorHover'] ) ) {

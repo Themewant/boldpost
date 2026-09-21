@@ -15,6 +15,7 @@ import {
     __experimentalDivider as Divider,
     SelectControl,
     TextControl,
+    ToggleControl,
     BoxControl,
     ToolbarGroup,
     ToolbarButton,
@@ -23,6 +24,7 @@ import {
     __experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
     __experimentalUnitControl as UnitControl,
     __experimentalNumberControl as NumberControl,
+	TabPanel,
 } from '@wordpress/components';
 
 import BackgroundControl from '../../custom-components/BackgroundControl';
@@ -200,6 +202,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             </BlockControls>
 
             <InspectorControls>
+                <TabPanel
+                    className="boldpo-inspector-tabs"
+                    activeClass="is-active"
+                    tabs={[
+                        { name: 'settings', title: __('Settings', 'boldpost') },
+                        { name: 'layout', title: __('Layout', 'boldpost') },
+                        { name: 'style', title: __('Style', 'boldpost') },
+                    ]}
+                >
+                    {(tab) => (
+                        <>
+                        {tab.name === 'layout' && (<>
                 <PanelBody title={__('Width', 'boldpost')} initialOpen={true}>
                     <SelectControl
                         label={__('Width Type', 'boldpost')}
@@ -257,8 +271,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         </>
                     )}
                 </PanelBody>
-
-                <PanelBody title={__('Layout', 'boldpost')} initialOpen={false}>
+                <PanelBody title={__('General', 'boldpost')} initialOpen={false}>
                     <SelectControl
                         label={__('HTML Tag', 'boldpost')}
                         value={htmlTag}
@@ -306,7 +319,30 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         __nextHasNoMarginBottom
                     />
                 </PanelBody>
-
+                        </>)}
+                        {tab.name === 'settings' && (<>
+                <PanelBody title={__('Responsive', 'boldpost')} initialOpen={false}>
+                    <ToggleControl
+                        label={__('Hide on Desktop', 'boldpost')}
+                        checked={!!attributes.hideDesktop}
+                        onChange={(v) => setAttributes({ hideDesktop: v })}
+                        __nextHasNoMarginBottom
+                    />
+                    <ToggleControl
+                        label={__('Hide on Tablet', 'boldpost')}
+                        checked={!!attributes.hideTablet}
+                        onChange={(v) => setAttributes({ hideTablet: v })}
+                        __nextHasNoMarginBottom
+                    />
+                    <ToggleControl
+                        label={__('Hide on Mobile', 'boldpost')}
+                        checked={!!attributes.hideMobile}
+                        onChange={(v) => setAttributes({ hideMobile: v })}
+                        __nextHasNoMarginBottom
+                    />
+                </PanelBody>
+                        </>)}
+                        {tab.name === 'layout' && (<>
                 <PanelBody title={__('Flexbox', 'boldpost')} initialOpen={false}>
                     <ResponsiveWrapper label={__('Direction', 'boldpost')}>
                         {(device) => (
@@ -372,9 +408,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         )}
                     </ResponsiveWrapper>
                 </PanelBody>
-            </InspectorControls>
-
-            <InspectorControls group="styles">
+                        </>)}
+                        {tab.name === 'style' && (<>
                 <PanelBody title={__('Background', 'boldpost')} initialOpen={false}>
                     <BackgroundControl
                         label={__('Background', 'boldpost')}
@@ -387,7 +422,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         onGradientChange={(v) => setAttributes({ backgroundGradient: v || '' })}
                     />
                 </PanelBody>
-
                 <PanelBody title={__('Border', 'boldpost')} initialOpen={false}>
                     <BorderControl
                         label={__('Border', 'boldpost')}
@@ -407,7 +441,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         onChange={(v) => setAttributes({ boxShadow: v })}
                     />
                 </PanelBody>
-
                 <PanelBody title={__('Spacing', 'boldpost')} initialOpen={false}>
                     <ResponsiveWrapper label={__('Padding', 'boldpost')}>
                         {(device) => (
@@ -427,6 +460,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         )}
                     </ResponsiveWrapper>
                 </PanelBody>
+                        </>)}
+                        </>
+                    )}
+                </TabPanel>
             </InspectorControls>
 
             <Tag {...blockProps}>

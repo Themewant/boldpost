@@ -14,24 +14,12 @@ return array(
 		),
 		'supports' => array(
 			'html' => false,
-			'spacing' => array(
-				'padding' => array(
-					'top',
-					'bottom',
-					'left',
-					'right'
-				),
-				'margin' => array(
-					'top',
-					'bottom',
-					'left',
-					'right'
-				)
-			),
-			'color' => array(
-				'background' => true,
-				'text' => false,
-				'gradients' => true
+			'align' => array(
+				'left',
+				'center',
+				'right',
+				'wide',
+				'full'
 			)
 		),
 		'textdomain' => 'boldpost',
@@ -91,9 +79,25 @@ return array(
 				'type' => 'string',
 				'default' => '312px'
 			),
+			'videoHeightTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'videoHeightMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'videoWidth' => array(
 				'type' => 'string',
 				'default' => '100%'
+			),
+			'videoWidthTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'videoWidthMobile' => array(
+				'type' => 'string',
+				'default' => ''
 			),
 			'videoControls' => array(
 				'type' => 'boolean',
@@ -139,6 +143,18 @@ return array(
 			'itemMargin' => array(
 				'type' => 'object'
 			),
+			'itemMarginTablet' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
+			),
+			'itemMarginMobile' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
+			),
 			'itemBorderRadius' => array(
 				'type' => 'object'
 			),
@@ -180,6 +196,18 @@ return array(
 			),
 			'contentPadding' => array(
 				'type' => 'object'
+			),
+			'contentPaddingTablet' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
+			),
+			'contentPaddingMobile' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
 			),
 			'readMorePadding' => array(
 				'type' => 'object'
@@ -484,6 +512,18 @@ return array(
 				'type' => 'string',
 				'default' => 'var(--boldpo-preset-color-primary)'
 			),
+			'paginationTypography' => array(
+				'type' => 'object',
+				'default' => array(
+					'fontFamily' => '',
+					'fontSize' => '',
+					'fontWeight' => '',
+					'fontStyle' => '',
+					'textTransform' => '',
+					'lineHeight' => '',
+					'letterSpacing' => ''
+				)
+			),
 			'columnsTablet' => array(
 				'type' => 'string',
 				'default' => '2'
@@ -668,6 +708,18 @@ return array(
 			),
 			'categoryMargin' => array(
 				'type' => 'object'
+			),
+			'hideDesktop' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'hideTablet' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'hideMobile' => array(
+				'type' => 'boolean',
+				'default' => false
 			)
 		)
 	)

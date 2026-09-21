@@ -13,7 +13,7 @@ import { decodeEntities } from '@wordpress/html-entities';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { useBlockProps, InspectorControls, BlockControls, AlignmentControl } from '@wordpress/block-editor';
 
 import {
     PanelBody,
@@ -25,7 +25,8 @@ import {
     SelectControl,
     TextControl,
     ToggleControl,
-    Icon
+    Icon,
+    ToolbarDropdownMenu
 } from '@wordpress/components';
 import BackgroundControl from '../../custom-components/BackgroundControl';
 import TypographyControls from '../../custom-components/TypographyControls';
@@ -101,7 +102,35 @@ export default function Edit({ attributes, setAttributes }) {
 
     return (
         <div {...useBlockProps()}>
+            <BlockControls>
+                <AlignmentControl
+                    value={attributes.contentAlign}
+                    onChange={(value) => setAttributes({ contentAlign: value || '' })}
+                />
+                <ToolbarDropdownMenu
+                    icon="heading"
+                    label={__('Title HTML Tag', 'boldpost')}
+                    text={(attributes.titleTag || 'h3').toUpperCase()}
+                    controls={['h2', 'h3', 'h4', 'h5', 'h6'].map((t) => ({
+                        title: t.toUpperCase(),
+                        isActive: attributes.titleTag === t,
+                        onClick: () => setAttributes({ titleTag: t }),
+                    }))}
+                />
+            </BlockControls>
             <InspectorControls>
+                <TabPanel
+                    className="boldpo-inspector-tabs"
+                    activeClass="is-active"
+                    tabs={[
+                        { name: 'settings', title: __('Settings', 'boldpost') },
+                        { name: 'layout', title: __('Layout', 'boldpost') },
+                        { name: 'style', title: __('Style', 'boldpost') },
+                    ]}
+                >
+                    {(tab) => (
+                        <>
+                        {tab.name === 'settings' && (<>
                 {/* Query settings panel group */}
                 <PanelBody title={__('Query', 'boldpost')} initialOpen={true}>
                     <NumberControl
@@ -158,7 +187,9 @@ export default function Edit({ attributes, setAttributes }) {
                         __nextHasNoMarginBottom={true}
                     />
                 </PanelBody>
-                <PanelBody title={__('Layout', 'boldpost')} initialOpen={false}>
+                        </>)}
+                        {tab.name === 'layout' && (<>
+                <PanelBody title={__('Preset', 'boldpost')} initialOpen={false}>
                     <ImageRadioControl
                         value={attributes.listStyle}
                         onChange={(value) => setAttributes({ listStyle: value })}
@@ -171,6 +202,8 @@ export default function Edit({ attributes, setAttributes }) {
                         __nextHasNoMarginBottom={true}
                     />
                 </PanelBody>
+                        </>)}
+                        {tab.name === 'settings' && (<>
                 {/* Content settings panel group */}
                 <PanelBody title={__('Content', 'boldpost')} initialOpen={false}>
                     <ResponsiveWrapper label={__('Columns', 'boldpost')}>
@@ -200,7 +233,6 @@ export default function Edit({ attributes, setAttributes }) {
                     </ResponsiveWrapper>
 
                 </PanelBody>
-
                 <PanelBody title={__('Title', 'boldpost')} initialOpen={false}>
                     <SelectControl
                         label={__('Title Tag', 'boldpost')}
@@ -217,7 +249,6 @@ export default function Edit({ attributes, setAttributes }) {
                         __nextHasNoMarginBottom={true}
                     />
                 </PanelBody>
-
                 <PanelBody title={__('Description', 'boldpost')} initialOpen={false}>
                     <ToggleControl
                         label={__('Show / Hide', 'boldpost')}
@@ -240,7 +271,6 @@ export default function Edit({ attributes, setAttributes }) {
                         __nextHasNoMarginBottom={true}
                     />
                 </PanelBody>
-
                 <PanelBody title={__('Details Button', 'boldpost')} initialOpen={false}>
                     <TextControl
                         label={__('Label', 'boldpost')}
@@ -250,9 +280,8 @@ export default function Edit({ attributes, setAttributes }) {
                         __nextHasNoMarginBottom={true}
                     />
                 </PanelBody>
-
-            </InspectorControls>
-            <InspectorControls group='styles'>
+                        </>)}
+                        {tab.name === 'style' && (<>
                 <PanelBody title={__('Item', 'boldpost')} initialOpen={false}>
                     <TabPanel
                         className="eshb-tab-panel"
@@ -337,7 +366,6 @@ export default function Edit({ attributes, setAttributes }) {
                     )}
 
                 </PanelBody>
-
                 <PanelBody title={__('Title', 'boldpost')} initialOpen={false}>
                     <TabPanel
                         className="eshb-tab-panel"
@@ -392,7 +420,6 @@ export default function Edit({ attributes, setAttributes }) {
                         )}
                     </ResponsiveWrapper>
                 </PanelBody>
-
                 <PanelBody title={__('Description', 'boldpost')} initialOpen={false}>
                     <ColorPopover
                         label={__('Color', 'boldpost')}
@@ -429,7 +456,6 @@ export default function Edit({ attributes, setAttributes }) {
                         )}
                     </ResponsiveWrapper>
                 </PanelBody>
-
                 <PanelBody title={__('Count', 'boldpost')} initialOpen={false}>
                     <ColorPopover
                         label={__('Color', 'boldpost')}
@@ -463,16 +489,34 @@ export default function Edit({ attributes, setAttributes }) {
                         attributeKey="countTypography"
                     />
                 </PanelBody>
-
                 <PanelBody title={__('Thumbnail', 'boldpost')} initialOpen={false}>
                     <SelectControl
                         label={__('Size', 'boldpost')}
                         value={attributes.thumbnailSize}
                         onChange={(value) => setAttributes({ thumbnailSize: value })}
-                        options={imageSizeOptions}
+                        options={[
+                            ...imageSizeOptions,
+                            { label: __('Custom', 'boldpost'), value: 'custom' },
+                        ]}
                         __next40pxDefaultSize={true}
                         __nextHasNoMarginBottom={true}
                     />
+                    {attributes.thumbnailSize === 'custom' && (
+                        <>
+                            <NumberControl
+                                label={__('Width (px)', 'boldpost')}
+                                value={attributes.thumbnailWidth}
+                                onChange={(value) => setAttributes({ thumbnailWidth: value })}
+                                __next40pxDefaultSize={true}
+                            />
+                            <NumberControl
+                                label={__('Height (px)', 'boldpost')}
+                                value={attributes.thumbnailHeight}
+                                onChange={(value) => setAttributes({ thumbnailHeight: value })}
+                                __next40pxDefaultSize={true}
+                            />
+                        </>
+                    )}
                     <Divider />
                     <BoxControl
                         label={__('Border Radius', 'boldpost')}
@@ -480,7 +524,6 @@ export default function Edit({ attributes, setAttributes }) {
                         onChange={(value) => setAttributes({ thumbnailBorderRadius: value })}
                     />
                 </PanelBody>
-
                 <PanelBody title={__('Details Button', 'boldpost')} initialOpen={false}>
                     <TabPanel
                         className="eshb-tab-panel"
@@ -521,23 +564,32 @@ export default function Edit({ attributes, setAttributes }) {
                                         attributeKey="detailsBtnTypography"
                                     />
                                     <Divider />
-                                    <BoxControl
-                                        label={__('Padding', 'boldpost')}
-                                        values={attributes.detailsBtnPadding}
-                                        onChange={(value) => setAttributes({ detailsBtnPadding: value })}
-                                    />
+                                    <ResponsiveWrapper label={__('Padding', 'boldpost')}>
+                                        {(device) => (
+                                            <BoxControl
+                                                values={attributes[getAttrKey('detailsBtnPadding', device)]}
+                                                onChange={(value) => setAttributes({ [getAttrKey('detailsBtnPadding', device)]: value })}
+                                            />
+                                        )}
+                                    </ResponsiveWrapper>
                                     <Divider />
-                                    <BoxControl
-                                        label={__('Margin', 'boldpost')}
-                                        values={attributes.detailsBtnMargin}
-                                        onChange={(value) => setAttributes({ detailsBtnMargin: value })}
-                                    />
+                                    <ResponsiveWrapper label={__('Margin', 'boldpost')}>
+                                        {(device) => (
+                                            <BoxControl
+                                                values={attributes[getAttrKey('detailsBtnMargin', device)]}
+                                                onChange={(value) => setAttributes({ [getAttrKey('detailsBtnMargin', device)]: value })}
+                                            />
+                                        )}
+                                    </ResponsiveWrapper>
                                     <Divider />
-                                    <BoxControl
-                                        label={__('Border Radius', 'boldpost')}
-                                        values={attributes.detailsBtnBorderRadius}
-                                        onChange={(value) => setAttributes({ detailsBtnBorderRadius: value })}
-                                    />
+                                    <ResponsiveWrapper label={__('Border Radius', 'boldpost')}>
+                                        {(device) => (
+                                            <BoxControl
+                                                values={attributes[getAttrKey('detailsBtnBorderRadius', device)]}
+                                                onChange={(value) => setAttributes({ [getAttrKey('detailsBtnBorderRadius', device)]: value })}
+                                            />
+                                        )}
+                                    </ResponsiveWrapper>
                                     <Divider />
                                     <BorderControl
                                         label={isHover ? __('Border (Hover)', 'boldpost') : __('Border', 'boldpost')}
@@ -550,7 +602,10 @@ export default function Edit({ attributes, setAttributes }) {
                         }}
                     </TabPanel>
                 </PanelBody>
-
+                        </>)}
+                        </>
+                    )}
+                </TabPanel>
             </InspectorControls>
 
             <ServerSideRender block="boldpost/category-list" attributes={attributes} httpMethod="POST" />

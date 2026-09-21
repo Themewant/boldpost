@@ -26,17 +26,11 @@ return array(
 			'html' => false,
 			'anchor' => true,
 			'align' => array(
+				'left',
+				'center',
+				'right',
 				'wide',
 				'full'
-			),
-			'spacing' => array(
-				'padding' => false,
-				'margin' => false
-			),
-			'color' => array(
-				'background' => false,
-				'text' => false,
-				'gradients' => false
 			)
 		),
 		'textdomain' => 'boldpost',
@@ -331,6 +325,18 @@ return array(
 			'position' => array(
 				'type' => 'string',
 				'default' => ''
+			),
+			'hideDesktop' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'hideTablet' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'hideMobile' => array(
+				'type' => 'boolean',
+				'default' => false
 			)
 		)
 	)

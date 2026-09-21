@@ -23,6 +23,7 @@ import {
     __experimentalNumberControl as NumberControl,
     __experimentalToggleGroupControl as ToggleGroupControl,
     __experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
+	TabPanel,
 } from '@wordpress/components';
 
 import {
@@ -213,7 +214,19 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             </BlockControls>
 
             <InspectorControls>
-                <PanelBody title={__('Layout', 'boldpost')} initialOpen={true}>
+                <TabPanel
+                    className="boldpo-inspector-tabs"
+                    activeClass="is-active"
+                    tabs={[
+                        { name: 'settings', title: __('Settings', 'boldpost') },
+                        { name: 'layout', title: __('Layout', 'boldpost') },
+                        { name: 'style', title: __('Style', 'boldpost') },
+                    ]}
+                >
+                    {(tab) => (
+                        <>
+                        {tab.name === 'layout' && (<>
+                <PanelBody title={__('Container', 'boldpost')} initialOpen={true}>
                     <div className="boldpo-preset-grid">
                         {LAYOUT_PRESETS.map((p) => (
                             <Button
@@ -281,7 +294,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         )}
                     </ResponsiveWrapper>
                 </PanelBody>
-
                 <PanelBody title={__('Flexbox', 'boldpost')} initialOpen={false}>
                     <ResponsiveWrapper label={__('Direction', 'boldpost')}>
                         {(device) => (
@@ -407,7 +419,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         )}
                     </ResponsiveWrapper>
                 </PanelBody>
-
                 <PanelBody title={__('Advanced Layout', 'boldpost')} initialOpen={false}>
                     <SelectControl
                         label={__('Vertical Align', 'boldpost')}
@@ -445,9 +456,30 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         __nextHasNoMarginBottom
                     />
                 </PanelBody>
-            </InspectorControls>
-
-            <InspectorControls group="styles">
+                        </>)}
+                        {tab.name === 'settings' && (<>
+                <PanelBody title={__('Responsive', 'boldpost')} initialOpen={false}>
+                    <ToggleControl
+                        label={__('Hide on Desktop', 'boldpost')}
+                        checked={!!attributes.hideDesktop}
+                        onChange={(v) => setAttributes({ hideDesktop: v })}
+                        __nextHasNoMarginBottom
+                    />
+                    <ToggleControl
+                        label={__('Hide on Tablet', 'boldpost')}
+                        checked={!!attributes.hideTablet}
+                        onChange={(v) => setAttributes({ hideTablet: v })}
+                        __nextHasNoMarginBottom
+                    />
+                    <ToggleControl
+                        label={__('Hide on Mobile', 'boldpost')}
+                        checked={!!attributes.hideMobile}
+                        onChange={(v) => setAttributes({ hideMobile: v })}
+                        __nextHasNoMarginBottom
+                    />
+                </PanelBody>
+                        </>)}
+                        {tab.name === 'style' && (<>
                 <PanelBody title={__('Background', 'boldpost')} initialOpen={false}>
                     <BackgroundControl
                         label={__('Background', 'boldpost')}
@@ -531,7 +563,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         </>
                     )}
                 </PanelBody>
-
                 <PanelBody title={__('Border', 'boldpost')} initialOpen={false}>
                     <BorderControl
                         label={__('Border', 'boldpost')}
@@ -551,7 +582,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         onChange={(v) => setAttributes({ boxShadow: v })}
                     />
                 </PanelBody>
-
                 <PanelBody title={__('Spacing', 'boldpost')} initialOpen={false}>
                     <ResponsiveWrapper label={__('Padding', 'boldpost')}>
                         {(device) => (
@@ -571,7 +601,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         )}
                     </ResponsiveWrapper>
                 </PanelBody>
-
                 <PanelBody title={__('Position & Z-Index', 'boldpost')} initialOpen={false}>
                     <SelectControl
                         label={__('Position', 'boldpost')}
@@ -613,6 +642,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         __nextHasNoMarginBottom
                     />
                 </PanelBody>
+                        </>)}
+                        </>
+                    )}
+                </TabPanel>
             </InspectorControls>
 
             <Tag {...blockProps}>

@@ -10,15 +10,13 @@
     "example": {},
     "supports": {
         "html": false,
-        "spacing": {
-            "padding": true,
-            "margin": true
-        },
-        "color": {
-            "background": false,
-            "text": false,
-            "gradients": false
-        }
+        "align": [
+            "left",
+            "center",
+            "right",
+            "wide",
+            "full"
+        ]
     },
     "textdomain": "boldpost",
     "editorScript": "file:./index.js",
@@ -199,6 +197,17 @@
         },
         "buttonWidth": {
             "type": "string"
-        }
-    }
+        },
+        "buttonWidthTablet": {
+            "type": "string",
+            "default": ""
+        },
+        "buttonWidthMobile": {
+            "type": "string",
+            "default": ""
+        },
+    "hideDesktop": { "type": "boolean", "default": false },
+    "hideTablet": { "type": "boolean", "default": false },
+    "hideMobile": { "type": "boolean", "default": false }
+   }
 }

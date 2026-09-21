@@ -341,6 +341,14 @@ $pag_styles = [];
 if ( ! empty( $attributes['paginationColor'] ) ) $pag_styles['color'] = $attributes['paginationColor'];
 if ( ! empty( $attributes['paginationBackgroundColor'] ) ) $pag_styles['background-color'] = $attributes['paginationBackgroundColor'];
 
+$pag_typo = $attributes['paginationTypography'] ?? [];
+if ( ! empty( $pag_typo['fontFamily'] ) ) $pag_styles['font-family'] = $pag_typo['fontFamily'];
+if ( ! empty( $pag_typo['fontSize'] ) ) $pag_styles['font-size'] = $pag_typo['fontSize'];
+if ( ! empty( $pag_typo['fontWeight'] ) ) $pag_styles['font-weight'] = $pag_typo['fontWeight'];
+if ( ! empty( $pag_typo['lineHeight'] ) ) $pag_styles['line-height'] = $pag_typo['lineHeight'];
+if ( ! empty( $pag_typo['textTransform'] ) ) $pag_styles['text-transform'] = $pag_typo['textTransform'];
+if ( ! empty( $pag_typo['letterSpacing'] ) ) $pag_styles['letter-spacing'] = $pag_typo['letterSpacing'];
+
 $pag_hover = [];
 if ( ! empty( $attributes['paginationColorHover'] ) ) $pag_hover['color'] = $attributes['paginationColorHover'];
 if ( ! empty( $attributes['paginationBackgroundColorHover'] ) ) {
@@ -381,6 +389,14 @@ BOLDPO_Helper::add_responsive_vars($attributes, $thumbnail_left_height_responsiv
 $thumbnail_right_height_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
 BOLDPO_Helper::add_responsive_vars($attributes, $thumbnail_right_height_responsive, 'thumbnailRightHeight', 'height', [], false);
 
+// Video height/width — desktop is emitted inline on the <video>/<iframe> element via
+// BOLDPO_Helper::boldpost_get_video_embed(); add tablet/mobile via CSS only (desktop left untouched).
+$video_size_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+if ( ! empty( $attributes['videoHeightTablet'] ) ) $video_size_responsive['tablet']['height'] = BOLDPO_Helper::ensure_unit( $attributes['videoHeightTablet'] );
+if ( ! empty( $attributes['videoHeightMobile'] ) ) $video_size_responsive['mobile']['height'] = BOLDPO_Helper::ensure_unit( $attributes['videoHeightMobile'] );
+if ( ! empty( $attributes['videoWidthTablet'] ) ) $video_size_responsive['tablet']['width'] = BOLDPO_Helper::ensure_unit( $attributes['videoWidthTablet'] );
+if ( ! empty( $attributes['videoWidthMobile'] ) ) $video_size_responsive['mobile']['width'] = BOLDPO_Helper::ensure_unit( $attributes['videoWidthMobile'] );
+
 // Thumbnail Border Radius
 $thumbnail_border_radius_styles = [];
 $t_border_radius = $attributes['thumbnailBorderRadius'] ?? [];
@@ -414,6 +430,7 @@ $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .bo
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-pagination .page-numbers', $pagination_btn_padding_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpost-load-more-btn', $pagination_btn_padding_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpost-pagination-container', $pagination_wrap_margin_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-video-wrapper video, ' . $selector . ' .boldpo-video-wrapper iframe', $video_size_responsive);
 
 if( $style == 'default') {
     $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-grid-4.style-' . $style . ' .boldpo-grid-item .boldpo-blog-img img', $thumbnail_right_height_responsive);   

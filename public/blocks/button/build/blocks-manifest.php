@@ -15,14 +15,12 @@ return array(
 		),
 		'supports' => array(
 			'html' => false,
-			'spacing' => array(
-				'padding' => true,
-				'margin' => true
-			),
-			'color' => array(
-				'background' => false,
-				'text' => false,
-				'gradients' => false
+			'align' => array(
+				'left',
+				'center',
+				'right',
+				'wide',
+				'full'
 			)
 		),
 		'textdomain' => 'boldpost',
@@ -204,6 +202,26 @@ return array(
 			),
 			'buttonWidth' => array(
 				'type' => 'string'
+			),
+			'buttonWidthTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'buttonWidthMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'hideDesktop' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'hideTablet' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'hideMobile' => array(
+				'type' => 'boolean',
+				'default' => false
 			)
 		)
 	)

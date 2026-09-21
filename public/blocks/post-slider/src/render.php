@@ -375,6 +375,37 @@ if ( ! empty( $t_border_radius['right'] ) ) $thumbnail_border_radius_styles['bor
 if ( ! empty( $t_border_radius['bottom'] ) ) $thumbnail_border_radius_styles['border-bottom-left-radius'] = BOLDPO_Helper::ensure_unit( $t_border_radius['bottom'] );
 if ( ! empty( $t_border_radius['left'] ) ) $thumbnail_border_radius_styles['border-bottom-right-radius'] = BOLDPO_Helper::ensure_unit( $t_border_radius['left'] );
 
+// Responsive (Tablet/Mobile) overrides — additive; desktop values keep their existing output.
+$nav_size_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+if(!empty($attributes['navSizeTablet'])) $nav_size_responsive['tablet']['--swiper-navigation-size'] = $attributes['navSizeTablet'];
+if(!empty($attributes['navSizeMobile'])) $nav_size_responsive['mobile']['--swiper-navigation-size'] = $attributes['navSizeMobile'];
+
+$nav_icon_size_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+if(!empty($attributes['navIconSizeTablet'])) {
+    $nav_icon_size_responsive['tablet']['height'] = BOLDPO_Helper::ensure_unit($attributes['navIconSizeTablet']);
+    $nav_icon_size_responsive['tablet']['width']  = BOLDPO_Helper::ensure_unit($attributes['navIconSizeTablet']);
+}
+if(!empty($attributes['navIconSizeMobile'])) {
+    $nav_icon_size_responsive['mobile']['height'] = BOLDPO_Helper::ensure_unit($attributes['navIconSizeMobile']);
+    $nav_icon_size_responsive['mobile']['width']  = BOLDPO_Helper::ensure_unit($attributes['navIconSizeMobile']);
+}
+
+$dots_size_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+if(!empty($attributes['dotsSizeTablet'])) {
+    $dots_size_responsive['tablet']['height'] = $attributes['dotsSizeTablet'];
+    $dots_size_responsive['tablet']['width']  = $attributes['dotsSizeTablet'];
+}
+if(!empty($attributes['dotsSizeMobile'])) {
+    $dots_size_responsive['mobile']['height'] = $attributes['dotsSizeMobile'];
+    $dots_size_responsive['mobile']['width']  = $attributes['dotsSizeMobile'];
+}
+
+$video_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+if(!empty($attributes['videoHeightTablet'])) $video_responsive['tablet']['height'] = $attributes['videoHeightTablet'];
+if(!empty($attributes['videoWidthTablet']))  $video_responsive['tablet']['width']  = $attributes['videoWidthTablet'];
+if(!empty($attributes['videoHeightMobile'])) $video_responsive['mobile']['height'] = $attributes['videoHeightMobile'];
+if(!empty($attributes['videoWidthMobile']))  $video_responsive['mobile']['width']  = $attributes['videoWidthMobile'];
+
 $style_handle = 'boldpo-post-slider-style';
 $unique_id    = 'boldpo-' . wp_rand( 100, 99999 );
 $selector     = '.boldpo-post-slider-block-wrap.' . $unique_id;
@@ -387,6 +418,10 @@ $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .bo
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider.style-' . $style . ' .boldpo-grid-item .boldpo-blog-content', $content_padding_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider.style-' . $style . ' .boldpo-grid-item .boldpo-blog-img img', $thumbnail_height_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider.style-' . $style . ' .boldpo-grid-item .boldpo-read-more .boldpo-read-more-link', $button_text_align_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider .nav-btn', $nav_size_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider .nav-btn .swiper-navigation-icon', $nav_icon_size_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-post-slider .swiper-pagination-bullet', $dots_size_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-video-wrapper video, ' . $selector . ' .boldpo-video-wrapper iframe', $video_responsive);
 
 wp_enqueue_style( $style_handle );
 BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css, [

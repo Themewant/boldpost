@@ -15,14 +15,12 @@ return array(
 		),
 		'supports' => array(
 			'html' => false,
-			'spacing' => array(
-				'padding' => true,
-				'margin' => true
-			),
-			'color' => array(
-				'background' => true,
-				'text' => false,
-				'gradients' => true
+			'align' => array(
+				'left',
+				'center',
+				'right',
+				'wide',
+				'full'
 			)
 		),
 		'textdomain' => 'boldpost',
@@ -245,6 +243,14 @@ return array(
 				'type' => 'string',
 				'default' => '4'
 			),
+			'itemGapTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'itemGapMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'itemTitleColor' => array(
 				'type' => 'string',
 				'default' => ''
@@ -264,6 +270,18 @@ return array(
 					'right' => '10px',
 					'bottom' => '3px',
 					'left' => '10px'
+				)
+			),
+			'contentPaddingTablet' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
+			),
+			'contentPaddingMobile' => array(
+				'type' => 'object',
+				'default' => array(
+					
 				)
 			),
 			'readMoreBackgroundColor' => array(
@@ -420,9 +438,25 @@ return array(
 				'type' => 'string',
 				'default' => '85px'
 			),
+			'videoHeightTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'videoHeightMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'videoWidth' => array(
 				'type' => 'string',
 				'default' => '100%'
+			),
+			'videoWidthTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'videoWidthMobile' => array(
+				'type' => 'string',
+				'default' => ''
 			),
 			'videoControls' => array(
 				'type' => 'boolean',
@@ -685,6 +719,18 @@ return array(
 			),
 			'categoryMargin' => array(
 				'type' => 'object'
+			),
+			'hideDesktop' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'hideTablet' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'hideMobile' => array(
+				'type' => 'boolean',
+				'default' => false
 			)
 		)
 	)

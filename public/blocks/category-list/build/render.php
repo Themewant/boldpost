@@ -17,6 +17,8 @@ $show_empty_count = !empty($attributes['showEmptyCount']) ? true : false;
 $show_description = !empty($attributes['showDescription']) ? true : false;
 $title_tag = isset($attributes['titleTag']) ? $attributes['titleTag'] : 'h3';
 $thumbnail_size = isset($attributes['thumbnailSize']) ? $attributes['thumbnailSize'] : 'medium';
+$thumbnail_width = isset($attributes['thumbnailWidth']) ? $attributes['thumbnailWidth'] : '';
+$thumbnail_height = isset($attributes['thumbnailHeight']) ? $attributes['thumbnailHeight'] : '';
 $details_btn_text = isset($attributes['detailsBtnLabel']) ? $attributes['detailsBtnLabel'] : 'Details';
 
 // styles
@@ -190,6 +192,17 @@ if ( ! empty( $t_border_radius['right'] ) ) $thumbnail_styles['border-top-right-
 if ( ! empty( $t_border_radius['bottom'] ) ) $thumbnail_styles['border-bottom-left-radius'] = BOLDPO_Helper::ensure_unit( $t_border_radius['bottom'] );
 if ( ! empty( $t_border_radius['left'] ) ) $thumbnail_styles['border-bottom-right-radius'] = BOLDPO_Helper::ensure_unit( $t_border_radius['left'] );
 
+// Custom thumbnail dimensions.
+if ( 'custom' === $thumbnail_size ) {
+    if ( '' !== $thumbnail_width && null !== $thumbnail_width ) {
+        $thumbnail_styles['width'] = BOLDPO_Helper::ensure_unit( $thumbnail_width );
+    }
+    if ( '' !== $thumbnail_height && null !== $thumbnail_height ) {
+        $thumbnail_styles['height'] = BOLDPO_Helper::ensure_unit( $thumbnail_height );
+        $thumbnail_styles['object-fit'] = 'cover';
+    }
+}
+
 
 
 // Details Button
@@ -294,7 +307,8 @@ if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) :
                     continue;
                 }
                 $category_image_id = get_term_meta( $category->term_id, 'category_image', true );
-                $category_image = wp_get_attachment_image_url( $category_image_id, $thumbnail_size );
+                $image_size_arg = ( 'custom' === $thumbnail_size ) ? 'full' : $thumbnail_size;
+                $category_image = wp_get_attachment_image_url( $category_image_id, $image_size_arg );
                 $placeholderImage = BOLDPO_PL_URL . 'public/assets/img/placeholder.png';
                 $category_image = $category_image ? $category_image : '';
                 $category_color = get_term_meta( $category->term_id, 'category_color', true );

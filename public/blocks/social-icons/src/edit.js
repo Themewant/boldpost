@@ -134,7 +134,19 @@ export default function Edit({ attributes, setAttributes }) {
             </BlockControls>
 
             <InspectorControls>
-                <PanelBody title={__('Layout', 'boldpost')} initialOpen={false}>
+                <TabPanel
+                    className="boldpo-inspector-tabs"
+                    activeClass="is-active"
+                    tabs={[
+                        { name: 'settings', title: __('Settings', 'boldpost') },
+                        { name: 'layout', title: __('Layout', 'boldpost') },
+                        { name: 'style', title: __('Style', 'boldpost') },
+                    ]}
+                >
+                    {(tab) => (
+                        <>
+                        {tab.name === 'layout' && (<>
+                <PanelBody title={__('Preset', 'boldpost')} initialOpen={false}>
                     <ImageRadioControl
                         value={attributes.layoutStyle}
                         onChange={(value) => setAttributes({ layoutStyle: value })}
@@ -146,6 +158,8 @@ export default function Edit({ attributes, setAttributes }) {
                         __nextHasNoMarginBottom={true}
                     />
                 </PanelBody>
+                        </>)}
+                        {tab.name === 'settings' && (<>
                 <PanelBody title={__('Social Icons', 'boldpost')} initialOpen={true}>
                     {items.map((item, index) => (
                         <div key={index} className="boldpo-social-icon-item-control">
@@ -196,8 +210,7 @@ export default function Edit({ attributes, setAttributes }) {
                         {__('+ Add Icon', 'boldpost')}
                     </Button>
                 </PanelBody>
-
-                <PanelBody title={__('Settings', 'boldpost')} initialOpen={false}>
+                <PanelBody title={__('General', 'boldpost')} initialOpen={false}>
                     <ToggleControl
                         label={__('Show Labels', 'boldpost')}
                         checked={showLabel}
@@ -205,9 +218,8 @@ export default function Edit({ attributes, setAttributes }) {
                         __nextHasNoMarginBottom={true}
                     />
                 </PanelBody>
-            </InspectorControls>
-
-            <InspectorControls group="styles">
+                        </>)}
+                        {tab.name === 'style' && (<>
                 <PanelBody title={__('Icon', 'boldpost')} initialOpen={false}>
                     <TabPanel
                         className="eshb-tab-panel"
@@ -308,7 +320,6 @@ export default function Edit({ attributes, setAttributes }) {
                         __nextHasNoMarginBottom={true}
                     />
                 </PanelBody>
-
                 {showLabel && (
                     <PanelBody title={__('Label', 'boldpost')} initialOpen={false}>
                         <TabPanel
@@ -344,6 +355,10 @@ export default function Edit({ attributes, setAttributes }) {
                         />
                     </PanelBody>
                 )}
+                        </>)}
+                        </>
+                    )}
+                </TabPanel>
             </InspectorControls>
 
             <div className="boldpo-social-icons" style={{ justifyContent: alignment || 'flex-start', gap: `${gap}px` }}>

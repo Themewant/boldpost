@@ -21,18 +21,12 @@
     "html": false,
     "anchor": true,
     "align": [
+      "left",
+      "center",
+      "right",
       "wide",
       "full"
-    ],
-    "spacing": {
-      "padding": false,
-      "margin": false
-    },
-    "color": {
-      "background": false,
-      "text": false,
-      "gradients": false
-    }
+    ]
   },
   "textdomain": "boldpost",
   "editorScript": "file:./index.js",
@@ -326,6 +320,18 @@
     "position": {
       "type": "string",
       "default": ""
+    },
+    "hideDesktop": {
+      "type": "boolean",
+      "default": false
+    },
+    "hideTablet": {
+      "type": "boolean",
+      "default": false
+    },
+    "hideMobile": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

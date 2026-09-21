@@ -3,6 +3,7 @@ import { useSelect } from '@wordpress/data';
 import {
     useBlockProps,
     InspectorControls,
+    BlockControls,
     MediaUpload,
     MediaUploadCheck,
 } from '@wordpress/block-editor';
@@ -16,6 +17,7 @@ import {
     TextControl,
     ToggleControl,
     Button,
+    ToolbarDropdownMenu,
 } from '@wordpress/components';
 
 import { ServerSideRender } from '@wordpress/server-side-render';
@@ -103,7 +105,32 @@ export default function Edit({ attributes, setAttributes }) {
 
     return (
         <div {...useBlockProps({ className: 'boldpo-block boldpo-info-box-block-wrap' })}>
+            <BlockControls>
+                <ToolbarDropdownMenu
+                    icon="heading"
+                    label={__('Title HTML Tag', 'boldpost')}
+                    text={(attributes.titleTag || 'h4').toUpperCase()}
+                    controls={['h2', 'h3', 'h4', 'h5', 'h6', 'div'].map((t) => ({
+                        title: t.toUpperCase(),
+                        isActive: attributes.titleTag === t,
+                        onClick: () => setAttributes({ titleTag: t }),
+                    }))}
+                />
+            </BlockControls>
+
             <InspectorControls>
+                <TabPanel
+                    className="boldpo-inspector-tabs"
+                    activeClass="is-active"
+                    tabs={[
+                        { name: 'settings', title: __('Settings', 'boldpost') },
+                        { name: 'layout', title: __('Layout', 'boldpost') },
+                        { name: 'style', title: __('Style', 'boldpost') },
+                    ]}
+                >
+                    {(tab) => (
+                        <>
+                        {tab.name === 'settings' && (<>
                 <PanelBody title={__('Items', 'boldpost')} initialOpen={true}>
                     {items.map((item, index) => (
                         <div key={index} className="boldpo-info-box-item-control">
@@ -195,7 +222,6 @@ export default function Edit({ attributes, setAttributes }) {
                         {__('+ Add Item', 'boldpost')}
                     </Button>
                 </PanelBody>
-
                 <PanelBody title={__('Content', 'boldpost')} initialOpen={false}>
                     <ResponsiveWrapper label={__('Columns', 'boldpost')}>
                         {(device) => (
@@ -218,7 +244,6 @@ export default function Edit({ attributes, setAttributes }) {
                         )}
                     </ResponsiveWrapper>
                 </PanelBody>
-
                 <PanelBody title={__('Title', 'boldpost')} initialOpen={false}>
                     <SelectControl
                         label={__('Title Tag', 'boldpost')}
@@ -236,7 +261,6 @@ export default function Edit({ attributes, setAttributes }) {
                         __nextHasNoMarginBottom={true}
                     />
                 </PanelBody>
-
                 <PanelBody title={__('Image', 'boldpost')} initialOpen={false}>
                     <SelectControl
                         label={__('Size', 'boldpost')}
@@ -247,9 +271,8 @@ export default function Edit({ attributes, setAttributes }) {
                         __nextHasNoMarginBottom={true}
                     />
                 </PanelBody>
-            </InspectorControls>
-
-            <InspectorControls group="styles">
+                        </>)}
+                        {tab.name === 'style' && (<>
                 <PanelBody title={__('Item', 'boldpost')} initialOpen={false}>
                     <TabPanel
                         className="eshb-tab-panel"
@@ -343,7 +366,6 @@ export default function Edit({ attributes, setAttributes }) {
                         onChange={(nextValues) => setAttributes({ itemBorderRadius: nextValues })}
                     />
                 </PanelBody>
-
                 <PanelBody title={__('Image', 'boldpost')} initialOpen={false}>
                     <ResponsiveWrapper label={__('Width (px)', 'boldpost')}>
                         {(device) => (
@@ -388,7 +410,6 @@ export default function Edit({ attributes, setAttributes }) {
                         onChange={(value) => setAttributes({ imageBorderRadius: value })}
                     />
                 </PanelBody>
-
                 <PanelBody title={__('Title', 'boldpost')} initialOpen={false}>
                     <TabPanel
                         className="eshb-tab-panel"
@@ -448,7 +469,6 @@ export default function Edit({ attributes, setAttributes }) {
                         )}
                     </ResponsiveWrapper>
                 </PanelBody>
-
                 <PanelBody title={__('Subtitle', 'boldpost')} initialOpen={false}>
                     <ColorPopover
                         label={__('Color', 'boldpost')}
@@ -482,6 +502,10 @@ export default function Edit({ attributes, setAttributes }) {
                         )}
                     </ResponsiveWrapper>
                 </PanelBody>
+                        </>)}
+                        </>
+                    )}
+                </TabPanel>
             </InspectorControls>
 
             <ServerSideRender block="boldpost/info-box" attributes={attributes} httpMethod="POST" />

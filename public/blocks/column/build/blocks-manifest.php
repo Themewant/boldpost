@@ -25,16 +25,7 @@ return array(
 			'html' => false,
 			'anchor' => true,
 			'reusable' => false,
-			'inserter' => true,
-			'spacing' => array(
-				'padding' => false,
-				'margin' => false
-			),
-			'color' => array(
-				'background' => false,
-				'text' => false,
-				'gradients' => false
-			)
+			'inserter' => true
 		),
 		'textdomain' => 'boldpost',
 		'editorScript' => 'file:./index.js',
@@ -108,6 +99,18 @@ return array(
 			'verticalAlign' => array(
 				'type' => 'string',
 				'default' => ''
+			),
+			'hideDesktop' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'hideTablet' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'hideMobile' => array(
+				'type' => 'boolean',
+				'default' => false
 			),
 			'flexDirection' => array(
 				'type' => 'string',

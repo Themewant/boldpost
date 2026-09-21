@@ -10,15 +10,13 @@
     "example": {},
     "supports": {
         "html": false,
-        "spacing": {
-            "padding": true,
-            "margin": true
-        },
-        "color": {
-            "background": true,
-            "text": false,
-            "gradients": true
-        }
+        "align": [
+            "left",
+            "center",
+            "right",
+            "wide",
+            "full"
+        ]
     },
     "textdomain": "boldpost",
     "editorScript": "file:./index.js",
@@ -316,6 +314,14 @@
             "type": "string",
             "default": "medium"
         },
+        "thumbnailWidth": {
+            "type": "string",
+            "default": ""
+        },
+        "thumbnailHeight": {
+            "type": "string",
+            "default": ""
+        },
         "thumbnailBorderRadius": {
             "type": "object",
             "default": {
@@ -367,51 +373,107 @@
         },
         "detailsBtnPadding": {
             "type": "object",
-            "default": { "top": "", "right": "", "bottom": "", "left": "" }
+            "default": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            }
         },
         "detailsBtnPaddingTablet": {
             "type": "object",
-            "default": { "top": "", "right": "", "bottom": "", "left": "" }
+            "default": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            }
         },
         "detailsBtnPaddingMobile": {
             "type": "object",
-            "default": { "top": "", "right": "", "bottom": "", "left": "" }
+            "default": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            }
         },
         "detailsBtnMargin": {
             "type": "object",
-            "default": { "top": "", "right": "", "bottom": "", "left": "" }
+            "default": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            }
         },
         "detailsBtnMarginTablet": {
             "type": "object",
-            "default": { "top": "", "right": "", "bottom": "", "left": "" }
+            "default": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            }
         },
         "detailsBtnMarginMobile": {
             "type": "object",
-            "default": { "top": "", "right": "", "bottom": "", "left": "" }
+            "default": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            }
         },
         "detailsBtnBorderRadius": {
             "type": "object",
-            "default": { "top": "", "right": "", "bottom": "", "left": "" }
+            "default": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            }
         },
         "detailsBtnBorderRadiusTablet": {
             "type": "object",
-            "default": { "top": "", "right": "", "bottom": "", "left": "" }
+            "default": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            }
         },
         "detailsBtnBorderRadiusMobile": {
             "type": "object",
-            "default": { "top": "", "right": "", "bottom": "", "left": "" }
+            "default": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            }
         },
         "detailsBtnBorder": {
             "type": "object",
-            "default": { "width": 0, "color": "", "style": "solid" }
+            "default": {
+                "width": 0,
+                "color": "",
+                "style": "solid"
+            }
         },
         "detailsBtnBorderHover": {
             "type": "object",
-            "default": { "width": 0, "color": "", "style": "solid" }
+            "default": {
+                "width": 0,
+                "color": "",
+                "style": "solid"
+            }
         },
         "contentAlign": {
             "type": "string",
             "default": "left"
-        }
-    }
+        },
+    "hideDesktop": { "type": "boolean", "default": false },
+    "hideTablet": { "type": "boolean", "default": false },
+    "hideMobile": { "type": "boolean", "default": false }
+   }
 }

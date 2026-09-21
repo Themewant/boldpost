@@ -142,6 +142,9 @@ $classes = [
 if ( $vertical )     $classes[] = 'is-valign-' . sanitize_html_class( $vertical );
 if ( $equal_height ) $classes[] = 'is-equal-height';
 if ( $stretch )      $classes[] = 'is-stretch';
+if ( ! empty( $attributes['hideDesktop'] ) ) $classes[] = 'boldpo-hide-desktop';
+if ( ! empty( $attributes['hideTablet'] ) )  $classes[] = 'boldpo-hide-tablet';
+if ( ! empty( $attributes['hideMobile'] ) )  $classes[] = 'boldpo-hide-mobile';
 if ( $custom_class ) {
     foreach ( explode( ' ', $custom_class ) as $c ) {
         $c = sanitize_html_class( $c );

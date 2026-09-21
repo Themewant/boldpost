@@ -10,15 +10,13 @@
 	"example": {},
 	"supports": {
 		"html": false,
-		"spacing": {
-			"padding": true,
-			"margin": true
-		},
-		"color": {
-			"background": true,
-			"text": false,
-			"gradients": true
-		}
+		"align": [
+			"left",
+			"center",
+			"right",
+			"wide",
+			"full"
+		]
 	},
 	"textdomain": "boldpost",
 	"editorScript": "file:./index.js",
@@ -252,6 +250,14 @@
 			"type": "string",
 			"default": "4"
 		},
+		"itemGapTablet": {
+			"type": "string",
+			"default": ""
+		},
+		"itemGapMobile": {
+			"type": "string",
+			"default": ""
+		},
 		"itemTitleColor": {
 			"type": "string",
 			"default": ""
@@ -446,7 +452,13 @@
 		},
 		"paginationBoxShadow": {
 			"type": "object",
-			"default": { "x": 0, "y": 5, "b": 10, "s": 0, "c": "rgba(14, 13, 13, 0.1)" }
+			"default": {
+				"x": 0,
+				"y": 5,
+				"b": 10,
+				"s": 0,
+				"c": "rgba(14, 13, 13, 0.1)"
+			}
 		},
 		"paginationBtnBorder": {
 			"type": "object",
@@ -700,6 +712,9 @@
 		},
 		"categoryMargin": {
 			"type": "object"
-		}
-	}
+		},
+	"hideDesktop": { "type": "boolean", "default": false },
+	"hideTablet": { "type": "boolean", "default": false },
+	"hideMobile": { "type": "boolean", "default": false }
+}
 }

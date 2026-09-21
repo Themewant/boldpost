@@ -24,7 +24,8 @@ import {
     __experimentalNumberControl as NumberControl,
     SelectControl,
     ToggleControl,
-    Icon
+    Icon,
+    ToolbarDropdownMenu
 } from '@wordpress/components';
 import BackgroundControl from '../../custom-components/BackgroundControl';
 import TypographyControls from '../../custom-components/TypographyControls';
@@ -135,10 +136,32 @@ export default function Edit({ attributes, setAttributes }) {
                     value={attributes.textAlign}
                     onChange={(value) => setAttributes({ textAlign: value })}
                 />
+                <ToolbarDropdownMenu
+                    icon="heading"
+                    label={__('Title HTML Tag', 'boldpost')}
+                    text={(attributes.titleTag || 'h2').toUpperCase()}
+                    controls={['h2', 'h3', 'h4', 'h5', 'h6'].map((t) => ({
+                        title: t.toUpperCase(),
+                        isActive: attributes.titleTag === t,
+                        onClick: () => setAttributes({ titleTag: t }),
+                    }))}
+                />
             </BlockControls>
 
             <InspectorControls>
-                <PanelBody title={__('Layout', 'boldpost')} initialOpen={false}>
+                <TabPanel
+                    className="boldpo-inspector-tabs"
+                    activeClass="is-active"
+                    tabs={[
+                        { name: 'settings', title: __('Settings', 'boldpost') },
+                        { name: 'layout', title: __('Layout', 'boldpost') },
+                        { name: 'style', title: __('Style', 'boldpost') },
+                    ]}
+                >
+                    {(tab) => (
+                        <>
+                        {tab.name === 'layout' && (<>
+                <PanelBody title={__('Preset', 'boldpost')} initialOpen={false}>
                     <ImageRadioControl
                         value={attributes.layoutStyle}
                         onChange={(value) => setAttributes({ layoutStyle: value })}
@@ -154,7 +177,8 @@ export default function Edit({ attributes, setAttributes }) {
                         __nextHasNoMarginBottom={true}
                     />
                 </PanelBody>
-
+                        </>)}
+                        {tab.name === 'settings' && (<>
                 <PanelBody title={__('Title', 'boldpost')} initialOpen={true}>
                     <SelectControl
                         label={__('Title Tag', 'boldpost')}
@@ -171,7 +195,6 @@ export default function Edit({ attributes, setAttributes }) {
                         __nextHasNoMarginBottom={true}
                     />
                 </PanelBody>
-
                 <PanelBody title={__('Description', 'boldpost')} initialOpen={false}>
                     <ToggleControl
                         label={__('Show / Hide', 'boldpost')}
@@ -180,9 +203,8 @@ export default function Edit({ attributes, setAttributes }) {
                         __nextHasNoMarginBottom={true}
                     />
                 </PanelBody>
-
-            </InspectorControls>
-            <InspectorControls group='styles'>
+                        </>)}
+                        {tab.name === 'style' && (<>
                 <PanelBody title={__('Title', 'boldpost')} initialOpen={false}>
                     <TabPanel
                         className="eshb-tab-panel"
@@ -239,7 +261,6 @@ export default function Edit({ attributes, setAttributes }) {
                         )}
                     </ResponsiveWrapper>
                 </PanelBody>
-
                 <PanelBody title={__('Description', 'boldpost')} initialOpen={false}>
                     <TabPanel
                         className="eshb-tab-panel"
@@ -292,7 +313,6 @@ export default function Edit({ attributes, setAttributes }) {
                         )}
                     </ResponsiveWrapper>
                 </PanelBody>
-
                 {(attributes.layoutStyle === '2' || attributes.layoutStyle === '4') && (
                     <PanelBody title={__('Border Line', 'boldpost')} initialOpen={false}>
                         <TabPanel
@@ -374,7 +394,6 @@ export default function Edit({ attributes, setAttributes }) {
                         )}
                     </PanelBody>
                 )}
-
                 {(attributes.layoutStyle === '2' || attributes.layoutStyle === '6') && (
                     <PanelBody title={__('Dot', 'boldpost')} initialOpen={false}>
                         <Divider />
@@ -414,6 +433,10 @@ export default function Edit({ attributes, setAttributes }) {
                         />
                     </PanelBody>
                 )}
+                        </>)}
+                        </>
+                    )}
+                </TabPanel>
             </InspectorControls>
 
             <div className="boldpo-heading-hover-styles">

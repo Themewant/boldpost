@@ -342,6 +342,14 @@ $pag_styles = [];
 if ( ! empty( $attributes['paginationColor'] ) ) $pag_styles['color'] = $attributes['paginationColor'];
 if ( ! empty( $attributes['paginationBackgroundColor'] ) ) $pag_styles['background-color'] = $attributes['paginationBackgroundColor'];
 
+$pag_typo = $attributes['paginationTypography'] ?? [];
+if ( ! empty( $pag_typo['fontFamily'] ) ) $pag_styles['font-family'] = $pag_typo['fontFamily'];
+if ( ! empty( $pag_typo['fontSize'] ) ) $pag_styles['font-size'] = $pag_typo['fontSize'];
+if ( ! empty( $pag_typo['fontWeight'] ) ) $pag_styles['font-weight'] = $pag_typo['fontWeight'];
+if ( ! empty( $pag_typo['lineHeight'] ) ) $pag_styles['line-height'] = $pag_typo['lineHeight'];
+if ( ! empty( $pag_typo['textTransform'] ) ) $pag_styles['text-transform'] = $pag_typo['textTransform'];
+if ( ! empty( $pag_typo['letterSpacing'] ) ) $pag_styles['letter-spacing'] = $pag_typo['letterSpacing'];
+
 $pag_hover = [];
 if ( ! empty( $attributes['paginationColorHover'] ) ) $pag_hover['color'] = $attributes['paginationColorHover'];
 if ( ! empty( $attributes['paginationBackgroundColorHover'] ) ) {
@@ -387,6 +395,13 @@ if ( ! empty( $t_border_radius['right'] ) ) $thumbnail_border_radius_styles['bor
 if ( ! empty( $t_border_radius['bottom'] ) ) $thumbnail_border_radius_styles['border-bottom-left-radius'] = BOLDPO_Helper::ensure_unit( $t_border_radius['bottom'] );
 if ( ! empty( $t_border_radius['left'] ) ) $thumbnail_border_radius_styles['border-bottom-right-radius'] = BOLDPO_Helper::ensure_unit( $t_border_radius['left'] );
 
+// Video thumbnail size (Tablet/Mobile only; desktop handled inline on the embed markup)
+$video_size_responsive = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+if ( ! empty( $attributes['videoHeightTablet'] ) ) $video_size_responsive['tablet']['height'] = BOLDPO_Helper::ensure_unit( $attributes['videoHeightTablet'] );
+if ( ! empty( $attributes['videoHeightMobile'] ) ) $video_size_responsive['mobile']['height'] = BOLDPO_Helper::ensure_unit( $attributes['videoHeightMobile'] );
+if ( ! empty( $attributes['videoWidthTablet'] ) ) $video_size_responsive['tablet']['width'] = BOLDPO_Helper::ensure_unit( $attributes['videoWidthTablet'] );
+if ( ! empty( $attributes['videoWidthMobile'] ) ) $video_size_responsive['mobile']['width'] = BOLDPO_Helper::ensure_unit( $attributes['videoWidthMobile'] );
+
 $style_handle = 'boldpo-post-grid-style';
 $unique_id    = $attributes['blockId'];
 $selector     = '.boldpo-post-grid-block-wrap.' . $unique_id;
@@ -403,6 +418,7 @@ $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .bo
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-pagination .page-numbers', $pagination_btn_padding_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpost-load-more-btn', $pagination_btn_padding_responsive);
 $full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpost-pagination-container', $pagination_wrap_margin_responsive);
+$full_responsive_css .= BOLDPO_Helper::generate_responsive_css($selector . ' .boldpo-video-wrapper iframe, ' . $selector . ' .boldpo-video-wrapper video', $video_size_responsive);
 
 wp_enqueue_style( $style_handle );
 BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_responsive_css, [

@@ -134,7 +134,19 @@ export default function Edit({ attributes, setAttributes }) {
             </BlockControls>
 
             <InspectorControls>
-                <PanelBody title={__('Layout', 'boldpost')} initialOpen={false}>
+                <TabPanel
+                    className="boldpo-inspector-tabs"
+                    activeClass="is-active"
+                    tabs={[
+                        { name: 'settings', title: __('Settings', 'boldpost') },
+                        { name: 'layout', title: __('Layout', 'boldpost') },
+                        { name: 'style', title: __('Style', 'boldpost') },
+                    ]}
+                >
+                    {(tab) => (
+                        <>
+                        {tab.name === 'layout' && (<>
+                <PanelBody title={__('Preset', 'boldpost')} initialOpen={false}>
                     <ImageRadioControl
                         value={attributes.buttonStyle}
                         onChange={(value) => setAttributes({ buttonStyle: value })}
@@ -143,6 +155,8 @@ export default function Edit({ attributes, setAttributes }) {
                         ]}
                     />
                 </PanelBody>
+                        </>)}
+                        {tab.name === 'settings' && (<>
                 <PanelBody title={__('Button Settings', 'boldpost')} initialOpen={true}>
                     <TextControl
                         label={__('URL', 'boldpost')}
@@ -180,7 +194,6 @@ export default function Edit({ attributes, setAttributes }) {
                     </ResponsiveWrapper>
 
                 </PanelBody>
-
                 <PanelBody title={__('Icon', 'boldpost')} initialOpen={false}>
                     <ToggleControl
                         label={__('Show Icon', 'boldpost')}
@@ -222,9 +235,8 @@ export default function Edit({ attributes, setAttributes }) {
                         </>
                     )}
                 </PanelBody>
-            </InspectorControls>
-
-            <InspectorControls group="styles">
+                        </>)}
+                        {tab.name === 'style' && (<>
                 <PanelBody title={__('Button', 'boldpost')} initialOpen={false}>
                     <TabPanel
                         className="eshb-tab-panel"
@@ -297,7 +309,6 @@ export default function Edit({ attributes, setAttributes }) {
                         )}
                     </ResponsiveWrapper>
                 </PanelBody>
-
                 {attributes.showIcon && (
                     <PanelBody title={__('Icon', 'boldpost')} initialOpen={false}>
                         <TabPanel
@@ -344,6 +355,10 @@ export default function Edit({ attributes, setAttributes }) {
                         />
                     </PanelBody>
                 )}
+                        </>)}
+                        </>
+                    )}
+                </TabPanel>
             </InspectorControls>
 
             <div className="boldpo-button-hover-styles">

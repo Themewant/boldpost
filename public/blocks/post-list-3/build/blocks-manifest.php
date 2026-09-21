@@ -15,14 +15,12 @@ return array(
 		),
 		'supports' => array(
 			'html' => false,
-			'spacing' => array(
-				'padding' => true,
-				'margin' => true
-			),
-			'color' => array(
-				'background' => true,
-				'text' => false,
-				'gradients' => true
+			'align' => array(
+				'left',
+				'center',
+				'right',
+				'wide',
+				'full'
 			)
 		),
 		'textdomain' => 'boldpost',
@@ -183,6 +181,18 @@ return array(
 					'letterSpacing' => ''
 				)
 			),
+			'itemTitleOneTypographyTablet' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
+			),
+			'itemTitleOneTypographyMobile' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
+			),
 			'itemTitleTwoTypography' => array(
 				'type' => 'object',
 				'default' => array(
@@ -193,6 +203,18 @@ return array(
 					'textTransform' => '',
 					'lineHeight' => '',
 					'letterSpacing' => ''
+				)
+			),
+			'itemTitleTwoTypographyTablet' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
+			),
+			'itemTitleTwoTypographyMobile' => array(
+				'type' => 'object',
+				'default' => array(
+					
 				)
 			),
 			'itemExcerptTypography' => array(
@@ -280,6 +302,14 @@ return array(
 				'type' => 'string',
 				'default' => '4'
 			),
+			'itemGapTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'itemGapMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'itemTitleColor' => array(
 				'type' => 'string',
 				'default' => ''
@@ -295,8 +325,32 @@ return array(
 			'contentPadding' => array(
 				'type' => 'object'
 			),
+			'contentPaddingTablet' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
+			),
+			'contentPaddingMobile' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
+			),
 			'contentTwoPadding' => array(
 				'type' => 'object'
+			),
+			'contentTwoPaddingTablet' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
+			),
+			'contentTwoPaddingMobile' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
 			),
 			'readMoreBackgroundColor' => array(
 				'type' => 'string',
@@ -679,6 +733,18 @@ return array(
 			),
 			'categoryMargin' => array(
 				'type' => 'object'
+			),
+			'hideDesktop' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'hideTablet' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'hideMobile' => array(
+				'type' => 'boolean',
+				'default' => false
 			)
 		)
 	)

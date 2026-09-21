@@ -10,15 +10,13 @@
 	"example": {},
 	"supports": {
 		"html": false,
-		"spacing": {
-			"padding": true,
-			"margin": true
-		},
-		"color": {
-			"background": true,
-			"text": false,
-			"gradients": true
-		}
+		"align": [
+			"left",
+			"center",
+			"right",
+			"wide",
+			"full"
+		]
 	},
 	"textdomain": "boldpost",
 	"editorScript": "file:./index.js",
@@ -70,9 +68,25 @@
 			"type": "string",
 			"default": "312px"
 		},
+		"videoHeightTablet": {
+			"type": "string",
+			"default": ""
+		},
+		"videoHeightMobile": {
+			"type": "string",
+			"default": ""
+		},
 		"videoWidth": {
 			"type": "string",
 			"default": "100%"
+		},
+		"videoWidthTablet": {
+			"type": "string",
+			"default": ""
+		},
+		"videoWidthMobile": {
+			"type": "string",
+			"default": ""
 		},
 		"videoControls": {
 			"type": "boolean",
@@ -342,6 +356,14 @@
 		"contentPadding": {
 			"type": "object"
 		},
+		"contentPaddingTablet": {
+			"type": "object",
+			"default": {}
+		},
+		"contentPaddingMobile": {
+			"type": "object",
+			"default": {}
+		},
 		"readMoreBackgroundColor": {
 			"type": "string",
 			"default": ""
@@ -566,7 +588,23 @@
 			"type": "string",
 			"default": ""
 		},
+		"navIconSizeTablet": {
+			"type": "string",
+			"default": ""
+		},
+		"navIconSizeMobile": {
+			"type": "string",
+			"default": ""
+		},
 		"navSize": {
+			"type": "string",
+			"default": ""
+		},
+		"navSizeTablet": {
+			"type": "string",
+			"default": ""
+		},
+		"navSizeMobile": {
 			"type": "string",
 			"default": ""
 		},
@@ -589,7 +627,15 @@
 			"type": "boolean",
 			"default": false
 		},
-		"dotsSize" : {
+		"dotsSize": {
+			"type": "string",
+			"default": ""
+		},
+		"dotsSizeTablet": {
+			"type": "string",
+			"default": ""
+		},
+		"dotsSizeMobile": {
 			"type": "string",
 			"default": ""
 		},
@@ -702,6 +748,9 @@
 		},
 		"categoryMargin": {
 			"type": "object"
-		}
-	}
+		},
+	"hideDesktop": { "type": "boolean", "default": false },
+	"hideTablet": { "type": "boolean", "default": false },
+	"hideMobile": { "type": "boolean", "default": false }
+}
 }

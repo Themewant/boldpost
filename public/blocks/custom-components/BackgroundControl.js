@@ -19,6 +19,10 @@ const BackgroundControl = ({
     defaultGradient = ''
 }) => {
     const [isVisible, setIsVisible] = useState(false);
+    // Popover needs a stable anchor element. Without one it falls back to a
+    // placeholder node and floating-ui keeps re-measuring against a moving
+    // reference, which makes the panel visibly jitter while it is open.
+    const [anchorEl, setAnchorEl] = useState(null);
 
     const toggleVisible = () => {
         setIsVisible((state) => !state);
@@ -39,6 +43,7 @@ const BackgroundControl = ({
         <div className="eshb-background-control" style={{ position: 'relative', marginBottom: '15px' }}>
             <Button
                 variant="secondary"
+                ref={setAnchorEl}
                 onClick={toggleVisible}
                 style={{ width: '100%', justifyContent: 'space-between', boxShadow: 'none' }}
             >
@@ -64,7 +69,12 @@ const BackgroundControl = ({
             </Button>
             {isVisible && (
                 <Popover
-                    position="bottom center"
+                    anchor={anchorEl}
+                    placement="left-start"
+                    offset={20}
+                    shift
+                    flip={false}
+                    resize={false}
                     onFocusOutside={() => setIsVisible(false)}
                 >
                     <div style={{ padding: '0', width: '280px' }}>

@@ -14,7 +14,7 @@ import { applyFilters } from '@wordpress/hooks';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { useBlockProps, InspectorControls, BlockControls, AlignmentControl } from '@wordpress/block-editor';
 
 import {
 	PanelBody,
@@ -25,7 +25,8 @@ import {
 	__experimentalNumberControl as NumberControl,
 	TextControl,
 	SelectControl,
-	ToggleControl
+	ToggleControl,
+	ToolbarDropdownMenu
 } from '@wordpress/components';
 import BackgroundControl from '../../custom-components/BackgroundControl';
 import TypographyControls from '../../custom-components/TypographyControls';
@@ -86,6 +87,20 @@ export default function Edit({ attributes, setAttributes }) {
 		if (device === 'desktop') return base;
 		return `${base}${device.charAt(0).toUpperCase() + device.slice(1)}`;
 	};
+
+	const deviceType = useSelect((select) => {
+		const editorStore = select('core/editor');
+		if (editorStore && typeof editorStore.getDeviceType === 'function') {
+			return editorStore.getDeviceType();
+		}
+		const editPostStore = select('core/edit-post');
+		if (editPostStore && typeof editPostStore.__experimentalGetPreviewDeviceType === 'function') {
+			return editPostStore.__experimentalGetPreviewDeviceType();
+		}
+		return 'Desktop';
+	}, []);
+	const dev = (deviceType || 'Desktop').toLowerCase();
+	const alignKey = getAttrKey('contentTextAlign', dev);
 
 	const categories = useSelect(
 		(select) =>
@@ -159,7 +174,45 @@ export default function Edit({ attributes, setAttributes }) {
 
 	return (
 		<div {...useBlockProps()}>
+			<BlockControls>
+				<AlignmentControl
+					value={attributes[alignKey]}
+					onChange={(v) => setAttributes({ [alignKey]: v || '' })}
+				/>
+				<ToolbarDropdownMenu
+					icon="heading"
+					label={__('Title 1 Tag', 'boldpost')}
+					text={(attributes.TitleOneTag || 'h2').toUpperCase()}
+					controls={['h2', 'h3', 'h4', 'h5', 'h6'].map((t) => ({
+						title: t.toUpperCase(),
+						isActive: attributes.TitleOneTag === t,
+						onClick: () => setAttributes({ TitleOneTag: t }),
+					}))}
+				/>
+				<ToolbarDropdownMenu
+					icon="heading"
+					label={__('Title 2 Tag', 'boldpost')}
+					text={(attributes.TitleTwoTag || 'h4').toUpperCase()}
+					controls={['h2', 'h3', 'h4', 'h5', 'h6'].map((t) => ({
+						title: t.toUpperCase(),
+						isActive: attributes.TitleTwoTag === t,
+						onClick: () => setAttributes({ TitleTwoTag: t }),
+					}))}
+				/>
+			</BlockControls>
 			<InspectorControls>
+				<TabPanel
+					className="boldpo-inspector-tabs"
+					activeClass="is-active"
+					tabs={[
+						{ name: 'settings', title: __('Settings', 'boldpost') },
+						{ name: 'layout', title: __('Layout', 'boldpost') },
+						{ name: 'style', title: __('Style', 'boldpost') },
+					]}
+				>
+					{(tab) => (
+						<>
+						{tab.name === 'settings' && (<>
 				{/* {query panel group} */}
 				<PanelBody title={__('Query', 'boldpost')} initialOpen={false}>
 					<NumberControl
@@ -240,9 +293,9 @@ export default function Edit({ attributes, setAttributes }) {
 						__nextHasNoMarginBottom={true}
 					/>
 				</PanelBody>
-
-
-				<PanelBody title={__('Layout', 'boldpost')} initialOpen={false}>
+						</>)}
+						{tab.name === 'layout' && (<>
+				<PanelBody title={__('Preset', 'boldpost')} initialOpen={false}>
 					<ImageRadioControl
 						value={attributes.listStyle}
 						onChange={(value) => setAttributes({ listStyle: value })}
@@ -257,6 +310,8 @@ export default function Edit({ attributes, setAttributes }) {
 						]}
 					/>
 				</PanelBody>
+						</>)}
+						{tab.name === 'settings' && (<>
 				<PanelBody title={__('Thumbnail', 'boldpost')} initialOpen={false}>
 					<SelectControl
 						label={__('Thumbnail One Size', 'boldpost')}
@@ -339,7 +394,6 @@ export default function Edit({ attributes, setAttributes }) {
 						__nextHasNoMarginBottom={true}
 					/>
 				</PanelBody>
-
 				<PanelBody title={__('Title', 'boldpost')} initialOpen={false}>
 					<SelectControl
 						label={__('Title Tag', 'boldpost')}
@@ -377,7 +431,6 @@ export default function Edit({ attributes, setAttributes }) {
 						__nextHasNoMarginBottom={true}
 					/>
 				</PanelBody>
-
 				<PanelBody title={__('Excerpt', 'boldpost')} initialOpen={false}>
 					<ToggleControl
 						label={__('Show / Hide', 'boldpost')}
@@ -395,7 +448,6 @@ export default function Edit({ attributes, setAttributes }) {
 						/>
 					)}
 				</PanelBody>
-
 				<PanelBody title={__('Meta', 'boldpost')} initialOpen={false}>
 					<ToggleControl
 						label={__('Show / Hide', 'boldpost')}
@@ -464,7 +516,6 @@ export default function Edit({ attributes, setAttributes }) {
 							</>
 						)}
 					</PanelBody>
-
 					<PanelBody title={__('Button', 'boldpost')} initialOpen={false}>
 						<ToggleControl
 							label={__('Show / Hide', 'boldpost')}
@@ -500,7 +551,6 @@ export default function Edit({ attributes, setAttributes }) {
 							</>
 						)}
 					</PanelBody>
-
 					<PanelBody title={__('Pagination', 'boldpost')} initialOpen={false}>
 						<ToggleControl
 							label={__('Show Pagination', 'boldpost')}
@@ -517,10 +567,8 @@ export default function Edit({ attributes, setAttributes }) {
 							__nextHasNoMarginBottom={true}
 						/>
 					</PanelBody>
-
-
-			</InspectorControls>
-			<InspectorControls group='styles'>
+						</>)}
+						{tab.name === 'style' && (<>
 				<PanelBody title={__('Item', 'boldpost')} initialOpen={false}>
 					<TabPanel
 						className="eshb-tab-panel"
@@ -610,7 +658,6 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(nextValues) => setAttributes({ itemBorderRadius: nextValues })}
 					/>
 				</PanelBody>
-
 				<PanelBody title={__('Content', 'boldpost')} initialOpen={false}>
 					<ResponsiveWrapper label={__('Text Align', 'boldpost')}>
 						{(device) => (
@@ -639,7 +686,6 @@ export default function Edit({ attributes, setAttributes }) {
 						)}
 					</ResponsiveWrapper>
 				</PanelBody>
-
 				<PanelBody title={__('Title', 'boldpost')} initialOpen={false}>
 					<TabPanel
 						className="eshb-tab-panel"
@@ -718,7 +764,6 @@ export default function Edit({ attributes, setAttributes }) {
 						)}
 					</ResponsiveWrapper>
 				</PanelBody>
-
 				<PanelBody title={__('Excerpt', 'boldpost')} initialOpen={false}>
 					<ColorPopover
 						label={__('Color', 'boldpost')}
@@ -769,7 +814,6 @@ export default function Edit({ attributes, setAttributes }) {
 						)}
 					</ResponsiveWrapper>
 				</PanelBody>
-
 				<PanelBody title={__('Date Badge', 'boldpost')} initialOpen={false}>
 					<ColorPopover
 						label={__('Color', 'boldpost')}
@@ -845,7 +889,6 @@ export default function Edit({ attributes, setAttributes }) {
 						attributeKey="metaTypography"
 					/>
 				</PanelBody>
-
 				<PanelBody title={__('Button', 'boldpost')} initialOpen={false}>
 					<TabPanel
 						className="eshb-tab-panel"
@@ -926,7 +969,6 @@ export default function Edit({ attributes, setAttributes }) {
 						attributeKey="readMoreTypography"
 					/>
 				</PanelBody>
-
 				<PanelBody title={__('Pagination', 'boldpost')} initialOpen={false}>
 					<TabPanel
 						className="eshb-tab-panel"
@@ -1003,7 +1045,6 @@ export default function Edit({ attributes, setAttributes }) {
 					</ResponsiveWrapper>
 
 				</PanelBody>
-
 				<PanelBody title={__('Thumbnail', 'boldpost')} initialOpen={false}>
 					<BoxControl
 						label={__('Border Radius', 'boldpost')}
@@ -1011,6 +1052,10 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(value) => setAttributes({ thumbnailBorderRadius: value })}
 					/>
 				</PanelBody>
+						</>)}
+						</>
+					)}
+				</TabPanel>
 			</InspectorControls>
 
 			<ServerSideRender block="boldpost/post-list-2" attributes={attributes} httpMethod="POST" />

@@ -21,9 +21,17 @@ $selector = '.' . $unique_id;
 
 $col_responsive = [ 'desktop' => [], 'tablet' => [], 'mobile' => [] ];
 
+// Explicit per-device (Tablet/Mobile) width declarations are captured here so they
+// can be re-emitted with a boosted selector + !important below. The parent row
+// (layout-row/src/style.scss) force-stacks every column to 100% under 767px with an
+// !important, higher-specificity rule, which otherwise cancels any Tablet/Mobile
+// width the user sets on the column.
+$width_override = [ 'tablet' => [], 'mobile' => [] ];
+
 // Width handling per type.
 $devices = [ '' => 'desktop', 'Tablet' => 'tablet', 'Mobile' => 'mobile' ];
 foreach ( $devices as $suffix => $device ) {
+    $width_decls = [];
     if ( $width_type === 'percentage' || $width_type === 'custom' ) {
         $w = isset( $attributes[ 'width' . $suffix ] ) ? trim( (string) $attributes[ 'width' . $suffix ] ) : '';
         if ( $w !== '' ) {
@@ -38,18 +46,24 @@ foreach ( $devices as $suffix => $device ) {
                     $w,
                     rtrim( rtrim( number_format( $w_num, 4, '.', '' ), '0' ), '.' )
                 );
-                $col_responsive[ $device ]['flex']      = '0 1 ' . $calc;
-                $col_responsive[ $device ]['max-width'] = $calc;
+                $width_decls['flex']      = '0 1 ' . $calc;
+                $width_decls['max-width'] = $calc;
             } else {
-                $col_responsive[ $device ]['width']     = $w;
-                $col_responsive[ $device ]['flex']      = '0 0 auto';
+                $width_decls['width'] = $w;
+                $width_decls['flex']  = '0 0 auto';
             }
         }
     } elseif ( $width_type === 'flex' ) {
         $grow  = isset( $attributes[ 'flexGrow' . $suffix ] ) ? trim( (string) $attributes[ 'flexGrow' . $suffix ] ) : '';
         $basis = isset( $attributes[ 'flexBasis' . $suffix ] ) ? trim( (string) $attributes[ 'flexBasis' . $suffix ] ) : '';
-        if ( $grow !== '' )  $col_responsive[ $device ]['flex-grow']  = (float) $grow;
-        if ( $basis !== '' ) $col_responsive[ $device ]['flex-basis'] = $basis;
+        if ( $grow !== '' )  $width_decls['flex-grow']  = (float) $grow;
+        if ( $basis !== '' ) $width_decls['flex-basis'] = $basis;
+    }
+    foreach ( $width_decls as $prop => $val ) {
+        $col_responsive[ $device ][ $prop ] = $val;
+        if ( $device !== 'desktop' ) {
+            $width_override[ $device ][ $prop ] = $val;
+        }
     }
 }
 
@@ -120,6 +134,25 @@ $style_handle = 'boldpo-column-style';
 $css  = BOLDPO_Helper::generate_responsive_css( $selector, $col_responsive );
 $css .= BOLDPO_Helper::generate_responsive_css( $inner_selector, $inner_responsive );
 
+// Re-emit any explicit Tablet/Mobile width with a boosted selector + !important so
+// it wins over the row's blanket mobile stacking rule (which is !important and has
+// specificity 0,3,0). Stacking three of the column's own classes matches that
+// specificity, and this rule is printed after it, so the cascade resolves in favour
+// of the user's width. Only emitted when a Tablet/Mobile width is actually set, so
+// desktop output and columns without a per-device width are untouched. Breakpoints
+// mirror BOLDPO_Helper::generate_responsive_css().
+$override_selector = $selector . '.boldpo-column.boldpo-block';
+$override_media    = [ 'tablet' => '@media (max-width: 1024px)', 'mobile' => '@media (max-width: 767px)' ];
+foreach ( $override_media as $device => $media ) {
+    if ( ! empty( $width_override[ $device ] ) ) {
+        $decls = '';
+        foreach ( $width_override[ $device ] as $prop => $val ) {
+            $decls .= $prop . ':' . wp_strip_all_tags( $val ) . ' !important;';
+        }
+        $css .= $media . ' { ' . $override_selector . ' { ' . $decls . ' } }' . "\n";
+    }
+}
+
 wp_enqueue_style( $style_handle );
 BOLDPO_Helper::add_custom_style( $style_handle, $selector, $css, [] );
 
@@ -129,6 +162,9 @@ $classes = [
     $unique_id,
 ];
 if ( $vertical ) $classes[] = 'is-self-' . sanitize_html_class( $vertical );
+if ( ! empty( $attributes['hideDesktop'] ) ) $classes[] = 'boldpo-hide-desktop';
+if ( ! empty( $attributes['hideTablet'] ) )  $classes[] = 'boldpo-hide-tablet';
+if ( ! empty( $attributes['hideMobile'] ) )  $classes[] = 'boldpo-hide-mobile';
 if ( $custom_class ) {
     foreach ( explode( ' ', $custom_class ) as $c ) {
         $c = sanitize_html_class( $c );

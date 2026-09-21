@@ -9,25 +9,13 @@
   "example": {},
   "supports": {
     "html": false,
-    "spacing": {
-      "padding": [
-        "top",
-        "bottom",
-        "left",
-        "right"
-      ],
-      "margin": [
-        "top",
-        "bottom",
-        "left",
-        "right"
-      ]
-    },
-    "color": {
-      "background": true,
-      "text": false,
-      "gradients": true
-    }
+    "align": [
+      "left",
+      "center",
+      "right",
+      "wide",
+      "full"
+    ]
   },
   "textdomain": "boldpost",
   "editorScript": "file:./index.js",
@@ -121,6 +109,14 @@
     "itemMargin": {
       "type": "object"
     },
+    "itemMarginTablet": {
+      "type": "object",
+      "default": {}
+    },
+    "itemMarginMobile": {
+      "type": "object",
+      "default": {}
+    },
     "itemBorderRadius": {
       "type": "object"
     },
@@ -148,6 +144,14 @@
         "letterSpacing": ""
       }
     },
+    "itemTitleLeftTypographyTablet": {
+      "type": "object",
+      "default": {}
+    },
+    "itemTitleLeftTypographyMobile": {
+      "type": "object",
+      "default": {}
+    },
     "itemTitleRightTypography": {
       "type": "object",
       "default": {
@@ -159,6 +163,14 @@
         "lineHeight": "",
         "letterSpacing": ""
       }
+    },
+    "itemTitleRightTypographyTablet": {
+      "type": "object",
+      "default": {}
+    },
+    "itemTitleRightTypographyMobile": {
+      "type": "object",
+      "default": {}
     },
     "itemExcerptTypography": {
       "type": "object",
@@ -174,6 +186,14 @@
     },
     "contentPadding": {
       "type": "object"
+    },
+    "contentPaddingTablet": {
+      "type": "object",
+      "default": {}
+    },
+    "contentPaddingMobile": {
+      "type": "object",
+      "default": {}
     },
     "readMorePadding": {
       "type": "object"
@@ -482,6 +502,18 @@
       "type": "string",
       "default": "var(--boldpo-preset-color-primary)"
     },
+    "paginationTypography": {
+      "type": "object",
+      "default": {
+        "fontFamily": "",
+        "fontSize": "",
+        "fontWeight": "",
+        "fontStyle": "",
+        "textTransform": "",
+        "lineHeight": "",
+        "letterSpacing": ""
+      }
+    },
     "columnsTablet": {
       "type": "string",
       "default": "2"
@@ -666,6 +698,18 @@
     },
     "categoryMargin": {
       "type": "object"
+    },
+    "hideDesktop": {
+      "type": "boolean",
+      "default": false
+    },
+    "hideTablet": {
+      "type": "boolean",
+      "default": false
+    },
+    "hideMobile": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

@@ -10,15 +10,13 @@
 	"example": {},
 	"supports": {
 		"html": false,
-		"spacing": {
-			"padding": true,
-			"margin": true
-		},
-		"color": {
-			"background": true,
-			"text": false,
-			"gradients": true
-		}
+		"align": [
+			"left",
+			"center",
+			"right",
+			"wide",
+			"full"
+		]
 	},
 	"textdomain": "boldpost",
 	"editorScript": "file:./index.js",
@@ -179,6 +177,14 @@
 				"letterSpacing": ""
 			}
 		},
+		"itemTitleOneTypographyTablet": {
+			"type": "object",
+			"default": {}
+		},
+		"itemTitleOneTypographyMobile": {
+			"type": "object",
+			"default": {}
+		},
 		"itemTitleTwoTypography": {
 			"type": "object",
 			"default": {
@@ -190,6 +196,14 @@
 				"lineHeight": "",
 				"letterSpacing": ""
 			}
+		},
+		"itemTitleTwoTypographyTablet": {
+			"type": "object",
+			"default": {}
+		},
+		"itemTitleTwoTypographyMobile": {
+			"type": "object",
+			"default": {}
 		},
 		"itemExcerptTypography": {
 			"type": "object",
@@ -276,6 +290,14 @@
 			"type": "string",
 			"default": ""
 		},
+		"itemGapTablet": {
+			"type": "string",
+			"default": ""
+		},
+		"itemGapMobile": {
+			"type": "string",
+			"default": ""
+		},
 		"itemTitleColor": {
 			"type": "string",
 			"default": ""
@@ -291,8 +313,24 @@
 		"contentPadding": {
 			"type": "object"
 		},
+		"contentPaddingTablet": {
+			"type": "object",
+			"default": {}
+		},
+		"contentPaddingMobile": {
+			"type": "object",
+			"default": {}
+		},
 		"contentTwoPadding": {
 			"type": "object"
+		},
+		"contentTwoPaddingTablet": {
+			"type": "object",
+			"default": {}
+		},
+		"contentTwoPaddingMobile": {
+			"type": "object",
+			"default": {}
 		},
 		"readMoreBackgroundColor": {
 			"type": "string",
@@ -673,6 +711,9 @@
 		},
 		"categoryMargin": {
 			"type": "object"
-		}
-	}
+		},
+	"hideDesktop": { "type": "boolean", "default": false },
+	"hideTablet": { "type": "boolean", "default": false },
+	"hideMobile": { "type": "boolean", "default": false }
+}
 }

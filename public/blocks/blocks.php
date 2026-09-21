@@ -36,6 +36,20 @@ function boldpo_enqueue_block_styles() {
 
 }
 
+/**
+ * Shared styling for the 3-tab (Settings / Layout / Style) inspector used by
+ * every BoldPost block, so the tabs sit evenly across the sidebar.
+ */
+function boldpo_enqueue_inspector_tab_styles() {
+	wp_register_style( 'boldpo-editor-ui', false, array(), BOLDPO_VERSION );
+	wp_enqueue_style( 'boldpo-editor-ui' );
+	wp_add_inline_style(
+		'boldpo-editor-ui',
+		'.boldpo-inspector-tabs .components-tab-panel__tabs{display:flex}.boldpo-inspector-tabs .components-tab-panel__tabs-item{flex:1;justify-content:center}'
+	);
+}
+add_action( 'enqueue_block_editor_assets', 'boldpo_enqueue_inspector_tab_styles' );
+
 $boldpo_blocks_instance = BOLDPO_Blocks::instance();
 $boldpo_blocks = $boldpo_blocks_instance->get_blocks();
 

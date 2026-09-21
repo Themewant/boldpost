@@ -10,15 +10,13 @@
     "example": {},
     "supports": {
         "html": false,
-        "spacing": {
-            "padding": true,
-            "margin": true
-        },
-        "color": {
-            "background": true,
-            "text": false,
-            "gradients": true
-        }
+        "align": [
+            "left",
+            "center",
+            "right",
+            "wide",
+            "full"
+        ]
     },
     "textdomain": "boldpost",
     "editorScript": "file:./index.js",
@@ -199,6 +197,9 @@
         "dotSize": {
             "type": "number",
             "default": 12
-        }
-    }
+        },
+    "hideDesktop": { "type": "boolean", "default": false },
+    "hideTablet": { "type": "boolean", "default": false },
+    "hideMobile": { "type": "boolean", "default": false }
+   }
 }

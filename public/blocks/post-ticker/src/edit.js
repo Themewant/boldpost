@@ -13,7 +13,7 @@ import { decodeEntities } from '@wordpress/html-entities';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { useBlockProps, InspectorControls, BlockControls, AlignmentControl } from '@wordpress/block-editor';
 
 import {
 	PanelBody,
@@ -25,7 +25,8 @@ import {
 	SelectControl,
 	ToggleControl,
 	TextControl,
-	RangeControl
+	RangeControl,
+	ToolbarDropdownMenu
 } from '@wordpress/components';
 import BackgroundControl from '../../custom-components/BackgroundControl';
 import TypographyControls from '../../custom-components/TypographyControls';
@@ -66,6 +67,16 @@ export default function Edit({ attributes, setAttributes }) {
 		if (device === 'desktop') return base;
 		return `${base}${device.charAt(0).toUpperCase() + device.slice(1)}`;
 	};
+
+	const _dev = useSelect((s) => {
+		const e = s('core/editor');
+		if (e && e.getDeviceType) return e.getDeviceType();
+		const p = s('core/edit-post');
+		if (p && p.__experimentalGetPreviewDeviceType) return p.__experimentalGetPreviewDeviceType();
+		return 'Desktop';
+	}, []);
+	const dev = _dev ? _dev.toLowerCase() : 'desktop';
+	const alignKey = getAttrKey('titleTextAlign', dev);
 
 	const categories = useSelect(
 		(select) =>
@@ -163,7 +174,35 @@ export default function Edit({ attributes, setAttributes }) {
 
 	return (
 		<div {...useBlockProps({ ref: blockRef })}>
+			<BlockControls>
+				<AlignmentControl
+					value={attributes[alignKey]}
+					onChange={(v) => setAttributes({ [alignKey]: v || '' })}
+				/>
+				<ToolbarDropdownMenu
+					icon="heading"
+					label={__('Title HTML Tag', 'boldpost')}
+					text={(attributes.titleTag || 'h3').toUpperCase()}
+					controls={['p', 'h2', 'h3', 'h4', 'h5', 'h6'].map((t) => ({
+						title: t.toUpperCase(),
+						isActive: attributes.titleTag === t,
+						onClick: () => setAttributes({ titleTag: t }),
+					}))}
+				/>
+			</BlockControls>
 			<InspectorControls>
+				<TabPanel
+					className="boldpo-inspector-tabs"
+					activeClass="is-active"
+					tabs={[
+						{ name: 'settings', title: __('Settings', 'boldpost') },
+						{ name: 'layout', title: __('Layout', 'boldpost') },
+						{ name: 'style', title: __('Style', 'boldpost') },
+					]}
+				>
+					{(tab) => (
+						<>
+						{tab.name === 'settings' && (<>
 				{/* {query panel group} */}
 				<PanelBody title={__('Query', 'boldpost')} initialOpen={false}>
 					<NumberControl
@@ -244,9 +283,9 @@ export default function Edit({ attributes, setAttributes }) {
 						__nextHasNoMarginBottom={true}
 					/>
 				</PanelBody>
-
-
-				<PanelBody title={__('Layout', 'boldpost')} initialOpen={false}>
+						</>)}
+						{tab.name === 'layout' && (<>
+				<PanelBody title={__('Preset', 'boldpost')} initialOpen={false}>
 					<ImageRadioControl
 						value={attributes.sliderStyle}
 						onChange={(value) => setAttributes({ sliderStyle: value })}
@@ -255,7 +294,8 @@ export default function Edit({ attributes, setAttributes }) {
 						]}
 					/>
 				</PanelBody>
-
+						</>)}
+						{tab.name === 'settings' && (<>
 				{ /* content panel group */}
 				<PanelBody title={__('Title', 'boldpost')} initialOpen={false}>
 					<SelectControl
@@ -281,7 +321,6 @@ export default function Edit({ attributes, setAttributes }) {
 						__nextHasNoMarginBottom={true}
 					/>
 				</PanelBody>
-
 				<PanelBody title={__('Slider', 'boldpost')} initialOpen={true}>
 					<SelectControl
 						label={__('Desktop', 'boldpost')}
@@ -441,9 +480,8 @@ export default function Edit({ attributes, setAttributes }) {
 						help={__('Autoplay delay of the transition between slides', 'boldpost')}
 					/>
 				</PanelBody>
-
-			</InspectorControls>
-			<InspectorControls group='styles'>
+						</>)}
+						{tab.name === 'style' && (<>
 				<PanelBody title={__('Item', 'boldpost')} initialOpen={false}>
 					<TabPanel
 						className="eshb-tab-panel"
@@ -549,7 +587,10 @@ export default function Edit({ attributes, setAttributes }) {
 						)}
 					</ResponsiveWrapper>
 				</PanelBody>
-
+						</>)}
+						</>
+					)}
+				</TabPanel>
 			</InspectorControls>
 
 			<ServerSideRender block="boldpost/post-ticker" attributes={attributes} httpMethod="POST" />
