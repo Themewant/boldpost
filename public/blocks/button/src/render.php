@@ -3,7 +3,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+// Every $-variable in this file is local to the block render callback rather than
+// a global, so the non-prefixed-variable sniff does not apply here.
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- block render callback scope; these are template locals, not globals.
 
 $text           = isset($attributes['text']) ? $attributes['text'] : '';
 $url            = isset($attributes['url']) ? $attributes['url'] : '#';
@@ -148,7 +150,10 @@ if ( ! empty( $rel ) ) {
 
 if ( ! empty( $text ) ) :
 ?>
-    <div <?php echo wp_kses_post( $block_wrap_attr ); ?>>
+    <div <?php
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() returns an attribute string already escaped by core; wp_kses() cannot act on a fragment with no tags.
+    echo $block_wrap_attr;
+    ?>>
         <div class="boldpo-button">
             <a href="<?php echo esc_url( $url ); ?>" class="boldpo-button-link icon-<?php echo esc_attr( $icon_position ); ?> icon-animation-<?php echo esc_attr( $icon_hover_animation ); ?>"<?php echo $link_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $link_attrs is built from esc_attr/esc_url pieces above. ?>>
                 <?php if ( $show_icon && $icon_position === 'left' ) : ?>
@@ -164,7 +169,10 @@ if ( ! empty( $text ) ) :
 <?php
 else:
 ?>
-    <div <?php echo wp_kses_post( get_block_wrapper_attributes() ); ?>>
+    <div <?php
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() returns an attribute string already escaped by core; wp_kses() cannot act on a fragment with no tags.
+    echo get_block_wrapper_attributes();
+    ?>>
         <p><?php esc_html_e( 'Add button text', 'boldpost' ); ?></p>
     </div>
 <?php

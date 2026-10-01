@@ -1,12 +1,12 @@
-=== BoldPost – Post Grid & Layout Blocks ===
+=== BoldPost ===
 Contributors: themewant
-Tags: post grid, post list, post slider, gutenberg blocks, category list
+Tags: post grid, post list, post slider, blocks, category list
 Requires at least: 6.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Display posts beautifully with customizable grids, lists, sliders & category displays. Perfect for blogs, magazines & content-rich sites.
 
@@ -147,6 +147,17 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 == Changelog ==
 
+= 1.0.8 - 1 Oct 2026 =
+* Security: Fixed an unauthenticated HTML injection. The heading tag chosen for a post title was written into the markup without being validated, and the AJAX pagination endpoint accepted that value from any visitor. Heading tags are now checked against an allowlist.
+* Security: SVG uploads are limited to administrators. Any role that could upload files could previously add an SVG, which is served from the uploads directory and runs in the site's own origin.
+* Security: The notice request to the Themewant service now verifies SSL and is cached for 12 hours, instead of being made on every admin page load with verification disabled.
+* Security: The promotional notice appears only on BoldPost's own admin pages, and a dismissed notice stays dismissed.
+* Privacy: Submitting a deactivation reason no longer sends the full diagnostic payload when telemetry was never opted into; only the reason and the site URL are sent.
+* Privacy: Every external service the plugin contacts is documented under "External services" with its privacy policy.
+* Fixed: The dashboard widget no longer re-orders the Dashboard to sit above the core widgets.
+* Fixed: "Video Url" corrected to "Video URL"; the licence declared in the plugin header now matches the readme.
+* Added: Requires at least and Requires PHP are now declared in the plugin header.
+
 = 1.0.7 =
 * Improved css controls of blocks
 
@@ -188,3 +199,53 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 = 1.0.0 =
 Initial release of BoldPost. Install and start creating beautiful post displays!
+
+== Third-party libraries ==
+
+This plugin bundles the following libraries. Where a minified build is shipped,
+the non-compressed source is published upstream at the link given.
+
+* Swiper - assets/lib/swiper/swiper-bundle.min.css, assets/lib/swiper/swiper-bundle.min.js
+  Source: https://github.com/nolimits4web/swiper
+  Home:   https://swiperjs.com/
+  Licence: MIT
+
+* Bootstrap grid - assets/lib/bootstrap/bootstrap-grid.css (non-compressed, with its .scss)
+  Source: https://github.com/twbs/bootstrap
+  Licence: MIT
+
+* Appsero Client SDK - admin/opt-in/vendor/appsero/client/
+  Source: https://github.com/Appsero/client
+  Licence: MIT
+
+== External services ==
+
+This plugin contacts the following external services. Each is listed with what it
+sends, when it sends it, and the provider's policies.
+
+Themewant notice service
+The plugin requests the notices and offers shown on its own admin screens. The
+request body carries only the plugin slug and which screen is asking, for example
+{"screen":"notice-bar","plugin":"boldpost"} - no site URL, no email address and
+no user information. The response is cached for 12 hours, and the request is only
+made on the plugin's own admin screens.
+Source: https://reactheme.com/products/license/wp-json/reacthemes/v1/get_thewtmc
+Privacy Policy: https://themewant.com/privacy-policy/
+Terms of Services: https://themewant.com/terms-of-condition/
+
+Themewant template library
+When you open the "Premade Designs" panel in the block editor and only then, the
+editor fetches the list of available layouts. The request carries only the filter
+values you chose in that panel - block type, template type, tier, search text and
+page number. Nothing identifying the site or the user is sent.
+Source: https://themewant.com/ (template library API)
+Privacy Policy: https://themewant.com/privacy-policy/
+Terms of Services: https://themewant.com/terms-of-condition/
+
+Appsero telemetry
+Disabled unless you explicitly allow it. If you choose "Allow" on the opt-in
+notice, a weekly request sends basic usage data as described in the Privacy Policy
+section above. If you do not opt in, nothing is sent - including when you submit a
+deactivation reason, where only the reason and the site URL are sent.
+Source: https://api.appsero.com/
+Privacy Policy: https://appsero.com/privacy-policy/

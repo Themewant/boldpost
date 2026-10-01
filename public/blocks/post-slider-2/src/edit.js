@@ -63,6 +63,7 @@ import { ServerSideRender } from '@wordpress/server-side-render';
 import metadata from './block.json';
 
 export default function Edit({ attributes, setAttributes }) {
+	const isLicenseActive = typeof boldpostProData !== 'undefined' && boldpostProData.is_license_active === '1';
 
 	const blockRef = useRef(null);
 
@@ -294,9 +295,11 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(value) => setAttributes({ sliderStyle: value })}
 						options={[
 							{ label: __('Default', 'boldpost'), value: 'default', src: layout1 },
-							{ label: __('Style 1', 'boldpost'), value: '1', src: layout2, isPro: true },
-							{ label: __('Style 2', 'boldpost'), value: '2', src: layout3, isPro: true },
-							{ label: __('Style 3', 'boldpost'), value: '3', src: layout4, isPro: true }
+							...(isLicenseActive ? [
+								{ label: __('Style 1', 'boldpost'), value: '1', src: layout2 },
+								{ label: __('Style 2', 'boldpost'), value: '2', src: layout3 },
+								{ label: __('Style 3', 'boldpost'), value: '3', src: layout4 },
+							] : []),
 						]}
 					/>
 				</PanelBody>

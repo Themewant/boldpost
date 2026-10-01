@@ -49,6 +49,7 @@ class BOLDPO_Block_Editor {
                 'plugin_url' => BOLDPO_PL_URL,
                 'api_url'    => $this->api_site_url,
                 'nonce'      => wp_create_nonce( 'wp_rest' ),
+                'pro_url'    => esc_url_raw( 'https://themewant.com/plugins/boldpost/pricing' ),
             ]
         );
     }

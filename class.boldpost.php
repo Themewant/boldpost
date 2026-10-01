@@ -98,7 +98,23 @@ class BOLDPO_Main {
 
 	}
     // Allow SVG upload
+    /**
+     * Allow SVG uploads for site administrators only.
+     *
+     * An SVG is served from the uploads directory as image/svg+xml, which means any
+     * script inside it runs in the site's own origin. Offering that to every role that
+     * can upload would let an Author plant a file that executes for logged-in admins.
+     * Administrators keep the ability they have today, so nothing an existing site does
+     * changes.
+     *
+     * @param array<string, string> $mimes Allowed mime types, keyed by extension.
+     * @return array<string, string>
+     */
     public function allow_svg_upload( $mimes ) {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return $mimes;
+        }
+
         $mimes['svg']  = 'image/svg+xml';
         $mimes['svgz'] = 'image/svg+xml';
 

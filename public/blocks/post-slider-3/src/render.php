@@ -3,7 +3,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+// Every $-variable in this file is local to the block render callback rather than
+// a global, so the non-prefixed-variable sniff does not apply here.
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- block render callback scope; these are template locals, not globals.
 
 // Attributes are available as $attributes array
 // Map camelCase attributes to match the logic (or use direct access)
@@ -40,7 +42,7 @@ $show_meta = !empty($attributes['showMeta']) ? true : false;
 $allowed_metas = isset($attributes['allowedMetas']) ? $attributes['allowedMetas'] : [];
 $meta_position = isset($attributes['metaPosition']) ? $attributes['metaPosition'] : 'below_title';
 $author_prefix = isset($attributes['authorPrefix']) ? $attributes['authorPrefix'] : 'by';
-$title_tag = isset($attributes['titleTag']) ? $attributes['titleTag'] : 'h3';
+$title_tag = BOLDPO_Helper::sanitize_html_tag( isset($attributes['titleTag']) ? $attributes['titleTag'] : 'h3', 'h3' );
 $show_excerpt = !empty($attributes['showExcerpt']) ? 'yes' : 'no';
 $show_read_more = !empty($attributes['showReadMore']) ? 'yes' : 'no';
 $read_more_text = isset($attributes['readMoreText']) ? $attributes['readMoreText'] : 'Read More';
@@ -459,7 +461,7 @@ if ( ! empty( $attributes['categories'] ) && ! in_array( 'all', $attributes['cat
 
 
 if($is_featured == true) {
-    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- The block offers filtering by a custom field, which cannot be expressed without meta_query; the query is bounded by the block's own posts-per-page setting.
     $args['meta_query'] = array(
         array(
             'key'     => '_is_featured',
@@ -479,7 +481,9 @@ if($style !== 'default' && defined('BOLDPO_PRO_PL_PATH')) {
 
 if ( $query->have_posts() ) :
 ?>
-    <div <?php echo wp_kses_post(get_block_wrapper_attributes( array( 
+    <div <?php
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() returns an attribute string already escaped by core; wp_kses() cannot act on a fragment with no tags.
+    echo (get_block_wrapper_attributes( array( 
         'class' => 'boldpo-block boldpo-post-slider-3-block-wrap ' . $unique_id,
         'data-unique' => esc_attr($unique),  
         'data-slides-per-view' => esc_attr($slidesPerView),

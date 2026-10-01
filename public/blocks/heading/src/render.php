@@ -3,12 +3,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+// Every $-variable in this file is local to the block render callback rather than
+// a global, so the non-prefixed-variable sniff does not apply here.
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- block render callback scope; these are template locals, not globals.
 
 // Attributes are available as $attributes array
 $style = isset($attributes['layoutStyle']) ? $attributes['layoutStyle'] : '1';
 $show_description = !empty($attributes['showDescription']) ? true : false;
-$title_tag = isset($attributes['titleTag']) ? $attributes['titleTag'] : 'h3';
+$title_tag = BOLDPO_Helper::sanitize_html_tag( isset($attributes['titleTag']) ? $attributes['titleTag'] : 'h3', 'h3' );
 
 // styles
 $responsive_data = [
@@ -175,7 +177,10 @@ $block_wrap_attr = get_block_wrapper_attributes( array( 'class' => 'boldpo-block
 
 if ( ! empty( $attributes['title'] ) ) :
 ?>
-    <div <?php echo wp_kses_post($block_wrap_attr); ?>>
+    <div <?php
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() returns an attribute string already escaped by core; wp_kses() cannot act on a fragment with no tags.
+    echo $block_wrap_attr;
+    ?>>
         <div class="boldpo-heading style-<?php echo esc_attr($style); ?>">
             <?php
             if($style == '4'){
@@ -229,7 +234,10 @@ if ( ! empty( $attributes['title'] ) ) :
 <?php
 else:
     ?>
-    <div <?php echo wp_kses_post(get_block_wrapper_attributes()); ?>>
+    <div <?php
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() returns an attribute string already escaped by core; wp_kses() cannot act on a fragment with no tags.
+    echo get_block_wrapper_attributes();
+    ?>>
         <p><?php esc_html_e('Add a title', 'boldpost'); ?></p>
     </div>
     <?php

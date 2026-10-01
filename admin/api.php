@@ -37,7 +37,7 @@ class BOLDPO_API {
                 'methods'  => 'POST',
                 'callback' => array( $this, 'create_template' ),
                 'permission_callback' => function () {
-                    return current_user_can('edit_posts');
+                    return current_user_can( 'publish_posts' );
                 },
             ),
         ) );
@@ -46,22 +46,24 @@ class BOLDPO_API {
             array(
                 'methods'  => 'GET',
                 'callback' => array( $this, 'get_template' ),
-                'permission_callback' => function () {
-                    return current_user_can('edit_posts');
+                // edit_posts is role-wide and says nothing about this template.
+                // Check the object the request names.
+                'permission_callback' => function ( $request ) {
+                    return current_user_can( 'edit_post', (int) $request['id'] );
                 },
             ),
             array(
                 'methods'  => 'PUT,PATCH',
                 'callback' => array( $this, 'update_template' ),
-                'permission_callback' => function () {
-                    return current_user_can('edit_posts');
+                'permission_callback' => function ( $request ) {
+                    return current_user_can( 'edit_post', (int) $request['id'] );
                 },
             ),
             array(
                 'methods'  => 'DELETE',
                 'callback' => array( $this, 'delete_template' ),
-                'permission_callback' => function () {
-                    return current_user_can('edit_posts');
+                'permission_callback' => function ( $request ) {
+                    return current_user_can( 'delete_post', (int) $request['id'] );
                 },
             ),
         ) );
@@ -69,8 +71,11 @@ class BOLDPO_API {
         register_rest_route( 'boldpo/v1', '/templates/bulk-delete', array(
             'methods'  => 'POST',
             'callback' => array( $this, 'bulk_delete_templates' ),
+            // The route-level gate cannot see the ids, so it only establishes
+            // that the caller may delete something; bulk_delete_templates()
+            // re-checks delete_post for each id it is handed.
             'permission_callback' => function () {
-                return current_user_can('edit_posts');
+                return current_user_can( 'delete_posts' );
             },
         ) );
 
@@ -246,11 +251,25 @@ class BOLDPO_API {
     }
 
     public function update_block_status( $request ) {
-        $block_id = $request->get_param( 'blockId' );
-        $status = $request->get_param( 'status' );
+        // Both halves reach an option name and an option value, and get_option()
+        // runs every stored value through maybe_unserialize() on each read, so an
+        // arbitrary string here is an object-injection primitive. Constrain both.
+        $block_id = sanitize_key( (string) $request->get_param( 'blockId' ) );
+        $status   = $request->get_param( 'status' );
 
+        if ( '' === $block_id ) {
+            return new WP_Error( 'boldpo_invalid_block', 'Invalid block id.', array( 'status' => 400 ) );
+        }
 
-        
+        // The admin screen toggles between exactly these two values
+        // (admin/app/src/custom-components/blocks.jsx) and blocks.php compares
+        // against them, so anything else is rejected rather than coerced --
+        // coercing could silently flip a block's state.
+        $status = is_scalar( $status ) ? sanitize_key( (string) $status ) : '';
+        if ( ! in_array( $status, array( 'enable', 'disable' ), true ) ) {
+            return new WP_Error( 'boldpo_invalid_status', 'Status must be enable or disable.', array( 'status' => 400 ) );
+        }
+
         // Update the block status in the database
         update_option( 'boldpo_block_' . $block_id, $status );
 
@@ -309,20 +328,6 @@ class BOLDPO_API {
     }
 
     public function create_template( $request ) {
-        // Check template limit for free version
-        $is_pro = false;
-        if ( class_exists( 'BOLDPO_LICENSE' ) ) {
-            $is_pro = (bool) BOLDPO_LICENSE::instance()->is_license_active();
-        }
-
-        if ( ! $is_pro ) {
-            $count = wp_count_posts( 'boldpo-template' );
-            $total = isset( $count->publish ) ? (int) $count->publish : 0;
-            if ( $total >= 3 ) {
-                return new WP_Error( 'template_limit', 'Free version allows up to 3 templates. Upgrade to Pro for unlimited templates.', array( 'status' => 403 ) );
-            }
-        }
-
         $title = sanitize_text_field( $request->get_param('title') );
 
         if ( empty( $title ) ) {
@@ -395,16 +400,32 @@ class BOLDPO_API {
         }
 
         $deleted = array();
+        $denied  = array();
         foreach ( $ids as $id ) {
             $id   = (int) $id;
             $post = get_post( $id );
-            if ( $post && $post->post_type === 'boldpo-template' ) {
-                wp_delete_post( $id, true );
-                $deleted[] = $id;
+            if ( ! $post || 'boldpo-template' !== $post->post_type ) {
+                continue;
             }
+            // The route-level capability only says the caller may delete
+            // something. Each template still has to be theirs to delete.
+            if ( ! current_user_can( 'delete_post', $id ) ) {
+                $denied[] = $id;
+                continue;
+            }
+            wp_delete_post( $id, true );
+            $deleted[] = $id;
         }
 
-        return rest_ensure_response( array( 'status' => 'success', 'deleted' => $deleted ) );
+        if ( empty( $deleted ) && ! empty( $denied ) ) {
+            return new WP_Error(
+                'boldpo_cannot_delete',
+                'You are not allowed to delete these templates.',
+                array( 'status' => 403, 'denied' => $denied )
+            );
+        }
+
+        return rest_ensure_response( array( 'status' => 'success', 'deleted' => $deleted, 'denied' => $denied ) );
     }
 
     private function format_template( $post ) {

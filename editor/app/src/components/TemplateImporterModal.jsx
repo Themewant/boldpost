@@ -33,6 +33,7 @@ const PER_PAGE = 12;
 const API_BASE = (typeof boldpoEditor !== 'undefined' && boldpoEditor.api_url) || '/wp-json/boldpost/v1';
 const IS_EXTERNAL_API = API_BASE.startsWith('http') && !API_BASE.startsWith(window.location.origin);
 const isLicenseActive = typeof boldpostProData !== 'undefined' && boldpostProData.is_license_active === '1';
+const PRO_URL = (typeof boldpoEditor !== 'undefined' && boldpoEditor.pro_url) || 'https://themewant.com/plugins/boldpost/pricing';
 
 /**
  * Fetch wrapper — uses plain fetch for external (cross-origin) APIs
@@ -378,7 +379,7 @@ export default function TemplateImporterModal({ isOpen, onClose, onImport, block
                                 return (
                                     <div
                                         key={template.id}
-                                        className={'boldpo-template-importer__item' + (isLocked ? ' is-locked' : '')}
+                                        className="boldpo-template-importer__item"
                                     >
                                         <div className="boldpo-template-importer__preview">
                                             {template.featured_image ? (
@@ -399,14 +400,6 @@ export default function TemplateImporterModal({ isOpen, onClose, onImport, block
                                             <span className={'boldpo-template-importer__badge' + (isPro ? ' is-pro' : ' is-free')}>
                                                 {isPro ? 'Pro' : 'Free'}
                                             </span>
-                                            {isLocked && (
-                                                <div className="boldpo-template-importer__lock-overlay">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                                                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                                                    </svg>
-                                                </div>
-                                            )}
                                         </div>
                                         <div className="boldpo-template-importer__info">
                                             <h4 className="boldpo-template-importer__title">
@@ -415,10 +408,12 @@ export default function TemplateImporterModal({ isOpen, onClose, onImport, block
                                             {isLocked ? (
                                                 <Button
                                                     variant="secondary"
-                                                    className="boldpo-template-importer__import-btn is-locked-btn"
-                                                    disabled
+                                                    className="boldpo-template-importer__import-btn is-pro-btn"
+                                                    href={PRO_URL}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
                                                 >
-                                                    Activate Pro
+                                                    Get Pro
                                                 </Button>
                                             ) : (
                                                 <Button

@@ -19,7 +19,7 @@ if ( ! class_exists( 'BOLDPO_Video_Post' ) ) {
 		public function register_meta_box() {
 			add_meta_box(
 				'boldpo_video_post',
-				'Video Url',
+				'Video URL',
 				[ $this, 'render_meta_box' ],
 				'post',
 				'side'

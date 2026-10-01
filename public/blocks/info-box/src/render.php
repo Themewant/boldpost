@@ -3,11 +3,13 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+// Every $-variable in this file is local to the block render callback rather than
+// a global, so the non-prefixed-variable sniff does not apply here.
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- block render callback scope; these are template locals, not globals.
 
 $items     = isset( $attributes['items'] ) ? $attributes['items'] : array();
 $style     = isset( $attributes['layoutStyle'] ) ? $attributes['layoutStyle'] : 'default';
-$title_tag = isset( $attributes['titleTag'] ) ? $attributes['titleTag'] : 'h4';
+$title_tag = BOLDPO_Helper::sanitize_html_tag( isset( $attributes['titleTag'] ) ? $attributes['titleTag'] : 'h4', 'h4' );
 $image_size = isset( $attributes['imageSize'] ) ? $attributes['imageSize'] : 'thumbnail';
 
 $style_handle = 'boldpo-info-box-style';
@@ -254,7 +256,10 @@ if ( empty( $items ) || ! is_array( $items ) ) {
     return;
 }
 ?>
-<div <?php echo wp_kses_post( $block_wrap_attr ); ?>>
+<div <?php
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() returns an attribute string already escaped by core; wp_kses() cannot act on a fragment with no tags.
+    echo $block_wrap_attr;
+    ?>>
     <div class="boldpo-info-box-list style-<?php echo esc_attr( $style ); ?> boldpo-row <?php echo esc_attr( $gap_class ); ?> <?php echo esc_attr( $gap_row_class ); ?>">
         <?php
         foreach ( $items as $item ) :

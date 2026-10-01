@@ -1,4 +1,3 @@
-import { __ } from '@wordpress/i18n';
 import { BaseControl, Tooltip } from '@wordpress/components';
 
 const ImageRadioControl = ({
@@ -8,9 +7,6 @@ const ImageRadioControl = ({
     onChange,
     help
 }) => {
-
-    const isLicenseActive = typeof boldpostProData !== 'undefined' && boldpostProData.is_license_active === '1';
-    const proVersionUrl = 'https://themewant.com/plugins/boldpost/pricing'; // goto pro url if license not active when onclick pro option
 
 
     return (
@@ -25,13 +21,7 @@ const ImageRadioControl = ({
                         <Tooltip text={option.label} key={index}>
                             <div
                                 className={`eshb-image-radio-item ${value === option.value ? 'active' : ''}`}
-                                onClick={() => {
-                                    if (option.isPro && !isLicenseActive) {
-                                        window.open(proVersionUrl, '_blank');
-                                        return;
-                                    }
-                                    onChange(option.value)
-                                }}
+                                onClick={() => onChange(option.value)}
                                 style={{
                                     border: value === option.value ? '2px solid var(--wp-admin-theme-color)' : '1px solid #e0e0e0',
                                     borderRadius: '4px',
@@ -55,23 +45,6 @@ const ImageRadioControl = ({
                                         borderRadius: '2px'
                                     }}
                                 />
-                                {!isLicenseActive && option.isPro && (
-                                    <span style={{
-                                        position: 'absolute',
-                                        top: '4px',
-                                        right: '4px',
-                                        backgroundColor: '#ff0036',
-                                        color: 'white',
-                                        fontSize: '10px',
-                                        fontWeight: 'bold',
-                                        padding: '2px 3px',
-                                        borderRadius: '3px',
-                                        textTransform: 'uppercase',
-                                        lineHeight: '1'
-                                    }}>
-                                        Pro
-                                    </span>
-                                )}
                             </div>
                         </Tooltip>
                     ))}

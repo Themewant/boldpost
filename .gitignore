@@ -1,17 +1,75 @@
-# all zip files
+# ---------------------------------------------------------------------------
+# What must never be committed: build tooling, build by-products and local junk.
+# None of it is needed to run the plugin or to review it.
+# ---------------------------------------------------------------------------
+
+# Dependencies, reinstalled from package.json / composer.json
+node_modules/
+bower_components/
+vendor/bin/
+
+# Build by-products
+*.map
+*.log
+.sass-cache/
+
+# Release archives: these are built into D:\Download\all-install-plugins,
+# never into the repository. A plugin zip committed next to the plugin is also
+# downloadable from the live site by anyone who guesses the URL.
 *.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
 
-# all md files
-*.md
+# Backups and dumps
+*.bak
+*.orig
+*.old
+*.sql
+.env
+.env.*
 
-# all node_modules files
-node_modules
-
-# all .DS_Store files
+# Editor and OS noise
 .DS_Store
-
-# qodo files
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
 .qodo
-
-# .gemini files
 .gemini
+
+# ---------------------------------------------------------------------------
+# Deliberately NOT ignored, and it must stay that way:
+#
+#   build/        -- this is what actually runs on the front end
+#   src/          -- WordPress.org guideline 4 requires the readable source of
+#                    anything compiled or minified to ship alongside it
+#   package.json  -- the build tooling the reviewer uses to rebuild src/ -> build/
+#   *.scss        -- the source of the compiled CSS
+#   vendor/       -- bundled libraries the plugin loads at runtime
+#   readme.txt    -- what WordPress.org publishes
+#
+# A sibling plugin was rejected for leaving src/ and package.json out of its
+# release, so do not add any of these to this file.
+# ---------------------------------------------------------------------------
+
+# Lock files and library scaffolding
+#
+# vendor/ is committed, so composer.lock is never acted on -- nothing ever runs
+# `composer install` here. package-lock.json is deliberately NOT listed: a reviewer
+# rebuilding src/ into build/ runs `npm ci`, which needs it.
+composer.lock
+
+# Dotfiles that bundled libraries bring along
+.editorconfig
+.php-cs-fixer.dist.php
+.php-cs-fixer.php
+.github/
+
+# A bundled library's own .gitignore. Scoped to vendor/ on purpose: this file, the
+# plugin's own .gitignore at the root, must stay tracked.
+**/vendor/**/.gitignore

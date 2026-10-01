@@ -858,7 +858,21 @@ class Insights {
             wp_send_json_error( 'You are not allowed for this task' );
         }
 
-        $data                = $this->get_tracking_data();
+        if ( $this->tracking_allowed() ) {
+            $data = $this->get_tracking_data();
+        } else {
+            // Tracking was never opted into, so the feedback the user chose to send
+            // carries only what the form is about. No admin email, name, IP address,
+            // server details or plugin inventory leaves the site.
+            $data = array(
+                'url'              => esc_url( home_url() ),
+                'hash'             => $this->client->hash,
+                'project_version'  => $this->client->project_version,
+                'tracking_skipped' => true,
+                'is_local'         => $this->is_local_server(),
+            );
+        }
+
         $data['reason_id']   = sanitize_text_field( wp_unslash( $_POST['reason_id'] ) );
         $data['reason_info'] = isset( $_REQUEST['reason_info'] ) ? trim( sanitize_text_field( wp_unslash( $_REQUEST['reason_info'] ) ) ) : '';
 

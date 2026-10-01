@@ -1,12 +1,14 @@
 <?php
 /**
- * Plugin Name: BoldPost 
+ * Plugin Name: BoldPost
  * Description: BoldPost Plugin, post display plugin for the block editor.
  * Plugin URI:  https://themewant.com/downloads/boldpost/
  * Author:      Themewant
  * Author URI:  http://themewant.com/
- * Version:     1.0.7
- * License:     GPL2
+ * Version:     1.0.8
+ * Requires at least: 6.0
+ * Requires PHP: 7.4
+ * License:     GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: boldpost
  * Domain Path: /languages
@@ -14,7 +16,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-define( 'BOLDPO_VERSION', '1.0.7' );
+define( 'BOLDPO_VERSION', '1.0.8' );
 define( 'BOLDPO_PL_ROOT', __FILE__ );
 define( 'BOLDPO_PL_URL', plugins_url( '/', BOLDPO_PL_ROOT ) );
 define( 'BOLDPO_PL_PATH', plugin_dir_path( BOLDPO_PL_ROOT ) );

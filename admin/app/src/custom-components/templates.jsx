@@ -6,12 +6,10 @@ import {
 import {
     PlusOutlined, EditOutlined, DeleteOutlined,
     SearchOutlined, ReloadOutlined, CopyOutlined,
-    CrownOutlined
 } from '@ant-design/icons';
 
 const { Search } = Input;
 
-const FREE_TEMPLATE_LIMIT = 3;
 
 export default function Templates() {
     const [templates, setTemplates] = useState([]);
@@ -25,13 +23,11 @@ export default function Templates() {
     const [sorter, setSorter] = useState({ field: 'date', order: 'descend' });
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
-    const [upgradeModalOpen, setUpgradeModalOpen] = useState(false);
     const [form] = Form.useForm();
     const [submitting, setSubmitting] = useState(false);
     const [templateCount, setTemplateCount] = useState(Number(boldpo.templateCount) || 0);
 
-    const isPro = Boolean(boldpo.isProActive);
-    const isLimitReached = !isPro && templateCount >= FREE_TEMPLATE_LIMIT;
+    // No template quota: the free plugin creates as many as the user wants.
 
     const fetchTemplates = useCallback((page = 1, pageSize = 10, searchVal = '', orderby = 'date', order = 'DESC') => {
         setLoading(true);
@@ -81,10 +77,6 @@ export default function Templates() {
     };
 
     const openAddModal = () => {
-        if (isLimitReached) {
-            setUpgradeModalOpen(true);
-            return;
-        }
         form.resetFields();
         setModalOpen(true);
     };
@@ -114,9 +106,6 @@ export default function Templates() {
                             pagination.current, pagination.pageSize, search,
                             sorter.field, sorter.order === 'ascend' ? 'ASC' : 'DESC'
                         );
-                    } else if (data.code === 'template_limit') {
-                        setModalOpen(false);
-                        setUpgradeModalOpen(true);
                     } else {
                         notification.error({ message: data.message || 'Operation failed' });
                     }
@@ -297,9 +286,6 @@ export default function Templates() {
             }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     <h1 className="boldpo-options-title" style={{ margin: 0 }}>Templates</h1>
-                    {!isPro && (
-                        <Tag color="orange">{templateCount}/{FREE_TEMPLATE_LIMIT}</Tag>
-                    )}
                 </div>
                 <Button
                     type="primary"
@@ -391,32 +377,6 @@ export default function Templates() {
                 </Form>
             </Modal>
 
-            <Modal
-                open={upgradeModalOpen}
-                onCancel={() => setUpgradeModalOpen(false)}
-                footer={null}
-                centered
-                width={480}
-            >
-                <div style={{ textAlign: 'center', padding: '20px 0' }}>
-                    <CrownOutlined style={{ fontSize: 48, color: '#a216ff', marginBottom: 16 }} />
-                    <h2 style={{ margin: '0 0 8px', fontSize: 22 }}>Upgrade to Pro</h2>
-                    <p style={{ color: '#666', fontSize: 15, margin: '0 0 20px' }}>
-                        You've reached the free limit of <strong>{FREE_TEMPLATE_LIMIT} templates</strong>.<br />
-                        Upgrade to BoldPost Pro for unlimited templates and premium features.
-                    </p>
-                    <Button
-                        type="primary"
-                        size="large"
-                        icon={<CrownOutlined />}
-                        href={boldpo.proUrl}
-                        target="_blank"
-                        style={{ background: '#a216ff', borderColor: '#a216ff' }}
-                    >
-                        Get BoldPost Pro
-                    </Button>
-                </div>
-            </Modal>
         </div>
     );
 }

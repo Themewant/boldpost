@@ -133,38 +133,77 @@ class BOLDPO_NoticeDashboard {
         // contract; renaming it would break the connection to the API.
         $notice_source_url = trailingslashit( BOLDPO_NOTICE_SOURCE_URL ) . 'wp-json/reacthemes/v1/get_thewtmc';
 
+        // One request per half day instead of one per admin page load, which is
+        // the shape rt-mega-menu already uses.
+        $cache_key = 'boldpo_dash_notice_' . md5( wp_json_encode( $args ) );
+        $cached    = get_transient( $cache_key );
+
+        if ( false !== $cached ) {
+            return $cached;
+        }
+
         $response = wp_remote_post(
             $notice_source_url,
             array(
                 'headers'     => array( 'Content-Type' => 'application/json' ),
-                'timeout'     => 30,
+                'timeout'     => 10,
                 'redirection' => 5,
                 'blocking'    => true,
-                'sslverify'   => false,
+                'sslverify'   => true,
                 'data_format' => 'body',
                 'body'        => wp_json_encode( $args ),
             )
         );
 
         if ( is_wp_error( $response ) ) {
+            // Back off briefly so an unreachable endpoint cannot stall every
+            // admin page load for the full timeout.
+            set_transient( $cache_key, '', 10 * MINUTE_IN_SECONDS );
             return '';
         }
 
-        return wp_remote_retrieve_body( $response );
+        $notice_body = wp_remote_retrieve_body( $response );
+        set_transient( $cache_key, $notice_body, 12 * HOUR_IN_SECONDS );
+
+        return $notice_body;
     }
 
-    public function expire_notice_by_date( $notice_id, $expire_timestamp ) {
+    /**
+     * Is the current admin screen one of this plugin's own pages?
+     *
+     * A notice hooked to admin_notices renders on every screen in wp-admin,
+     * including screens belonging to other plugins. Guideline 11 treats that as
+     * hijacking the dashboard, so the notice bar is limited to the pages this
+     * plugin adds itself. Notice content and dismissals are unaffected.
+     *
+     * @return bool True when the current screen belongs to this plugin.
+     */
+    private function BOLDPO_notice_is_plugin_screen() {
 
-        $today_date      = gmdate( 'Y-m-d' );
-        $today_timestamp = strtotime( $today_date );
-
-        if ( $today_timestamp >= $expire_timestamp ) {
-            $user_id = get_current_user_id();
-            delete_user_meta( $user_id, 'thewtmc_notice_ignore_' . $notice_id );
+        if ( ! function_exists( 'get_current_screen' ) ) {
+            return false;
         }
+
+        $screen = get_current_screen();
+
+        if ( ! $screen || empty( $screen->id ) ) {
+            return false;
+        }
+
+        foreach ( array( 'boldpost' ) as $slug ) {
+            if ( false !== strpos( $screen->id, $slug ) ) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function BOLDPO_notice_add_to_notice_bar() {
+
+        if ( ! $this->BOLDPO_notice_is_plugin_screen() ) {
+            return;
+        }
 
         $args = array( 'screen' => 'notice-bar' );
 
@@ -190,8 +229,6 @@ class BOLDPO_NoticeDashboard {
             $content          = isset( $notice['content'] ) ? $notice['content'] : '';
             $action_buttons   = isset( $notice['action_buttons'] ) ? $notice['action_buttons'] : array();
             $expire_timestamp = isset( $notice['expire_date'] ) ? strtotime( $notice['expire_date'] ) : '';
-
-            $this->expire_notice_by_date( $notice_id, $expire_timestamp );
 
             $notice_ignore_status = $this->get_notice_status( $notice_id );
 
@@ -242,10 +279,10 @@ class BOLDPO_NoticeDashboard {
 
     public function BOLDPO_notice_add_to_dashboard_widget() {
 
-        // Register into the 'high' priority bucket — WP renders dashboard
-        // widgets in order: high → core → default → low. Putting ours in
-        // 'high' guarantees it appears above any widget registered with
-        // 'core' or lower priority.
+        // Registered with a low priority and left wherever WordPress places it.
+        // Rewriting $wp_meta_boxes to force this widget above core's own is what
+        // guideline 11 calls hijacking the dashboard. The widget itself is
+        // unchanged, and a user can still move or hide it from Screen Options.
         wp_add_dashboard_widget(
             'BOLDPO_notice_widget',
             'ThemeWant Stories',
@@ -253,25 +290,8 @@ class BOLDPO_NoticeDashboard {
             null,
             null,
             'normal',
-            'high'
+            'low'
         );
-
-        global $wp_meta_boxes;
-
-        if ( ! isset( $wp_meta_boxes['dashboard']['normal']['high']['BOLDPO_notice_widget'] ) ) {
-            return;
-        }
-
-        $my_widget = array(
-            'BOLDPO_notice_widget' => $wp_meta_boxes['dashboard']['normal']['high']['BOLDPO_notice_widget'],
-        );
-
-        unset( $wp_meta_boxes['dashboard']['normal']['high']['BOLDPO_notice_widget'] );
-
-        // Prepend so our widget sits at the very top of the 'high' bucket,
-        // above any other plugin/core widget that also registered here.
-        $wp_meta_boxes['dashboard']['normal']['high'] =
-            $my_widget + $wp_meta_boxes['dashboard']['normal']['high'];
     }
 
     public function BOLDPO_notice_widget_callback() {
@@ -309,8 +329,6 @@ class BOLDPO_NoticeDashboard {
             if ( empty( $sub_title ) ) {
                 $sub_title = $this->get_active_plugin_display_name();
             }
-
-            $this->expire_notice_by_date( $notice_id, $expire_timestamp );
 
             $notice_ignore_status = $this->get_notice_status( $notice_id );
 

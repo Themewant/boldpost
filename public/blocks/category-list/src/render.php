@@ -3,7 +3,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+// Every $-variable in this file is local to the block render callback rather than
+// a global, so the non-prefixed-variable sniff does not apply here.
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- block render callback scope; these are template locals, not globals.
 
 // Attributes are available as $attributes array
 $per_page = isset($attributes['perPage']) ? $attributes['perPage'] : 9;
@@ -15,7 +17,7 @@ $hide_empty = !empty($attributes['hideEmpty']) ? true : false;
 $show_count = !empty($attributes['showCount']) ? true : false;
 $show_empty_count = !empty($attributes['showEmptyCount']) ? true : false;
 $show_description = !empty($attributes['showDescription']) ? true : false;
-$title_tag = isset($attributes['titleTag']) ? $attributes['titleTag'] : 'h3';
+$title_tag = BOLDPO_Helper::sanitize_html_tag( isset($attributes['titleTag']) ? $attributes['titleTag'] : 'h3', 'h3' );
 $thumbnail_size = isset($attributes['thumbnailSize']) ? $attributes['thumbnailSize'] : 'medium';
 $thumbnail_width = isset($attributes['thumbnailWidth']) ? $attributes['thumbnailWidth'] : '';
 $thumbnail_height = isset($attributes['thumbnailHeight']) ? $attributes['thumbnailHeight'] : '';
@@ -298,7 +300,10 @@ if($style !== 'default' && defined('BOLDPO_PRO_PL_PATH')) {
 
 if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) :
 ?>
-    <div <?php echo wp_kses_post($block_wrap_attr); ?>>
+    <div <?php
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() returns an attribute string already escaped by core; wp_kses() cannot act on a fragment with no tags.
+    echo $block_wrap_attr;
+    ?>>
         <div class="boldpo-category-list style-<?php echo esc_attr($style); ?> boldpo-row <?php echo esc_attr($gap_class); ?> <?php echo esc_attr($gap_row_class); ?>">
             <?php
             foreach ( $categories as $category ) :
@@ -311,7 +316,9 @@ if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) :
                 $category_image = wp_get_attachment_image_url( $category_image_id, $image_size_arg );
                 $placeholderImage = BOLDPO_PL_URL . 'public/assets/img/placeholder.png';
                 $category_image = $category_image ? $category_image : '';
-                $category_color = get_term_meta( $category->term_id, 'category_color', true );
+                // Term meta is untrusted at read time, so the colour is validated here rather
+                // than relying on whatever sanitiser ran when it was saved.
+                $category_color = sanitize_hex_color( (string) get_term_meta( $category->term_id, 'category_color', true ) );
                 $category_gradient = $category_color ? 'linear-gradient(to top, '.$category_color.', rgba(255, 255, 255, 0))' : '';
                 $style_file = $template_pl_path . 'public/template-parts/category-list/style-' . $style . '.php';
                 if ( file_exists( $style_file ) ) {
@@ -324,7 +331,10 @@ if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) :
 <?php
 else:
     ?>
-    <div <?php echo wp_kses_post(get_block_wrapper_attributes()); ?>>
+    <div <?php
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() returns an attribute string already escaped by core; wp_kses() cannot act on a fragment with no tags.
+    echo get_block_wrapper_attributes();
+    ?>>
         <p><?php esc_html_e('No categories found.', 'boldpost'); ?></p>
     </div>
     <?php

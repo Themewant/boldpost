@@ -3,7 +3,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+// Every $-variable in this file is local to the block render callback rather than
+// a global, so the non-prefixed-variable sniff does not apply here.
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- block render callback scope; these are template locals, not globals.
 
 $items      = isset( $attributes['items'] ) ? $attributes['items'] : array();
 $show_label = ! empty( $attributes['showLabel'] );
@@ -137,7 +139,10 @@ BOLDPO_Helper::add_custom_style( $style_handle, $selector, $full_css, array() );
 
 $block_wrap_attr = get_block_wrapper_attributes( array( 'class' => 'boldpo-block boldpo-social-icons-block-wrap ' . $unique_id ) );
 ?>
-<div <?php echo wp_kses_post( $block_wrap_attr ); ?>>
+<div <?php
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() returns an attribute string already escaped by core; wp_kses() cannot act on a fragment with no tags.
+    echo $block_wrap_attr;
+    ?>>
     <div class="boldpo-social-icons style-<?php echo esc_attr( $attributes['layoutStyle'] ); ?>">
         <?php foreach ( $items as $item ) :
             $icon        = isset( $item['icon'] ) ? $item['icon'] : '';
@@ -151,7 +156,7 @@ $block_wrap_attr = get_block_wrapper_attributes( array( 'class' => 'boldpo-block
             <a href="<?php echo esc_url( $url ); ?>"
                class="boldpo-social-icon-item"
                aria-label="<?php echo esc_attr( $label ? $label : $icon ); ?>"
-               <?php echo $target; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+               <?php echo $target; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $target is one of two hardcoded literals assigned a few lines above; no user value reaches it. ?>>
                 <i class="boldpo-icon <?php echo esc_attr( $icon ); ?>"></i>
                 <?php if ( $show_label && ! empty( $label ) ) : ?>
                     <span class="boldpo-social-icon-label"><?php echo esc_html( $label ); ?></span>

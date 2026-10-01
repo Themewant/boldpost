@@ -3,7 +3,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+// Every $-variable in this file is local to the block render callback rather than
+// a global, so the non-prefixed-variable sniff does not apply here.
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- block render callback scope; these are template locals, not globals.
 
 // Attributes are available as $attributes array
 // Map camelCase attributes to match the logic (or use direct access)
@@ -35,7 +37,7 @@ $ignore_stikcy_posts = !empty($attributes['ignoreStikcyPosts']) ? 1 : 0;
 
 
 // Styles attributes
-$title_tag = isset($attributes['titleTag']) ? $attributes['titleTag'] : 'h3';
+$title_tag = BOLDPO_Helper::sanitize_html_tag( isset($attributes['titleTag']) ? $attributes['titleTag'] : 'h3', 'h3' );
 $title_trim = isset($attributes['titleTrim']) ? $attributes['titleTrim'] : 100;
 
 // styles
@@ -169,7 +171,7 @@ if ( ! empty( $attributes['categories'] ) && ! in_array( 'all', $attributes['cat
 
 
 if($is_featured == true) {
-    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- The block offers filtering by a custom field, which cannot be expressed without meta_query; the query is bounded by the block's own posts-per-page setting.
     $args['meta_query'] = array(
         array(
             'key'     => '_is_featured',
@@ -184,7 +186,9 @@ $query = new WP_Query( $args );
 
 if ( $query->have_posts() ) :
 ?>
-    <div <?php echo wp_kses_post(get_block_wrapper_attributes( array( 
+    <div <?php
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() returns an attribute string already escaped by core; wp_kses() cannot act on a fragment with no tags.
+    echo (get_block_wrapper_attributes( array( 
         'class' => 'boldpo-block boldpo-post-ticker-block-wrap ' . $unique_id,
         'data-unique' => esc_attr($unique),  
         'data-slides-per-view' => esc_attr($slidesPerView),

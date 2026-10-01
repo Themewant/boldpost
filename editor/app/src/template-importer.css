@@ -360,35 +360,12 @@
     color: #fff;
 }
 
-/* Lock Overlay for Pro templates */
-.boldpo-template-importer__lock-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.45);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-    color: #fff;
-}
-
-/* Locked Item */
-.boldpo-template-importer__item.is-locked {
-    opacity: 0.85;
-}
-
-.boldpo-template-importer__item.is-locked:hover {
-    border-color: #e0e0e0;
-    box-shadow: none;
-}
-
-/* Locked Button */
-.boldpo-template-importer__import-btn.is-locked-btn.components-button {
+/* Pro template button */
+.boldpo-template-importer__import-btn.is-pro-btn.components-button {
     background: transparent;
     border: 1px solid #ccc;
     color: #999;
     font-size: 12px;
     padding: 6px 16px;
     border-radius: 4px;
-    cursor: not-allowed;
 }

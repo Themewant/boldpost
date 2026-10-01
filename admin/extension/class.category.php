@@ -17,64 +17,36 @@ class BOLDPO_Category {
         add_action( 'edited_category', array( $this, 'save_category_image_color' ) );
         add_action( 'created_category', array( $this, 'save_category_image_color' ) );
         add_action( 'admin_enqueue_scripts', array( $this, 'category_image_color_enqueue_scripts' ) );
-        add_action( 'admin_footer', array( $this, 'category_image_color_inline_script' ) );
     }
     
     function category_image_color_enqueue_scripts( $hook ) {
         if ( $hook !== 'edit-tags.php' && $hook !== 'term.php' ) {
             return;
         }
+        $screen = get_current_screen();
+        if ( ! $screen || 'category' !== $screen->taxonomy ) {
+            return;
+        }
+
         wp_enqueue_media();
         wp_enqueue_style( 'wp-color-picker' );
         wp_enqueue_script( 'wp-color-picker' );
+
+        wp_enqueue_script(
+            'boldpo-category',
+            BOLDPO_PL_URL . 'admin/extension/assets/boldpo-category.js',
+            array( 'jquery', 'wp-color-picker', 'media-upload' ),
+            BOLDPO_VERSION,
+            true
+        );
+
+        wp_localize_script(
+            'boldpo-category',
+            'boldpoCategory',
+            array( 'chooseImage' => esc_html__( 'Choose Image', 'boldpost' ) )
+        );
     }
 
-    function category_image_color_inline_script() {
-        $screen = get_current_screen();
-        if ( ! $screen || $screen->taxonomy !== 'category' ) {
-            return;
-        }
-        ?>
-        <script>
-            jQuery(document).ready(function($) {
-                var mediaUploader;
-
-                $('.category-color-picker').wpColorPicker();
-
-                $('.category_image_button').click(function(e) {
-                    e.preventDefault();
-
-                    if (mediaUploader) {
-                        mediaUploader.open();
-                        return;
-                    }
-
-                    mediaUploader = wp.media.frames.file_frame = wp.media({
-                        title: '<?php esc_html_e( "Choose Image", "boldpost" ); ?>',
-                        button: {
-                            text: '<?php esc_html_e( "Choose Image", "boldpost" ); ?>'
-                        },
-                        multiple: false
-                    });
-
-                    mediaUploader.on('select', function() {
-                        var attachment = mediaUploader.state().get('selection').first().toJSON();
-                        $('#category_image').val(attachment.id);
-                        $('#category_image_preview').html('<img src="' + attachment.url + '" style="max-width:100px;"/>');
-                    });
-
-                    mediaUploader.open();
-                });
-
-                $('.category_image_remove_button').click(function(e) {
-                    e.preventDefault();
-                    $('#category_image').val('');
-                    $('#category_image_preview').html('');
-                });
-            });
-        </script>
-        <?php
-    }
 
     function category_image_color_field( $term ) {
         $category_image_id = '';

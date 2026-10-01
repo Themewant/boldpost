@@ -28,7 +28,11 @@ class BOLDPO_Elementor_Template_Widget extends \Elementor\Widget_Base {
     private function get_templates_list() {
         $templates = get_posts( array(
             'post_type'      => 'boldpo-template',
+            // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostsPerPage_posts_per_page -- This fills the Elementor widget's template dropdown, which has to list every template the user has saved; a cap would silently hide some of them. No row count or object caches are requested, and it only runs inside the Elementor editor.
             'posts_per_page' => -1,
+            'no_found_rows'  => true,
+            'update_post_meta_cache' => false,
+            'update_post_term_cache' => false,
             'post_status'    => 'publish',
             'orderby'        => 'title',
             'order'          => 'ASC',
@@ -73,30 +77,7 @@ class BOLDPO_Elementor_Template_Widget extends \Elementor\Widget_Base {
                     . '<a id="boldpo-edit-template-btn" href="#" target="_blank" style="padding:8px 16px; display:inline-flex; align-items:center; background:#555; color:#fff; border-radius:3px; text-decoration:none; text-align:center; flex:1; justify-content:center;font-size:12px;">'
                     . '<i class="eicon-edit" style="margin-right:5px;"></i> Edit Template'
                     . '</a>'
-                    . '</div>'
-                    . '<script>'
-                    . '(function(){'
-                    . '  function updateEditBtn(){'
-                    . '    var sel = document.querySelector("[data-setting=\"template_id\"]");'
-                    . '    var btn = document.getElementById("boldpo-edit-template-btn");'
-                    . '    if(!sel || !btn) return;'
-                    . '    var id = sel.value;'
-                    . '    if(id){'
-                    . '      btn.href = "' . esc_url( admin_url( 'post.php' ) ) . '?post="+id+"&action=edit";'
-                    . '      btn.style.opacity = "1";'
-                    . '      btn.style.pointerEvents = "auto";'
-                    . '    } else {'
-                    . '      btn.href = "#";'
-                    . '      btn.style.opacity = "0.5";'
-                    . '      btn.style.pointerEvents = "none";'
-                    . '    }'
-                    . '  }'
-                    . '  updateEditBtn();'
-                    . '  var obs = new MutationObserver(updateEditBtn);'
-                    . '  var panel = document.querySelector(".elementor-panel");'
-                    . '  if(panel) obs.observe(panel, {childList:true, subtree:true, attributes:true});'
-                    . '})();'
-                    . '</script>',
+                    . '</div>',
                 'content_classes' => 'boldpo-template-actions',
             )
         );
@@ -109,7 +90,7 @@ class BOLDPO_Elementor_Template_Widget extends \Elementor\Widget_Base {
         $template_id = absint( $settings['template_id'] );
 
         if ( $template_id ) {
-            $is_editor = isset( $_GET['action'] ) || isset( $_POST['action'] ); //phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.NonceVerification.Recommended
+            $is_editor = $this->is_elementor_editor();
 
             // In Elementor editor/AJAX context, print base styles before content
             if ( $is_editor ) {
@@ -135,9 +116,41 @@ class BOLDPO_Elementor_Template_Widget extends \Elementor\Widget_Base {
                 $this->print_block_variation_styles();
             }
 
-        } elseif ( isset( $_GET['action'] ) && $_GET['action'] == 'elementor' ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        } elseif ( $this->is_elementor_editor() ) {
             echo '<p style="text-align:center; padding:20px; background:#f0f0f0; border:1px dashed #ccc; border-radius:4px; color:#666;">Please select a BoldPost template.</p>';
         }
+    }
+
+    /**
+     * Whether this render is happening inside the Elementor editor.
+     *
+     * The preview emitter below writes <link>, <style> and <script> tags by hand
+     * because Elementor's editor iframe has no enqueue pipeline. That is only
+     * acceptable while it cannot happen on a page a visitor is looking at, so
+     * the check is Elementor's own, not a guess at a query argument.
+     *
+     * @return bool
+     */
+    private function is_elementor_editor() {
+
+        if ( ! did_action( 'elementor/loaded' ) || ! class_exists( '\\Elementor\\Plugin' ) ) {
+            return false;
+        }
+
+        $elementor = \Elementor\Plugin::$instance;
+
+        if ( isset( $elementor->editor ) && $elementor->editor->is_edit_mode() ) {
+            return true;
+        }
+
+        if ( isset( $elementor->preview ) && $elementor->preview->is_preview_mode() ) {
+            return true;
+        }
+
+        // Elementor also re-renders a single widget over admin-ajax, where
+        // neither of the above reports true. Gate that on the capability editing
+        // requires so a visitor cannot reach it by naming the action.
+        return wp_doing_ajax() && current_user_can( 'edit_posts' );
     }
 
     private function print_inline_styles( $post_id ) {
@@ -156,7 +169,7 @@ class BOLDPO_Elementor_Template_Widget extends \Elementor\Widget_Base {
 
         // BoldPost base styles
         $css_urls[] = BOLDPO_PL_URL . 'public/assets/css/public.css';
-        $css_urls[] = BOLDPO_PL_URL . 'assets/lib/bootstrap/bootstrap-grid.min.css';
+        $css_urls[] = BOLDPO_PL_URL . 'assets/lib/bootstrap/bootstrap-grid.css';
         $css_urls[] = BOLDPO_PL_URL . 'assets/lib/swiper/swiper-bundle.min.css';
 
         // Collect block-specific styles

@@ -3,7 +3,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+// Every $-variable in this file is local to the block render callback rather than
+// a global, so the non-prefixed-variable sniff does not apply here.
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- block render callback scope; these are template locals, not globals.
 
 // Attributes are available as $attributes array
 // Map camelCase attributes to match the logic (or use direct access)
@@ -12,7 +14,7 @@ $per_page = isset($attributes['perPage']) ? $attributes['perPage'] : 6;
 $order = isset($attributes['order']) ? $attributes['order'] : 'ASC';
 $orderby = isset($attributes['orderby']) ? $attributes['orderby'] : 'date';
 $offset = isset($attributes['offset']) ? $attributes['offset'] : 0;
-$style = isset($attributes['listStyle']) ? $attributes['listStyle'] : 'default';
+$style = isset($attributes['listStyle']) ? sanitize_key( $attributes['listStyle'] ) : 'default';
 $thumbnail_one_size = isset($attributes['thumbnailOneSize']) ? $attributes['thumbnailOneSize'] : 'large';
 $thumbnail_two_size = isset($attributes['thumbnailTwoSize']) ? $attributes['thumbnailTwoSize'] : 'large';
 $is_featured = !empty($attributes['isFeatured']) ? true : false;
@@ -37,8 +39,8 @@ $show_meta = !empty($attributes['showMeta']) ? true : false;
 $allowed_metas = isset($attributes['allowedMetas']) ? $attributes['allowedMetas'] : [];
 $meta_position = isset($attributes['metaPosition']) ? $attributes['metaPosition'] : 'below_title';
 $author_prefix = isset($attributes['authorPrefix']) ? $attributes['authorPrefix'] : 'by';
-$title_one_tag = isset($attributes['TitleOneTag']) ? $attributes['TitleOneTag'] : 'h3';
-$title_two_tag = isset($attributes['TitleTwoTag']) ? $attributes['TitleTwoTag'] : 'h3';
+$title_one_tag = BOLDPO_Helper::sanitize_html_tag( isset($attributes['TitleOneTag']) ? $attributes['TitleOneTag'] : 'h3', 'h3' );
+$title_two_tag = BOLDPO_Helper::sanitize_html_tag( isset($attributes['TitleTwoTag']) ? $attributes['TitleTwoTag'] : 'h3', 'h3' );
 $show_excerpt = !empty($attributes['showExcerpt']) ? 'yes' : 'no';
 $show_read_more = !empty($attributes['showReadMore']) ? 'yes' : 'no';
 $read_more_text = isset($attributes['readMoreText']) ? $attributes['readMoreText'] : 'Read More';
@@ -494,7 +496,7 @@ if ( ! empty( $attributes['categories'] ) && ! in_array( 'all', $attributes['cat
 }
 
 if($is_featured == true) {
-    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- The block offers filtering by a custom field, which cannot be expressed without meta_query; the query is bounded by the block's own posts-per-page setting.
     $args['meta_query'] = array(
         array(
             'key'     => '_is_featured',
@@ -518,7 +520,10 @@ if($style !== 'default' && defined('BOLDPO_PRO_PL_PATH')) {
 
 if ( $query->have_posts() ) :
 ?>
-    <div <?php echo wp_kses_post($block_wrap_attr); ?>>
+    <div <?php
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() returns an attribute string already escaped by core; wp_kses() cannot act on a fragment with no tags.
+    echo $block_wrap_attr;
+    ?>>
         <div class="boldpo-post-list-2 boldpo-row style-<?php echo esc_attr($style); ?> <?php echo esc_attr($row_gap_class); ?> boldpo-gx-0" <?php if ( 'numeric' !== $pagination_type ) { 
             $data_attr = $attributes;
             $data_attr['blockName'] = 'boldpost/post-list-2';

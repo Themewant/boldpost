@@ -33,18 +33,147 @@ class BOLDPO_Helper {
 		}
 	}
 
+	/**
+	 * CSS collected during a REST (editor preview) render, awaiting render_block.
+	 *
+	 * @var string
+	 */
+	private static $rest_css = '';
+
+	/**
+	 * CSS collected on the front end after wp_head, awaiting the footer.
+	 *
+	 * @var string
+	 */
+	private static $late_css = '';
+
+	/**
+	 * Whether the footer printer has been hooked yet.
+	 *
+	 * @var bool
+	 */
+	private static $late_hooked = false;
+
+	/**
+	 * Prints the CSS collected after wp_head, through the styles API.
+	 *
+	 * Deliberately not wp_enqueue_block_support_styles(): core sends that to
+	 * wp_head on a block theme, which has already fired by the time a block
+	 * inside the_content() renders, so the CSS would be dropped. A handle
+	 * registered here is printed with WordPress's late styles on either theme
+	 * type.
+	 *
+	 * @return void
+	 */
+	public static function print_late_css() {
+		if ( '' === self::$late_css ) {
+			return;
+		}
+		wp_register_style( 'boldpost-block-inline', false, array(), BOLDPO_VERSION );
+		wp_enqueue_style( 'boldpost-block-inline' );
+		wp_add_inline_style( 'boldpost-block-inline', self::$late_css );
+		self::$late_css = '';
+	}
+
+	/**
+	 * Whether the render_block carrier has been hooked yet.
+	 *
+	 * @var bool
+	 */
+	private static $rest_hooked = false;
+
+	/**
+	 * Appends the preview CSS to the block's own rendered markup.
+	 *
+	 * Inside the block editor's ServerSideRender request there is no wp_head and
+	 * no wp_footer, so the per-instance CSS has to travel with the fragment or
+	 * the preview is unstyled. Returning it from a filter keeps it out of an
+	 * echo, which is what makes a hand-written <style> tag a review finding.
+	 *
+	 * @param string $content Rendered block HTML.
+	 * @return string
+	 */
+	public static function carry_rest_css( $content ) {
+		if ( '' === self::$rest_css ) {
+			return $content;
+		}
+		$css            = self::$rest_css;
+		self::$rest_css = '';
+		return '<style>' . $css . '</style>' . $content;
+	}
+
 	public static function ensure_unit ($value) {
 		if ( $value === '' || $value === null ) return '0px';
 		if ( is_numeric( $value ) && $value != 0 ) return $value . 'px';
 		return $value;
 	}
 
+	/**
+	 * Makes a stored CSS value safe to place inside a declaration.
+	 *
+	 * Block attributes are not validated against block.json at render time, so
+	 * every colour, gradient, shadow and typography value arriving here is
+	 * untrusted. Removing < > { } ; means a value cannot close the style
+	 * element, end its own declaration, or open a new rule. Real values --
+	 * #fff, rgba(0,0,0,.5), linear-gradient(...), 0 2px 4px rgba(...),
+	 * "Helvetica Neue", sans-serif -- contain none of those characters, so
+	 * this does not change how an existing site renders.
+	 *
+	 * @param mixed $value Raw stored value.
+	 * @return string Value safe to concatenate into CSS, or '' if unusable.
+	 */
+	/**
+	 * Validate a value that will be written as an HTML tag name.
+	 *
+	 * A tag name cannot be made safe by escaping: it is whitespace-sensitive, so
+	 * anything after the first space becomes an attribute. esc_attr() leaves
+	 * "h3 onmouseover=alert(1)" untouched because it contains no character
+	 * esc_attr() acts on. Only an allowlist works here.
+	 *
+	 * The list is a superset of the tags the block editor offers, so a page that
+	 * renders correctly today is unchanged.
+	 *
+	 * @param mixed  $tag      The stored tag name.
+	 * @param string $fallback Tag to use when $tag is not allowed.
+	 * @return string A tag name that is safe to write unescaped.
+	 */
+	public static function sanitize_html_tag( $tag, $fallback = 'h3' ) {
+		$allowed = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'p', 'span' );
+
+		if ( is_scalar( $tag ) ) {
+			$tag = strtolower( trim( (string) $tag ) );
+
+			if ( in_array( $tag, $allowed, true ) ) {
+				return $tag;
+			}
+		}
+
+		return in_array( $fallback, $allowed, true ) ? $fallback : 'h3';
+	}
+
+	public static function sanitize_css_value ( $value ) {
+		if ( ! is_scalar( $value ) ) {
+			return '';
+		}
+		$value = (string) $value;
+
+		// Constructs that can execute or fetch, whatever the property is.
+		if ( preg_match( '/(javascript\s*:|expression\s*\(|@import|behaviou?r\s*:|url\s*\(\s*["\']?\s*(javascript|data)\s*:)/i', $value ) ) {
+			return '';
+		}
+
+		return trim( str_replace( array( '<', '>', '{', '}', ';' ), '', $value ) );
+	}
+
 	public static function get_inline_styles ($style_map) {
 		$styles = [];
 		foreach ( $style_map as $prop => $value ) {
-			//if ( $value !== '' && $value !== null && $value !== 'inherit' && $value !== '0px' ) {
-				$styles[] = $prop . ':' . $value;
-			//}
+			$prop  = preg_replace( '/[^a-zA-Z0-9_-]/', '', (string) $prop );
+			$value = self::sanitize_css_value( $value );
+			if ( '' === $prop || '' === $value ) {
+				continue;
+			}
+			$styles[] = $prop . ':' . $value;
 		}
 		return implode( ';', $styles );
 	}
@@ -61,7 +190,12 @@ class BOLDPO_Helper {
 			if (!empty($responsive_data[$device])) {
 				$decls = "";
 				foreach ($responsive_data[$device] as $prop => $val) {
-					$decls .= $prop . ":" . wp_strip_all_tags( $val ) . ";";
+					$prop_safe = preg_replace( '/[^a-zA-Z0-9_-]/', '', (string) $prop );
+					$val_safe  = self::sanitize_css_value( $val );
+					if ( '' === $prop_safe || '' === $val_safe ) {
+						continue;
+					}
+					$decls .= $prop_safe . ":" . $val_safe . ";";
 				}
 				if ($media) {
 					$css .= $media . " { " . $selector . " { " . $decls . " } }\n";
@@ -82,21 +216,39 @@ class BOLDPO_Helper {
 			}
 		}
 
-		if ( ! empty( $css ) ) {
-			if ( is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS values are sanitized via wp_strip_all_tags() during generation
-				echo '<style>' . $css . '</style>';
-			} elseif ( did_action( 'wp_head' ) ) {
-				// Classic (non-block) themes render blocks inside the_content() AFTER wp_head()
-				// has already printed. wp_add_inline_style() would queue the CSS to a handle
-				// that's already been output, so it never reaches the page. Print inline instead.
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS values are sanitized via wp_strip_all_tags() during generation
-				echo '<style id="' . esc_attr( $handle ) . '-inline">' . $css . '</style>';
-			} else {
-				wp_add_inline_style( $handle, $css );
-			}
-
+		if ( empty( $css ) ) {
+			return '';
 		}
+
+		// Inside a REST render (the editor's ServerSideRender preview) no style
+		// hook will fire again, so the CSS travels out with the block's own
+		// markup through render_block -- a returned string, never an echo.
+		if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+			self::$rest_css .= $css;
+			if ( ! self::$rest_hooked ) {
+				self::$rest_hooked = true;
+				add_filter( 'render_block', array( __CLASS__, 'carry_rest_css' ), 20 );
+			}
+			return '';
+		}
+
+		// Before wp_head prints, the CSS can go onto the handle it belongs to.
+		if ( ! did_action( 'wp_head' ) && wp_style_is( $handle, 'enqueued' ) ) {
+			wp_add_inline_style( $handle, $css );
+			return '';
+		}
+
+		// A block rendering inside the_content() runs after wp_head, so the
+		// handle it belongs to has already printed. Collect the CSS and let the
+		// footer printer above put it on the page.
+		self::$late_css .= $css;
+
+		if ( ! self::$late_hooked ) {
+			self::$late_hooked = true;
+			add_action( 'wp_footer', array( __CLASS__, 'print_late_css' ), 5 );
+		}
+
+		return '';
 	}
 
 	public static function box_shadow_to_css($shadow) {

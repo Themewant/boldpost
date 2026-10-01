@@ -12,7 +12,7 @@ $image_alt = ! empty( $item_image_alt ) ? $item_image_alt : $item_title;
 ?>
 <div class="<?php echo esc_attr( $col_class ); ?>">
     <div class="boldpo-info-box-item">
-        <a href="<?php echo esc_url( $item_url ); ?>" class="boldpo-info-box-image"<?php echo $item_new_tab ? ' target="_blank" rel="noopener noreferrer"' : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+        <a href="<?php echo esc_url( $item_url ); ?>" class="boldpo-info-box-image"<?php echo $item_new_tab ? ' target="_blank" rel="noopener noreferrer"' : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- both branches are hardcoded literals; $item_new_tab only selects between them. ?>>
             <img src="<?php echo esc_url( $image_src ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" />
         </a>
         <div class="boldpo-info-box-content">
@@ -21,7 +21,7 @@ $image_alt = ! empty( $item_image_alt ) ? $item_image_alt : $item_title;
             <?php endif; ?>
             <?php if ( ! empty( $item_title ) ) : ?>
                 <<?php echo esc_attr( $title_tag ); ?> class="boldpo-info-box-title">
-                    <a href="<?php echo esc_url( $item_url ); ?>"<?php echo $item_new_tab ? ' target="_blank" rel="noopener noreferrer"' : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+                    <a href="<?php echo esc_url( $item_url ); ?>"<?php echo $item_new_tab ? ' target="_blank" rel="noopener noreferrer"' : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- both branches are hardcoded literals; $item_new_tab only selects between them. ?>>
                         <?php echo esc_html( $item_title ); ?>
                     </a>
                 </<?php echo esc_attr( $title_tag ); ?>>
